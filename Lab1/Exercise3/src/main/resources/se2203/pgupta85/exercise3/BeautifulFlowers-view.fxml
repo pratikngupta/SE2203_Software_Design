@@ -1,16 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="se2203.pgupta85.exercise3.BeautifulFlowersController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se2203.pgupta85.exercise3.BeautifulFlowersController">
+   <children>
+      <TitledPane animated="false" layoutX="14.0" layoutY="14.0" prefHeight="94.0" prefWidth="182.0" text="About Me">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="68.0" prefWidth="188.0">
+               <children>
+                  <Text layoutX="12.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: Pratik Narendra Gupta" wrappingWidth="173.12081146240234" />
+                  <Text layoutX="21.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email: pgupta85@uwo.ca" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <ImageView fx:id="flowersImageView" fitHeight="300.0" fitWidth="300.0" layoutX="198.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Rose.gif" />
+         </image>
+      </ImageView>
+      <Label fx:id="flowersNote" layoutX="506.0" layoutY="53.0" prefHeight="300.0" prefWidth="140.0" text="This beautiful flower and symbol of love belongs the genus Rosa. The family name of this flower is Rosaceae and it contains different other species in almost all parts of the world. The flower of rose vary in size from each other depending upon the species to which they belong. A large number of species of this flower are found in different parts of Asia." wrapText="true" />
+      <RadioButton fx:id="roseRadioButton" layoutX="24.0" layoutY="148.0" mnemonicParsing="false" onAction="#roseRadioButtonListener" selected="true" text="Rose">
+         <toggleGroup>
+            <ToggleGroup fx:id="flowersToggleGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="callaLilyRadioButton" layoutX="9.0" layoutY="181.0" mnemonicParsing="false" onAction="#callaLilyRadioButtonListener" text="Calla Lily" toggleGroup="$flowersToggleGroup" />
+      <RadioButton fx:id="cannaRadioButton" layoutX="7.0" layoutY="227.0" mnemonicParsing="false" onAction="#cannaRadioButtonListener" text="Canna" toggleGroup="$flowersToggleGroup" />
+      <RadioButton fx:id="bleedingHeartRadioButton" layoutX="15.0" layoutY="259.0" mnemonicParsing="false" onAction="#bleedingHeartRadioButtonListener" text="Bleeding Heart" toggleGroup="$flowersToggleGroup" />
+      <RadioButton fx:id="cherryBlossomRadioButton" layoutX="15.0" layoutY="304.0" mnemonicParsing="false" onAction="#cherryBlossomRadioButtonListener" text="Cherry Blossom" toggleGroup="$flowersToggleGroup" />
+   </children>
+</AnchorPane>
