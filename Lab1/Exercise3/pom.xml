@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>se2203.pgupta85.exercise3/se2203.pgupta85.exercise3.HelloApplication</mainClass>
+                            <mainClass>se2203.pgupta85.exercise3/se2203.pgupta85.exercise3.BeautifulFlowersApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

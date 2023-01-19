@@ -3,7 +3,7 @@ package se2203.pgupta85.exercise3;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class BeautifulFlowersController {
     @FXML
     private Label welcomeText;
 
