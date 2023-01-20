@@ -1,14 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="se2203.pgupta85.exercise3.BeautifulFlowersImprovedView"
-            prefHeight="400.0" prefWidth="600.0">
+<TabPane prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se2203.pgupta85.exercise3.BeautifulFlowersImprovedController">
+    <Tab fx:id="WelcomeTab" onSelectionChanged="#WelcomeTabClicked" text="Welcome">
+        <AnchorPane fx:id="WelcomeTabView" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Label layoutX="166.0" text="Flower Encyclopedia" textFill="#f8f8f8">
+                <font>
+                    <Font name="Apple Chancery" size="35.0" />
+                </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="255.0" text="Fun Facts about Flower" textAlignment="CENTER" textFill="WHITE">
+                <font>
+                    <Font name="Apple Chancery" size="20.0" />
+                </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="290.0" text="Broccoli is actually a flower" textFill="WHITE" wrapText="true" />
+            <Label layoutX="15.0" layoutY="310.0" text="Tulip bulbs were more valuable than gold in Holland in the 1600s" textFill="WHITE" />
+        </AnchorPane>
+    </Tab>
+    <Tab fx:id="RoseTab" onSelectionChanged="#RoseTabClicked" text="Rose">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <ImageView fx:id="roseImage" fitHeight="300.0" fitWidth="300.0" layoutX="21.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+            <Text layoutX="350.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="General Name: " textAlignment="RIGHT" />
+            <Text layoutX="350.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scientific Name: " textAlignment="RIGHT" />
+            <Text layoutX="350.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Native Place: " textAlignment="RIGHT" />
+            <Text layoutX="352.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: " />
+            <Text layoutX="455.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rose" />
+            <Text layoutX="455.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rosa rubiginosa" />
+            <Text layoutX="455.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Most species are native to Asia" />
+            <Label layoutX="450.0" layoutY="107.0" prefHeight="180.0" prefWidth="188.0" text="Their stems are usually prickly and their glossy, green leaves have toothed edges. Rose flowers vary in size and shape. They burst with colours ranging from pastel pink, peach, and cream, to vibrant yellow, orange, and red. Many roses are fragrant, and some produce berry-like fruits called hips." wrapText="true" />
+        </AnchorPane>
+    </Tab>
+    <Tab fx:id="CherryTab" onSelectionChanged="#CherryTabClicked" text="Cherry Blossom">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <ImageView fx:id="cherryImage" fitHeight="300.0" fitWidth="300.0" layoutX="21.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+            <Text layoutX="350.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="General Name: " textAlignment="RIGHT" />
+            <Text layoutX="350.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scientific Name: " textAlignment="RIGHT" />
+            <Text layoutX="350.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Native Place: " textAlignment="RIGHT" />
+            <Text layoutX="352.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: " />
+            <Text layoutX="455.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cherry Blossom" />
+            <Text layoutX="455.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prunus serrulata" />
+            <Text layoutX="455.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Common species in East Asia" />
+            <Label layoutX="450.0" layoutY="107.0" prefHeight="166.0" prefWidth="188.0" text="Cherry Blossom Trees bring billowy pink and white blooms in the spring. These blooms often last no more than two weeks and are also a symbol of renewal and the ephemeral nature of life. The most well-known species is the Japanese Cherry Tree or the Sakura." wrapText="true" />
 
-</AnchorPane>
+        </AnchorPane>
+    </Tab>
+    <Tab fx:id="cannaTab" onSelectionChanged="#cannaTabClicked" text="Canna">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <ImageView fx:id="cannaImage" fitHeight="300.0" fitWidth="300.0" layoutX="21.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+            <Text layoutX="350.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="General Name: " textAlignment="RIGHT" />
+            <Text layoutX="350.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scientific Name: " textAlignment="RIGHT" />
+            <Text layoutX="350.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Native Place: " textAlignment="RIGHT" />
+            <Text layoutX="352.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: " />
+            <Text layoutX="455.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Canna Lilly" />
+            <Text layoutX="455.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Canna" />
+            <Text layoutX="455.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="South America, Central America" />
+            <Label layoutX="450.0" layoutY="107.0" prefHeight="181.0" prefWidth="188.0" text="Calla lily is an herbaceous or semi-evergreen perennial grown from rhizomes. Tubular shaped flowers with pointed tips produce a long, finger-like spadix at the center. Blooms come in colors of white, yellow, orange, pink, red, purple, green, or black. Tall elegant stems rise above broad solid green or speckled leaves." wrapText="true" />
+
+        </AnchorPane>
+    </Tab>
+    <Tab fx:id="BleedingTab" onSelectionChanged="#BleedingTabCLicked" text="Bleeding Heart">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <ImageView fx:id="bleedingImage" fitHeight="300.0" fitWidth="300.0" layoutX="21.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+            <Text layoutX="350.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="General Name: " textAlignment="RIGHT" />
+            <Text layoutX="350.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scientific Name: " textAlignment="RIGHT" />
+            <Text layoutX="350.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Native Place: " textAlignment="RIGHT" />
+            <Text layoutX="352.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: " />
+            <Text layoutX="455.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bleeding Heart" />
+            <Text layoutX="455.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lamprocapnos" />
+            <Text layoutX="455.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siberia, northern China, Korea" />
+            <Label layoutX="450.0" layoutY="107.0" prefHeight="147.0" prefWidth="188.0" text="The bleeding heart plant gets its common name from its puffy, heart-shaped pink flowers that dangle from long, arching stems. Beneath the heart shape is a protruding white petal that looks like a drop—hence the bleeding in bleeding heart." wrapText="true" />
+        </AnchorPane>
+    </Tab>
+    <Tab fx:id="callaTab" onSelectionChanged="#CallaTabClicked" text="Calla Lily">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <ImageView fx:id="callaImage" fitHeight="300.0" fitWidth="300.0" layoutX="21.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+            <Text layoutX="350.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="General Name: " textAlignment="RIGHT" />
+            <Text layoutX="350.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scientific Name: " textAlignment="RIGHT" />
+            <Text layoutX="350.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Native Place: " textAlignment="RIGHT" />
+            <Text layoutX="352.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: " />
+            <Text layoutX="455.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calla Lilly" />
+            <Text layoutX="455.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zantedeschia" />
+            <Text layoutX="455.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="South Africa north to Malawi" />
+            <Label layoutX="450.0" layoutY="107.0" prefHeight="180.0" prefWidth="188.0" text="Calla lily is an herbaceous or semi-evergreen perennial grown from rhizomes. Tubular shaped flowers with pointed tips produce a long, finger-like spadix at the center. Blooms come in colors of white, yellow, orange, pink, red, purple, green, or black. Tall elegant stems rise above broad solid green or speckled leaves." wrapText="true" />
+
+        </AnchorPane>
+    </Tab>
+    <Tab fx:id="aboutMeTab" onSelectionChanged="#aboutMeTabClicked" text="About Me">
+        <AnchorPane fx:id="aboutMePane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <ImageView fx:id="aboutMeImage" fitHeight="50.0" fitWidth="50.0" layoutX="586.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Text fill="WHITE" layoutX="67.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: Pratik Narendra Gupta" />
+            <Text fill="WHITE" layoutX="67.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email: pgupta85@uwo.ca" />
+            <Text fill="WHITE" layoutX="67.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course: SE2203" />
+        </AnchorPane>
+    </Tab>
+</TabPane>
