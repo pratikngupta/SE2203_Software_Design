@@ -1,5 +1,6 @@
 # Exercise 3
 
+# Summary
 In this lab exercise we learned about the following:
 - How to use the Scene Builder to create a GUI
 - How to use the FXML file to create a GUI
