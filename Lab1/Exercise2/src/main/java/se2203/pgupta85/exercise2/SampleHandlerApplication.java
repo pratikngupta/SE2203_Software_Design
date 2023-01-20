@@ -10,10 +10,14 @@ import java.io.IOException;
 public class SampleHandlerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        // Load the FXML file.
         FXMLLoader fxmlLoader = new FXMLLoader(SampleHandlerApplication.class.getResource("SampleHandler-view.fxml"));
+        // Create and display the stage.
         Scene scene = new Scene(fxmlLoader.load(), 700, 500);
+        // Set the scene to the stage.
         stage.setTitle("SampleHandler");
         stage.setScene(scene);
+        // Show the stage.
         stage.show();
     }
 
