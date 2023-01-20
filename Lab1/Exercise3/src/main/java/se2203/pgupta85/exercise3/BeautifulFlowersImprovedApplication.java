@@ -19,15 +19,16 @@ import java.io.IOException;
 public class BeautifulFlowersImprovedApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        //Load the FXML file
         FXMLLoader fxmlLoader = new FXMLLoader(BeautifulFlowersImprovedApplication.class.getResource("BeautifulFlowers-improvedView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Beautiful Flowers");
-        stage.setScene(scene);
-        stage.getIcons().add(new javafx.scene.image.Image("file:src/main/resources/se2203/pgupta85/exercise3/WesternLogo.png"));
-        stage.show();
+        Scene scene = new Scene(fxmlLoader.load()); //Load the scene
+        stage.setTitle("Beautiful Flowers"); //Set the title of the stage
+        stage.setScene(scene); //Set the scene of the stage
+        stage.getIcons().add(new javafx.scene.image.Image("file:src/main/resources/se2203/pgupta85/exercise3/WesternLogo.png")); //Set the icon of the stage
+        stage.show(); //Show the stage
     }
 
     public static void main(String[] args) {
         launch();
-    }
+    } //Launch the application
 }
