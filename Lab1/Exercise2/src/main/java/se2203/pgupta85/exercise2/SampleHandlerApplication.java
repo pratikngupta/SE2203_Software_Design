@@ -2,7 +2,7 @@
  * Name: Pratik Narendra Gupta
  * Date: 19th January 2023
  * Student ID: 251211859
- * Task: Exercise 3
+ * Task: Exercise 2
  * Description: This is the main class for the sample handler. This class is used to launch the GUI
  **********************************************************************************************************************/
 
