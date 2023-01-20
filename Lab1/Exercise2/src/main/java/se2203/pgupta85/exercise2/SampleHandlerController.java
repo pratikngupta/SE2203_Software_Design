@@ -1,3 +1,11 @@
+/***********************************************************************************************************************
+ * Name: Pratik Narendra Gupta
+ * Date: 19th January 2023
+ * Student ID: 251211859
+ * Task: Exercise 3
+ * Description: This is the controller class for the sample handler. This will add functionality to the GUI by moving the label when mouse is over it
+ **********************************************************************************************************************/
+
 package se2203.pgupta85.exercise2;
 
 import javafx.fxml.FXML;
