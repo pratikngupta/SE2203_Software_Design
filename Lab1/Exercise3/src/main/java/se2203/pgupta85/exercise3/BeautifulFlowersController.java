@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BeautifulFlowersController implements Initializable {
+
     @FXML
     private ImageView flowersImageView;
     @FXML
@@ -32,10 +33,9 @@ public class BeautifulFlowersController implements Initializable {
     private RadioButton bleedingHeartRadioButton;
     @FXML
     private RadioButton cherryBlossomRadioButton;
-    @FXML
 
     //Private variables for the images of the flowers
-    private Image roseImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Rose.gif");
+    private final Image roseImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Rose.gif");
     private final Image callaLilyImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Calla Lily.gif");
     private final Image cannaImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Canna.gif");
     private final Image bleedingHeartImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Bleeding Heart.gif");
