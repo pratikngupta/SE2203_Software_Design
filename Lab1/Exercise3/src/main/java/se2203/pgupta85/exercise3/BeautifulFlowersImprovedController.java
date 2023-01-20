@@ -1,3 +1,12 @@
+/***********************************************************************************************************************
+ * Name: Pratik Narendra Gupta
+ * Date: 19th January 2023
+ * Student ID: 251211859
+ * Task: Exercise 3
+ * Description: This is the main class for the Beautiful Flowers Application. It is used to add functionality to the GUI.
+ * It is a major improvement over the previous version of the application.
+ **********************************************************************************************************************/
+
 package se2203.pgupta85.exercise3;
 
 import javafx.fxml.Initializable;
