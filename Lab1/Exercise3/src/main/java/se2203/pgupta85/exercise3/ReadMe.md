@@ -1,5 +1,13 @@
 # Exercise 3
 
+# About
+* Name: Pratik Narendra Gupta
+* Date: 19th January 2023
+* Student ID: 251211859
+* Task: Exercise 3
+* Description: This is the main class for the Beautiful Flowers Application. It is used to create the GUI for the application.
+* It is a major improvement over the previous version of the application.
+
 # Summary
 In this lab exercise we learned about the following:
 - How to use the Scene Builder to create a GUI
