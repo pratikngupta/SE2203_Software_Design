@@ -43,26 +43,6 @@ public class BeautifulFlowersImprovedController implements Initializable {
     private final Image CherryBlossomImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Cherry Blossom.gif");
     private final Image WesternLogo = new Image("file:src/main/resources/se2203/pgupta85/exercise3/WesternLogo.png");
 
-    //Getter methods for the images
-    public String getRoseImage() {
-        return RoseImage.getUrl();
-    }
-    public String getCallaLilyImage() {
-        return CallaLilyImage.getUrl();
-    }
-    public String getCannaImage() {
-        return CannaImage.getUrl();
-    }
-    public String getBleedingHeartImage() {
-        return BleedingHeartImage.getUrl();
-    }
-    public String getCherryBlossomImage() {
-        return CherryBlossomImage.getUrl();
-    }
-    public String getWesternLogo() {
-        return WesternLogo.getUrl();
-    }
-
     //set background for the welcomeTabView
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //set background for the welcomeTabView from the resources folder and set default tab to welcomeTab
@@ -78,7 +58,7 @@ public class BeautifulFlowersImprovedController implements Initializable {
         RoseTab.isSelected();
         RoseTab.setClosable(false);
         //set image for the RoseTab
-        roseImage.setImage(new Image(getRoseImage()));
+        roseImage.setImage(RoseImage);
     }
 
     //change view when the Bleeding tab is selected
@@ -86,7 +66,7 @@ public class BeautifulFlowersImprovedController implements Initializable {
         BleedingTab.isSelected();
         BleedingTab.setClosable(false);
         //set image for the BleedingTab
-        bleedingImage.setImage(new Image(getBleedingHeartImage()));
+        bleedingImage.setImage(BleedingHeartImage);
     }
 
     //change view when the canna tab is selected
@@ -94,7 +74,7 @@ public class BeautifulFlowersImprovedController implements Initializable {
         cannaTab.isSelected();
         cannaTab.setClosable(false);
         //set image for the cannaTab
-        cannaImage.setImage(new Image(getCannaImage()));
+        cannaImage.setImage(CannaImage);
     }
 
     //change view when the cherry tab is selected
@@ -102,7 +82,7 @@ public class BeautifulFlowersImprovedController implements Initializable {
         CherryTab.isSelected();
         CherryTab.setClosable(false);
         //set image for the CherryTab
-        cherryImage.setImage(new Image(getCherryBlossomImage()));
+        cherryImage.setImage(CherryBlossomImage);
     }
 
     //change view when the rose tab is selected
@@ -118,7 +98,7 @@ public class BeautifulFlowersImprovedController implements Initializable {
         callaTab.isSelected();
         callaTab.setClosable(false);
         //set image for the callaTab
-        callaImage.setImage(new Image(getCallaLilyImage()));
+        callaImage.setImage(CallaLilyImage);
     }
 
     //change view when the aboutMe tab is selected
@@ -126,7 +106,7 @@ public class BeautifulFlowersImprovedController implements Initializable {
         aboutMeTab.isSelected();
         aboutMeTab.setClosable(false);
         //set image for the aboutMeTab
-        aboutMeImage.setImage(new Image(getWesternLogo()));
+        aboutMeImage.setImage(WesternLogo);
         //noinspection CssUnknownTarget
         aboutMePane.setStyle("-fx-background-image: url('file:src/main/resources/se2203/pgupta85/exercise3/aboutMe.jpg')"); //set background for the aboutMePane from the resources folder
     }
