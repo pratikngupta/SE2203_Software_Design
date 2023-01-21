@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se2203.pgupta85.exercise3.BeautifulFlowersController">
-    <TitledPane animated="false" expanded="false" layoutX="14.0" layoutY="14.0" prefHeight="82.0" prefWidth="182.0" text="About Me">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se2203.pgupta85.exercise3.BeautifulFlowersController">
+    <TitledPane expanded="false" layoutX="14.0" layoutY="14.0" prefHeight="82.0" prefWidth="182.0" text="About Me">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="51.0" prefWidth="180.0">
             <Text layoutX="12.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: Pratik Narendra Gupta" wrappingWidth="173.12081146240234" />
             <Text layoutX="12.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email: pgupta85@uwo.ca" />
@@ -18,6 +15,9 @@
     </TitledPane>
     <ImageView fx:id="flowersImageView" fitHeight="300.0" fitWidth="300.0" layoutX="198.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@Rose.gif" />
+      <effect>
+         <Glow />
+      </effect>
     </ImageView>
     <Label fx:id="flowersNote" layoutX="506.0" layoutY="53.0" prefHeight="300.0" prefWidth="140.0" text="This beautiful flower and symbol of love belongs the genus Rosa. The family name of this flower is Rosaceae and it contains different other species in almost all parts of the world. The flower of rose vary in size from each other depending upon the species to which they belong. A large number of species of this flower are found in different parts of Asia." wrapText="true" />
     <RadioButton fx:id="roseRadioButton" layoutX="65.0" layoutY="130.0" mnemonicParsing="false" onAction="#roseRadioButtonListener" selected="true" text="Rose">

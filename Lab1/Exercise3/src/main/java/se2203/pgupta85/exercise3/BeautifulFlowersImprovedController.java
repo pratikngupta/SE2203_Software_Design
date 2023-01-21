@@ -36,16 +36,24 @@ public class BeautifulFlowersImprovedController implements Initializable {
     public AnchorPane aboutMePane;
 
     //Private variables for the images of the flowers
-    private final Image RoseImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Rose.gif");
-    private final Image CallaLilyImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Calla Lily.gif");
-    private final Image CannaImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Canna.gif");
-    private final Image BleedingHeartImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Bleeding Heart.gif");
-    private final Image CherryBlossomImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Cherry Blossom.gif");
-    private final Image WesternLogo = new Image("file:src/main/resources/se2203/pgupta85/exercise3/WesternLogo.png");
+    private Image RoseImage;
+    private Image CallaLilyImage;
+    private Image CannaImage;
+    private Image BleedingHeartImage;
+    private Image CherryBlossomImage;
+    private Image WesternLogo;
 
     //set background for the welcomeTabView
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //set background for the welcomeTabView from the resources folder and set default tab to welcomeTab
+
+        RoseImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Rose.gif");
+        CallaLilyImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Calla Lily.gif");
+        CannaImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Canna.gif");
+        BleedingHeartImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Bleeding Heart.gif");
+        CherryBlossomImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Cherry Blossom.gif");
+        WesternLogo = new Image("file:src/main/resources/se2203/pgupta85/exercise3/WesternLogo.png");
+
         WelcomeTab.isSelected();
         WelcomeTab.setClosable(false);
 
