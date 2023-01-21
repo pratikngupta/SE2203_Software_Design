@@ -35,14 +35,21 @@ public class BeautifulFlowersController implements Initializable {
     private RadioButton cherryBlossomRadioButton;
 
     //Private variables for the images of the flowers
-    private final Image roseImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Rose.gif");
-    private final Image callaLilyImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Calla Lily.gif");
-    private final Image cannaImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Canna.gif");
-    private final Image bleedingHeartImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Bleeding Heart.gif");
-    private final Image cherryBlossomImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Cherry Blossom.gif");
+    private Image roseImage;
+    private Image callaLilyImage;
+    private Image cannaImage;
+    private Image bleedingHeartImage;
+    private Image cherryBlossomImage;
 
     @Override //This method is called by the FXMLLoader when initialization is complete, it is used to set the initial values for the controller's variables
     public void initialize(URL url, ResourceBundle rb) {
+
+        roseImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Rose.gif");
+        callaLilyImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Calla Lily.gif");
+        cannaImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Canna.gif");
+        bleedingHeartImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Bleeding Heart.gif");
+        cherryBlossomImage = new Image("file:src/main/resources/se2203/pgupta85/exercise3/Cherry Blossom.gif");
+
         flowersImageView.setImage(roseImage);
         flowersNote.setText("This beautiful flower and symbol of love belongs the genus Rosa. The family name of this flower is Rosaceae and it contains different other species in almost all parts of the world. The flower of rose vary in size from each other depending upon the species to which they belong. A large number of species of this flower are found in different parts of Asia.");
     }
