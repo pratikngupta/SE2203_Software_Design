@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<TabPane prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se2203.pgupta85.exercise3.BeautifulFlowersImprovedController">
+<TabPane prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se2203.pgupta85.exercise3.BeautifulFlowersImprovedController">
     <Tab fx:id="WelcomeTab" onSelectionChanged="#WelcomeTabClicked" text="Welcome">
         <AnchorPane fx:id="WelcomeTabView" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <Label layoutX="166.0" text="Flower Encyclopedia" textFill="#f8f8f8">
