@@ -18,6 +18,7 @@ public class ListViewController {
     public void initialize() {
         lvItem.getItems().addAll("Poodle", "Great Dane", "Labrador", "Terrier");
     }
+
     @FXML
     void displaySelectedItem() {
         selectedItem.setText(lvItem.getSelectionModel().getSelectedItem());
