@@ -7,10 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.MouseEvent;
 
-public class SliderController {
+public class SliderControllerImproved {
 
     public ToggleGroup option;
     public RadioButton CeltoFah;
