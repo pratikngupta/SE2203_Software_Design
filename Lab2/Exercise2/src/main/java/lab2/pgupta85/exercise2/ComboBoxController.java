@@ -3,7 +3,7 @@ package lab2.pgupta85.exercise2;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class ComboBoxController {
     @FXML
     private Label welcomeText;
 
