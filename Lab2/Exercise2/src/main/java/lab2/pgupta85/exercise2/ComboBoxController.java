@@ -1,14 +1,23 @@
 package lab2.pgupta85.exercise2;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
 public class ComboBoxController {
     @FXML
-    private Label welcomeText;
-
+    private ComboBox selectionBox;
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private Label DisplayName;
+
+
+    public void initialize() {
+        selectionBox.getItems().addAll("A", "B", "C", "D", "E");
+    }
+
+
+    public void sayHello(ActionEvent actionEvent) {
+        DisplayName.setText("Hello " + selectionBox.getValue() + "!");
     }
 }
