@@ -20,7 +20,8 @@ public class ListViewController {
     }
     @FXML
     void displaySelectedItem() {
-        selectedItem.setText(lvItem.getSelectionModel().getSelectedItem());
+        selectedItem.setText(lvItem.getSelectionModel().getSelectedIndex() + "-" +
+                lvItem.getSelectionModel().getSelectedItem());
     }
 
 }
