@@ -28,7 +28,6 @@ public class ListViewController {
         strArrayList.add("Terrier");
         ObservableList<String> strList = FXCollections.observableArrayList(strArrayList);
         lvItem.getItems().setAll(strList);
-
     }
 
     @FXML
