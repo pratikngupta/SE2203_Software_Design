@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class ComboBoxController {
     @FXML
     private ComboBox selectionBox;
@@ -13,11 +16,30 @@ public class ComboBoxController {
 
 
     public void initialize() {
-        selectionBox.getItems().addAll("A", "B", "C", "D", "E");
+        //create a list of items for the ComboBox
+
+        ArrayList name = new ArrayList<String>();
+        name.add("Select a name");
+        name.add("Will");
+        name.add("Megan");
+        name.add("Amanda");
+        name.add("Tyler");
+
+        //set the items to the ComboBox
+        //set the default value to select a name
+
+        selectionBox.getItems().addAll(name);
+
     }
 
 
     public void sayHello(ActionEvent actionEvent) {
-        DisplayName.setText("Hello " + selectionBox.getValue() + "!");
+
+        if (selectionBox.getValue() == "Select a name") {
+            DisplayName.setText("");
+        } else {
+            DisplayName.setText("Hello " + selectionBox.getValue() + "!");
+        }
+
     }
 }
