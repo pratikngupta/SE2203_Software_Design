@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SliderApplicationImproved extends Application {
+public class SliderApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(SliderApplicationImproved.class.getResource("Slider-viewImproved.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SliderApplication.class.getResource("Slider-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Converter");
         stage.setScene(scene);
