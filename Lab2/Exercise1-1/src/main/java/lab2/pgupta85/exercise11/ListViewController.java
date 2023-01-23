@@ -8,6 +8,9 @@ public class ListViewController {
     @FXML
     private ListView<String> lvItem;
 
-     listView.getItems().addAll("Poodle", "Great Dane", "Labrador", "Terrier");
-
+    // This method is called by the FXMLLoader when initialization is complete
+    public void initialize() {
+        lvItem.getItems().addAll("Poodle", "Great Dane", "Labrador", "Terrier");
+    }
+    
 }
