@@ -10,8 +10,6 @@ public class ListViewController {
     @FXML
     private Label selectedItem;
     @FXML
-    private Button listViewBtn;
-    @FXML
     private ListView<String> lvItem;
 
     // This method is called by the FXMLLoader when initialization is complete
