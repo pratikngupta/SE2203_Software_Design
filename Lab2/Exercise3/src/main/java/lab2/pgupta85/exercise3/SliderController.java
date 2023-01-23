@@ -1,14 +1,21 @@
 package lab2.pgupta85.exercise3;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 
 public class SliderController {
 
+    public ToggleGroup option;
+    public RadioButton CeltoFah;
+    public RadioButton fahToCel;
+    public Label scaleValue;
     @FXML
     private Label celsiusBox;
 
@@ -36,13 +43,37 @@ public class SliderController {
         celsiusSlider.setMin(0);
     }
 
-    public void CelsiusToFah(MouseEvent mouseEvent) {
-        double celsius = celsiusSlider.getValue();
-        celsiusBox.setText(String.format("%.2f", celsius));
-        fahrenheitBox.setText(String.format("%.2f", (converter(celsius))));
+    public void CelsiusToFah() {
+        if (CeltoFah.isSelected()) {
+            double celsius = celsiusSlider.getValue();
+            double fahrenheit = converter(celsius);
+            celsiusBox.setText(String.format("%.2f", celsius));
+            fahrenheitBox.setText(String.format("%.2f", fahrenheit));
+        }
+        else {
+            double fahrenheit = celsiusSlider.getValue();
+            double celsius = converter2(fahrenheit);
+            celsiusBox.setText(String.format("%.2f", celsius));
+            fahrenheitBox.setText(String.format("%.2f", fahrenheit));
+        }
     }
 
     public double converter (double celsius) {
         return (celsius * 9 / 5) + 32;
+    }
+
+    public double converter2 (double fahrenheit) {
+        return (fahrenheit - 32) * 5 / 9;
+    }
+
+    public void changeType(ActionEvent actionEvent) {
+        if (CeltoFah.isSelected()) {
+            scaleValue.setText("Celsius");
+            CelsiusToFah();
+
+        } else {
+            scaleValue.setText("Fahrenheit");
+            CelsiusToFah();
+        }
     }
 }
