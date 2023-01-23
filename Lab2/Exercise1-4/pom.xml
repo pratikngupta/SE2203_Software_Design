@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>lab2.pgupta85.exercise14/lab2.pgupta85.exercise14.HelloApplication</mainClass>
+                            <mainClass>lab2.pgupta85.exercise14/lab2.pgupta85.exercise14.ListViewApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
