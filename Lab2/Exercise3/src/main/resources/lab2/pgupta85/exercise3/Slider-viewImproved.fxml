@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
@@ -16,87 +17,88 @@
 <?import javafx.scene.text.Text?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lab2.pgupta85.exercise3.SliderControllerImproved">
-  <tabs>
-      <Tab fx:id="WelcomeTab" onSelectionChanged="#WelcomeTabClicked" text="Welcome">
-         <content>
-            <AnchorPane fx:id="WelcomeTabPlane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <Label layoutX="166.0" text="Converter" textFill="#f8f8f8">
-                     <font>
-                        <Font name="Apple Chancery" size="35.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
+    <Tab fx:id="WelcomeTab" onSelectionChanged="#WelcomeTabClicked" text="Welcome">
+        <AnchorPane fx:id="WelcomeTabPlane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        </AnchorPane>
+    </Tab>
     <Tab fx:id="TemperatureTab" onSelectionChanged="#TemperatureTabClicked" text="Temperature">
-      <content>
         <AnchorPane fx:id="TemperatureTabPlane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <RadioButton fx:id="CelsiusRadioButton" layoutX="181.0" layoutY="43.0" mnemonicParsing="false" onAction="#CelsiusRadioButtonClicked" selected="true" text="Celsius">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="TempSelector" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <Label layoutX="28.0" layoutY="43.0" text="Select base value:" />
-                  <RadioButton fx:id="FahrenheitRadioButton" layoutX="272.0" layoutY="43.0" mnemonicParsing="false" onAction="#FahrenheitRadioButtonClicked" text="Fahrenheit" toggleGroup="$TempSelector" />
-                  <RadioButton fx:id="KelvinRadioButton" layoutX="410.0" layoutY="43.0" mnemonicParsing="false" onAction="#KelvinRadioButtonClicked" text="Kelvin" toggleGroup="$TempSelector" />
-                  <Label fx:id="BaseUnit" layoutX="219.0" layoutY="108.0" text="Label" />
-                  <Label fx:id="SecondUnit" layoutX="219.0" layoutY="209.0" text="Label" />
-                  <Label fx:id="ThirdUnit" layoutX="219.0" layoutY="248.0" text="Label" />
-                  <Label layoutX="296.0" layoutY="151.0" prefHeight="17.0" prefWidth="9.0" text="Is" />
-                  <Label fx:id="BaseUnitBValue" layoutX="340.0" layoutY="108.0" text="Label" />
-                  <Label fx:id="SecondUnitValue" layoutX="340.0" layoutY="209.0" text="Label" />
-                  <Label fx:id="ThirdUnitValue" layoutX="340.0" layoutY="248.0" text="Label" />
-                  <Slider fx:id="TemperatureSlider" blockIncrement="25.0" layoutX="46.0" layoutY="286.0" majorTickUnit="10.0" onDragDetected="#TemperatureSlider" onInputMethodTextChanged="#TemperatureSlider" onMouseClicked="#TemperatureSlider" onMouseDragged="#TemperatureSlider" prefHeight="50.0" prefWidth="500.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-               </children></AnchorPane>
-      </content>
+            <RadioButton fx:id="CelsiusRadioButton" layoutX="181.0" layoutY="43.0" mnemonicParsing="false" onAction="#CelsiusRadioButtonClicked" selected="true" text="Celsius">
+                <toggleGroup>
+                    <ToggleGroup fx:id="TempSelector" />
+                </toggleGroup>
+            </RadioButton>
+            <Label layoutX="28.0" layoutY="43.0" text="Select base value:" />
+            <RadioButton fx:id="FahrenheitRadioButton" layoutX="284.0" layoutY="43.0" mnemonicParsing="false" onAction="#FahrenheitRadioButtonClicked" text="Fahrenheit" toggleGroup="$TempSelector" />
+            <RadioButton fx:id="KelvinRadioButton" layoutX="410.0" layoutY="43.0" mnemonicParsing="false" onAction="#KelvinRadioButtonClicked" text="Kelvin" toggleGroup="$TempSelector" />
+            <Label fx:id="BaseUnit" layoutX="240.0" layoutY="110.0" text="Label" />
+            <Label fx:id="SecondUnit" layoutX="240.0" layoutY="190.0" text="Label" />
+            <Label fx:id="ThirdUnit" layoutX="240.0" layoutY="220.0" text="Label" />
+            <Label layoutX="296.0" layoutY="151.0" prefHeight="17.0" prefWidth="9.0" text="Is" />
+            <Label fx:id="BaseUnitBValue" layoutX="320.0" layoutY="110.0" text="Label" />
+            <Label fx:id="SecondUnitValue" layoutX="320.0" layoutY="190.0" text="Label" />
+            <Label fx:id="ThirdUnitValue" layoutX="320.0" layoutY="220.0" text="Label" />
+            <Slider fx:id="TemperatureSlider" blockIncrement="25.0" layoutX="46.0" layoutY="286.0" majorTickUnit="10.0" onDragDetected="#TemperatureSlider" onInputMethodTextChanged="#TemperatureSlider" onMouseClicked="#TemperatureSlider" onMouseDragged="#TemperatureSlider" prefHeight="50.0" prefWidth="500.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+        </AnchorPane>
     </Tab>
     <Tab fx:id="ResistorTab" onSelectionChanged="#ResistorTabClicked" text="Resistor">
-      <content>
-        <AnchorPane fx:id="MetricTabPlane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <Label layoutX="37.0" layoutY="25.0" text="Welcome to Resistor Calculator" />
-                  <Label layoutX="100.0" layoutY="85.0" text="Band 1" />
-                  <Label layoutX="100.0" layoutY="125.0" text="Band 2" />
-                  <Label layoutX="92.0" layoutY="165.0" text="Multipler" />
-                  <Label layoutX="85.0" layoutY="205.0" text="Tolerance" />
-                  <ComboBox fx:id="BandOneSelector" layoutX="150.0" layoutY="80.0" onAction="#DropDownMenu" prefHeight="25.0" prefWidth="120.0" promptText="Select Color" />
-                  <ComboBox fx:id="BandTwoSelector" layoutX="150.0" layoutY="120.0" onAction="#DropDownMenu" prefWidth="120.0" promptText="Select Color" />
-                  <ComboBox fx:id="MultiplerSelector" layoutX="150.0" layoutY="160.0" onAction="#DropDownMenu" prefWidth="120.0" promptText="Select Color" />
-                  <ComboBox fx:id="ToleranceSelector" layoutX="150.0" layoutY="200.0" onAction="#DropDownMenu" prefWidth="120.0" promptText="Select Color" />
-                  <Rectangle fx:id="BandOneColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="370.0" layoutY="125.0" stroke="WHITE" strokeType="INSIDE" width="17.0" />
-                  <Rectangle fx:id="BandTwoColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="411.0" layoutY="125.0" stroke="#f8f8f8" strokeType="INSIDE" width="17.0" />
-                  <Rectangle fx:id="MultiplerColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="431.0" layoutY="125.0" stroke="WHITE" strokeType="INSIDE" width="17.0" />
-                  <Rectangle fx:id="ToleranceColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="490.0" layoutY="125.0" stroke="WHITE" strokeType="INSIDE" width="17.0" />
-                  <ImageView fx:id="ResistorImage" fitHeight="102.0" fitWidth="287.0" layoutX="295.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label layoutX="336.0" layoutY="77.0" text="Band 1" />
-                  <Label layoutX="403.0" layoutY="77.0" text="Band 2" />
-                  <Label layoutX="415.0" layoutY="216.0" text="Multipler" />
-                  <Label layoutX="473.0" layoutY="225.0" text="Tolerance" />
-                  <Line endX="40.0" endY="1.6666717529296875" layoutX="336.0" layoutY="120.0" startX="24.0" startY="-25.0" />
-                  <Line endX="33.0" layoutX="387.0" layoutY="121.0" startX="40.0" startY="-27.0" />
-                  <Line endX="-1.0" endY="11.0" layoutX="440.0" layoutY="205.0" startX="-0.666656494140625" startY="-8.666671752929688" />
-                  <Line endX="-0.5" endY="21.0" layoutX="501.0" layoutY="204.0" startX="-0.666656494140625" startY="-8.666671752929688" />
-                  <Label layoutX="208.0" layoutY="305.0" text="Resistance is:" />
-                  <Button fx:id="CalculateButton" layoutX="262.0" layoutY="253.0" mnemonicParsing="false" onAction="#CalculateResistance" text="Calculate" />
-                  <Label fx:id="ValuePartOne" layoutX="291.0" layoutY="304.0" prefHeight="17.0" prefWidth="73.0" />
-                  <Label fx:id="ValuePartTwo" layoutX="375.0" layoutY="305.0" prefHeight="17.0" prefWidth="52.0" />
-               </children></AnchorPane>
-      </content>
+        <AnchorPane fx:id="ResistorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Label fx:id="BandOneLabel" layoutX="100.0" layoutY="85.0" text="Band 1" />
+            <Label fx:id="BandTwoLabel" layoutX="100.0" layoutY="125.0" text="Band 2" />
+            <Label fx:id="MultiplerLabel" layoutX="92.0" layoutY="165.0" text="Multipler" />
+            <Label fx:id="ToleranceLabel" layoutX="85.0" layoutY="205.0" text="Tolerance" />
+            <ComboBox fx:id="BandOneSelector" layoutX="150.0" layoutY="80.0" onAction="#DropDownMenu" prefHeight="25.0" prefWidth="120.0" promptText="Select Color" />
+            <ComboBox fx:id="BandTwoSelector" layoutX="150.0" layoutY="120.0" onAction="#DropDownMenu" prefWidth="120.0" promptText="Select Color" />
+            <ComboBox fx:id="MultiplerSelector" layoutX="150.0" layoutY="160.0" onAction="#DropDownMenu" prefWidth="120.0" promptText="Select Color" />
+            <ComboBox fx:id="ToleranceSelector" layoutX="150.0" layoutY="200.0" onAction="#DropDownMenu" prefWidth="120.0" promptText="Select Color" />
+            <Rectangle fx:id="BandOneColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="370.0" layoutY="125.0" stroke="WHITE" strokeType="INSIDE" width="17.0" />
+            <Rectangle fx:id="BandTwoColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="395.0" layoutY="125.0" stroke="#f8f8f8" strokeType="INSIDE" width="17.0" />
+            <Rectangle fx:id="BandThreeColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="420.0" layoutY="125.0" stroke="WHITE" strokeType="INSIDE" width="17.0" />
+            <Rectangle fx:id="MultiplierColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="450.0" layoutY="125.0" stroke="WHITE" strokeType="INSIDE" width="17.0" />
+            <Rectangle fx:id="ToleranceColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="490.0" layoutY="125.0" stroke="WHITE" strokeType="INSIDE" width="17.0" />
+            <ImageView fx:id="ResistorImage" fitHeight="102.0" fitWidth="287.0" layoutX="295.0" layoutY="109.0"
+                       pickOnBounds="true" preserveRatio="true">
+                <Image url="@resistor.png"/>
+            </ImageView>
+            <Label fx:id="BandOneImageLabel" layoutX="336.0" layoutY="77.0" text="Band 1" />
+            <Label fx:id="BandTwoImageLabel" layoutX="392.0" layoutY="71.0" text="Band 2" />
+            <Label fx:id="MultiplerImageLabel" layoutX="415.0" layoutY="216.0" text="Multipler" />
+            <Label fx:id="ToleranceImageLabel" layoutX="473.0" layoutY="225.0" text="Tolerance" />
+            <Line fx:id="BandOneLine" endX="40.0" endY="1.6666717529296875" layoutX="336.0" layoutY="120.0" startX="24.0" startY="-25.0" />
+            <Line fx:id="BandTwoline" endX="33.0" layoutX="369.0" layoutY="122.0" startX="40.0" startY="-27.0" />
+            <Line fx:id="MultiplerLine" endX="-1.0" endY="11.0" layoutX="459.0" layoutY="203.0" startX="-0.666656494140625" startY="-8.666671752929688" />
+            <Line fx:id="ToleranceLine" endX="-0.5" endY="21.0" layoutX="501.0" layoutY="204.0" startX="-0.666656494140625" startY="-8.666671752929688" />
+            <Label fx:id="ResultLabel" layoutX="122.0" layoutY="316.0" text="Resistance is:">
+            <font>
+               <Font size="18.0" />
+            </font></Label>
+            <Button fx:id="CalculateButton" layoutX="261.0" layoutY="278.0" mnemonicParsing="false" onAction="#CalculateResistance" text="Calculate" />
+            <Label fx:id="ValuePartOne" layoutX="226.0" layoutY="317.0" prefHeight="23.0" prefWidth="103.0">
+            <font>
+               <Font size="18.0" />
+            </font></Label>
+            <Label fx:id="ValuePartTwo" layoutX="337.0" layoutY="317.0" prefHeight="23.0" prefWidth="152.0">
+            <font>
+               <Font size="18.0" />
+            </font></Label>
+            <Label fx:id="ResistorQuestion" layoutX="145.0" layoutY="31.0" text="How many number of band: " />
+            <ComboBox fx:id="NumberOfBand" layoutX="323.0" layoutY="28.0" onAction="#DropDownMenu" prefHeight="25.0" prefWidth="95.0" promptText="Number" />
+            <Label fx:id="BandThreeLabel" layoutX="100.0" layoutY="245.0" text="Band 3" />
+            <ComboBox fx:id="BandThreeSelector" layoutX="150.0" layoutY="240.0" onAction="#DropDownMenu" prefWidth="120.0" promptText="Select Color" />
+            <Label fx:id="BandThreeImageLabel" layoutX="441.0" layoutY="72.0" text="Band 3" />
+            <Line fx:id="BandThreeLine" endX="38.9190673828125" endY="-8.904159545898438" layoutX="392.0" layoutY="132.0" startX="63.789886474609375" startY="-43.00001525878906" />
+        </AnchorPane>
     </Tab>
-      <Tab fx:id="aboutMeTab" onSelectionChanged="#aboutMeTabClicked" text="About Me">
-         <content>
-            <AnchorPane fx:id="AboutMePlane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <ImageView fx:id="aboutMeImage" fitHeight="50.0" fitWidth="50.0" layoutX="586.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                  <Text fill="WHITE" layoutX="67.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: Pratik Narendra Gupta" />
-                  <Text fill="WHITE" layoutX="67.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email: pgupta85@uwo.ca" />
-                  <Text fill="WHITE" layoutX="67.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course: SE2203" />
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-  </tabs>
+    <Tab fx:id="aboutMeTab" onSelectionChanged="#aboutMeTabClicked" text="About Me">
+        <AnchorPane fx:id="AboutMePlane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <ImageView fx:id="aboutMeImage" fitHeight="50.0" fitWidth="50.0" layoutX="536.0" layoutY="13.0"
+                       pickOnBounds="true" preserveRatio="true"/>
+            <Text fill="WHITE" layoutX="67.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Name: Pratik Narendra Gupta"/>
+            <Text fill="WHITE" layoutX="67.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Email: pgupta85@uwo.ca"/>
+            <Text fill="WHITE" layoutX="67.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Course: SE2203"/>
+        </AnchorPane>
+    </Tab>
 </TabPane>
