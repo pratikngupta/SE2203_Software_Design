@@ -133,7 +133,7 @@ public class SliderControllerImproved {
     public void initialize(){
         WelcomeTab.isSelected();
         WelcomeTab.setClosable(false);
-        WelcomeTabPlane.setStyle("-fx-background-image: url('file:src/main/resources/lab2/pgupta85/exercise3/welcomeBackground.png')");
+        WelcomeTabPlane.setStyle("-fx-background-image: url('file:src/main/resources/lab2/pgupta85/exercise3/Science.png')");
 
         hideAll(-1,false);
 
