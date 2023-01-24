@@ -2,76 +2,173 @@ package lab2.pgupta85.exercise3;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class SliderControllerImproved {
 
-    public ToggleGroup option;
-    public RadioButton CeltoFah;
-    public RadioButton fahToCel;
-    public Label scaleValue;
     @FXML
-    private Label celsiusBox;
-
+    private AnchorPane AboutMePlane;
     @FXML
-    private Slider celsiusSlider;
-
+    private Label BaseUnit;
     @FXML
-    private Label fahrenheitBox;
+    private Label BaseUnitBValue;
+    @FXML
+    private RadioButton CelsiusRadioButton;
+    @FXML
+    private RadioButton FahrenheitRadioButton;
+    @FXML
+    private RadioButton KelvinRadioButton;
+    @FXML
+    private Tab MetricTab;
+    @FXML
+    private AnchorPane MetricTabPlane;
+    @FXML
+    private Label SecondUnit;
+    @FXML
+    private Label SecondUnitValue;
+    @FXML
+    private ToggleGroup TempSelector;
+    @FXML
+    private Slider TemperatureSlider;
+    @FXML
+    private Tab TemperatureTab;
+    @FXML
+    private AnchorPane TemperatureTabPlane;
+    @FXML
+    private Label ThirdUnit;
+    @FXML
+    private Label ThirdUnitValue;
+    @FXML
+    private Tab WelcomeTab;
+    @FXML
+    private AnchorPane WelcomeTabPlane;
+    @FXML
+    private ImageView aboutMeImage;
+    @FXML
+    private Tab aboutMeTab;
 
+    private double celsius;
+    private double fahrenheit;
+    private double kelvin;
+    private double sliderValue;
 
-    public void initialize() {
+    public void initialize(){
+        WelcomeTab.isSelected();
+        WelcomeTab.setClosable(false);
 
-        celsiusBox.setStyle("-fx-border-color: black");
-        celsiusBox.setAlignment(Pos.CENTER);
-        //set fixed width for the label
-        celsiusBox.setMinWidth(50);
-        celsiusBox.setText("0");
-
-        fahrenheitBox.setStyle("-fx-border-color: black");
-        //set fixed width for the label
-        fahrenheitBox.setAlignment(Pos.CENTER);
-        fahrenheitBox.setMinWidth(50);
-        fahrenheitBox.setText("32");
-
-        celsiusSlider.setMin(0);
+        WelcomeTabPlane.setStyle("-fx-background-color: rgba(0,57,190,0.67)");
     }
 
-    public void CelsiusToFah() {
-        if (CeltoFah.isSelected()) {
-            double celsius = celsiusSlider.getValue();
-            double fahrenheit = converter(celsius);
-            celsiusBox.setText(String.format("%.2f", celsius));
-            fahrenheitBox.setText(String.format("%.2f", fahrenheit));
+    public void WelcomeTabClicked( ) {
+        WelcomeTab.isSelected();
+        WelcomeTab.setClosable(false);
+
+    }
+
+    public void TemperatureTabClicked( ) {
+        TemperatureTab.isSelected();
+        TemperatureTab.setClosable(false);
+
+        BaseUnit.setText("Celsius");
+        BaseUnitBValue.setStyle("-fx-border-color: black");
+        BaseUnitBValue.setAlignment(javafx.geometry.Pos.CENTER);
+        BaseUnitBValue.setMinWidth(50);
+        BaseUnitBValue.setText("0");
+
+        SecondUnit.setText("Fahrenheit");
+        SecondUnitValue.setStyle("-fx-border-color: black");
+        SecondUnitValue.setAlignment(javafx.geometry.Pos.CENTER);
+        SecondUnitValue.setMinWidth(50);
+        SecondUnitValue.setText("32");
+
+        ThirdUnit.setText("Kelvin");
+        ThirdUnitValue.setStyle("-fx-border-color: black");
+        ThirdUnitValue.setAlignment(javafx.geometry.Pos.CENTER);
+        ThirdUnitValue.setMinWidth(50);
+        ThirdUnitValue.setText("273.15");
+    }
+
+    public void CelsiusRadioButtonClicked( ) {
+        BaseUnit.setText("Celsius");
+        SecondUnit.setText("Fahrenheit");
+        ThirdUnit.setText("Kelvin");
+        TempConverter();
+    }
+
+    public void FahrenheitRadioButtonClicked() {
+        BaseUnit.setText("Fahrenheit");
+        SecondUnit.setText("Celsius");
+        ThirdUnit.setText("Kelvin");
+        TempConverter();
+    }
+
+    public void KelvinRadioButtonClicked() {
+        BaseUnit.setText("Kelvin");
+        SecondUnit.setText("Celsius");
+        ThirdUnit.setText("Fahrenheit");
+        TempConverter();
+    }
+
+    public void TemperatureSlider( ) {
+        sliderValue = TemperatureSlider.getValue();
+        TempConverter();
+    }
+
+    public void TempConverter (){
+
+        if (CelsiusRadioButton.isSelected()){
+            celsius = sliderValue;
+            fahrenheit = (celsius * 9 / 5) + 32;
+            kelvin = celsius + 273.15;
+
+            //set value with 2 decimal places
+            BaseUnitBValue.setText(String.format("%.2f", celsius));
+            SecondUnitValue.setText(String.format("%.2f", fahrenheit));
+            ThirdUnitValue.setText(String.format("%.2f", kelvin));
         }
-        else {
-            double fahrenheit = celsiusSlider.getValue();
-            double celsius = converter2(fahrenheit);
-            celsiusBox.setText(String.format("%.2f", celsius));
-            fahrenheitBox.setText(String.format("%.2f", fahrenheit));
+
+        else if (FahrenheitRadioButton.isSelected()){
+            fahrenheit = sliderValue;
+            celsius = (fahrenheit - 32) * 5 / 9;
+            kelvin = celsius + 273.15;
+
+            //set value with 2 decimal places
+            BaseUnitBValue.setText(String.format("%.2f", fahrenheit));
+            SecondUnitValue.setText(String.format("%.2f", celsius));
+            ThirdUnitValue.setText(String.format("%.2f", kelvin));
+        }
+
+        else if (KelvinRadioButton.isSelected()){
+            kelvin = sliderValue;
+            celsius = kelvin - 273.15;
+            fahrenheit = (celsius * 9 / 5) + 32;
+
+            //set value with 2 decimal places
+            BaseUnitBValue.setText(String.format("%.2f", kelvin));
+            SecondUnitValue.setText(String.format("%.2f", celsius));
+            ThirdUnitValue.setText(String.format("%.2f", fahrenheit));
         }
     }
 
-    public double converter (double celsius) {
-        return (celsius * 9 / 5) + 32;
+    public void MetricTabClicked( ) {
+        MetricTab.isSelected();
+        MetricTab.setClosable(false);
     }
 
-    public double converter2 (double fahrenheit) {
-        return (fahrenheit - 32) * 5 / 9;
+    public void aboutMeTabClicked( ) {
+        aboutMeTab.isSelected();
+        aboutMeTab.setClosable(false);
+
+        AboutMePlane.setStyle("-fx-background-color: #824d4d");
+
     }
 
-    public void changeType(ActionEvent actionEvent) {
-        if (CeltoFah.isSelected()) {
-            scaleValue.setText("Celsius");
-            CelsiusToFah();
-
-        } else {
-            scaleValue.setText("Fahrenheit");
-            CelsiusToFah();
-        }
-    }
 }

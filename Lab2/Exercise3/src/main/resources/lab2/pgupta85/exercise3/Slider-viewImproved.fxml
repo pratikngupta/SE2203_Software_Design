@@ -3,26 +3,71 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="lab2.pgupta85.exercise3.SliderControllerImproved">
-   <Label layoutX="195.0" layoutY="140.0" prefHeight="18.0" prefWidth="61.0" text="Fahrenheit:"/>
-   <Label layoutX="195.0" layoutY="190.0" text="Celsius:"/>
-   <Label fx:id="fahrenheitBox" layoutX="300.0" layoutY="140.0" text="Label"/>
-   <Label fx:id="celsiusBox" layoutX="300.0" layoutY="190.0" text="Label"/>
-   <Slider fx:id="celsiusSlider" layoutX="50.0" layoutY="316.0" onDragDetected="#CelsiusToFah"
-           onInputMethodTextChanged="#CelsiusToFah" onMouseClicked="#CelsiusToFah" onMouseDragged="#CelsiusToFah"
-           prefHeight="50.0" prefWidth="500.0" showTickLabels="true" showTickMarks="true" snapToTicks="true"/>
-   <Label fx:id="scaleValue" layoutX="81.0" layoutY="358.0"/>
-   <RadioButton fx:id="CeltoFah" layoutX="127.0" layoutY="74.0" mnemonicParsing="false" onAction="#changeType"
-                selected="true" text="Celsius to Fahrenheit">
-      <toggleGroup>
-         <ToggleGroup fx:id="option"/>
-      </toggleGroup>
-   </RadioButton>
-   <RadioButton fx:id="fahToCel" layoutX="317.0" layoutY="74.0" mnemonicParsing="false" onAction="#changeType"
-                text="Fahrenheit to Celsius" toggleGroup="$option"/>
-</AnchorPane>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="lab2.pgupta85.exercise3.SliderControllerImproved">
+  <tabs>
+      <Tab fx:id="WelcomeTab" onSelectionChanged="#WelcomeTabClicked" text="Welcome">
+         <content>
+            <AnchorPane fx:id="WelcomeTabPlane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="166.0" text="Converter" textFill="#f8f8f8">
+                     <font>
+                        <Font name="Apple Chancery" size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+    <Tab fx:id="TemperatureTab" onSelectionChanged="#TemperatureTabClicked" text="Temperature">
+      <content>
+        <AnchorPane fx:id="TemperatureTabPlane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="28.0" layoutY="43.0" text="Select base value:" />
+                  <RadioButton fx:id="CelsiusRadioButton" layoutX="155.0" layoutY="42.0" mnemonicParsing="false" onAction="#CelsiusRadioButtonClicked" selected="true" text="Celsius">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="TempSelector" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="FahrenheitRadioButton" layoutX="272.0" layoutY="43.0" mnemonicParsing="false" onAction="#FahrenheitRadioButtonClicked" text="Fahrenheit" toggleGroup="$TempSelector" />
+                  <RadioButton fx:id="KelvinRadioButton" layoutX="410.0" layoutY="43.0" mnemonicParsing="false" onAction="#KelvinRadioButtonClicked" text="Kelvin" toggleGroup="$TempSelector" />
+                  <Label fx:id="BaseUnit" layoutX="219.0" layoutY="108.0" text="Label" />
+                  <Label fx:id="SecondUnit" layoutX="219.0" layoutY="209.0" text="Label" />
+                  <Label fx:id="ThirdUnit" layoutX="219.0" layoutY="248.0" text="Label" />
+                  <Label layoutX="296.0" layoutY="151.0" prefHeight="17.0" prefWidth="9.0" text="Is" />
+                  <Label fx:id="BaseUnitBValue" layoutX="340.0" layoutY="108.0" text="Label" />
+                  <Label fx:id="SecondUnitValue" layoutX="340.0" layoutY="209.0" text="Label" />
+                  <Label fx:id="ThirdUnitValue" layoutX="340.0" layoutY="248.0" text="Label" />
+                  <Slider fx:id="TemperatureSlider" blockIncrement="25.0" layoutX="46.0" layoutY="286.0" majorTickUnit="10.0" onDragDetected="#TemperatureSlider" onInputMethodTextChanged="#TemperatureSlider" onMouseClicked="#TemperatureSlider" onMouseDragged="#TemperatureSlider" prefHeight="50.0" prefWidth="500.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="MetricTab" onSelectionChanged="#MetricTabClicked" text="Metric">
+      <content>
+        <AnchorPane fx:id="MetricTabPlane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="285.0" layoutY="176.0" text="Hello" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab fx:id="aboutMeTab" onSelectionChanged="#aboutMeTabClicked" text="About Me">
+         <content>
+            <AnchorPane fx:id="AboutMePlane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="aboutMeImage" fitHeight="50.0" fitWidth="50.0" layoutX="586.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fill="WHITE" layoutX="67.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: Pratik Narendra Gupta" />
+                  <Text fill="WHITE" layoutX="67.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email: pgupta85@uwo.ca" />
+                  <Text fill="WHITE" layoutX="67.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course: SE2203" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
