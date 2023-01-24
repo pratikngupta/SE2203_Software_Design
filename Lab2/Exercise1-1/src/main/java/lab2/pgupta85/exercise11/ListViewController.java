@@ -23,5 +23,5 @@ public class ListViewController {
     void displaySelectedItem() {
         selectedItem.setText(lvItem.getSelectionModel().getSelectedItem());
     }
-
 }
+

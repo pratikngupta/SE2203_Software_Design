@@ -36,7 +36,6 @@ public class ListViewController {
         lvItem.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ObservableList<String> selectedItems = lvItem.getSelectionModel().getSelectedItems();
         selectedItem.setText(selectedItems.toString());
-
     }
 
 }
