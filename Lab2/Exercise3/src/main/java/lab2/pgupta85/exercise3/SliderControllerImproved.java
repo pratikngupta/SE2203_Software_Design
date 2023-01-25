@@ -1,13 +1,7 @@
 package lab2.pgupta85.exercise3;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Slider;
-import javafx.scene.control.Tab;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -310,28 +304,50 @@ public class SliderControllerImproved {
             displayResult();
         }
         catch (Exception e) {
+
             if (String.valueOf(BandOneSelector.getValue()).equals("null")){
                 ColorOneWarning.setVisible(true);
+                BandOneSelector.setStyle("-fx-border-color: red");
             }
             if (String.valueOf(BandTwoSelector.getValue()).equals("null")){
                 ColorTwoWarning.setVisible(true);
+                BandTwoSelector.setStyle("-fx-border-color: red");
             }
-            if (String.valueOf(MultiplierSelector.getValue()).equals("null")){
-                ColorThreeWarning.setVisible(true);
+
+            switch (band){
+                case 3:
+                    if (String.valueOf(MultiplierSelector.getValue()).equals("null")){
+                        ColorThreeWarning.setVisible(true);
+                        MultiplierSelector.setStyle("-fx-border-color: red");
+                    }
+                    break;
+                case 4:
+                    if (String.valueOf(MultiplierSelector.getValue()).equals("null")){
+                        ColorThreeWarning.setVisible(true);
+                        MultiplierSelector.setStyle("-fx-border-color: red");
+                    }
+                    if (String.valueOf(ToleranceSelector.getValue()).equals("null")){
+                        ColorFourWarning.setVisible(true);
+                        ToleranceSelector.setStyle("-fx-border-color: red");
+                    }
+                    break;
+                case 5:
+                    if (String.valueOf(BandThreeSelector.getValue()).equals("null")){
+                        ColorThreeWarning.setVisible(true);
+                        BandThreeSelector.setStyle("-fx-border-color: red");
+                    }
+                    if (String.valueOf(MultiplierSelector.getValue()).equals("null")){
+                        ColorFourWarning.setVisible(true);
+                        MultiplierSelector.setStyle("-fx-border-color: red");
+                    }
+                    if (String.valueOf(ToleranceSelector.getValue()).equals("null")){
+                        ColorFiveWarning.setVisible(true);
+                        ToleranceSelector.setStyle("-fx-border-color: red");
+                    }
+                    break;
             }
-            if (band == 4 || band == 5){
-                if (String.valueOf(ToleranceSelector.getValue()).equals("null")){
-                    ColorFourWarning.setVisible(true);
-                }
-            }
-            if (band == 5){
-                if (String.valueOf(BandThreeSelector.getValue()).equals("null")){
-                    ColorFiveWarning.setVisible(true);
-                }
-            }
+
         }
-
-
     }
 
     public void displayResult(){
@@ -356,16 +372,11 @@ public class SliderControllerImproved {
     public void ResistorTabClicked( ) {
         ResistorTab.isSelected();
         ResistorTab.setClosable(false);
+
         hideAll(-1,false);
         //change y position of the ResistorQuestion
         ResistorQuestion.setLayoutY(150);
         NumberOfBand.setLayoutY(150);
-
-        ColorOneWarning.setVisible(false);
-        ColorTwoWarning.setVisible(false);
-        ColorThreeWarning.setVisible(false);
-        ColorFourWarning.setVisible(false);
-        ColorFiveWarning.setVisible(false);
 
         ResistorImage.setImage(new Image("file:src/main/resources/lab2/pgupta85/exercise3/resistor.png"));
         //clear all item in the combo box
@@ -382,10 +393,6 @@ public class SliderControllerImproved {
         BandThreeSelector.getItems().addAll(colorBand.keySet());
         MultiplierSelector.getItems().addAll(multiplierBand.keySet());
         ToleranceSelector.getItems().addAll(toleranceBand.keySet());
-
-        //edit text color for comboBox
-        BandOneSelector.setStyle("-fx-text-fill: White");
-
     }
 
     public void DropDownMenu() {
@@ -393,58 +400,153 @@ public class SliderControllerImproved {
             setRectangleColor(1, BandOneSelector.getValue());
             //enable index for combo box
             ColorOneWarning.setVisible(false);
+            BandOneSelector.setStyle("-fx-border-color: transparent");
         }
 
         if (BandTwoSelector.isShowing()){
             setRectangleColor(2, BandTwoSelector.getValue());
             ColorTwoWarning.setVisible(false);
+            BandTwoSelector.setStyle("-fx-border-color: transparent");
         }
 
         if (BandThreeSelector.isShowing()){
             setRectangleColor(3, BandThreeSelector.getValue());
-            ColorFiveWarning.setVisible(false);
+            switch (band) {
+                case 5 -> ColorThreeWarning.setVisible(false);
+                default -> ColorFiveWarning.setVisible(false);
+            }
+            BandThreeSelector.setStyle("-fx-border-color: transparent");
         }
 
         if (MultiplierSelector.isShowing()){
             setRectangleColor(4, MultiplierSelector.getValue());
-            ColorThreeWarning.setVisible(false);
+            switch (band) {
+                case 4, 3 -> ColorThreeWarning.setVisible(false);
+                default -> ColorFourWarning.setVisible(false);
+            }
+            MultiplierSelector.setStyle("-fx-border-color: transparent");
         }
 
         if (ToleranceSelector.isShowing()){
             setRectangleColor(5, ToleranceSelector.getValue());
-            ColorFourWarning.setVisible(false);
+            switch (band) {
+                case 4 -> ColorFourWarning.setVisible(false);
+                default -> ColorFiveWarning.setVisible(false);
+            }
+            ToleranceSelector.setStyle("-fx-border-color: transparent");
         }
 
         if (NumberOfBand.isShowing()){
+            //clear all selection for combo box
+            BandOneSelector.getSelectionModel().clearSelection();
+            BandTwoSelector.getSelectionModel().clearSelection();
+            BandThreeSelector.getSelectionModel().clearSelection();
+            MultiplierSelector.getSelectionModel().clearSelection();
+            ToleranceSelector.getSelectionModel().clearSelection();
+            //clear all color for rectangle
+
+            BandOneSelector.setStyle("-fx-border-color: transparent");
+            BandTwoSelector.setStyle("-fx-border-color: transparent");
+            BandThreeSelector.setStyle("-fx-border-color: transparent");
+            MultiplierSelector.setStyle("-fx-border-color: transparent");
+            ToleranceSelector.setStyle("-fx-border-color: transparent");
+
+            ColorOneWarning.setVisible(false);
+            ColorTwoWarning.setVisible(false);
+            ColorThreeWarning.setVisible(false);
+            ColorFourWarning.setVisible(false);
+            ColorFiveWarning.setVisible(false);
+
+            BandOneSelector.setPromptText("Select Color");
+            BandTwoSelector.setPromptText("Select Color");
+            BandThreeSelector.setPromptText("Select Color");
+            MultiplierSelector.setPromptText("Select Color");
+            ToleranceSelector.setPromptText("Select Color");
+
+            //Display ComboBox Prompt Text
+            BandOneSelector.setButtonCell(new ListCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText("Select Color");
+                    } else {
+                        setText(item);
+                    }
+                }
+            });
+            BandTwoSelector.setButtonCell(new ListCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText("Select Color");
+                    } else {
+                        setText(item);
+                    }
+                }
+            });
+            BandThreeSelector.setButtonCell(new ListCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText("Select Color");
+                    } else {
+                        setText(item);
+                    }
+                }
+            });
+            MultiplierSelector.setButtonCell(new ListCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText("Select Color");
+                    } else {
+                        setText(item);
+                    }
+                }
+            });
+            ToleranceSelector.setButtonCell(new ListCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText("Select Color");
+                    } else {
+                        setText(item);
+                    }
+                }
+            });
+
             rearrangeGUI();
         }
     }
 
     public void setRectangleColor(int caseNumber, String color) {
 
-        if (caseNumber == 1) {
-            BandOneColor.setVisible(true);
-            BandOneColor.setStyle("-fx-fill: " + color);
-        }
-
-        if (caseNumber == 2) {
-            BandTwoColor.setVisible(true);
-            BandTwoColor.setStyle("-fx-fill: " + color);
-        }
-
-        if (caseNumber == 3) {
-            BandThreeColor.setVisible(true);
-            BandThreeColor.setStyle("-fx-fill: " + color);
-        }
-
-        if (caseNumber == 4) {
-            MultiplierColor.setVisible(true);
-            MultiplierColor.setStyle("-fx-fill: " + color);
-        }
-
-        if (caseNumber == 5) {
-            ToleranceColor.setVisible(true);
-            ToleranceColor.setStyle("-fx-fill: " + color);
+        switch (caseNumber) {
+            case 1 -> {
+                BandOneColor.setVisible(true);
+                BandOneColor.setStyle("-fx-fill: " + color);
+            }
+            case 2 -> {
+                BandTwoColor.setVisible(true);
+                BandTwoColor.setStyle("-fx-fill: " + color);
+            }
+            case 3 -> {
+                BandThreeColor.setVisible(true);
+                BandThreeColor.setStyle("-fx-fill: " + color);
+            }
+            case 4 -> {
+                MultiplierColor.setVisible(true);
+                MultiplierColor.setStyle("-fx-fill: " + color);
+            }
+            case 5 -> {
+                ToleranceColor.setVisible(true);
+                ToleranceColor.setStyle("-fx-fill: " + color);
+            }
         }
     }
 
@@ -482,50 +584,66 @@ public class SliderControllerImproved {
         //set all BandOne item to false
         BandOneLabel.setVisible(view);
         BandOneSelector.setVisible(view);
-        BandOneColor.setVisible(view);
         BandOneLine.setVisible(view);
         BandOneImageLabel.setVisible(view);
 
         //set all BandTwo item to false
         BandTwoLabel.setVisible(view);
         BandTwoSelector.setVisible(view);
-        BandTwoColor.setVisible(view);
         BandTwoline.setVisible(view);
         BandTwoImageLabel.setVisible(view);
 
         //set all Multiplier item to false
         MultiplierLabel.setVisible(view);
         MultiplierSelector.setVisible(view);
-        MultiplierColor.setVisible(view);
         MultiplierImageLabel.setVisible(view);
         MultiplierLine.setVisible(view);
 
-        if (caseNumber == 4 || caseNumber == 5 || caseNumber == -1){
-            //set all Tolerance item to false
-            ToleranceLabel.setVisible(view);
-            ToleranceSelector.setVisible(view);
-            ToleranceColor.setVisible(view);
-            ToleranceImageLabel.setVisible(view);
-            ToleranceLine.setVisible(view);
+        switch (caseNumber) {
+            case 4, 5, -1 -> {
+                //set all Tolerance item to false
+                ToleranceLabel.setVisible(view);
+                ToleranceSelector.setVisible(view);
+                ToleranceImageLabel.setVisible(view);
+                ToleranceLine.setVisible(view);
+            }
         }
 
-        if (caseNumber == 5 || caseNumber == -1){
+        switch (caseNumber) {
+            case 5, -1 -> {
+                //set all Tolerance item to false
+                BandThreeLabel.setVisible(view);
+                BandThreeSelector.setVisible(view);
+                BandThreeImageLabel.setVisible(view);
+                BandThreeLine.setVisible(view);
+            }
+        }
+
+        if (caseNumber == -1){
             //set all Tolerance item to false
-            BandThreeLabel.setVisible(view);
-            BandThreeSelector.setVisible(view);
+            ColorOneWarning.setVisible(view);
+            ColorTwoWarning.setVisible(view);
+            ColorThreeWarning.setVisible(view);
+            ColorFourWarning.setVisible(view);
+            ColorFiveWarning.setVisible(view);
+
+            BandOneColor.setVisible(view);
+            BandTwoColor.setVisible(view);
             BandThreeColor.setVisible(view);
-            BandThreeImageLabel.setVisible(view);
-            BandThreeLine.setVisible(view);
+            MultiplierColor.setVisible(view);
+            ToleranceColor.setVisible(view);
         }
 
-        //set all Value item to false
+        switch (caseNumber) {
+            case 10, -1 -> {
+                ValuePartOne.setVisible(view);
+                ValuePartTwo.setVisible(view);
+                ResultLabel.setVisible(view);
+            }
+        }
+
         ResistorImage.setVisible(view);
 
-        if (caseNumber == 10 || caseNumber == -1){
-            ValuePartOne.setVisible(view);
-            ValuePartTwo.setVisible(view);
-            ResultLabel.setVisible(view);
-        }
         //set button to false
         CalculateButton.setVisible(view);
     }

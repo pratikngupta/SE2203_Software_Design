@@ -45,23 +45,23 @@
         <AnchorPane fx:id="ResistorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <Label fx:id="BandOneLabel" layoutX="100.0" layoutY="85.0" text="Band 1" />
             <Label fx:id="BandTwoLabel" layoutX="100.0" layoutY="125.0" text="Band 2" />
-            <Label fx:id="MultiplierLabel" layoutX="92.0" layoutY="165.0" text="Multiplier" />
+            <Label fx:id="MultiplierLabel" layoutX="92.0" layoutY="165.0" text="Multipler" />
             <Label fx:id="ToleranceLabel" layoutX="85.0" layoutY="205.0" text="Tolerance" />
             <ComboBox fx:id="BandOneSelector" layoutX="150.0" layoutY="80.0" onAction="#DropDownMenu" prefHeight="25.0" prefWidth="120.0" promptText="Select Color" />
             <ComboBox fx:id="BandTwoSelector" layoutX="150.0" layoutY="120.0" onAction="#DropDownMenu" prefWidth="120.0" promptText="Select Color" />
             <ComboBox fx:id="MultiplierSelector" layoutX="150.0" layoutY="160.0" onAction="#DropDownMenu" prefWidth="120.0" promptText="Select Color" />
             <ComboBox fx:id="ToleranceSelector" layoutX="150.0" layoutY="200.0" onAction="#DropDownMenu" prefWidth="120.0" promptText="Select Color" />
-            <Rectangle fx:id="BandOneColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="370.0" layoutY="125.0" stroke="WHITE" strokeType="INSIDE" width="17.0" />
-            <Rectangle fx:id="BandTwoColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="395.0" layoutY="125.0" stroke="#f8f8f8" strokeType="INSIDE" width="17.0" />
-            <Rectangle fx:id="BandThreeColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="420.0" layoutY="125.0" stroke="WHITE" strokeType="INSIDE" width="17.0" />
-            <Rectangle fx:id="MultiplierColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="450.0" layoutY="125.0" stroke="WHITE" strokeType="INSIDE" width="17.0" />
-            <Rectangle fx:id="ToleranceColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="490.0" layoutY="125.0" stroke="WHITE" strokeType="INSIDE" width="17.0" />
+            <Rectangle fx:id="BandOneColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="370.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
+            <Rectangle fx:id="BandTwoColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="395.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
+            <Rectangle fx:id="BandThreeColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="420.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
+            <Rectangle fx:id="MultiplierColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="450.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
+            <Rectangle fx:id="ToleranceColor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="490.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
             <ImageView fx:id="ResistorImage" fitHeight="102.0" fitWidth="287.0" layoutX="295.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@resistor.png" />
             </ImageView>
             <Label fx:id="BandOneImageLabel" layoutX="336.0" layoutY="77.0" text="Band 1" />
             <Label fx:id="BandTwoImageLabel" layoutX="392.0" layoutY="71.0" text="Band 2" />
-            <Label fx:id="MultiplierImageLabel" layoutX="415.0" layoutY="216.0" text="Multiplier" />
+            <Label fx:id="MultiplierImageLabel" layoutX="415.0" layoutY="216.0" text="Multipler" />
             <Label fx:id="ToleranceImageLabel" layoutX="473.0" layoutY="225.0" text="Tolerance" />
             <Line fx:id="BandOneLine" endX="40.0" endY="1.6666717529296875" layoutX="336.0" layoutY="120.0" startX="24.0" startY="-25.0" />
             <Line fx:id="BandTwoline" endX="33.0" layoutX="369.0" layoutY="122.0" startX="40.0" startY="-27.0" />
