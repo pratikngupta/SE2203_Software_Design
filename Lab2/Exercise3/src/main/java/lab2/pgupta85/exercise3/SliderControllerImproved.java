@@ -13,9 +13,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+
 import java.util.HashMap;
 
 public class SliderControllerImproved {
+    @FXML
+    private Text ColorOneWarning;
+    @FXML
+    private Text ColorFourWarning;
+    @FXML
+    private Text ColorTwoWarning;
+    @FXML
+    private Text ColorThreeWarning;
+    @FXML
+    private Text ColorFiveWarning;
     @FXML
     private Label BandOneImageLabel;
     @FXML
@@ -23,7 +35,7 @@ public class SliderControllerImproved {
     @FXML
     private Label BandTwoLabel;
     @FXML
-    private Label MultiplerLabel;
+    private Label MultiplierLabel;
     @FXML
     private Label ToleranceLabel;
     @FXML
@@ -37,11 +49,11 @@ public class SliderControllerImproved {
     @FXML
     private Label ResultLabel;
     @FXML
-    private Line MultiplerLine;
+    private Line MultiplierLine;
     @FXML
     private Line BandOneLine;
     @FXML
-    private Label MultiplerImageLabel;
+    private Label MultiplierImageLabel;
     @FXML
     private Label ResistorQuestion;
     @FXML
@@ -83,7 +95,7 @@ public class SliderControllerImproved {
     @FXML
     private Rectangle MultiplierColor;
     @FXML
-    private ComboBox<String> MultiplerSelector;
+    private ComboBox<String> MultiplierSelector;
     @FXML
     private ImageView ResistorImage;
     @FXML
@@ -277,13 +289,13 @@ public class SliderControllerImproved {
     public void CalculateResistance() {
         band = NumberOfBand.getValue();
         resistance = 0;
-        double bandOneValue = -1;
-        double bandTwoValue = -1;
-        double multiplier = -1;
+        double bandOneValue;
+        double bandTwoValue ;
+        double multiplier;
         try {
             bandOneValue = colorBand.get(BandOneSelector.getValue());
             bandTwoValue = colorBand.get(BandTwoSelector.getValue());
-            multiplier = multiplierBand.get(MultiplerSelector.getValue());
+            multiplier = multiplierBand.get(MultiplierSelector.getValue());
             if (band == 3 || band == 4) {
                 //calculate the resistance using 3 bands
                 resistance = (bandOneValue * 10 + bandTwoValue) * multiplier;
@@ -295,14 +307,31 @@ public class SliderControllerImproved {
                 bandThreeValue = colorBand.get(BandThreeSelector.getValue());
                 resistance = (bandOneValue * 100 + bandTwoValue * 10 + bandThreeValue) * multiplier;
             }
+            displayResult();
         }
         catch (Exception e) {
             if (String.valueOf(BandOneSelector.getValue()).equals("null")){
-                BandOneLabel.setText("Enter Band One");
+                ColorOneWarning.setVisible(true);
+            }
+            if (String.valueOf(BandTwoSelector.getValue()).equals("null")){
+                ColorTwoWarning.setVisible(true);
+            }
+            if (String.valueOf(MultiplierSelector.getValue()).equals("null")){
+                ColorThreeWarning.setVisible(true);
+            }
+            if (band == 4 || band == 5){
+                if (String.valueOf(ToleranceSelector.getValue()).equals("null")){
+                    ColorFourWarning.setVisible(true);
+                }
+            }
+            if (band == 5){
+                if (String.valueOf(BandThreeSelector.getValue()).equals("null")){
+                    ColorFiveWarning.setVisible(true);
+                }
             }
         }
 
-        displayResult();
+
     }
 
     public void displayResult(){
@@ -332,6 +361,11 @@ public class SliderControllerImproved {
         ResistorQuestion.setLayoutY(150);
         NumberOfBand.setLayoutY(150);
 
+        ColorOneWarning.setVisible(false);
+        ColorTwoWarning.setVisible(false);
+        ColorThreeWarning.setVisible(false);
+        ColorFourWarning.setVisible(false);
+        ColorFiveWarning.setVisible(false);
 
         ResistorImage.setImage(new Image("file:src/main/resources/lab2/pgupta85/exercise3/resistor.png"));
         //clear all item in the combo box
@@ -339,14 +373,14 @@ public class SliderControllerImproved {
         BandOneSelector.getItems().clear();
         BandTwoSelector.getItems().clear();
         BandThreeSelector.getItems().clear();
-        MultiplerSelector.getItems().clear();
+        MultiplierSelector.getItems().clear();
         ToleranceSelector.getItems().clear();
 
         NumberOfBand.getItems().addAll(3,4,5);
         BandOneSelector.getItems().addAll(colorBand.keySet());
         BandTwoSelector.getItems().addAll(colorBand.keySet());
         BandThreeSelector.getItems().addAll(colorBand.keySet());
-        MultiplerSelector.getItems().addAll(multiplierBand.keySet());
+        MultiplierSelector.getItems().addAll(multiplierBand.keySet());
         ToleranceSelector.getItems().addAll(toleranceBand.keySet());
 
         //edit text color for comboBox
@@ -358,23 +392,27 @@ public class SliderControllerImproved {
         if (BandOneSelector.isShowing()){
             setRectangleColor(1, BandOneSelector.getValue());
             //enable index for combo box
-
+            ColorOneWarning.setVisible(false);
         }
 
         if (BandTwoSelector.isShowing()){
             setRectangleColor(2, BandTwoSelector.getValue());
+            ColorTwoWarning.setVisible(false);
         }
 
         if (BandThreeSelector.isShowing()){
             setRectangleColor(3, BandThreeSelector.getValue());
+            ColorFiveWarning.setVisible(false);
         }
 
-        if (MultiplerSelector.isShowing()){
-            setRectangleColor(4, MultiplerSelector.getValue());
+        if (MultiplierSelector.isShowing()){
+            setRectangleColor(4, MultiplierSelector.getValue());
+            ColorThreeWarning.setVisible(false);
         }
 
         if (ToleranceSelector.isShowing()){
             setRectangleColor(5, ToleranceSelector.getValue());
+            ColorFourWarning.setVisible(false);
         }
 
         if (NumberOfBand.isShowing()){
@@ -417,24 +455,24 @@ public class SliderControllerImproved {
 
         if (NumberOfBand.getValue() == 3){
             hideAll(0,true);
-            MultiplerLabel.setLayoutY(165);
-            MultiplerSelector.setLayoutY(160);
+            MultiplierLabel.setLayoutY(165);
+            MultiplierSelector.setLayoutY(160);
         }
         if (NumberOfBand.getValue() == 4){
             hideAll(4,true);
-            MultiplerLabel.setLayoutY(165);
+            MultiplierLabel.setLayoutY(165);
             ToleranceLabel.setLayoutY(205);
-            MultiplerSelector.setLayoutY(160);
+            MultiplierSelector.setLayoutY(160);
             ToleranceSelector.setLayoutY(200);
         }
         if (NumberOfBand.getValue() == 5){
             hideAll(5,true);
             BandThreeLabel.setLayoutY(165);
-            MultiplerLabel.setLayoutY(205);
+            MultiplierLabel.setLayoutY(205);
             ToleranceLabel.setLayoutY(245);
 
             BandThreeSelector.setLayoutY(160);
-            MultiplerSelector.setLayoutY(200);
+            MultiplierSelector.setLayoutY(200);
             ToleranceSelector.setLayoutY(240);
 
         }
@@ -456,11 +494,11 @@ public class SliderControllerImproved {
         BandTwoImageLabel.setVisible(view);
 
         //set all Multiplier item to false
-        MultiplerLabel.setVisible(view);
-        MultiplerSelector.setVisible(view);
+        MultiplierLabel.setVisible(view);
+        MultiplierSelector.setVisible(view);
         MultiplierColor.setVisible(view);
-        MultiplerImageLabel.setVisible(view);
-        MultiplerLine.setVisible(view);
+        MultiplierImageLabel.setVisible(view);
+        MultiplierLine.setVisible(view);
 
         if (caseNumber == 4 || caseNumber == 5 || caseNumber == -1){
             //set all Tolerance item to false
