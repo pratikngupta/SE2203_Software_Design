@@ -10,6 +10,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class SliderControllerImproved {
     @FXML
@@ -129,10 +130,8 @@ public class SliderControllerImproved {
 
     private double sliderValue;
     private double tolerance;
-    private double bandThreeValue;
     private double resistance;
     private int band;
-
 
     HashMap<String, Double> colorBand = new HashMap<>();
     HashMap<String, Double> multiplierBand = new HashMap<>();
@@ -255,7 +254,6 @@ public class SliderControllerImproved {
             fahrenheit = sliderValue;
             celsius = (fahrenheit - 32) * 5 / 9;
             kelvin = celsius + 273.15;
-
             //set value with 2 decimal places
             BaseUnitBValue.setText(String.format("%.2f", fahrenheit));
             SecondUnitValue.setText(String.format("%.2f", celsius));
@@ -298,7 +296,7 @@ public class SliderControllerImproved {
                 tolerance = toleranceBand.get(ToleranceSelector.getValue());
             }
             if (band == 5){
-                bandThreeValue = colorBand.get(BandThreeSelector.getValue());
+                double bandThreeValue = colorBand.get(BandThreeSelector.getValue());
                 resistance = (bandOneValue * 100 + bandTwoValue * 10 + bandThreeValue) * multiplier;
             }
             displayResult();
@@ -443,8 +441,8 @@ public class SliderControllerImproved {
             BandThreeSelector.getSelectionModel().clearSelection();
             MultiplierSelector.getSelectionModel().clearSelection();
             ToleranceSelector.getSelectionModel().clearSelection();
-            //clear all color for rectangle
 
+            //clear all color for rectangle
             BandOneSelector.setStyle("-fx-border-color: transparent");
             BandTwoSelector.setStyle("-fx-border-color: transparent");
             BandThreeSelector.setStyle("-fx-border-color: transparent");
@@ -456,12 +454,6 @@ public class SliderControllerImproved {
             ColorThreeWarning.setVisible(false);
             ColorFourWarning.setVisible(false);
             ColorFiveWarning.setVisible(false);
-
-            BandOneSelector.setPromptText("Select Color");
-            BandTwoSelector.setPromptText("Select Color");
-            BandThreeSelector.setPromptText("Select Color");
-            MultiplierSelector.setPromptText("Select Color");
-            ToleranceSelector.setPromptText("Select Color");
 
             //Display ComboBox Prompt Text
             BandOneSelector.setButtonCell(new ListCell<>() {
@@ -581,6 +573,7 @@ public class SliderControllerImproved {
     }
 
     public void hideAll (int caseNumber, boolean view){
+
         //set all BandOne item to false
         BandOneLabel.setVisible(view);
         BandOneSelector.setVisible(view);
