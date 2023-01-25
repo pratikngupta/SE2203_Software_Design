@@ -11,10 +11,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-
 import java.util.HashMap;
 
 public class SliderControllerImproved {
@@ -125,17 +123,22 @@ public class SliderControllerImproved {
 
     private double sliderValue;
     private double tolerance;
+    private double bandThreeValue;
+    private double resistance;
+    private int band;
 
-    HashMap <String, Double> colorBand = new HashMap<>();
-    HashMap <String, Double> multiplierBand = new HashMap<>();
-    HashMap <String, Double> toleranceBand = new HashMap<>();
 
-    public void initialize(){
+    HashMap<String, Double> colorBand = new HashMap<>();
+    HashMap<String, Double> multiplierBand = new HashMap<>();
+    HashMap<String, Double> toleranceBand = new HashMap<>();
+
+    public void initialize() {
         WelcomeTab.isSelected();
         WelcomeTab.setClosable(false);
+        //noinspection CssUnknownTarget
         WelcomeTabPlane.setStyle("-fx-background-image: url('file:src/main/resources/lab2/pgupta85/exercise3/Science.png')");
 
-        hideAll(-1,false);
+        hideAll(-1, false);
 
         //add the color bands to the hashmap
         colorBand.put("Black", 0.0);
@@ -174,12 +177,12 @@ public class SliderControllerImproved {
         toleranceBand.put("Silver", 10.0);
     }
 
-    public void WelcomeTabClicked( ) {
+    public void WelcomeTabClicked() {
         WelcomeTab.isSelected();
         WelcomeTab.setClosable(false);
     }
 
-    public void TemperatureTabClicked( ) {
+    public void TemperatureTabClicked() {
         TemperatureTab.isSelected();
         TemperatureTab.setClosable(false);
 
@@ -202,7 +205,7 @@ public class SliderControllerImproved {
         ThirdUnitValue.setText("273.15");
     }
 
-    public void CelsiusRadioButtonClicked( ) {
+    public void CelsiusRadioButtonClicked() {
         BaseUnit.setText("Celsius");
         SecondUnit.setText("Fahrenheit");
         ThirdUnit.setText("Kelvin");
@@ -223,17 +226,17 @@ public class SliderControllerImproved {
         TempConverter();
     }
 
-    public void TemperatureSlider( ) {
+    public void TemperatureSlider() {
         sliderValue = TemperatureSlider.getValue();
         TempConverter();
     }
 
-    public void TempConverter (){
+    public void TempConverter() {
 
         double celsius;
         double fahrenheit;
         double kelvin;
-        if (CelsiusRadioButton.isSelected()){
+        if (CelsiusRadioButton.isSelected()) {
             celsius = sliderValue;
             fahrenheit = (celsius * 9 / 5) + 32;
             kelvin = celsius + 273.15;
@@ -242,9 +245,7 @@ public class SliderControllerImproved {
             BaseUnitBValue.setText(String.format("%.2f", celsius));
             SecondUnitValue.setText(String.format("%.2f", fahrenheit));
             ThirdUnitValue.setText(String.format("%.2f", kelvin));
-        }
-
-        else if (FahrenheitRadioButton.isSelected()){
+        } else if (FahrenheitRadioButton.isSelected()) {
             fahrenheit = sliderValue;
             celsius = (fahrenheit - 32) * 5 / 9;
             kelvin = celsius + 273.15;
@@ -253,9 +254,7 @@ public class SliderControllerImproved {
             BaseUnitBValue.setText(String.format("%.2f", fahrenheit));
             SecondUnitValue.setText(String.format("%.2f", celsius));
             ThirdUnitValue.setText(String.format("%.2f", kelvin));
-        }
-
-        else if (KelvinRadioButton.isSelected()){
+        } else if (KelvinRadioButton.isSelected()) {
             kelvin = sliderValue;
             celsius = kelvin - 273.15;
             fahrenheit = (celsius * 9 / 5) + 32;
@@ -267,33 +266,46 @@ public class SliderControllerImproved {
         }
     }
 
-    public void aboutMeTabClicked( ) {
+    public void aboutMeTabClicked() {
         aboutMeTab.isSelected();
         aboutMeTab.setClosable(false);
-
+        //noinspection CssUnknownTarget
         AboutMePlane.setStyle("-fx-background-image: url('file:src/main/resources/lab2/pgupta85/exercise3/aboutMe.jpg')");
         aboutMeImage.setImage(new Image("file:src/main/resources/lab2/pgupta85/exercise3/WesternLogo.png"));
     }
 
     public void CalculateResistance() {
-        int band = NumberOfBand.getValue();
-        double resistance = 0;
-        double bandOne = colorBand.get(BandOneSelector.getValue());
-        double bandTwo = colorBand.get(BandTwoSelector.getValue());
-        double multiplier = multiplierBand.get(MultiplerSelector.getValue());
+        band = NumberOfBand.getValue();
+        resistance = 0;
+        double bandOneValue = -1;
+        double bandTwoValue = -1;
+        double multiplier = -1;
+        try {
+            bandOneValue = colorBand.get(BandOneSelector.getValue());
+            bandTwoValue = colorBand.get(BandTwoSelector.getValue());
+            multiplier = multiplierBand.get(MultiplerSelector.getValue());
+            if (band == 3 || band == 4) {
+                //calculate the resistance using 3 bands
+                resistance = (bandOneValue * 10 + bandTwoValue) * multiplier;
+            }
+            if (band == 4 || band == 5){
+                tolerance = toleranceBand.get(ToleranceSelector.getValue());
+            }
+            if (band == 5){
+                bandThreeValue = colorBand.get(BandThreeSelector.getValue());
+                resistance = (bandOneValue * 100 + bandTwoValue * 10 + bandThreeValue) * multiplier;
+            }
+        }
+        catch (Exception e) {
+            if (String.valueOf(BandOneSelector.getValue()).equals("null")){
+                BandOneLabel.setText("Enter Band One");
+            }
+        }
 
-        if (band == 3 || band == 4) {
-            //calculate the resistance using 3 bands
-            resistance = (bandOne * 10 + bandTwo) * multiplier;
-        }
-        if (band == 4 || band == 5){
-            tolerance = toleranceBand.get(ToleranceSelector.getValue());
-        }
-        if (band == 5){
-            double bandThree = colorBand.get(BandThreeSelector.getValue());
-            resistance = (bandOne * 100 + bandTwo * 10 + bandThree) * multiplier;
-        }
+        displayResult();
+    }
 
+    public void displayResult(){
         if (resistance < 1000){
             ValuePartOne.setText(String.format("%.2f", resistance) + " Ω");
         }
@@ -345,6 +357,8 @@ public class SliderControllerImproved {
     public void DropDownMenu() {
         if (BandOneSelector.isShowing()){
             setRectangleColor(1, BandOneSelector.getValue());
+            //enable index for combo box
+
         }
 
         if (BandTwoSelector.isShowing()){
@@ -369,185 +383,30 @@ public class SliderControllerImproved {
     }
 
     public void setRectangleColor(int caseNumber, String color) {
+
         if (caseNumber == 1) {
             BandOneColor.setVisible(true);
-            //BandOneColor.setStyle("-fx-border-color: black");
-            //compare 2 string
-            if (color.equals("Black")){
-                BandOneColor.setFill(Color.BLACK);
-            }
-            if (color.equals("Brown")){
-                BandOneColor.setFill(Color.BROWN);
-            }
-            if (color.equals("Red")){
-                BandOneColor.setFill(Color.RED);
-            }
-            if (color.equals("Orange")){
-                BandOneColor.setFill(Color.ORANGE);
-            }
-            if (color.equals("Yellow")){
-                BandOneColor.setFill(Color.YELLOW);
-            }
-            if (color.equals("Green")){
-                BandOneColor.setFill(Color.GREEN);
-            }
-            if (color.equals("Blue")){
-                BandOneColor.setFill(Color.BLUE);
-            }
-            if (color.equals("Violet")){
-                BandOneColor.setFill(Color.VIOLET);
-            }
-            if (color.equals("Gray")){
-                BandOneColor.setFill(Color.GRAY);
-            }
-            if (color.equals("White")){
-                BandOneColor.setFill(Color.WHITE);
-            }
-
+            BandOneColor.setStyle("-fx-fill: " + color);
         }
+
         if (caseNumber == 2) {
             BandTwoColor.setVisible(true);
-            //BandTwoColor.setStyle("-fx-border-color: black");
-            //compare 2 string
-            if (color.equals("Black")){
-                BandTwoColor.setFill(Color.BLACK);
-            }
-            if (color.equals("Brown")){
-                BandTwoColor.setFill(Color.BROWN);
-            }
-            if (color.equals("Red")){
-                BandTwoColor.setFill(Color.RED);
-            }
-            if (color.equals("Orange")){
-                BandTwoColor.setFill(Color.ORANGE);
-            }
-            if (color.equals("Yellow")){
-                BandTwoColor.setFill(Color.YELLOW);
-            }
-            if (color.equals("Green")){
-                BandTwoColor.setFill(Color.GREEN);
-            }
-            if (color.equals("Blue")){
-                BandTwoColor.setFill(Color.BLUE);
-            }
-            if (color.equals("Violet")){
-                BandTwoColor.setFill(Color.VIOLET);
-            }
-            if (color.equals("Gray")){
-                BandTwoColor.setFill(Color.GRAY);
-            }
-            if (color.equals("White")){
-                BandTwoColor.setFill(Color.WHITE);
-            }
-
+            BandTwoColor.setStyle("-fx-fill: " + color);
         }
+
         if (caseNumber == 3) {
             BandThreeColor.setVisible(true);
-            //BandThreeColor.setStyle("-fx-border-color: black");
-            //compare 2 string
-            if (color.equals("Black")){
-                BandThreeColor.setFill(Color.BLACK);
-            }
-            if (color.equals("Brown")){
-                BandThreeColor.setFill(Color.BROWN);
-            }
-            if (color.equals("Red")){
-                BandThreeColor.setFill(Color.RED);
-            }
-            if (color.equals("Orange")){
-                BandThreeColor.setFill(Color.ORANGE);
-            }
-            if (color.equals("Yellow")){
-                BandThreeColor.setFill(Color.YELLOW);
-            }
-            if (color.equals("Green")){
-                BandThreeColor.setFill(Color.GREEN);
-            }
-            if (color.equals("Blue")){
-                BandThreeColor.setFill(Color.BLUE);
-            }
-            if (color.equals("Violet")){
-                BandThreeColor.setFill(Color.VIOLET);
-            }
-            if (color.equals("Gray")){
-                BandThreeColor.setFill(Color.GRAY);
-            }
-            if (color.equals("White")){
-                BandThreeColor.setFill(Color.WHITE);
-            }
-
+            BandThreeColor.setStyle("-fx-fill: " + color);
         }
+
         if (caseNumber == 4) {
             MultiplierColor.setVisible(true);
-            //MultiplerColor.setStyle("-fx-border-color: black");
-            //compare 2 string
-            if (color.equals("Black")){
-                MultiplierColor.setFill(Color.BLACK);
-            }
-            if (color.equals("Brown")){
-                MultiplierColor.setFill(Color.BROWN);
-            }
-            if (color.equals("Red")){
-                MultiplierColor.setFill(Color.RED);
-            }
-            if (color.equals("Orange")){
-                MultiplierColor.setFill(Color.ORANGE);
-            }
-            if (color.equals("Yellow")){
-                MultiplierColor.setFill(Color.YELLOW);
-            }
-            if (color.equals("Green")){
-                MultiplierColor.setFill(Color.GREEN);
-            }
-            if (color.equals("Blue")){
-                MultiplierColor.setFill(Color.BLUE);
-            }
-            if (color.equals("Violet")){
-                MultiplierColor.setFill(Color.VIOLET);
-            }
-            if (color.equals("Gray")){
-                MultiplierColor.setFill(Color.GRAY);
-            }
-            if (color.equals("White")){
-                MultiplierColor.setFill(Color.WHITE);
-            }
-
+            MultiplierColor.setStyle("-fx-fill: " + color);
         }
+
         if (caseNumber == 5) {
             ToleranceColor.setVisible(true);
-            //ToleranceSelector.setStyle("-fx-background-color: " + color);
-            //compare 2 string
-            if (color.equals("Black")){
-                ToleranceColor.setFill(Color.BLACK);
-            }
-            if (color.equals("Brown")){
-                ToleranceColor.setFill(Color.BROWN);
-            }
-            if (color.equals("Red")){
-                ToleranceColor.setFill(Color.RED);
-            }
-            if (color.equals("Orange")){
-                ToleranceColor.setFill(Color.ORANGE);
-            }
-            if (color.equals("Yellow")){
-                ToleranceColor.setFill(Color.YELLOW);
-            }
-            if (color.equals("Green")){
-                ToleranceColor.setFill(Color.GREEN);
-            }
-            if (color.equals("Blue")){
-                ToleranceColor.setFill(Color.BLUE);
-            }
-            if (color.equals("Violet")){
-                ToleranceColor.setFill(Color.VIOLET);
-            }
-            if (color.equals("Gray")){
-                ToleranceColor.setFill(Color.GRAY);
-            }
-            if (color.equals("White")){
-                ToleranceColor.setFill(Color.WHITE);
-            }
-
+            ToleranceColor.setStyle("-fx-fill: " + color);
         }
     }
 
