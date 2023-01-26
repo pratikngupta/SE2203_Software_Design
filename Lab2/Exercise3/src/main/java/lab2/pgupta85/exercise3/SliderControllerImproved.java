@@ -395,43 +395,43 @@ public class SliderControllerImproved {
 
     public void DropDownMenu() {
         if (BandOneSelector.isShowing()){
-            setRectangleColor(1, BandOneSelector.getValue());
+            setRectangleColor(BandOneColor, BandOneSelector);
             //enable index for combo box
             ColorOneWarning.setVisible(false);
-            BandOneSelector.setStyle("-fx-border-color: transparent");
+
         }
 
         if (BandTwoSelector.isShowing()){
-            setRectangleColor(2, BandTwoSelector.getValue());
+            setRectangleColor(BandTwoColor, BandTwoSelector);
             ColorTwoWarning.setVisible(false);
-            BandTwoSelector.setStyle("-fx-border-color: transparent");
+
         }
 
         if (BandThreeSelector.isShowing()){
-            setRectangleColor(3, BandThreeSelector.getValue());
+            setRectangleColor(BandThreeColor, BandThreeSelector);
             switch (band) {
                 case 5 -> ColorThreeWarning.setVisible(false);
                 default -> ColorFiveWarning.setVisible(false);
             }
-            BandThreeSelector.setStyle("-fx-border-color: transparent");
+
         }
 
         if (MultiplierSelector.isShowing()){
-            setRectangleColor(4, MultiplierSelector.getValue());
+            setRectangleColor(MultiplierColor, MultiplierSelector);
             switch (band) {
                 case 4, 3 -> ColorThreeWarning.setVisible(false);
                 default -> ColorFourWarning.setVisible(false);
             }
-            MultiplierSelector.setStyle("-fx-border-color: transparent");
+
         }
 
         if (ToleranceSelector.isShowing()){
-            setRectangleColor(5, ToleranceSelector.getValue());
+            setRectangleColor(ToleranceColor, ToleranceSelector);
             switch (band) {
                 case 4 -> ColorFourWarning.setVisible(false);
                 default -> ColorFiveWarning.setVisible(false);
             }
-            ToleranceSelector.setStyle("-fx-border-color: transparent");
+
         }
 
         if (NumberOfBand.isShowing()){
@@ -455,91 +455,36 @@ public class SliderControllerImproved {
             ColorFourWarning.setVisible(false);
             ColorFiveWarning.setVisible(false);
 
-            //Display ComboBox Prompt Text
-            BandOneSelector.setButtonCell(new ListCell<>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
-                        setText("Select Color");
-                    } else {
-                        setText(item);
-                    }
-                }
-            });
-            BandTwoSelector.setButtonCell(new ListCell<>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
-                        setText("Select Color");
-                    } else {
-                        setText(item);
-                    }
-                }
-            });
-            BandThreeSelector.setButtonCell(new ListCell<>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
-                        setText("Select Color");
-                    } else {
-                        setText(item);
-                    }
-                }
-            });
-            MultiplierSelector.setButtonCell(new ListCell<>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
-                        setText("Select Color");
-                    } else {
-                        setText(item);
-                    }
-                }
-            });
-            ToleranceSelector.setButtonCell(new ListCell<>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
-                        setText("Select Color");
-                    } else {
-                        setText(item);
-                    }
-                }
-            });
+            updateItem(BandOneSelector);
+            updateItem(BandTwoSelector);
+            updateItem(BandThreeSelector);
+            updateItem(MultiplierSelector);
+            updateItem(ToleranceSelector);
 
             rearrangeGUI();
         }
     }
 
-    public void setRectangleColor(int caseNumber, String color) {
+    //updateitem for combo box
+    public void updateItem(ComboBox<String> comboBox){
+        comboBox.setButtonCell(new ListCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText("Select Color");
+                } else {
+                    setText(item);
+                }
+            }
+        });
+    }
 
-        switch (caseNumber) {
-            case 1 -> {
-                BandOneColor.setVisible(true);
-                BandOneColor.setStyle("-fx-fill: " + color);
-            }
-            case 2 -> {
-                BandTwoColor.setVisible(true);
-                BandTwoColor.setStyle("-fx-fill: " + color);
-            }
-            case 3 -> {
-                BandThreeColor.setVisible(true);
-                BandThreeColor.setStyle("-fx-fill: " + color);
-            }
-            case 4 -> {
-                MultiplierColor.setVisible(true);
-                MultiplierColor.setStyle("-fx-fill: " + color);
-            }
-            case 5 -> {
-                ToleranceColor.setVisible(true);
-                ToleranceColor.setStyle("-fx-fill: " + color);
-            }
-        }
+    public void setRectangleColor(Rectangle name, ComboBox<String> selector) {
+        name.setVisible(true);
+        selector.setStyle("-fx-border-color: transparent");
+        name.setStyle("-fx-fill: " + (selector.getValue()));
+
     }
 
     public void rearrangeGUI(){
