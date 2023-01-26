@@ -10,7 +10,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.util.HashMap;
-import java.util.TreeMap;
 
 public class SliderControllerImproved {
     @FXML
@@ -312,39 +311,38 @@ public class SliderControllerImproved {
                 BandTwoSelector.setStyle("-fx-border-color: red");
             }
 
-            switch (band){
-                case 3:
-                    if (String.valueOf(MultiplierSelector.getValue()).equals("null")){
+            switch (band) {
+                case 3 -> {
+                    if (String.valueOf(MultiplierSelector.getValue()).equals("null")) {
                         ColorThreeWarning.setVisible(true);
                         MultiplierSelector.setStyle("-fx-border-color: red");
                     }
-                    break;
-                case 4:
-                    if (String.valueOf(MultiplierSelector.getValue()).equals("null")){
+                }
+                case 4 -> {
+                    if (String.valueOf(MultiplierSelector.getValue()).equals("null")) {
                         ColorThreeWarning.setVisible(true);
                         MultiplierSelector.setStyle("-fx-border-color: red");
                     }
-                    if (String.valueOf(ToleranceSelector.getValue()).equals("null")){
+                    if (String.valueOf(ToleranceSelector.getValue()).equals("null")) {
                         ColorFourWarning.setVisible(true);
                         ToleranceSelector.setStyle("-fx-border-color: red");
                     }
-                    break;
-                case 5:
-                    if (String.valueOf(BandThreeSelector.getValue()).equals("null")){
+                }
+                case 5 -> {
+                    if (String.valueOf(BandThreeSelector.getValue()).equals("null")) {
                         ColorThreeWarning.setVisible(true);
                         BandThreeSelector.setStyle("-fx-border-color: red");
                     }
-                    if (String.valueOf(MultiplierSelector.getValue()).equals("null")){
+                    if (String.valueOf(MultiplierSelector.getValue()).equals("null")) {
                         ColorFourWarning.setVisible(true);
                         MultiplierSelector.setStyle("-fx-border-color: red");
                     }
-                    if (String.valueOf(ToleranceSelector.getValue()).equals("null")){
+                    if (String.valueOf(ToleranceSelector.getValue()).equals("null")) {
                         ColorFiveWarning.setVisible(true);
                         ToleranceSelector.setStyle("-fx-border-color: red");
                     }
-                    break;
+                }
             }
-
         }
     }
 
@@ -465,7 +463,7 @@ public class SliderControllerImproved {
         }
     }
 
-    //updateitem for combo box
+    //update for combo box
     public void updateItem(ComboBox<String> comboBox){
         comboBox.setButtonCell(new ListCell<>() {
             @Override
@@ -581,7 +579,6 @@ public class SliderControllerImproved {
         }
 
         ResistorImage.setVisible(view);
-
         //set button to false
         CalculateButton.setVisible(view);
     }
