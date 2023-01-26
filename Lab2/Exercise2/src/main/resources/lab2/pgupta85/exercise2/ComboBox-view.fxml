@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<SplitPane dividerPositions="0.3070469798657718" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+           minWidth="-Infinity" orientation="VERTICAL" prefHeight="300.0" prefWidth="300.0"
+           xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="lab2.pgupta85.exercise2.ComboBoxController">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="298.0">
+        <ComboBox fx:id="selectionBox" layoutX="74.0" layoutY="25.0" onAction="#sayHello" prefWidth="150.0"/>
+    </AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+        <Label layoutX="118.0" layoutY="28.0" text="Welcome" textFill="#eb0000"/>
+        <Label fx:id="DisplayName" layoutX="129.0" layoutY="58.0"/>
+    </AnchorPane>
+</SplitPane>
