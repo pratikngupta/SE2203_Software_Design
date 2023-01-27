@@ -1,3 +1,11 @@
+/***********************************************************************************************************************
+ * Name: Pratik Narendra Gupta
+ * Date: 27 January 2023
+ * Student ID: 251211859
+ * Task: Exercise 1-3
+ * Description: This is the controller class for the ComboBox Application. It contains the methods for the ComboBox
+ **********************************************************************************************************************/
+
 package lab2.pgupta85.exercise2;
 
 import javafx.fxml.FXML;
@@ -23,6 +31,7 @@ public class ComboBoxController {
         name.add("Amanda");
         name.add("Tyler");
 
+        //set the items to the ComboBox
         selectionBox.getItems().addAll(name);
     }
 
@@ -30,7 +39,7 @@ public class ComboBoxController {
         if (Objects.equals(selectionBox.getValue(), "Select a name")) {
             DisplayName.setText("");
         } else {
-            DisplayName.setText("Hello " + selectionBox.getValue() + "!");
+            DisplayName.setText(selectionBox.getValue() + "!");
         }
     }
 }

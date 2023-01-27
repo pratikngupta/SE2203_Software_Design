@@ -1,3 +1,11 @@
+/***********************************************************************************************************************
+ * Name: Pratik Narendra Gupta
+ * Date: 27 January 2023
+ * Student ID: 251211859
+ * Task: Exercise 2
+ * Description: This is the main class for the ComboBoxApplication.
+ **********************************************************************************************************************/
+
 package lab2.pgupta85.exercise2;
 
 import javafx.application.Application;
@@ -11,7 +19,7 @@ public class ComboBoxApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ComboBoxApplication.class.getResource("ComboBox-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
