@@ -1,3 +1,12 @@
+/***********************************************************************************************************************
+ * Name: Pratik Narendra Gupta
+ * Date: 27 January 2023
+ * Student ID: 251211859
+ * Task: Exercise
+ * Description: This is the controller class for the Slider Application. It contains the methods for the buttons.
+ * What I learned from this exercise: I learned how to use the slider and how to use the buttons.
+ **********************************************************************************************************************/
+
 package lab2.pgupta85.exercise3;
 
 import javafx.event.ActionEvent;

@@ -1,3 +1,14 @@
+/***********************************************************************************************************************
+ * Name: Pratik Narendra Gupta
+ * Date: 27 January 2023
+ * Student ID: 251211859
+ * Task: Exercise 3
+ * Description: This is the controller class for the improved Slider Application. It contains the methods for the buttons.
+ * What can this do?
+ * This application can convert the temperature from Celsius to Fahrenheit to Kelvin and vice versa.
+ * Able to calculate resistance of a resistor with 3,4, and 5 bands.
+ **********************************************************************************************************************/
+
 package lab2.pgupta85.exercise3;
 
 import javafx.fxml.FXML;
@@ -12,133 +23,64 @@ import javafx.scene.text.Text;
 import java.util.HashMap;
 
 public class SliderControllerImproved {
+
+    //Declaring the variables for resistance calculation
     @FXML
-    private Text ColorOneWarning;
+    private Text ColorOneWarning, ColorTwoWarning,ColorFourWarning, ColorThreeWarning,ColorFiveWarning;
     @FXML
-    private Text ColorFourWarning;
+    private Label BandOneLabel, BandTwoLabel, BandThreeLabel, MultiplierLabel, ToleranceLabel;
     @FXML
-    private Text ColorTwoWarning;
+    private Label BandOneImageLabel, BandTwoImageLabel, BandThreeImageLabel, MultiplierImageLabel, ToleranceImageLabel;
     @FXML
-    private Text ColorThreeWarning;
+    private Label ValuePartOne, ValuePartTwo, ResultLabel, ResistorQuestion;
     @FXML
-    private Text ColorFiveWarning;
+    private Rectangle BandOneColor, BandTwoColor, BandThreeColor ,ToleranceColor, MultiplierColor;
     @FXML
-    private Label BandOneImageLabel;
+    private ComboBox<String> BandOneSelector, BandTwoSelector, BandThreeSelector, MultiplierSelector, ToleranceSelector;
     @FXML
-    private Label BandOneLabel;
+    private ComboBox<Integer> NumberOfBand;
     @FXML
-    private Label BandTwoLabel;
-    @FXML
-    private Label MultiplierLabel;
-    @FXML
-    private Label ToleranceLabel;
-    @FXML
-    private Label BandTwoImageLabel;
-    @FXML
-    private Label ToleranceImageLabel;
-    @FXML
-    private Line BandTwoline;
-    @FXML
-    private Line ToleranceLine;
-    @FXML
-    private Label ResultLabel;
-    @FXML
-    private Line MultiplierLine;
-    @FXML
-    private Line BandOneLine;
-    @FXML
-    private Label MultiplierImageLabel;
-    @FXML
-    private Label ResistorQuestion;
-    @FXML
-    private Label BandThreeLabel;
-    @FXML
-    private Line BandThreeLine;
-    @FXML
-    private Label BandThreeImageLabel;
-    @FXML
-    private Rectangle BandThreeColor;
-    @FXML
-    private AnchorPane AboutMePlane;
-    @FXML
-    private Rectangle BandOneColor;
-    @FXML
-    private ComboBox<String> BandOneSelector;
-    @FXML
-    private Rectangle BandTwoColor;
-    @FXML
-    private ComboBox<String> BandTwoSelector;
-    @FXML
-    private ComboBox<String> BandThreeSelector;
-    @FXML
-    private Label BaseUnit;
-    @FXML
-    private Label BaseUnitBValue;
+    private Line BandOneLine, BandTwoLine, BandThreeLine, MultiplierLine, ToleranceLine;
     @FXML
     private Button CalculateButton;
     @FXML
-    private RadioButton CelsiusRadioButton;
-    @FXML
-    private RadioButton FahrenheitRadioButton;
-    @FXML
-    private RadioButton KelvinRadioButton;
-    @FXML
-    private Tab ResistorTab;
-    @FXML
-    private AnchorPane ResistorPane;
-    @FXML
-    private Rectangle MultiplierColor;
-    @FXML
-    private ComboBox<String> MultiplierSelector;
-    @FXML
     private ImageView ResistorImage;
+
+
+    //Declaring the variables for temperature
     @FXML
-    private Label SecondUnit;
+    private Label BaseUnit, BaseUnitBValue, SecondUnit, SecondUnitValue, ThirdUnit, ThirdUnitValue;
     @FXML
-    private Label SecondUnitValue;
+    private RadioButton CelsiusRadioButton, FahrenheitRadioButton, KelvinRadioButton;
     @FXML
     private ToggleGroup TempSelector;
     @FXML
     private Slider TemperatureSlider;
+
+    //Declaring the common variables
     @FXML
-    private Tab TemperatureTab;
+    private AnchorPane AboutMePlane, ResistorPane, WelcomeTabPlane, TemperatureTabPlane;
     @FXML
-    private AnchorPane TemperatureTabPlane;
-    @FXML
-    private Label ThirdUnit;
-    @FXML
-    private Label ThirdUnitValue;
-    @FXML
-    private Rectangle ToleranceColor;
-    @FXML
-    private ComboBox<String> ToleranceSelector;
-    @FXML
-    private Tab WelcomeTab;
-    @FXML
-    private AnchorPane WelcomeTabPlane;
+    private Tab ResistorTab, TemperatureTab, AboutMeTab, WelcomeTab;
     @FXML
     private ImageView aboutMeImage;
-    @FXML
-    private Tab aboutMeTab;
-    @FXML
-    private Label ValuePartOne;
-    @FXML
-    private Label ValuePartTwo;
-    @FXML
-    private ComboBox<Integer> NumberOfBand;
 
+    //Private variables for the resistor
     private double sliderValue;
     private double tolerance;
     private double resistance;
     private int band;
 
+    //HashMap for the color code
     HashMap<String, Double> colorBand = new HashMap<>();
     HashMap<String, Double> multiplierBand = new HashMap<>();
     HashMap<String, Double> toleranceBand = new HashMap<>();
 
+    //Initializing method for
     public void initialize() {
+
         WelcomeTab.isSelected();
-        WelcomeTab.setClosable(false);
+        WelcomeTab.setClosable(false); //Disabling the close button
         //noinspection CssUnknownTarget
         WelcomeTabPlane.setStyle("-fx-background-image: url('file:src/main/resources/lab2/pgupta85/exercise3/Science.png')");
 
@@ -181,34 +123,33 @@ public class SliderControllerImproved {
         toleranceBand.put("Silver", 10.0);
     }
 
+    //Welcome tab
     public void WelcomeTabClicked() {
         WelcomeTab.isSelected();
         WelcomeTab.setClosable(false);
     }
 
+    //Temperature tab
     public void TemperatureTabClicked() {
         TemperatureTab.isSelected();
-        TemperatureTab.setClosable(false);
+        TemperatureTab.setClosable(false); //This is to make the tab not closable
 
-        BaseUnit.setText("Celsius");
-        BaseUnitBValue.setStyle("-fx-border-color: black");
-        BaseUnitBValue.setAlignment(javafx.geometry.Pos.CENTER);
-        BaseUnitBValue.setMinWidth(50);
-        BaseUnitBValue.setText("0");
-
-        SecondUnit.setText("Fahrenheit");
-        SecondUnitValue.setStyle("-fx-border-color: black");
-        SecondUnitValue.setAlignment(javafx.geometry.Pos.CENTER);
-        SecondUnitValue.setMinWidth(50);
-        SecondUnitValue.setText("32");
-
-        ThirdUnit.setText("Kelvin");
-        ThirdUnitValue.setStyle("-fx-border-color: black");
-        ThirdUnitValue.setAlignment(javafx.geometry.Pos.CENTER);
-        ThirdUnitValue.setMinWidth(50);
-        ThirdUnitValue.setText("273.15");
+        //Setting the default values
+        defaultOnLoad(BaseUnit, BaseUnitBValue, "Celsius", "0");
+        defaultOnLoad(SecondUnit, SecondUnitValue, "Fahrenheit", "32");
+        defaultOnLoad(ThirdUnit, ThirdUnitValue, "Kelvin", "273.15");
     }
 
+    // method to set the default values for the radio buttons
+    public void defaultOnLoad(Label unit, Label unitValue, String text, String value) {
+        unit.setText(text);
+        unitValue.setStyle("-fx-border-color: black");
+        unitValue.setAlignment(javafx.geometry.Pos.CENTER);
+        unitValue.setMinWidth(50);
+        unitValue.setText(value);
+    }
+
+    //Action method for radio buttons
     public void CelsiusRadioButtonClicked() {
         BaseUnit.setText("Celsius");
         SecondUnit.setText("Fahrenheit");
@@ -216,6 +157,7 @@ public class SliderControllerImproved {
         TempConverter();
     }
 
+    //Action method for radio buttons
     public void FahrenheitRadioButtonClicked() {
         BaseUnit.setText("Fahrenheit");
         SecondUnit.setText("Celsius");
@@ -223,6 +165,7 @@ public class SliderControllerImproved {
         TempConverter();
     }
 
+    //Action method for radio buttons
     public void KelvinRadioButtonClicked() {
         BaseUnit.setText("Kelvin");
         SecondUnit.setText("Celsius");
@@ -230,16 +173,20 @@ public class SliderControllerImproved {
         TempConverter();
     }
 
+    //Action method for slider
     public void TemperatureSlider() {
         sliderValue = TemperatureSlider.getValue();
         TempConverter();
     }
 
+    //Method to convert the temperature
     public void TempConverter() {
-
+        //Some variables
         double celsius;
         double fahrenheit;
         double kelvin;
+
+        //Converting the temperature
         if (CelsiusRadioButton.isSelected()) {
             celsius = sliderValue;
             fahrenheit = (celsius * 9 / 5) + 32;
@@ -269,20 +216,24 @@ public class SliderControllerImproved {
         }
     }
 
+    //About tab
     public void aboutMeTabClicked() {
-        aboutMeTab.isSelected();
-        aboutMeTab.setClosable(false);
+        AboutMeTab.isSelected();
+        AboutMeTab.setClosable(false);
         //noinspection CssUnknownTarget
         AboutMePlane.setStyle("-fx-background-image: url('file:src/main/resources/lab2/pgupta85/exercise3/aboutMe.jpg')");
         aboutMeImage.setImage(new Image("file:src/main/resources/lab2/pgupta85/exercise3/WesternLogo.png"));
     }
 
+    //Calculator for the resistor
     public void CalculateResistance() {
+        //Some variables
         band = NumberOfBand.getValue();
         resistance = 0;
         double bandOneValue;
         double bandTwoValue ;
         double multiplier;
+        //Getting the values from the hashmap
         try {
             bandOneValue = colorBand.get(BandOneSelector.getValue());
             bandTwoValue = colorBand.get(BandTwoSelector.getValue());
@@ -300,7 +251,8 @@ public class SliderControllerImproved {
             }
             displayResult();
         }
-        catch (Exception e) {
+        //catch the exception if the user does not select any value
+        catch (NullPointerException e) {
 
             if (String.valueOf(BandOneSelector.getValue()).equals("null")){
                 ColorOneWarning.setVisible(true);
@@ -346,6 +298,7 @@ public class SliderControllerImproved {
         }
     }
 
+    //Method to display the result
     public void displayResult(){
         if (resistance < 1000){
             ValuePartOne.setText(String.format("%.2f", resistance) + " Ω");
@@ -365,14 +318,16 @@ public class SliderControllerImproved {
         hideAll(10,true);
     }
 
+    //Resistor tab
     public void ResistorTabClicked( ) {
         ResistorTab.isSelected();
-        ResistorTab.setClosable(false);
+        ResistorTab.setClosable(false); //disable the close button
 
         hideAll(-1,false);
         //change y position of the ResistorQuestion
         ResistorQuestion.setLayoutY(150);
         NumberOfBand.setLayoutY(150);
+
 
         ResistorImage.setImage(new Image("file:src/main/resources/lab2/pgupta85/exercise3/resistor.png"));
         //clear all item in the combo box
@@ -383,6 +338,7 @@ public class SliderControllerImproved {
         MultiplierSelector.getItems().clear();
         ToleranceSelector.getItems().clear();
 
+        //add items to the combo box
         NumberOfBand.getItems().addAll(3,4,5);
         BandOneSelector.getItems().addAll(colorBand.keySet());
         BandTwoSelector.getItems().addAll(colorBand.keySet());
@@ -391,20 +347,23 @@ public class SliderControllerImproved {
         ToleranceSelector.getItems().addAll(toleranceBand.keySet());
     }
 
+    //action for the combo box
     public void DropDownMenu() {
+        //If the user select band one
         if (BandOneSelector.isShowing()){
             setRectangleColor(BandOneColor, BandOneSelector);
             //enable index for combo box
             ColorOneWarning.setVisible(false);
-
         }
 
+        //If the user select band two
         if (BandTwoSelector.isShowing()){
             setRectangleColor(BandTwoColor, BandTwoSelector);
             ColorTwoWarning.setVisible(false);
 
         }
 
+        //If the user select band three
         if (BandThreeSelector.isShowing()){
             setRectangleColor(BandThreeColor, BandThreeSelector);
             switch (band) {
@@ -414,6 +373,7 @@ public class SliderControllerImproved {
 
         }
 
+        //If the user select multiplier
         if (MultiplierSelector.isShowing()){
             setRectangleColor(MultiplierColor, MultiplierSelector);
             switch (band) {
@@ -423,6 +383,7 @@ public class SliderControllerImproved {
 
         }
 
+        //If the user select tolerance
         if (ToleranceSelector.isShowing()){
             setRectangleColor(ToleranceColor, ToleranceSelector);
             switch (band) {
@@ -432,60 +393,48 @@ public class SliderControllerImproved {
 
         }
 
+        //If the user select number of band
         if (NumberOfBand.isShowing()){
-            //clear all selection for combo box
-            BandOneSelector.getSelectionModel().clearSelection();
-            BandTwoSelector.getSelectionModel().clearSelection();
-            BandThreeSelector.getSelectionModel().clearSelection();
-            MultiplierSelector.getSelectionModel().clearSelection();
-            ToleranceSelector.getSelectionModel().clearSelection();
 
-            //clear all color for rectangle
-            BandOneSelector.setStyle("-fx-border-color: transparent");
-            BandTwoSelector.setStyle("-fx-border-color: transparent");
-            BandThreeSelector.setStyle("-fx-border-color: transparent");
-            MultiplierSelector.setStyle("-fx-border-color: transparent");
-            ToleranceSelector.setStyle("-fx-border-color: transparent");
-
-            ColorOneWarning.setVisible(false);
-            ColorTwoWarning.setVisible(false);
-            ColorThreeWarning.setVisible(false);
-            ColorFourWarning.setVisible(false);
-            ColorFiveWarning.setVisible(false);
-
-            updateItem(BandOneSelector);
-            updateItem(BandTwoSelector);
-            updateItem(BandThreeSelector);
-            updateItem(MultiplierSelector);
-            updateItem(ToleranceSelector);
+            numberOfBandHelper(ColorOneWarning, BandOneSelector);
+            numberOfBandHelper(ColorTwoWarning, BandTwoSelector);
+            numberOfBandHelper(ColorThreeWarning, BandThreeSelector);
+            numberOfBandHelper(ColorFourWarning, MultiplierSelector);
+            numberOfBandHelper(ColorFiveWarning, ToleranceSelector);
 
             rearrangeGUI();
         }
     }
 
-    //update for combo box
-    public void updateItem(ComboBox<String> comboBox){
+    //helper method for NumberOfBand menu in DropDownMenu()
+    public void numberOfBandHelper(Text label, ComboBox<String> comboBox){
+        label.setVisible(false); //hide the warning label
+        comboBox.getSelectionModel().clearSelection(); //clear the selection
+        comboBox.setStyle("-fx-border-color: transparent"); //clear the border
+
         comboBox.setButtonCell(new ListCell<>() {
             @Override
+            //set the default value to null
             protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
+                super.updateItem(item, empty); //call the super class
                 if (empty || item == null) {
-                    setText("Select Color");
+                    setText("Select Color"); //set the default value
                 } else {
-                    setText(item);
+                    setText(item); //set the value
                 }
             }
         });
     }
 
     public void setRectangleColor(Rectangle name, ComboBox<String> selector) {
-        name.setVisible(true);
-        selector.setStyle("-fx-border-color: transparent");
-        name.setStyle("-fx-fill: " + (selector.getValue()));
-
+        name.setVisible(true); //show the rectangle
+        selector.setStyle("-fx-border-color: transparent"); //clear the border
+        name.setStyle("-fx-fill: " + (selector.getValue())); //set the color
     }
 
     public void rearrangeGUI(){
+        //rearrange the GUI after the user select the number of band
+
         hideAll(-1,false);
         ResistorQuestion.setLayoutY(31);
         NumberOfBand.setLayoutY(28);
@@ -507,14 +456,13 @@ public class SliderControllerImproved {
             BandThreeLabel.setLayoutY(165);
             MultiplierLabel.setLayoutY(205);
             ToleranceLabel.setLayoutY(245);
-
             BandThreeSelector.setLayoutY(160);
             MultiplierSelector.setLayoutY(200);
             ToleranceSelector.setLayoutY(240);
-
         }
     }
 
+    //hide all the GUI or a certain part base on caseNumber provider
     public void hideAll (int caseNumber, boolean view){
 
         //set all BandOne item to false
@@ -526,7 +474,7 @@ public class SliderControllerImproved {
         //set all BandTwo item to false
         BandTwoLabel.setVisible(view);
         BandTwoSelector.setVisible(view);
-        BandTwoline.setVisible(view);
+        BandTwoLine.setVisible(view);
         BandTwoImageLabel.setVisible(view);
 
         //set all Multiplier item to false
@@ -577,7 +525,6 @@ public class SliderControllerImproved {
                 ResultLabel.setVisible(view);
             }
         }
-
         ResistorImage.setVisible(view);
         //set button to false
         CalculateButton.setVisible(view);
