@@ -1,3 +1,10 @@
+/***********************************************************************************************************************
+ * Name: Pratik Narendra Gupta
+ * Date: 27 January 2023
+ * Student ID: 251211859
+ * Task: Exercise 3
+ * Description: This is the main class for the Slider Application. This is improved version of the previous exercise.
+ **********************************************************************************************************************/
 package lab2.pgupta85.exercise3;
 
 import javafx.application.Application;
