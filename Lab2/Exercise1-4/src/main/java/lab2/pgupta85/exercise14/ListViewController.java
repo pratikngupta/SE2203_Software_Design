@@ -13,7 +13,8 @@ import java.util.ArrayList;
 
 public class ListViewController {
 
-    public javafx.scene.control.Button Button;
+    @FXML
+    private javafx.scene.control.Button listViewBtn;
     @FXML
     private Label selectedItem;
     @FXML
@@ -26,14 +27,16 @@ public class ListViewController {
         strArrayList.add("Great Dane");
         strArrayList.add("Labrador");
         strArrayList.add("Terrier");
+
         ObservableList<String> strList = FXCollections.observableArrayList(strArrayList);
+
         lvItem.getItems().setAll(strList);
+        lvItem.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     @FXML
     void displaySelectedItem() {
         //Multiple selection
-        lvItem.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ObservableList<String> selectedItems = lvItem.getSelectionModel().getSelectedItems();
         selectedItem.setText(selectedItems.toString());
     }

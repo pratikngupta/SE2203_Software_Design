@@ -8,6 +8,8 @@ import javafx.scene.control.ListView;
 public class ListViewController {
 
     @FXML
+    private Button listViewBtn;
+    @FXML
     private Label selectedItem;
     @FXML
     private ListView<String> lvItem;
@@ -15,7 +17,9 @@ public class ListViewController {
     // This method is called by the FXMLLoader when initialization is complete
     public void initialize() {
         lvItem.getItems().addAll("Poodle", "Great Dane", "Labrador", "Terrier");
+        listViewBtn.setVisible(false);
     }
+
     @FXML
     void displaySelectedItem() {
         selectedItem.setText(lvItem.getSelectionModel().getSelectedIndex() + "-" +
