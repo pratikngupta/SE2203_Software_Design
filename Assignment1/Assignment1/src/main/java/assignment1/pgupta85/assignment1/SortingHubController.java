@@ -6,14 +6,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
-public class SortingHubController {
+public class SortingHubController extends MegreSort {
 
     @FXML
     private Label ArraySizeLabel;
@@ -36,13 +35,14 @@ public class SortingHubController {
     @FXML
     private AnchorPane Stage;
 
-    //create a Rectangle arrayList to store the bars
-    private ArrayList<Rectangle> bars = new ArrayList<Rectangle>();
+    private SortingStrategy sortingStrategy;
 
-    private  int[] ramdomNumbersGenerator = new int[96];
+    //create a Rectangle arrayList to store the bars
+    private ArrayList<Rectangle> bars = new ArrayList<>();
 
     private int[] intArray;
 
+    private int size;
     @FXML
     void ResetButtonClicked() {
         MainFrame.getChildren().clear();
@@ -52,40 +52,43 @@ public class SortingHubController {
     public void initialize() {
         SelectionMethodSelector.getItems().addAll("Bubble Sort", "Selection Sort", "Insertion Sort", "Merge Sort", "Quick Sort");
         ArraySizeSlider.setValue(64);
-
-        int number = 32;
-        for (int i = 0; i < 96; i++) {
-            ramdomNumbersGenerator[i] = number;
-            number ++;
-        }
-
+        size = 64;
+        addNumber();
+        updateGraph();
     }
 
     @FXML
     void SetArraySize() {
-        int size = (int) ArraySizeSlider.getValue();
+        if (ArraySizeSlider.getValue() != 64) {
+            size = (int) ArraySizeSlider.getValue();
+        }
         ArraySizeLabel.setText(size + "");
+        addNumber();
+        updateGraph();
+    }
+    public void addNumber(){
         intArray = new int[size];
-        //generate number between 0 and 95 inclusive
-        for (int i = 0; i < size; i++) {
+        int min = 1;
+        int max = size;
 
-            //check if the number is already in the array
-            int randomNumber = (int) (Math.random() * 96);
+        int range = max - min + 1;
+
+        //add values to the array without duplicates
+        for (int i = 0; i < size; i++) {
+            int rand = (int) (Math.random() * range) + min;
+            intArray[i] = rand;
             for (int j = 0; j < i; j++) {
-                if (intArray[j] == ramdomNumbersGenerator[randomNumber]) {
-                    randomNumber = (int) (Math.random() * 96);
-                    j = -1;
+                if (intArray[j] == rand) {
+                    i--;
+                    break;
                 }
             }
-            intArray[i] = ramdomNumbersGenerator[randomNumber];
         }
-
-        updateGraph();
     }
 
     public void updateGraph(){
         MainFrame.getChildren().clear();
-        double width = (MainFrame.getPrefWidth() / intArray.length )- 2;
+        double width = (MainFrame.getPrefWidth() / intArray.length ) - 2;
         double x = 0;
         double height;
         int y = 0;
@@ -96,17 +99,15 @@ public class SortingHubController {
                 max = intArray[i];
             }
         }
+        System.out.println("Max: " + max);
 
         for (int i=0; i < intArray.length; i++){
-            //set the height of the bar with proportion to the value of the array with 32 being the lowest and 128 being the highest, and it should fit in mainFrame height
-            //set the height in such a way that the max value is at the top of the frame and the min value is 5 pixels from the bottom of the frame also min value is 32 should be visible
-            height = (intArray[i] - 31) * (MainFrame.getPrefHeight()) / (max - 31);
-            //cap the height at prefHeight
+            //set height of bar in proportion to max value
+            height = (intArray[i] * MainFrame.getPrefHeight()) / max;
 
             //set the x and width of the bar such that it is evenly spaced and there is a space of 1 pixel between each bar, and it is in the prefWidth of the mainFrame
-            x = ((i  * (width+2)));
+            x = ((i  * (width + 2)));
             //set width of bar such that it is 1 pixel less than the width of the frame so that there is a space of 1 pixel between each bar
-
 
             Rectangle bar = new Rectangle(x, y + (MainFrame.getHeight() - height), width, height);
 
@@ -117,13 +118,51 @@ public class SortingHubController {
     }
 
     @FXML
-    void SortButtonClicked(ActionEvent event) {
+    void SortButtonClicked() {
+        //when the sort button is clicked, selecting sorting is performes
+        String selection = SelectionMethodSelector.getValue();
+        if (selection == "Bubble Sort") {
+//        } else if (selection == "Selection Sort") {
+            //sortingStrategy = new SelectionSort();
+        } else if (selection == "Insertion Sort") {
+            //sortingStrategy = new InsertionSort();
+        } else if (selection == "Merge Sort") {
+            sortingStrategy = new MegreSort();
+        } else if (selection == "Quick Sort") {
+            //sortingStrategy = new QuickSort();
+        }
 
+        //pass the array to the sorting strategy
+        sortingStrategy.sort(intArray);
+        //start the sorting strategy
+        sortingStrategy.run();
     }
 
     @FXML
-    void setSortStrategy(ActionEvent event) {
-
+    void setSortStrategy() {
+        String sortMethod = SelectionMethodSelector.getValue();
+        switch (sortMethod) {
+            case "Bubble Sort":
+                //sortingStrategy = new BubbleSort();
+                break;
+            case "Selection Sort":
+                //sortingStrategy = new SelectionSort();
+                break;
+            case "Insertion Sort":
+                //sortingStrategy = new InsertionSort();
+                break;
+            case "Merge Sort":
+                sortingStrategy = new MegreSort();
+                //call the sort method
+                sortingStrategy.sort(intArray);
+                break;
+            case "Quick Sort":
+                //sortingStrategy = new QuickSort();
+                break;
+        }
     }
 
+    public int[] getArray() {
+        return intArray;
+    }
 }
