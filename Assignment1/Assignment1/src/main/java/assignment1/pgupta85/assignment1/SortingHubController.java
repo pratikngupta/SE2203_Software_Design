@@ -1,6 +1,5 @@
 package assignment1.pgupta85.assignment1;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -12,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
-public class SortingHubController extends MegreSort {
+public class SortingHubController{
 
     @FXML
     private Label ArraySizeLabel;
@@ -35,6 +34,8 @@ public class SortingHubController extends MegreSort {
     @FXML
     private AnchorPane Stage;
 
+
+
     private SortingStrategy sortingStrategy;
 
     //create a Rectangle arrayList to store the bars
@@ -50,23 +51,14 @@ public class SortingHubController extends MegreSort {
 
     //create initialize method to initialize the bars
     public void initialize() {
-        SelectionMethodSelector.getItems().addAll("Bubble Sort", "Selection Sort", "Insertion Sort", "Merge Sort", "Quick Sort");
+        SelectionMethodSelector.getItems().addAll("Merge Sort");
         ArraySizeSlider.setValue(64);
-        size = 64;
-        addNumber();
-        updateGraph();
     }
 
     @FXML
     void SetArraySize() {
-        if (ArraySizeSlider.getValue() != 64) {
-            size = (int) ArraySizeSlider.getValue();
-        }
+        size = (int) ArraySizeSlider.getValue();
         ArraySizeLabel.setText(size + "");
-        addNumber();
-        updateGraph();
-    }
-    public void addNumber(){
         intArray = new int[size];
         int min = 1;
         int max = size;
@@ -84,26 +76,24 @@ public class SortingHubController extends MegreSort {
                 }
             }
         }
+        updateGraph();
     }
 
+
     public void updateGraph(){
+
         MainFrame.getChildren().clear();
         double width = (MainFrame.getPrefWidth() / intArray.length ) - 2;
         double x = 0;
         double height;
         int y = 0;
         //find max value in array
-        int max = intArray[0];
-        for (int i = 0; i < intArray.length; i++) {
-            if (intArray[i] > max) {
-                max = intArray[i];
-            }
-        }
-        System.out.println("Max: " + max);
+
+        System.out.println("Max: " + size);
 
         for (int i=0; i < intArray.length; i++){
             //set height of bar in proportion to max value
-            height = (intArray[i] * MainFrame.getPrefHeight()) / max;
+            height = (intArray[i] * MainFrame.getPrefHeight()) / size;
 
             //set the x and width of the bar such that it is evenly spaced and there is a space of 1 pixel between each bar, and it is in the prefWidth of the mainFrame
             x = ((i  * (width + 2)));
@@ -119,47 +109,19 @@ public class SortingHubController extends MegreSort {
 
     @FXML
     void SortButtonClicked() {
-        //when the sort button is clicked, selecting sorting is performes
-        String selection = SelectionMethodSelector.getValue();
-        if (selection == "Bubble Sort") {
-//        } else if (selection == "Selection Sort") {
-            //sortingStrategy = new SelectionSort();
-        } else if (selection == "Insertion Sort") {
-            //sortingStrategy = new InsertionSort();
-        } else if (selection == "Merge Sort") {
-            sortingStrategy = new MegreSort();
-        } else if (selection == "Quick Sort") {
-            //sortingStrategy = new QuickSort();
-        }
+        //call the sort method from the SelectionSort class
+        //pass the bars to the SelectionSort class
+        //pass sortingHubController to the SelectionSort class
+        sortingStrategy = new SelectionSort(this, intArray);
 
-        //pass the array to the sorting strategy
-        sortingStrategy.sort(intArray);
-        //start the sorting strategy
-        sortingStrategy.run();
+        Thread thread = new Thread(sortingStrategy);
+        thread.start();
+
     }
 
     @FXML
     void setSortStrategy() {
-        String sortMethod = SelectionMethodSelector.getValue();
-        switch (sortMethod) {
-            case "Bubble Sort":
-                //sortingStrategy = new BubbleSort();
-                break;
-            case "Selection Sort":
-                //sortingStrategy = new SelectionSort();
-                break;
-            case "Insertion Sort":
-                //sortingStrategy = new InsertionSort();
-                break;
-            case "Merge Sort":
-                sortingStrategy = new MegreSort();
-                //call the sort method
-                sortingStrategy.sort(intArray);
-                break;
-            case "Quick Sort":
-                //sortingStrategy = new QuickSort();
-                break;
-        }
+
     }
 
     public int[] getArray() {
