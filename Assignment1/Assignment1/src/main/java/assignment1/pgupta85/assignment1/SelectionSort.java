@@ -17,35 +17,39 @@ public class SelectionSort implements SortingStrategy{
 
     @Override
     public void sort(int[] arr) {
-        int n = arr.length;
-
-        for (int i = 0; i < n-1; i++)
-        {
-            int min_idx = i;
-            for (int j = i+1; j < n; j++)
-                if (arr[j] < arr[min_idx])
-                    min_idx = j;
-
-            int temp = arr[min_idx];
-            arr[min_idx] = arr[i];
+        System.out.println("New Selection Sort");
+        //sort the array using selection sort: send the array to the controller to display after each swap with a delay before the next swap
+        for (int i = 0; i < arr.length - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            int temp = arr[minIndex];
+            arr[minIndex] = arr[i];
             arr[i] = temp;
+            //print the array
+            for (int j : arr) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+           //start a new thread to display the array
+            //update the graph in background thread with a delay
         }
     }
 
     @Override
     public void run() {
-        new Thread(() -> {
-            try {
-                while (true) {
-                    Platform.runLater(() -> {
-                        sort(intArray);
-                        sortingHubController.updateGraph();
-                    });
-                    Thread.sleep(10000000);
-                }
-            } catch (InterruptedException ex) {
-            }
-        }).start();
+        // delay execution very briefly after each redraw to allow the user to see the changes in the display before the next swap
+        //Called sort method to sort the array and display it using the controller using thread
 
+        Thread thread = new Thread(() -> {
+            sortingHubController.updateGraph(intArray);
+            Platform.runLater(() -> {
+                sort(intArray);
+            });
+        });
+        thread.start();
     }
 }

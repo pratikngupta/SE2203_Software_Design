@@ -5,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -23,30 +22,25 @@ public class SortingHubController{
     private Pane MainFrame;
 
     @FXML
-    private Button ResetButton;
+    private Button ResetButton, SortButton;
 
     @FXML
     private ComboBox<String> SelectionMethodSelector;
-
-    @FXML
-    private Button SortButton;
-
-    @FXML
-    private AnchorPane Stage;
-
-
 
     private SortingStrategy sortingStrategy;
 
     //create a Rectangle arrayList to store the bars
     private ArrayList<Rectangle> bars = new ArrayList<>();
 
+    private int[] backUpArray;
+
     private int[] intArray;
 
-    private int size;
+    private int arraySize;
     @FXML
     void ResetButtonClicked() {
         MainFrame.getChildren().clear();
+        updateGraph(backUpArray);
     }
 
     //create initialize method to initialize the bars
@@ -57,16 +51,18 @@ public class SortingHubController{
 
     @FXML
     void SetArraySize() {
-        size = (int) ArraySizeSlider.getValue();
-        ArraySizeLabel.setText(size + "");
-        intArray = new int[size];
+        arraySize = (int) ArraySizeSlider.getValue();
+        ArraySizeLabel.setText(arraySize + "");
+        intArray = new int[arraySize];
+        backUpArray = new int[arraySize];
+
         int min = 1;
-        int max = size;
+        int max = arraySize;
 
         int range = max - min + 1;
 
         //add values to the array without duplicates
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < arraySize; i++) {
             int rand = (int) (Math.random() * range) + min;
             intArray[i] = rand;
             for (int j = 0; j < i; j++) {
@@ -76,33 +72,37 @@ public class SortingHubController{
                 }
             }
         }
-        updateGraph();
+        //initialize the backup array
+
+        //copy the values from the intArray to the backup array
+        System.arraycopy(intArray, 0, backUpArray, 0, arraySize);
+
+        updateGraph(intArray);
     }
 
 
-    public void updateGraph(){
+    public void updateGraph(int[] intArray) {
 
         MainFrame.getChildren().clear();
         double width = (MainFrame.getPrefWidth() / intArray.length ) - 2;
-        double x = 0;
+        double x;
         double height;
-        int y = 0;
+        int y;
         //find max value in array
-
-        System.out.println("Max: " + size);
 
         for (int i=0; i < intArray.length; i++){
             //set height of bar in proportion to max value
-            height = (intArray[i] * MainFrame.getPrefHeight()) / size;
+            height = (intArray[i] * MainFrame.getPrefHeight()) / arraySize;
 
             //set the x and width of the bar such that it is evenly spaced and there is a space of 1 pixel between each bar, and it is in the prefWidth of the mainFrame
             x = ((i  * (width + 2)));
-            //set width of bar such that it is 1 pixel less than the width of the frame so that there is a space of 1 pixel between each bar
+            y = (int) (MainFrame.getHeight() - height);
 
-            Rectangle bar = new Rectangle(x, y + (MainFrame.getHeight() - height), width, height);
+            Rectangle bar = new Rectangle(x, y , width, height);
+            bars.add(bar);
 
             bar.setStyle("-fx-fill: #ff0000" + "; -fx-border-color: Black; -fx-border-width: 50px;");
-            bars.add(bar);
+
             MainFrame.getChildren().add(bar);
         }
     }
@@ -113,10 +113,8 @@ public class SortingHubController{
         //pass the bars to the SelectionSort class
         //pass sortingHubController to the SelectionSort class
         sortingStrategy = new SelectionSort(this, intArray);
-
-        Thread thread = new Thread(sortingStrategy);
-        thread.start();
-
+        sortingStrategy.sort(intArray);
+        updateGraph(intArray);
     }
 
     @FXML
@@ -124,7 +122,5 @@ public class SortingHubController{
 
     }
 
-    public int[] getArray() {
-        return intArray;
-    }
+
 }
