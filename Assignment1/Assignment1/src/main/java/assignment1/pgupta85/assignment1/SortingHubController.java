@@ -45,7 +45,7 @@ public class SortingHubController{
 
     //create initialize method to initialize the bars
     public void initialize() {
-        SelectionMethodSelector.getItems().addAll("Merge Sort");
+        SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "Insertion Sort");
         ArraySizeSlider.setValue(64);
     }
 
@@ -112,13 +112,24 @@ public class SortingHubController{
         //call the sort method from the SelectionSort class
         //pass the bars to the SelectionSort class
         //pass sortingHubController to the SelectionSort class
-        sortingStrategy = new BubbleSort(this, intArray);
         sortingStrategy.sort(intArray);
     }
 
     @FXML
     void setSortStrategy() {
-
+        String sortStrategy = SelectionMethodSelector.getValue();
+        if (sortStrategy.equals("Insertion Sort")) {
+            sortingStrategy = new Insertion(this, intArray);
+        }
+        else if (sortStrategy.equals("Selection Sort")) {
+            sortingStrategy = new SelectionSort(this, intArray);
+        }
+        else if (sortStrategy.equals("Bubble Sort")) {
+            sortingStrategy = new BubbleSort(this, intArray);
+        }
+        else if (sortStrategy.equals("Merge Sort")) {
+            sortingStrategy = new MergeSort(this, intArray);
+        }
     }
 
 
