@@ -20,19 +20,10 @@ public class QuickSort implements SortingStrategy{
             System.out.println("New Quick Sort");
             //write code as a thread
             new Thread(() -> {
-                //create a variable to store the value of the first index
-                int low = 0;
-                //create a variable to store the value of the last index
-                int high = arr.length - 1;
                 //call the quickSort method
-                quickSort(arr, low, high);
+                quickSort(arr, 0, arr.length - 1);
                 //update the graph
                 sortingHubController.updateGraph(arr);
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 //print the array
                 for (int i = 0; i < arr.length; i++) {
                     System.out.println(arr[i] + " ");
@@ -42,53 +33,68 @@ public class QuickSort implements SortingStrategy{
                 //exit the program
                 Platform.exit();
             }).start();
+
         }
 
-    @Override
-    public void run() {
-
+    private void quickSort(int[] arr, int i, int i1) {
+        //check if the value of i is less than the value of i1
+        if (i < i1) {
+            //create a variable to store the partition
+            int partition = partition(arr, i, i1);
+            //call the quickSort method
+            quickSort(arr, i, partition - 1);
+            //call the quickSort method
+            quickSort(arr, partition + 1, i1);
+        }
     }
 
-    //create a method to sort the array
-        public void quickSort(int[] arr, int low, int high) {
-            //create a variable to store the value of the low index
-            int i = low;
-            //create a variable to store the value of the high index
-            int j = high;
-            //create a variable to store the value of the pivot
-            int pivot = arr[low + (high - low) / 2];
-            //create a while loop to iterate through the array
-            while (i <= j) {
-                //create a while loop to iterate through the array
-                while (arr[i] < pivot) {
-                    //increment i
-                    i++;
-                }
-                //create a while loop to iterate through the array
-                while (arr[j] > pivot) {
-                    //decrement j
-                    j--;
-                }
-                //create an if statement to check if i is less than or equal to j
-                if (i <= j) {
-                    //create a variable to store the value at i
-                    int temp = arr[i];
-                    //assign the value at j to the value at i
-                    arr[i] = arr[j];
-                    //assign the value at temp to the value at j
-                    arr[j] = temp;
-                    //increment i
-                    i++;
-                    //decrement j
-                    j--;
-                    //update the graph
-                    Platform.runLater(() -> sortingHubController.updateGraph(arr));
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+    private int partition(int[] arr, int i, int i1) {
+        //create a variable to store the pivot
+        int pivot = arr[i1];
+        //create a variable to store the index
+        int index = i - 1;
+        //create a for loop to iterate through the array
+        for (int j = i; j < i1; j++) {
+            //check if the value at j is less than the value at pivot
+            if (arr[j] < pivot) {
+                //increment the value of index
+                index++;
+                //create a temporary variable to store the value at index
+                int temp = arr[index];
+                //assign the value at j to the value at index
+                arr[index] = arr[j];
+                //assign the value at index to the value at j
+                arr[j] = temp;
+                //update the graph
+                Platform.runLater(() -> sortingHubController.updateGraph(arr));
+                //sleep the thread
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }
+        //create a temporary variable to store the value at index + 1
+        int temp = arr[index + 1];
+        //assign the value at pivot to the value at index + 1
+        arr[index + 1] = arr[i1];
+        //assign the value at index + 1 to the value at pivot
+        arr[i1] = temp;
+        //update the graph
+        Platform.runLater(() -> sortingHubController.updateGraph(arr));
+        //sleep the thread
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //return the value of index + 1
+        return index + 1;
+    }
+
+    @Override
+    public void run() {
+    }
+
 }

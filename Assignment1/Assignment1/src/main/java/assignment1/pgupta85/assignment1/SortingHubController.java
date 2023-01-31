@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
-public class SortingHubController{
+public class SortingHubController {
 
     @FXML
     private Label ArraySizeLabel;
@@ -41,11 +41,14 @@ public class SortingHubController{
     void ResetButtonClicked() {
         MainFrame.getChildren().clear();
         updateGraph(backUpArray);
+
+        //copy backUpArray to intArray
+        System.arraycopy(backUpArray, 0, intArray, 0, backUpArray.length);
     }
 
     //create initialize method to initialize the bars
     public void initialize() {
-        SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "Insertion Sort", "Quick Sort", "Heap Sort");
+        SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "InsertionSort Sort", "Quick Sort", "Heap Sort");
         ArraySizeSlider.setValue(64);
     }
 
@@ -113,13 +116,23 @@ public class SortingHubController{
         //pass the bars to the SelectionSort class
         //pass sortingHubController to the SelectionSort class
         sortingStrategy.sort(intArray);
+
+        rainbow(intArray);
+    }
+
+    public void rainbow(int [] intArray){
+        //make the bars rainbow-colored
+        for (int i = 0; i < intArray.length; i++) {
+            bars.get(i).setStyle("-fx-fill: #0c5aff" + "; -fx-border-color: Black; -fx-border-width: 50px;");
+        }
     }
 
     @FXML
     void setSortStrategy() {
         String sortStrategy = SelectionMethodSelector.getValue();
-        if (sortStrategy.equals("Insertion Sort")) {
-            sortingStrategy = new Insertion(this, intArray);
+        if (sortStrategy.equals("InsertionSort Sort")) {
+            sortingStrategy = new InsertionSort(this, intArray);
+            rainbow(intArray);
         }
         else if (sortStrategy.equals("Selection Sort")) {
             sortingStrategy = new SelectionSort(this, intArray);
@@ -134,7 +147,7 @@ public class SortingHubController{
             sortingStrategy = new QuickSort(this, intArray);
         }
         else if (sortStrategy.equals("Heap Sort")) {
-           // sortingStrategy = new HeapSort(this, intArray);
+            sortingStrategy = new HeapSort(this, intArray);
         }
     }
 

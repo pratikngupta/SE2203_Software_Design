@@ -2,14 +2,14 @@ package assignment1.pgupta85.assignment1;
 
 import javafx.application.Platform;
 
-public class Insertion implements SortingStrategy{
+public class InsertionSort implements SortingStrategy{
 
     private SortingHubController sortingHubController;
 
     private int[] intArray;
 
     //create a constructor to get the array from the SortingHubController
-    public Insertion(SortingHubController sortingHubController, int[] intArray) {
+    public InsertionSort(SortingHubController sortingHubController, int[] intArray) {
         //assign value to controller
         this.sortingHubController = sortingHubController;
         this.intArray = intArray;
@@ -17,7 +17,7 @@ public class Insertion implements SortingStrategy{
 
     @Override
     public void sort(int[] arr) {
-        System.out.println("New Insertion Sort");
+        System.out.println("New InsertionSort Sort");
         //write code as a thread
         new Thread(() -> {
             //create a for loop to iterate through the array
@@ -53,7 +53,7 @@ public class Insertion implements SortingStrategy{
                 System.out.println(arr[i] + " ");
             }
             //print the message
-            System.out.println("Insertion Sort Complete");
+            System.out.println("InsertionSort Sort Complete");
             //exit the program
             Platform.exit();
         }).start();
