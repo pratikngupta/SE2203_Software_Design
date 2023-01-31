@@ -112,9 +112,8 @@ public class SortingHubController{
         //call the sort method from the SelectionSort class
         //pass the bars to the SelectionSort class
         //pass sortingHubController to the SelectionSort class
-        sortingStrategy = new SelectionSort(this, intArray);
+        sortingStrategy = new BubbleSort(this, intArray);
         sortingStrategy.sort(intArray);
-        updateGraph(intArray);
     }
 
     @FXML

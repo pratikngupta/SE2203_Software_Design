@@ -2,14 +2,14 @@ package assignment1.pgupta85.assignment1;
 
 import javafx.application.Platform;
 
-public class SelectionSort implements SortingStrategy{
+public class BubbleSort implements SortingStrategy{
 
     private SortingHubController sortingHubController;
 
     private int[] intArray;
 
     //create a constructor to get the array from the SortingHubController
-    public SelectionSort(SortingHubController sortingHubController, int[] intArray) {
+    public BubbleSort(SortingHubController sortingHubController, int[] intArray) {
         //assign value to controller
         this.sortingHubController = sortingHubController;
         this.intArray = intArray;
@@ -17,33 +17,28 @@ public class SelectionSort implements SortingStrategy{
 
     @Override
     public void sort(int[] arr) {
-        System.out.println("New Selection Sort");
+        System.out.println("New Bubble Sort");
         //write code as a thread
         new Thread(() -> {
             //create a for loop to iterate through the array
             for (int i = 0; i < arr.length - 1; i++) {
-                //create a variable to store the minimum value
-                int min = i;
                 //create a for loop to iterate through the array
-                for (int j = i + 1; j < arr.length; j++) {
-                    //check if the value at j is less than the value at min
-                    if (arr[j] < arr[min]) {
-                        //if it is, assign the value at j to min
-                        min = j;
+                for (int j = 0; j < arr.length - i - 1; j++) {
+                    //check if the value at j is greater than the value at j + 1
+                    if (arr[j] > arr[j + 1]) {
+                        //create a temporary variable to store the value at j
+                        int temp = arr[j];
+                        //assign the value at j + 1 to the value at j
+                        arr[j] = arr[j + 1];
+                        //assign the value at j to the value at j + 1
+                        arr[j + 1] = temp;
+                        //update the graph
+                        Platform.runLater(() -> sortingHubController.updateGraph(arr));
                     }
                 }
-                //create a temporary variable to store the value at i
-                int temp = arr[i];
-                //assign the value at min to the value at i
-                arr[i] = arr[min];
-                //assign the value at i to the value at min
-                arr[min] = temp;
-                //update the graph
-                Platform.runLater(() -> sortingHubController.updateGraph(arr));
-
                 //sleep the thread
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -51,11 +46,11 @@ public class SelectionSort implements SortingStrategy{
             //update the graph
             sortingHubController.updateGraph(arr);
             //print the array
-            for (int i = 0; i < arr.length; i++) {
-                System.out.println(arr[i] + " ");
+            for (int j : arr) {
+                System.out.println(j + " ");
             }
             //print the message
-            System.out.println("Selection Sort Complete");
+            System.out.println("Bubble Sort Complete");
             //exit the program
             Platform.exit();
         }).start();
@@ -66,3 +61,4 @@ public class SelectionSort implements SortingStrategy{
         //make sort method more efficient by calling it, calling updateGraph method, and printing the array using thread here
     }
 }
+
