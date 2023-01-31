@@ -45,7 +45,7 @@ public class SortingHubController{
 
     //create initialize method to initialize the bars
     public void initialize() {
-        SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "Insertion Sort");
+        SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "Insertion Sort", "Quick Sort", "Heap Sort");
         ArraySizeSlider.setValue(64);
     }
 
@@ -129,6 +129,12 @@ public class SortingHubController{
         }
         else if (sortStrategy.equals("Merge Sort")) {
             sortingStrategy = new MergeSort(this, intArray);
+        }
+        else if (sortStrategy.equals("Quick Sort")) {
+            sortingStrategy = new QuickSort(this, intArray);
+        }
+        else if (sortStrategy.equals("Heap Sort")) {
+           // sortingStrategy = new HeapSort(this, intArray);
         }
     }
 

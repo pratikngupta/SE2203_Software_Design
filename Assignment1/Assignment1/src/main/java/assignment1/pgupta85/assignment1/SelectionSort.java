@@ -43,7 +43,7 @@ public class SelectionSort implements SortingStrategy{
 
                 //sleep the thread
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(200);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
