@@ -32,13 +32,14 @@ public class SortingHubController {
     private SortingStrategy sortingStrategy;
 
     //create a Rectangle arrayList to store the bars
-    private ArrayList<Rectangle> bars = new ArrayList<>();
+    private final ArrayList<Rectangle> bars = new ArrayList<>();
 
     private int[] backUpArray;
 
     private int[] intArray;
 
     private int arraySize;
+
     @FXML
     void ResetButtonClicked() {
         MainFrame.getChildren().clear();
@@ -46,6 +47,9 @@ public class SortingHubController {
 
         //copy backUpArray to intArray
         System.arraycopy(backUpArray, 0, intArray, 0, backUpArray.length);
+
+        //stop the thread
+        sortingStrategy.stop();
     }
 
     //create initialize method to initialize the bars
@@ -59,7 +63,7 @@ public class SortingHubController {
         }
 
         //change direction of combobox menu
-        SelectionMethodSelector.setEffect( new javafx.scene.effect.DropShadow());
+        SelectionMethodSelector.setEffect(new javafx.scene.effect.DropShadow());
     }
 
     @FXML
@@ -71,16 +75,15 @@ public class SortingHubController {
         updateGraph(intArray);
     }
 
-    public void fillArray (int arraySize) {
+    public void fillArray(int arraySize) {
         System.out.println("fill array");
         ArraySizeLabel.setText(arraySize + "");
         intArray = new int[arraySize];
         backUpArray = new int[arraySize];
 
         int min = 1;
-        int max = arraySize;
 
-        int range = max - min + 1;
+        int range = arraySize - min + 1;
 
         //add values to the array without duplicates
         for (int i = 0; i < arraySize; i++) {
@@ -102,15 +105,15 @@ public class SortingHubController {
     public void updateGraph(int[] intArray) {
 
         MainFrame.getChildren().clear();
-        double width = (MainFrame.getPrefWidth() / intArray.length ) - 2;
+        double width = (MainFrame.getPrefWidth() / intArray.length) - 2;
         double x;
         double height;
         int y;
         //find max value in array
         for (int j = 0; j < intArray.length; j++) {
             height = (intArray[j] * MainFrame.getPrefHeight()) / arraySize;
-            x = ((j  * (width + 2)));
-            y = (int) (MainFrame.getHeight() - height);
+            x = ((j * (width + 2)));
+            y = (int) (MainFrame.getPrefHeight() - height);
 
             bars.get(j).setHeight(height);
             bars.get(j).setWidth(width);
@@ -123,20 +126,12 @@ public class SortingHubController {
         }
     }
 
-    public void rainbow(int [] intArray){
-        for (int j = 0; j < intArray.length; j++) {
-            bars.get(j).setStyle("-fx-fill: #6200f4" + "; -fx-border-color: Black; -fx-border-width: 50px;");
-        }
-    }
-
     @FXML
     void SortButtonClicked() {
         try {
             SelectionMethodSelector.setStyle("-fx-border-color: green");
             sortingStrategy.sort(intArray);
-            rainbow(intArray);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             SelectionMethodSelector.setStyle("-fx-border-color: red");
             //create a alert box to show the error
             //set custom title
@@ -153,17 +148,15 @@ public class SortingHubController {
     @FXML
     void setSortStrategy() {
 
-            String sortStrategy = SelectionMethodSelector.getValue();
+        String sortStrategy = SelectionMethodSelector.getValue();
 
-            switch (sortStrategy) {
-                case "InsertionSort Sort" -> sortingStrategy = new InsertionSort(this, intArray);
-                case "Selection Sort" -> sortingStrategy = new SelectionSort(this, intArray);
-                case "Bubble Sort" -> sortingStrategy = new BubbleSort(this, intArray);
-                case "Merge Sort" -> sortingStrategy = new MergeSort(this, intArray);
-                case "Quick Sort" -> sortingStrategy = new QuickSort(this, intArray);
-                case "Heap Sort" -> sortingStrategy = new HeapSort(this, intArray);
-            }
-
-
+        switch (sortStrategy) {
+            case "InsertionSort Sort" -> sortingStrategy = new InsertionSort(this, intArray);
+            case "Selection Sort" -> sortingStrategy = new SelectionSort(this, intArray);
+            case "Bubble Sort" -> sortingStrategy = new BubbleSort(this, intArray);
+            case "Merge Sort" -> sortingStrategy = new MergeSort(this, intArray);
+            case "Quick Sort" -> sortingStrategy = new QuickSort(this, intArray);
+            case "Heap Sort" -> sortingStrategy = new HeapSort(this, intArray);
+        }
     }
 }

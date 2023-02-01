@@ -4,9 +4,9 @@ import javafx.application.Platform;
 
 public class SelectionSort implements SortingStrategy{
 
-    private SortingHubController sortingHubController;
+    private final SortingHubController sortingHubController;
 
-    private int[] intArray;
+    private final int[] intArray;
 
     //create a constructor to get the array from the SortingHubController
     public SelectionSort(SortingHubController sortingHubController, int[] intArray) {
@@ -15,35 +15,37 @@ public class SelectionSort implements SortingStrategy{
         this.intArray = intArray;
     }
 
+    //create a
+
+
     @Override
     public void sort(int[] arr) {
         System.out.println("New Selection Sort");
-        //write code as a thread
+        //write code using thread
         new Thread(() -> {
             //create a for loop to iterate through the array
             for (int i = 0; i < arr.length - 1; i++) {
-                //create a variable to store the minimum value
-                int min = i;
+                //create a variable to store the value of i
+                int minIndex = i;
                 //create a for loop to iterate through the array
                 for (int j = i + 1; j < arr.length; j++) {
-                    //check if the value at j is less than the value at min
-                    if (arr[j] < arr[min]) {
-                        //if it is, assign the value at j to min
-                        min = j;
+                    //create an if statement to check if the value at j is less than the value at minIndex
+                    if (arr[j] < arr[minIndex]) {
+                        //assign the value at j to the value at minIndex
+                        minIndex = j;
                     }
                 }
-                //create a temporary variable to store the value at i
-                int temp = arr[i];
-                //assign the value at min to the value at i
-                arr[i] = arr[min];
-                //assign the value at i to the value at min
-                arr[min] = temp;
+                //create a variable to store the value at minIndex
+                int temp = arr[minIndex];
+                //assign the value at i to the value at minIndex
+                arr[minIndex] = arr[i];
+                //assign the value at temp to the value at i
+                arr[i] = temp;
                 //update the graph
                 Platform.runLater(() -> sortingHubController.updateGraph(arr));
-
                 //sleep the thread
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -59,6 +61,8 @@ public class SelectionSort implements SortingStrategy{
             //exit the program
             Platform.exit();
         }).start();
+
+
     }
 
     @Override

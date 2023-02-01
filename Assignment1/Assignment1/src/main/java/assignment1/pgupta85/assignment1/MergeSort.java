@@ -6,9 +6,9 @@ import static java.util.Arrays.*;
 
 public class MergeSort implements SortingStrategy{
 
-    private SortingHubController sortingHubController;
+    private final SortingHubController sortingHubController;
 
-    private int[] intArray;
+    private final int[] intArray;
 
     //create a constructor to get the array from the SortingHubController
     public MergeSort(SortingHubController sortingHubController, int[] intArray) {
@@ -78,10 +78,8 @@ public class MergeSort implements SortingStrategy{
         //create a variable to store the right array
         int[] rightArray = new int[sizeOfRightArray];
         //create a for loop to iterate through the left array
-        for (int j = 0; j < sizeOfLeftArray; j++) {
-            //assign the value of the left array
-            leftArray[j] = arr[i + j];
-        }
+        //assign the value of the left array
+        System.arraycopy(arr, i + 0, leftArray, 0, sizeOfLeftArray);
         //create a for loop to iterate through the right array
         for (int j = 0; j < sizeOfRightArray; j++) {
             //assign the value of the right array
@@ -151,9 +149,4 @@ public class MergeSort implements SortingStrategy{
         }
 
     }
-
-
-
-
-
 }

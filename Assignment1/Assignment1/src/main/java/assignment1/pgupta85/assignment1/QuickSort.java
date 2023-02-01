@@ -4,9 +4,9 @@ import javafx.application.Platform;
 
 public class QuickSort implements SortingStrategy{
 
-        private SortingHubController sortingHubController;
+        private final SortingHubController sortingHubController;
 
-        private int[] intArray;
+        private final int[] intArray;
 
         //create a constructor to get the array from the SortingHubController
         public QuickSort(SortingHubController sortingHubController, int[] intArray) {

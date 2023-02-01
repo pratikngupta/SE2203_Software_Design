@@ -4,9 +4,9 @@ import javafx.application.Platform;
 
 public class HeapSort implements SortingStrategy{
 
-        private SortingHubController sortingHubController;
+        private final SortingHubController sortingHubController;
 
-        private int[] intArray;
+        private final int[] intArray;
 
         //create a constructor to get the array from the SortingHubController
         public HeapSort(SortingHubController sortingHubController, int[] intArray) {
@@ -127,5 +127,6 @@ public class HeapSort implements SortingStrategy{
 
 
         }
+
 
 }

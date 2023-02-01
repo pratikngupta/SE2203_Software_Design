@@ -4,9 +4,9 @@ import javafx.application.Platform;
 
 public class InsertionSort implements SortingStrategy{
 
-    private SortingHubController sortingHubController;
+    private final SortingHubController sortingHubController;
 
-    private int[] intArray;
+    private final int[] intArray;
 
     //create a constructor to get the array from the SortingHubController
     public InsertionSort(SortingHubController sortingHubController, int[] intArray) {
@@ -63,6 +63,7 @@ public class InsertionSort implements SortingStrategy{
     public void run() {
         //make sort method more efficient by calling it, calling updateGraph method, and printing the array using thread here
     }
+
 }
 
 

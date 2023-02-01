@@ -4,9 +4,9 @@ import javafx.application.Platform;
 
 public class BubbleSort implements SortingStrategy{
 
-    private SortingHubController sortingHubController;
+    private final SortingHubController sortingHubController;
 
-    private int[] intArray;
+    private final int[] intArray;
 
     //create a constructor to get the array from the SortingHubController
     public BubbleSort(SortingHubController sortingHubController, int[] intArray) {

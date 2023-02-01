@@ -2,7 +2,7 @@ package assignment1.pgupta85.assignment1;
 
 public class randomNumber {
 
-    private static int[] ramdomNumbersGenerator = new int[97];
+    private static final int[] ramdomNumbersGenerator = new int[97];
     private static int[] intArray;
 
 
