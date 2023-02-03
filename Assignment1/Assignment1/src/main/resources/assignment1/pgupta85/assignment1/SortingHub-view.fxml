@@ -17,6 +17,6 @@
       <Button fx:id="SortButton" layoutX="652.0" layoutY="364.0" mnemonicParsing="false" onAction="#SortButtonClicked" prefHeight="26.0" prefWidth="59.0" text="Sort" />
       <Button fx:id="ResetButton" layoutX="724.0" layoutY="364.0" mnemonicParsing="false" onAction="#ResetButtonClicked" prefHeight="26.0" prefWidth="56.0" text="Reset" />
       <Pane fx:id="MainFrame" layoutX="9" layoutY="9" prefHeight="343.0" prefWidth="774.0" style="-fx-border-color: Black;" />
-      <ProgressBar fx:id="StatusBar" layoutX="227.0" layoutY="362.0" prefHeight="6.0" prefWidth="346.0" progress="0.0" />
+      <ProgressBar fx:id="StatusBar" layoutX="227.0" layoutY="356.0" prefHeight="16.0" prefWidth="346.0" progress="0.51" />
    </children>
 </AnchorPane>

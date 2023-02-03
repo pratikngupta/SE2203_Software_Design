@@ -102,4 +102,8 @@ public class QuickSort implements SortingStrategy{
                 System.out.println("Quick Sort Complete");
             }).start();
     }
+    @Override
+    public int getRunNeeded(int[] intArray) {
+        return 0;
+    }
 }

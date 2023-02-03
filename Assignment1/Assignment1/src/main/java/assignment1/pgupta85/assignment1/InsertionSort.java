@@ -57,6 +57,10 @@ public class InsertionSort implements SortingStrategy{
             Platform.exit();
 
     }
+    @Override
+    public int getRunNeeded(int[] intArray) {
+        return 0;
+    }
 
     @Override
     public void run() {

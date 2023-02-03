@@ -58,6 +58,10 @@ public class SelectionSort implements SortingStrategy{
             System.out.println("Selection Sort Complete");
             //exit the program
     }
+    @Override
+    public int getRunNeeded(int[] intArray) {
+        return 0;
+    }
 
     @Override
     public void run() {

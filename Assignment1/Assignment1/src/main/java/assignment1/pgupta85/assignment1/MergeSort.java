@@ -152,4 +152,8 @@ public class MergeSort implements SortingStrategy{
         }
 
     }
+    @Override
+    public int getRunNeeded(int[] intArray) {
+        return 0;
+    }
 }

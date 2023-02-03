@@ -31,6 +31,10 @@ public class HeapSort implements SortingStrategy{
                 System.out.println("Heap Sort Complete");
                 //exit the program
         }
+    @Override
+    public int getRunNeeded(int[] intArray) {
+        return 0;
+    }
 
     @Override
     public void run() {

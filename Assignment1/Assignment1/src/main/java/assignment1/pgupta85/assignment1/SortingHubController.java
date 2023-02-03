@@ -40,7 +40,7 @@ public class SortingHubController {
 
     private int[] intArray;
 
-    private int arraySize;
+    private int arraySize, arrayCounter, runNeeded;
 
     @FXML
     void ResetButtonClicked() {
@@ -58,7 +58,9 @@ public class SortingHubController {
     //create initialize method to initialize the bars
     public void initialize() {
         SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "InsertionSort Sort", "Quick Sort", "Heap Sort");
-        StatusBar.setVisible(false);
+
+        StatusBar.setStyle("-fx-accent: #142174");
+        StatusBar.setProgress(0);
         //create 128 bars
         for (int i = 0; i < 128; i++) {
             //create a rectangle
@@ -139,6 +141,8 @@ public class SortingHubController {
 
     @FXML
     void SortButtonClicked() {
+        StatusBar.setProgress(0);
+        runNeeded = sortingStrategy.getRunNeeded(backUpArray);
         try {
             //call constructor of the sorting strategy
             sortingStrategy.SortingStrategy(intArray,this);
@@ -173,16 +177,24 @@ public class SortingHubController {
             case "Heap Sort" -> sortingStrategy = new HeapSort();
         }
         SelectionMethodSelector.setStyle("-fx-border-color: green; -fx-border-radius: 5px; -fx-border-width: 2px;");
+        StatusBar.setProgress(0.5);
     }
 
     public void setStatusBar(boolean counter) {
+        System.out.println(runNeeded + "  -----  " + arrayCounter);
 
         if (counter) {
-            StatusBar.setVisible(true);
+            arrayCounter ++;
+            double progress = (double) arrayCounter / runNeeded;
+            System.out.println(progress);
+            StatusBar.setProgress(progress);
+            //update status bar
+
         } else {
-            StatusBar.setVisible(false);
+            arrayCounter = 0;
+            StatusBar.setProgress(0);
         }
-         = (double) arrayIleration / arraySize;
-        StatusBar.setProgress(progress);
+
     }
+
 }
