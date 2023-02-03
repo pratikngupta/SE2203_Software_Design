@@ -7,9 +7,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SortingHubController {
+
+    @FXML
+    private ProgressBar StatusBar;
 
     @FXML
     private AnchorPane Stage;
@@ -42,41 +44,52 @@ public class SortingHubController {
 
     @FXML
     void ResetButtonClicked() {
-        MainFrame.getChildren().clear();
+
+        //hide all bars
+        bars.listIterator().forEachRemaining(bar -> bar.setVisible(false));
+
         updateGraph(backUpArray);
 
         //copy backUpArray to intArray
         System.arraycopy(backUpArray, 0, intArray, 0, backUpArray.length);
 
-        //stop the thread
-        sortingStrategy.stop();
     }
 
     //create initialize method to initialize the bars
     public void initialize() {
         SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "InsertionSort Sort", "Quick Sort", "Heap Sort");
+        StatusBar.setVisible(false);
         //create 128 bars
         for (int i = 0; i < 128; i++) {
             //create a rectangle
             Rectangle rectangle = new Rectangle();
             bars.add(rectangle);
+            MainFrame.getChildren().add(bars.get(i));
+            bars.get(i).setStyle("-fx-fill: #142174" + "; -fx-border-color: Black; -fx-border-width: 50px;");
         }
 
-        //change direction of combobox menu
-        SelectionMethodSelector.setEffect(new javafx.scene.effect.DropShadow());
+        //set the ar
+
+        //set the arraySize to 64
+        arraySize = 64;
+        //call the fillArray method
+        fillArray(arraySize);
+        //call the updateGraph method
+        updateGraph(intArray);
+        //set slider value to 64
+        ArraySizeSlider.setValue(64);
+
     }
 
     @FXML
     void SetArraySize() {
         arraySize = (int) ArraySizeSlider.getValue();
-        System.out.println("set array size to " + arraySize);
         fillArray(arraySize);
-        System.out.println("update graph");
         updateGraph(intArray);
+        //printGreen("User set array size to " + arraySize);
     }
 
     public void fillArray(int arraySize) {
-        System.out.println("fill array");
         ArraySizeLabel.setText(arraySize + "");
         intArray = new int[arraySize];
         backUpArray = new int[arraySize];
@@ -104,7 +117,8 @@ public class SortingHubController {
 
     public void updateGraph(int[] intArray) {
 
-        MainFrame.getChildren().clear();
+        bars.listIterator().forEachRemaining(bar -> bar.setVisible(false));
+
         double width = (MainFrame.getPrefWidth() / intArray.length) - 2;
         double x;
         double height;
@@ -115,25 +129,25 @@ public class SortingHubController {
             x = ((j * (width + 2)));
             y = (int) (MainFrame.getPrefHeight() - height);
 
-            bars.get(j).setHeight(height);
-            bars.get(j).setWidth(width);
-            bars.get(j).setY(y);
             bars.get(j).setX(x);
-
-            bars.get(j).setStyle("-fx-fill: #142174" + "; -fx-border-color: Black; -fx-border-width: 50px;");
-
-            MainFrame.getChildren().add(bars.get(j));
+            bars.get(j).setY(y);
+            bars.get(j).setWidth(width);
+            bars.get(j).setHeight(height);
+            bars.get(j).setVisible(true);
         }
     }
 
     @FXML
     void SortButtonClicked() {
         try {
-            SelectionMethodSelector.setStyle("-fx-border-color: green");
-            sortingStrategy.sort(intArray);
+            //call constructor of the sorting strategy
+            sortingStrategy.SortingStrategy(intArray,this);
+            //start the thread
+            new Thread(sortingStrategy).start();
+
         } catch (Exception e) {
             SelectionMethodSelector.setStyle("-fx-border-color: red");
-            //create a alert box to show the error
+            //create an alert box to show the error
             //set custom title
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -151,12 +165,24 @@ public class SortingHubController {
         String sortStrategy = SelectionMethodSelector.getValue();
 
         switch (sortStrategy) {
-            case "InsertionSort Sort" -> sortingStrategy = new InsertionSort(this, intArray);
-            case "Selection Sort" -> sortingStrategy = new SelectionSort(this, intArray);
-            case "Bubble Sort" -> sortingStrategy = new BubbleSort(this, intArray);
-            case "Merge Sort" -> sortingStrategy = new MergeSort(this, intArray);
-            case "Quick Sort" -> sortingStrategy = new QuickSort(this, intArray);
-            case "Heap Sort" -> sortingStrategy = new HeapSort(this, intArray);
+            case "InsertionSort Sort" -> sortingStrategy = new InsertionSort();
+            case "Selection Sort" -> sortingStrategy = new SelectionSort();
+            case "Bubble Sort" -> sortingStrategy = new BubbleSort();
+            case "Merge Sort" -> sortingStrategy = new MergeSort();
+            case "Quick Sort" -> sortingStrategy = new QuickSort();
+            case "Heap Sort" -> sortingStrategy = new HeapSort();
         }
+        SelectionMethodSelector.setStyle("-fx-border-color: green; -fx-border-radius: 5px; -fx-border-width: 2px;");
+    }
+
+    public void setStatusBar(boolean counter) {
+
+        if (counter) {
+            StatusBar.setVisible(true);
+        } else {
+            StatusBar.setVisible(false);
+        }
+         = (double) arrayIleration / arraySize;
+        StatusBar.setProgress(progress);
     }
 }

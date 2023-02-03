@@ -4,22 +4,20 @@ import javafx.application.Platform;
 
 public class QuickSort implements SortingStrategy{
 
-        private final SortingHubController sortingHubController;
+        private SortingHubController sortingHubController;
 
-        private final int[] intArray;
+        private int[] intArray;
 
-        //create a constructor to get the array from the SortingHubController
-        public QuickSort(SortingHubController sortingHubController, int[] intArray) {
-            //assign value to controller
-            this.sortingHubController = sortingHubController;
-            this.intArray = intArray;
+        @Override
+        public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
+        this.sortingHubController = sortingHubController;
+        this.intArray = arr;
         }
 
         @Override
         public void sort(int[] arr) {
             System.out.println("New Quick Sort");
             //write code as a thread
-            new Thread(() -> {
                 //call the quickSort method
                 quickSort(arr, 0, arr.length - 1);
                 //update the graph
@@ -32,7 +30,7 @@ public class QuickSort implements SortingStrategy{
                 System.out.println("Quick Sort Complete");
                 //exit the program
                 Platform.exit();
-            }).start();
+
 
         }
 
@@ -95,6 +93,13 @@ public class QuickSort implements SortingStrategy{
 
     @Override
     public void run() {
+            new Thread(() -> {
+                //call the quickSort method
+                quickSort(intArray, 0, intArray.length - 1);
+                //update the graph
+                sortingHubController.updateGraph(intArray);
+                //print the message
+                System.out.println("Quick Sort Complete");
+            }).start();
     }
-
 }

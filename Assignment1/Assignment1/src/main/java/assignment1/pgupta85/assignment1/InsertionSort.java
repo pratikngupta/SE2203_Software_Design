@@ -4,22 +4,21 @@ import javafx.application.Platform;
 
 public class InsertionSort implements SortingStrategy{
 
-    private final SortingHubController sortingHubController;
+    private SortingHubController sortingHubController;
 
-    private final int[] intArray;
+    private int[] intArray;
 
-    //create a constructor to get the array from the SortingHubController
-    public InsertionSort(SortingHubController sortingHubController, int[] intArray) {
-        //assign value to controller
+    @Override
+    public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
         this.sortingHubController = sortingHubController;
-        this.intArray = intArray;
+        this.intArray = arr;
     }
+
 
     @Override
     public void sort(int[] arr) {
         System.out.println("New InsertionSort Sort");
         //write code as a thread
-        new Thread(() -> {
             //create a for loop to iterate through the array
             for (int i = 1; i < arr.length; i++) {
                 //create a variable to store the value at i
@@ -56,12 +55,19 @@ public class InsertionSort implements SortingStrategy{
             System.out.println("InsertionSort Sort Complete");
             //exit the program
             Platform.exit();
-        }).start();
+
     }
 
     @Override
     public void run() {
-        //make sort method more efficient by calling it, calling updateGraph method, and printing the array using thread here
+        new Thread(() -> {
+            //call the quickSort method
+            sort(intArray);
+            //update the graph
+            sortingHubController.updateGraph(intArray);
+            //print the message
+            System.out.println("Quick Sort Complete");
+        }).start();
     }
 
 }

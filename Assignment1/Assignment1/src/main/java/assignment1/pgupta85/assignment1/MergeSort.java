@@ -6,37 +6,40 @@ import static java.util.Arrays.*;
 
 public class MergeSort implements SortingStrategy{
 
-    private final SortingHubController sortingHubController;
+    private SortingHubController sortingHubController;
 
-    private final int[] intArray;
+    private int[] intArray;
 
-    //create a constructor to get the array from the SortingHubController
-    public MergeSort(SortingHubController sortingHubController, int[] intArray) {
-        //assign value to controller
+    @Override
+    public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
         this.sortingHubController = sortingHubController;
-        this.intArray = intArray;
+        this.intArray = arr;
     }
+
 
     @Override
     public void sort(int[] arr) {
         //write code as a thread
-        new Thread(() -> {
+
             //call the mergeSort method
             mergeSort(arr, 0, arr.length - 1);
             //update the graph
             //print the array
-            for (int i = 0; i < arr.length; i++) {
-                System.out.println(arr[i] + " ");
-            }
+        for (int j : arr) {
+            System.out.println(j + " ");
+        }
             //print the message
             System.out.println("Merge Sort Complete");
-        }).start();
-
     }
 
     @Override
     public void run() {
-
+        new Thread(() -> {
+            //call the quickSort method
+            sort(intArray);
+            //print the message
+            System.out.println("Merge Sort Complete");
+        }).start();
     }
 
     public void mergeSort(int[] arr, int i, int i1) {

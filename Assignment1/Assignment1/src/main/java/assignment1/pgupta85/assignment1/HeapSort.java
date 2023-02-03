@@ -4,22 +4,21 @@ import javafx.application.Platform;
 
 public class HeapSort implements SortingStrategy{
 
-        private final SortingHubController sortingHubController;
+        private SortingHubController sortingHubController;
 
-        private final int[] intArray;
+    private int[] intArray;
 
-        //create a constructor to get the array from the SortingHubController
-        public HeapSort(SortingHubController sortingHubController, int[] intArray) {
-            //assign value to controller
-            this.sortingHubController = sortingHubController;
-            this.intArray = intArray;
-        }
+    @Override
+    public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
+        this.sortingHubController = sortingHubController;
+        this.intArray = arr;
+    }
 
-        @Override
+
+    @Override
         public void sort(int[] arr) {
             System.out.println("New Heap Sort");
             //write code as a thread
-            new Thread(() -> {
                 //call the heapSort method
                 heapSort(arr);
                 //update the graph
@@ -31,25 +30,18 @@ public class HeapSort implements SortingStrategy{
                 //print the message
                 System.out.println("Heap Sort Complete");
                 //exit the program
-                Platform.exit();
-            }).start();
-
         }
 
     @Override
     public void run() {
-        //call the heapSort method
-        heapSort(intArray);
-        //update the graph
-        sortingHubController.updateGraph(intArray);
-        //print the array
-        for (int i = 0; i < intArray.length; i++) {
-            System.out.println(intArray[i] + " ");
-        }
-        //print the message
-        System.out.println("Heap Sort Complete");
-        //exit the program
-        Platform.exit();
+        new Thread(() -> {
+            //call the quickSort method
+            sort(intArray);
+            //update the graph
+            sortingHubController.updateGraph(intArray);
+            //print the message
+            System.out.println("Quick Sort Complete");
+        }).start();
     }
 
     private void heapSort(int[] arr) {
@@ -110,23 +102,5 @@ public class HeapSort implements SortingStrategy{
                 heapify(arr, n, largest);
 
             }
-            //in HeapSort, the heapify method is called in the heapSort method
-            //what is difference between heapsort and selection sort
-            //selection sort is not a stable sort
-            //heapsort is a stable sort
-            //heapsort is not an in-place sort
-            //selection sort is an in-place sort
-            //heapsort is not a comparison sort
-            //selection sort is a comparison sort
-            //heapsort is not a recursive sort
-            //selection sort is a recursive sort
-            //heapsort is not a stable sort
-            //selection sort is a stable sort
-            //Where is the largest item in heapsort after first pass?
-            //the largest item is at the root of the tree
-
-
         }
-
-
 }
