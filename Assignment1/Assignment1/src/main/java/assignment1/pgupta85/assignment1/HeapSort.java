@@ -9,6 +9,8 @@ public class HeapSort implements SortingStrategy {
     private SortingHubController sortingHubController;
 
     private int[] intArray;
+    private int loop;
+    private boolean actualRun;
 
     @Override
     public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
@@ -24,14 +26,7 @@ public class HeapSort implements SortingStrategy {
         for (int i = n / 2 - 1; i >= 0; i--) {
             //call the heapify method
             heapify(arr, n, i);
-            Platform.runLater(() -> sortingHubController.updateGraph(arr));
-            Platform.runLater(() -> sortingHubController.setStatusBar(true));
-            //sleep the thread
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            logic(arr);
         }
         //create a for loop to iterate through the array
         for (int i = n - 1; i >= 0; i--) {
@@ -44,40 +39,16 @@ public class HeapSort implements SortingStrategy {
             //call the heapify method
             heapify(arr, i, 0);
             //update the graph while sorting is in progress
-            Platform.runLater(() -> sortingHubController.updateGraph(arr));
-            Platform.runLater(() -> sortingHubController.setStatusBar(true));
-            //sleep the thread
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            logic(arr);
         }
     }
 
     @Override
     public int getRunNeeded(int[] arr) {
         printCYAN("Finding the number of loops needed for Heap Sort", "DEBUG: HeapSort.java ---> ");
-        int loop = 0;
-        int n = arr.length;
-        for (int i = n / 2 - 1; i >= 0; i--) {
-            //call the heapify method
-            heapify(arr, n, i);
-            loop++;
-        }
-        //create a for loop to iterate through the array
-        for (int i = n - 1; i >= 0; i--) {
-            //create a variable to store the value at 0
-            int temp = arr[0];
-            //assign the value at i to the value at 0
-            arr[0] = arr[i];
-            //assign the value at temp to the value at i
-            arr[i] = temp;
-            //call the heapify method
-            heapify(arr, i, 0);
-            loop++;
-            //update the graph while sorting is in progress
-        }
+        actualRun = false;
+        loop = 0;
+        sort(arr);
         printCYAN("Number of loops needed for Heap Sort: " + loop, "DEBUG: HeapSort.java ---> ");
         return loop;
     }
@@ -85,6 +56,7 @@ public class HeapSort implements SortingStrategy {
     @Override
     public void run() {
         new Thread(() -> {
+            actualRun = true;
             printPURPLE("Heap Selection Sort", "DEBUG: HeapSort.java ---> ");
             sort(intArray);
             printPURPLE("Heap Sort Complete", "DEBUG: HeapSort.java ---> ");
@@ -121,6 +93,21 @@ public class HeapSort implements SortingStrategy {
             arr[largest] = temp;
             //call the heapify method
             heapify(arr, n, largest);
+        }
+    }
+
+    public void logic (int [] arr ) {
+        if (actualRun) {
+            Platform.runLater(() -> sortingHubController.updateGraph(arr));
+            Platform.runLater(() -> sortingHubController.setStatusBar(true));
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (!actualRun) {
+            loop++;
         }
     }
 }

@@ -9,6 +9,8 @@ public class MergeSort implements SortingStrategy {
     private SortingHubController sortingHubController;
 
     private int[] intArray;
+    private int loop;
+    private boolean actualRun;
 
     @Override
     public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
@@ -25,6 +27,7 @@ public class MergeSort implements SortingStrategy {
     @Override
     public void run() {
         new Thread(() -> {
+            actualRun = true;
             printPURPLE("Merge Selection Sort", "DEBUG: MergeSort.java ---> ");
             sort(intArray);
             printPURPLE("Merge Sort Complete", "DEBUG: MergeSort.java ---> ");
@@ -34,13 +37,9 @@ public class MergeSort implements SortingStrategy {
     }
 
     public void mergeSort(int[] arr, int i, int i1) {
-        Platform.runLater(() -> sortingHubController.updateGraph(arr));
-        //sleep the thread
-        try {
-            Thread.sleep(25);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        logic(arr);
+
         //check if the value of i is less than the value of i1
         if (i < i1) {
             //create a variable to store the middle
@@ -51,19 +50,14 @@ public class MergeSort implements SortingStrategy {
             mergeSort(arr, middle + 1, i1);
             //call the merge method
             merge(arr, i, middle, i1);
-
         }
     }
 
     //create a method to merge the array
     public void merge(int[] arr, int i, int middle, int i1) {
-        Platform.runLater(() -> sortingHubController.updateGraph(arr));
-        //sleep the thread
-        try {
-            Thread.sleep(25);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        logic(arr);
+
         //create a variable to store the size of the left array
         int sizeOfLeftArray = middle - i + 1;
         //create a variable to store the size of the right array
@@ -102,13 +96,7 @@ public class MergeSort implements SortingStrategy {
             }
             //increment the value of the merged array
             indexOfMergedArray++;
-            Platform.runLater(() -> sortingHubController.updateGraph(arr));
-            //sleep the thread
-            try {
-                Thread.sleep(25);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            logic(arr);
         }
         //create a while loop to iterate through the left array
         while (indexOfLeftArray < sizeOfLeftArray) {
@@ -118,13 +106,7 @@ public class MergeSort implements SortingStrategy {
             indexOfLeftArray++;
             //increment the value of the merged array
             indexOfMergedArray++;
-            Platform.runLater(() -> sortingHubController.updateGraph(arr));
-            //sleep the thread
-            try {
-                Thread.sleep(25);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            logic(arr);
         }
         //create a while loop to iterate through the right array
         while (indexOfRightArray < sizeOfRightArray) {
@@ -134,19 +116,32 @@ public class MergeSort implements SortingStrategy {
             indexOfRightArray++;
             //increment the value of the merged array
             indexOfMergedArray++;
+            logic(arr);
+        }
+    }
+
+    public void logic (int [] arr ) {
+        if (actualRun) {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
-            //sleep the thread
+            Platform.runLater(() -> sortingHubController.setStatusBar(true));
             try {
-                Thread.sleep(25);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
+        if (!actualRun) {
+            loop++;
+        }
     }
 
     @Override
     public int getRunNeeded(int[] intArray) {
-        return 0;
+        printCYAN("Finding the number of loops needed for Merge Sort", "DEBUG: MergeSort.java ---> ");
+        actualRun = false;
+        loop = 0;
+        sort(intArray);
+        printCYAN("Number of loops needed for Merge Sort: " + loop, "DEBUG: MergeSort.java ---> ");
+        return loop;
     }
 }

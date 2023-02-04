@@ -8,4 +8,5 @@ public interface SortingStrategy extends Runnable {
     void SortingStrategy(int[] arr, SortingHubController sortingHubController);
 
     int getRunNeeded(int[] intArray);
+
 }

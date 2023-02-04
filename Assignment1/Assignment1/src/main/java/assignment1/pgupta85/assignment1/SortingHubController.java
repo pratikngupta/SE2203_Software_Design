@@ -6,8 +6,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
-import static assignment1.pgupta85.method.Debug.*;
 import java.util.ArrayList;
+
+import static assignment1.pgupta85.method.Debug.printSameLine;
 
 public class SortingHubController {
 
@@ -38,27 +39,33 @@ public class SortingHubController {
     //create a Rectangle arrayList to store the bars
     private final ArrayList<Rectangle> bars = new ArrayList<>();
 
-    private int[] backUpArray;
-
     private int[] intArray;
 
     private int[] dummyArray;
 
     private int arraySize, arrayCounter, runNeeded;
 
+    //create sortingStrategy thread
+
+
     @FXML
     void ResetButtonClicked() {
-        IndicatorLabel.setVisible(false);
         //hide all bars
         bars.listIterator().forEachRemaining(bar -> bar.setVisible(false));
-
-        updateGraph(backUpArray);
-
-        //copy backUpArray to intArray
-        System.arraycopy(backUpArray, 0, intArray, 0, backUpArray.length);
-        System.arraycopy(backUpArray, 0, dummyArray, 0, backUpArray.length);
-
+        //set the arraySize to 64
+        arraySize = 64;
+        //call the fillArray method
+        fillArray(arraySize);
+        //call the updateGraph method
+        updateGraph(intArray);
+        //set slider value to 64
+        ArraySizeSlider.setValue(64);
+        //set the progress bar to 0
         StatusBar.setProgress(0);
+        //hide the indicator label
+        IndicatorLabel.setVisible(false);
+        //set combo box to merge sort
+        SelectionMethodSelector.setValue("Merge Sort");
     }
 
     //create initialize method to initialize the bars
@@ -67,6 +74,7 @@ public class SortingHubController {
 
         StatusBar.setStyle("-fx-accent: #142174");
         StatusBar.setProgress(0);
+        IndicatorLabel.setVisible(false);
 
         //create 128 bars
         for (int i = 0; i < 128; i++) {
@@ -74,7 +82,7 @@ public class SortingHubController {
             Rectangle rectangle = new Rectangle();
             bars.add(rectangle);
             MainFrame.getChildren().add(bars.get(i));
-            bars.get(i).setStyle("-fx-fill: #142174" + "; -fx-border-color: Black; -fx-border-width: 50px;");
+            bars.get(i).setStyle("-fx-fill: #142174" + "; -fx-border-color: #f40202; -fx-border-width: 50px;");
         }
 
         //set the ar
@@ -103,7 +111,6 @@ public class SortingHubController {
     public void fillArray(int arraySize) {
         ArraySizeLabel.setText(arraySize + "");
         intArray = new int[arraySize];
-        backUpArray = new int[arraySize];
         dummyArray = new int[arraySize];
 
         int min = 1;
@@ -124,7 +131,6 @@ public class SortingHubController {
         //initialize the backup array
 
         //copy the values from the intArray to the backup array
-        System.arraycopy(intArray, 0, backUpArray, 0, arraySize);
         System.arraycopy(intArray, 0, dummyArray, 0, arraySize);
     }
 
@@ -221,12 +227,6 @@ public class SortingHubController {
             StatusBar.setProgress(0);
         }
 
-    }
-
-    //make UI responsive
-    @FXML
-    void MainFrameResized() {
-        updateGraph(intArray);
     }
 
 }

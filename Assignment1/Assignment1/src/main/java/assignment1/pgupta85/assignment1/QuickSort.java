@@ -2,37 +2,26 @@ package assignment1.pgupta85.assignment1;
 
 import javafx.application.Platform;
 
-public class QuickSort implements SortingStrategy{
+import static assignment1.pgupta85.method.Debug.*;
 
-        private SortingHubController sortingHubController;
+public class QuickSort implements SortingStrategy {
 
-        private int[] intArray;
+    private SortingHubController sortingHubController;
 
-        @Override
-        public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
+    private int[] intArray;
+    private int loop;
+    private boolean actualRun;
+
+    @Override
+    public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
         this.sortingHubController = sortingHubController;
         this.intArray = arr;
-        }
+    }
 
-        @Override
-        public void sort(int[] arr) {
-            System.out.println("New Quick Sort");
-            //write code as a thread
-                //call the quickSort method
-                quickSort(arr, 0, arr.length - 1);
-                //update the graph
-                sortingHubController.updateGraph(arr);
-                //print the array
-                for (int i = 0; i < arr.length; i++) {
-                    System.out.println(arr[i] + " ");
-                }
-                //print the message
-                System.out.println("Quick Sort Complete");
-                //exit the program
-                Platform.exit();
-
-
-        }
+    @Override
+    public void sort(int[] arr) {
+        quickSort(arr, 0, arr.length - 1);
+    }
 
     private void quickSort(int[] arr, int i, int i1) {
         //check if the value of i is less than the value of i1
@@ -64,13 +53,7 @@ public class QuickSort implements SortingStrategy{
                 //assign the value at index to the value at j
                 arr[j] = temp;
                 //update the graph
-                Platform.runLater(() -> sortingHubController.updateGraph(arr));
-                //sleep the thread
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                logic(arr);
             }
         }
         //create a temporary variable to store the value at index + 1
@@ -80,30 +63,46 @@ public class QuickSort implements SortingStrategy{
         //assign the value at index + 1 to the value at pivot
         arr[i1] = temp;
         //update the graph
-        Platform.runLater(() -> sortingHubController.updateGraph(arr));
-        //sleep the thread
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        logic(arr);
         //return the value of index + 1
         return index + 1;
     }
 
+    public void logic (int [] arr ) {
+
+        if (actualRun) {
+            Platform.runLater(() -> sortingHubController.updateGraph(arr));
+            Platform.runLater(() -> sortingHubController.setStatusBar(true));
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (!actualRun) {
+            loop++;
+        }
+    }
+
     @Override
     public void run() {
-            new Thread(() -> {
-                //call the quickSort method
-                quickSort(intArray, 0, intArray.length - 1);
-                //update the graph
-                sortingHubController.updateGraph(intArray);
-                //print the message
-                System.out.println("Quick Sort Complete");
-            }).start();
+        new Thread(() -> {
+            actualRun = true;
+            printPURPLE("Quick Selection Sort", "DEBUG: QuickSort.java ---> ");
+            sort(intArray);
+            printPURPLE("Quick Sort Complete", "DEBUG: QuickSort.java ---> ");
+            sortingHubController.updateGraph(intArray);
+            printLine();
+        }).start();
     }
+
     @Override
     public int getRunNeeded(int[] intArray) {
-        return 0;
+        printCYAN("Finding the number of loops needed for Quick Sort", "DEBUG: QuickSort.java ---> ");
+        actualRun = false;
+        loop = 0;
+        sort(intArray);
+        printCYAN("Number of loops needed for Quick Sort: " + loop, "DEBUG: QuickSort.java ---> ");
+        return loop;
     }
 }
