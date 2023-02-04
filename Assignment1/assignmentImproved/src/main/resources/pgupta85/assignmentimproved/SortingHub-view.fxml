@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import eu.hansolo.medusa.Gauge?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressBar?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="Stage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="1094.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pgupta85.assignmentimproved.SortingHubController">
+    <children>
+        <Label layoutX="14.0" layoutY="451.0" prefHeight="48.0" prefWidth="82.0" text="Algorithm">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+        <Slider fx:id="ArraySizeSlider" layoutX="109.0" layoutY="535.0" max="128.0" min="32.0" onDragDetected="#SetArraySize" onInputMethodTextChanged="#SetArraySize" onMouseClicked="#SetArraySize" onMouseDragged="#SetArraySize" prefHeight="16.0" prefWidth="488.0" />
+        <Button fx:id="SortButton" layoutX="109.0" layoutY="584.0" mnemonicParsing="false" onAction="#SortButtonClicked" prefHeight="42.0" prefWidth="94.0" text="Sort" />
+        <Button fx:id="ResetButton" layoutX="420.0" layoutY="584.0" mnemonicParsing="false" onAction="#ResetButtonClicked" prefHeight="42.0" prefWidth="94.0" text="Reset" />
+        <Pane fx:id="MainFrame" layoutX="9" layoutY="9" prefHeight="425.0" prefWidth="1075.0" style="-fx-border-color: Black;" />
+        <Label fx:id="IndicatorLabel" layoutX="941.0" layoutY="584.0" prefHeight="17.0" prefWidth="46.0" text="Label" />
+      <Gauge fx:id="gauge" layoutX="859.0" layoutY="462.0" prefHeight="161.0" prefWidth="210.0" skinType="SIMPLE_DIGITAL" />
+      <MFXComboBox fx:id="SelectionMethodSelector" layoutX="109.0" layoutY="454.0" onAction="#setSortStrategy" />
+      <MFXProgressBar fx:id="StatusBar" layoutX="10.0" layoutY="434.0" prefHeight="4.0" prefWidth="1075.0" progress="1.0" />
+      <Gauge fx:id="ArraySizeLabel" knobType="METAL" layoutX="625.0" layoutY="439.0" lcdCrystalEnabled="true" lcdDesign="ORANGE" ledBlinking="true" maxMeasuredValue="124.0" maxValue="124.0" minValue="32.0" needleShape="ROUND" needleSize="THICK" needleType="AVIONIC" prefHeight="222.0" prefWidth="200.0" skinType="SIMPLE_SECTION" />
+    </children>
+</AnchorPane>
