@@ -41,6 +41,8 @@ public class SortingHubController {
 
     private int[] intArray;
 
+    private int[] dummyArray;
+
     private int arraySize, arrayCounter, runNeeded;
 
     @FXML
@@ -53,12 +55,21 @@ public class SortingHubController {
 
         //copy backUpArray to intArray
         System.arraycopy(backUpArray, 0, intArray, 0, backUpArray.length);
+        System.arraycopy(backUpArray, 0, dummyArray, 0, backUpArray.length);
 
+        StatusBar.setProgress(0);
     }
 
     //create initialize method to initialize the bars
     public void initialize() {
         SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "InsertionSort Sort", "Quick Sort", "Heap Sort");
+
+        //create a listener for width and height of anchor pane to enable resizing
+        Stage.widthProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Width: " + newValue);
+            //call the updateGraph method
+            updateGraph(intArray);
+        });
 
         StatusBar.setStyle("-fx-accent: #142174");
         StatusBar.setProgress(0);
@@ -98,6 +109,7 @@ public class SortingHubController {
         ArraySizeLabel.setText(arraySize + "");
         intArray = new int[arraySize];
         backUpArray = new int[arraySize];
+        dummyArray = new int[arraySize];
 
         int min = 1;
 
@@ -118,6 +130,7 @@ public class SortingHubController {
 
         //copy the values from the intArray to the backup array
         System.arraycopy(intArray, 0, backUpArray, 0, arraySize);
+        System.arraycopy(intArray, 0, dummyArray, 0, arraySize);
     }
 
     public void updateGraph(int[] intArray) {
@@ -144,10 +157,12 @@ public class SortingHubController {
 
     @FXML
     void SortButtonClicked() {
-        StatusBar.setProgress(0);
-        runNeeded = sortingStrategy.getRunNeeded(backUpArray);
+
         try {
             //call constructor of the sorting strategy
+            StatusBar.setProgress(0);
+            runNeeded = sortingStrategy.getRunNeeded(dummyArray);
+
             IndicatorLabel.setText("Sorting...");
             sortingStrategy.SortingStrategy(intArray,this);
             //start the thread
@@ -184,8 +199,6 @@ public class SortingHubController {
         }
         SelectionMethodSelector.setStyle("-fx-border-color: green; -fx-border-radius: 5px; -fx-border-width: 2px;");
         IndicatorLabel.setText("CLICK SORT TO START");
-
-        StatusBar.setProgress(0.5);
     }
 
     public void setStatusBar(boolean counter) {

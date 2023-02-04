@@ -6,6 +6,7 @@ public class BubbleSort implements SortingStrategy{
     private SortingHubController sortingHubController;
 
     private int[] intArray;
+    private int loop;
 
     @Override
     public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
