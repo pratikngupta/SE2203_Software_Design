@@ -38,7 +38,6 @@ public class Ask {
         if (message.length()>0){
             System.out.print(message);
         }
-        System.out.print(": ");
     }
 
     //This will accept string message and will return integer value it got from user.

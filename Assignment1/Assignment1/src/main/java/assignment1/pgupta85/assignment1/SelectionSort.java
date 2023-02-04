@@ -2,8 +2,6 @@ package assignment1.pgupta85.assignment1;
 
 import javafx.application.Platform;
 
-import java.util.HashMap;
-
 import static assignment1.pgupta85.method.Debug.*;
 
 public class SelectionSort implements SortingStrategy {
@@ -21,7 +19,7 @@ public class SelectionSort implements SortingStrategy {
     @Override
     public void sort(int[] arr) {
 
-        printPURPLE("Starting Selection Sort", "DEBUG: SelectionSort.java ---> ");
+
         //create a for loop to iterate through the array
         for (int i = 0; i < arr.length - 1; i++) {
             //create a variable to store the value of i
@@ -52,10 +50,6 @@ public class SelectionSort implements SortingStrategy {
                 e.printStackTrace();
             }
         }
-
-        //print the message
-        printPURPLE("Selection Sort Complete", "DEBUG: SelectionSort.java ---> ");
-        //exit the program
     }
 
     @Override
@@ -93,10 +87,11 @@ public class SelectionSort implements SortingStrategy {
     @Override
     public void run() {
         new Thread(() -> {
-            //call the quickSort method
+            printPURPLE("Starting Selection Sort", "DEBUG: SelectionSort.java ---> ");
             sort(intArray);
-            //update the graph
+            printPURPLE("Selection Sort Complete", "DEBUG: SelectionSort.java ---> ");
             sortingHubController.updateGraph(intArray);
+            printLine();
         }).start();
     }
 }

@@ -2,9 +2,9 @@ package assignment1.pgupta85.assignment1;
 
 import javafx.application.Platform;
 
-import static java.util.Arrays.*;
+import static assignment1.pgupta85.method.Debug.*;
 
-public class MergeSort implements SortingStrategy{
+public class MergeSort implements SortingStrategy {
 
     private SortingHubController sortingHubController;
 
@@ -19,26 +19,17 @@ public class MergeSort implements SortingStrategy{
 
     @Override
     public void sort(int[] arr) {
-        //write code as a thread
-
-            //call the mergeSort method
-            mergeSort(arr, 0, arr.length - 1);
-            //update the graph
-            //print the array
-        for (int j : arr) {
-            System.out.println(j + " ");
-        }
-            //print the message
-            System.out.println("Merge Sort Complete");
+        mergeSort(arr, 0, arr.length - 1);
     }
 
     @Override
     public void run() {
         new Thread(() -> {
-            //call the quickSort method
+            printPURPLE("Merge Selection Sort", "DEBUG: MergeSort.java ---> ");
             sort(intArray);
-            //print the message
-            System.out.println("Merge Sort Complete");
+            printPURPLE("Merge Sort Complete", "DEBUG: MergeSort.java ---> ");
+            sortingHubController.updateGraph(intArray);
+            printLine();
         }).start();
     }
 
@@ -63,6 +54,7 @@ public class MergeSort implements SortingStrategy{
 
         }
     }
+
     //create a method to merge the array
     public void merge(int[] arr, int i, int middle, int i1) {
         Platform.runLater(() -> sortingHubController.updateGraph(arr));
@@ -152,6 +144,7 @@ public class MergeSort implements SortingStrategy{
         }
 
     }
+
     @Override
     public int getRunNeeded(int[] intArray) {
         return 0;

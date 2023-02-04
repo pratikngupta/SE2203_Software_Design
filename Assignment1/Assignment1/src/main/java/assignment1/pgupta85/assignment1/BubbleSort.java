@@ -2,7 +2,9 @@ package assignment1.pgupta85.assignment1;
 
 import javafx.application.Platform;
 
-public class BubbleSort implements SortingStrategy{
+import static assignment1.pgupta85.method.Debug.*;
+
+public class BubbleSort implements SortingStrategy {
     private SortingHubController sortingHubController;
 
     private int[] intArray;
@@ -16,7 +18,7 @@ public class BubbleSort implements SortingStrategy{
 
     @Override
     public int getRunNeeded(int[] intArray) {
-        System.out.println("New Bubble Sort");
+        printCYAN("Finding the number of loops needed for Bubble Sort", "DEBUG: BubbleSort.java ---> ");
         //write code as a thread
         int loop = 0;
         //create a for loop to iterate through the array
@@ -37,52 +39,51 @@ public class BubbleSort implements SortingStrategy{
                 loop++;
             }
         }
+        printCYAN("Number of loops needed for Selection Sort: " + loop, "DEBUG: BubbleSort.java ---> ");
         return loop;
     }
 
 
     @Override
     public void sort(int[] arr) {
-        System.out.println("New Bubble Sort");
-        //write code as a thread
-        int loop;
-            //create a for loop to iterate through the array
-            for (int i = 0; i < arr.length - 1; i++) {
-                //create a for loop to iterate through the array
-                for (int j = 0; j < arr.length - i - 1; j++) {
-                    //check if the value at j is greater than the value at j + 1
-                    if (arr[j] > arr[j + 1]) {
-                        //create a temporary variable to store the value at j
-                        int temp = arr[j];
-                        //assign the value at j + 1 to the value at j
-                        arr[j] = arr[j + 1];
-                        //assign the value at j to the value at j + 1
-                        arr[j + 1] = temp;
-                        //update the graph
-                    }
-                    Platform.runLater(() -> sortingHubController.updateGraph(arr));
-                    Platform.runLater(() -> sortingHubController.setStatusBar(true));
-                    //sleep the thread
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
 
+        //write code as a thread
+        //create a for loop to iterate through the array
+        for (int i = 0; i < arr.length - 1; i++) {
+            //create a for loop to iterate through the array
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                //check if the value at j is greater than the value at j + 1
+                if (arr[j] > arr[j + 1]) {
+                    //create a temporary variable to store the value at j
+                    int temp = arr[j];
+                    //assign the value at j + 1 to the value at j
+                    arr[j] = arr[j + 1];
+                    //assign the value at j to the value at j + 1
+                    arr[j + 1] = temp;
+                    //update the graph
+                }
+                Platform.runLater(() -> sortingHubController.updateGraph(arr));
+                Platform.runLater(() -> sortingHubController.setStatusBar(true));
+                //sleep the thread
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-            //update the graph
-            sortingHubController.updateGraph(arr);//print the array
-            //print the message
-            System.out.println("Bubble Sort Complete");
+
+        }
     }
 
 
     @Override
     public void run() {
         new Thread(() -> {
+            printPURPLE("Starting Bubble Sort", "DEBUG: BubbleSort.java ---> ");
             sort(intArray);
+            printPURPLE("Bubble Sort Complete", "DEBUG: BubbleSort.java ---> ");
             sortingHubController.updateGraph(intArray);
+            printLine();
         }).start();
     }
 }

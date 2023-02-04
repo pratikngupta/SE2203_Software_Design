@@ -63,17 +63,11 @@ public class SortingHubController {
 
     //create initialize method to initialize the bars
     public void initialize() {
-        SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "InsertionSort Sort", "Quick Sort", "Heap Sort");
-
-        //create a listener for width and height of anchor pane to enable resizing
-        Stage.widthProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Width: " + newValue);
-            //call the updateGraph method
-            updateGraph(intArray);
-        });
+        SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "Insertion Sort", "Quick Sort", "Heap Sort");
 
         StatusBar.setStyle("-fx-accent: #142174");
         StatusBar.setProgress(0);
+
         //create 128 bars
         for (int i = 0; i < 128; i++) {
             //create a rectangle
@@ -191,7 +185,7 @@ public class SortingHubController {
         String sortStrategy = SelectionMethodSelector.getValue();
 
         switch (sortStrategy) {
-            case "InsertionSort Sort" -> sortingStrategy = new InsertionSort();
+            case "Insertion Sort" -> sortingStrategy = new InsertionSort();
             case "Selection Sort" -> sortingStrategy = new SelectionSort();
             case "Bubble Sort" -> sortingStrategy = new BubbleSort();
             case "Merge Sort" -> sortingStrategy = new MergeSort();
@@ -209,12 +203,12 @@ public class SortingHubController {
             double progress = (double) arrayCounter / runNeeded;
 
             if (arrayCounter % 100 == 0 | arrayCounter == runNeeded | arrayCounter == 1 && runNeeded>100) {
-                String text = "Total run: "+runNeeded + "  -----  " + "Run Completed: "+ arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
-                printSameLine(text, "Progress Bar");
+                String text = "\b\b Total run: "+runNeeded + "  -----  " + "Run Completed: "+ arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
+                printSameLine(text, "DEBUG: Progress Bar ---> ");
             }
             if (runNeeded < 100 && arrayCounter % 10 == 0 | arrayCounter == runNeeded | arrayCounter == 1) {
                 String text = "Total run: " + runNeeded + "  -----  " + "Run Completed: " + arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
-                printSameLine(text, "Progress Bar");
+                printSameLine(text, "DEBUG: Progress Bar ---> ");
             }
 
             IndicatorLabel.setText(//format the progress to 2 decimal places

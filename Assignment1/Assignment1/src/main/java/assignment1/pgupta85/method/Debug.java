@@ -24,7 +24,10 @@ public class Debug extends Ask{
     public static void printSameLine(String message, String type){
         System.out.println(yellow + type +": "+ cyan + message + reset);
     }
-
+    public static void printLine()
+    {
+        System.out.println(yellow + "-----------------------------------------------------------------------------------------------------------------" + reset);
+    }
     public static void printArray(String message, int[] arr){
         System.out.print(yellow + message + blue + ": ");
         for (int j : arr) {
