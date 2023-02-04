@@ -82,7 +82,7 @@ public class MergeSort implements SortingStrategy{
         int[] rightArray = new int[sizeOfRightArray];
         //create a for loop to iterate through the left array
         //assign the value of the left array
-        System.arraycopy(arr, i + 0, leftArray, 0, sizeOfLeftArray);
+        System.arraycopy(arr, i, leftArray, 0, sizeOfLeftArray);
         //create a for loop to iterate through the right array
         for (int j = 0; j < sizeOfRightArray; j++) {
             //assign the value of the right array

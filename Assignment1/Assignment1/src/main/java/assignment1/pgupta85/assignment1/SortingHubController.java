@@ -6,6 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
+import static assignment1.pgupta85.method.Debug.*;
 import java.util.ArrayList;
 
 public class SortingHubController {
@@ -47,7 +48,7 @@ public class SortingHubController {
 
     @FXML
     void ResetButtonClicked() {
-
+        IndicatorLabel.setVisible(false);
         //hide all bars
         bars.listIterator().forEachRemaining(bar -> bar.setVisible(false));
 
@@ -73,8 +74,6 @@ public class SortingHubController {
 
         StatusBar.setStyle("-fx-accent: #142174");
         StatusBar.setProgress(0);
-
-        IndicatorLabel.setText("Select a sorting method");
         //create 128 bars
         for (int i = 0; i < 128; i++) {
             //create a rectangle
@@ -102,6 +101,8 @@ public class SortingHubController {
         arraySize = (int) ArraySizeSlider.getValue();
         fillArray(arraySize);
         updateGraph(intArray);
+        StatusBar.setProgress(0);
+        IndicatorLabel.setVisible(false);
         //printGreen("User set array size to " + arraySize);
     }
 
@@ -161,13 +162,13 @@ public class SortingHubController {
         try {
             //call constructor of the sorting strategy
             StatusBar.setProgress(0);
+            arrayCounter = 0;
             runNeeded = sortingStrategy.getRunNeeded(dummyArray);
 
-            IndicatorLabel.setText("Sorting...");
             sortingStrategy.SortingStrategy(intArray,this);
             //start the thread
             new Thread(sortingStrategy).start();
-            IndicatorLabel.setText("Sorting Completed");
+
             IndicatorLabel.setStyle("-fx-text-fill: green");
 
         } catch (Exception e) {
@@ -198,16 +199,26 @@ public class SortingHubController {
             case "Heap Sort" -> sortingStrategy = new HeapSort();
         }
         SelectionMethodSelector.setStyle("-fx-border-color: green; -fx-border-radius: 5px; -fx-border-width: 2px;");
-        IndicatorLabel.setText("CLICK SORT TO START");
+
     }
 
     public void setStatusBar(boolean counter) {
-        System.out.println(runNeeded + "  -----  " + arrayCounter);
-
+        IndicatorLabel.setVisible(true);
         if (counter) {
             arrayCounter ++;
             double progress = (double) arrayCounter / runNeeded;
-            System.out.println(progress);
+
+            if (arrayCounter % 100 == 0 | arrayCounter == runNeeded | arrayCounter == 1 && runNeeded>100) {
+                String text = "Total run: "+runNeeded + "  -----  " + "Run Completed: "+ arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
+                printSameLine(text, "Progress Bar");
+            }
+            if (runNeeded < 100 && arrayCounter % 10 == 0 | arrayCounter == runNeeded | arrayCounter == 1) {
+                String text = "Total run: " + runNeeded + "  -----  " + "Run Completed: " + arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
+                printSameLine(text, "Progress Bar");
+            }
+
+            IndicatorLabel.setText(//format the progress to 2 decimal places
+                    String.format("%.0f", progress * 100) + "%");
             StatusBar.setProgress(progress);
             //update status bar
 

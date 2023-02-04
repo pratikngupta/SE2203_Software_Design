@@ -82,10 +82,7 @@ public class BubbleSort implements SortingStrategy{
     public void run() {
         new Thread(() -> {
             sort(intArray);
-            //update the graph
             sortingHubController.updateGraph(intArray);
-            //print the message
-            System.out.println("Quick Sort Complete");
         }).start();
     }
 }
