@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class SortingHubController {
 
+    public Label IndicatorLabel;
     @FXML
     private ProgressBar StatusBar;
 
@@ -61,6 +62,8 @@ public class SortingHubController {
 
         StatusBar.setStyle("-fx-accent: #142174");
         StatusBar.setProgress(0);
+
+        IndicatorLabel.setText("Select a sorting method");
         //create 128 bars
         for (int i = 0; i < 128; i++) {
             //create a rectangle
@@ -145,9 +148,12 @@ public class SortingHubController {
         runNeeded = sortingStrategy.getRunNeeded(backUpArray);
         try {
             //call constructor of the sorting strategy
+            IndicatorLabel.setText("Sorting...");
             sortingStrategy.SortingStrategy(intArray,this);
             //start the thread
             new Thread(sortingStrategy).start();
+            IndicatorLabel.setText("Sorting Completed");
+            IndicatorLabel.setStyle("-fx-text-fill: green");
 
         } catch (Exception e) {
             SelectionMethodSelector.setStyle("-fx-border-color: red");
@@ -177,6 +183,8 @@ public class SortingHubController {
             case "Heap Sort" -> sortingStrategy = new HeapSort();
         }
         SelectionMethodSelector.setStyle("-fx-border-color: green; -fx-border-radius: 5px; -fx-border-width: 2px;");
+        IndicatorLabel.setText("CLICK SORT TO START");
+
         StatusBar.setProgress(0.5);
     }
 
@@ -195,6 +203,12 @@ public class SortingHubController {
             StatusBar.setProgress(0);
         }
 
+    }
+
+    //make UI responsive
+    @FXML
+    void MainFrameResized() {
+        updateGraph(intArray);
     }
 
 }
