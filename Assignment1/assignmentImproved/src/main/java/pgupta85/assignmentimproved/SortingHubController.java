@@ -3,6 +3,8 @@ package pgupta85.assignmentimproved;
 import eu.hansolo.medusa.Gauge;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
+import io.github.palexdev.materialfx.controls.MFXSlider;
+import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,12 +19,12 @@ import static pgupta85.method.Debug.*;
 import java.util.ArrayList;
 
 public class SortingHubController {
-    @FXML
-    private Gauge ArraySizeLabel;
-
-    @FXML
-    private Slider ArraySizeSlider;
-
+    public Gauge percentageGauge;
+    public Gauge ArraySizeGauge;
+    public MFXComboBox SortSpeedSelector;
+    public MFXToggleButton resetType;
+    public MFXComboBox ColorSelector;
+    public MFXSlider ArraySizeSlider;
     @FXML
     private Label IndicatorLabel;
 
@@ -43,9 +45,6 @@ public class SortingHubController {
 
     @FXML
     private MFXProgressBar StatusBar;
-
-    @FXML
-    private Gauge gauge;
 
     private SortingStrategy sortingStrategy;
 
@@ -110,12 +109,11 @@ public class SortingHubController {
         //call the updateGraph method
         updateGraph(intArray);
         //set slider value to 64
-        ArraySizeLabel.setAnimated(false);
-        ArraySizeLabel.setValue(64);
-        ArraySizeLabel.setUnit("Bars");
-        ArraySizeLabel.setDecimals(0);
-        ArraySizeLabel.setMinValue(2);
-        ArraySizeLabel.setMaxValue(200);
+        ArraySizeGauge.setValue(64);
+        ArraySizeGauge.setUnit("Bars");
+        ArraySizeGauge.setDecimals(0);
+        ArraySizeGauge.setMinValue(2);
+        ArraySizeGauge.setMaxValue(200);
     }
 
     @FXML
@@ -123,7 +121,7 @@ public class SortingHubController {
         arraySize = (int) ArraySizeSlider.getValue();
         fillArray(arraySize);
         updateGraph(intArray);
-        ArraySizeLabel.setValue(arraySize);
+        ArraySizeGauge.setValue(arraySize);
         IndicatorLabel.setVisible(false);
         //printGreen("User set array size to " + arraySize);
     }
@@ -234,7 +232,7 @@ public class SortingHubController {
 
             IndicatorLabel.setText(//format the progress to 2 decimal places
                     String.format("%.0f", progress * 100) + "%");
-            gauge.setValue(progress * 100);
+            percentageGauge.setValue(progress * 100);
             StatusBar.setProgress(progress);
             //update status bar
 
