@@ -61,6 +61,8 @@ public class SelectionSort implements SortingStrategy {
     @Override
     public void run() {
         new Thread(() -> {
+            sortingHubController.disableDuringSorting(true);
+
             actualRun = true;
             sortingHubController.disableButtons(true);
             printPURPLE("Starting Selection Sort", "DEBUG: SelectionSort.java ---> ");
@@ -68,8 +70,7 @@ public class SelectionSort implements SortingStrategy {
             printPURPLE("Selection Sort Complete", "DEBUG: SelectionSort.java ---> ");
             sortingHubController.updateGraph(intArray);
             printLine();
-            sortingHubController.disableButtons(false);
-            sortingHubController.setStatusBar(false);
+            sortingHubController.disableDuringSorting(false);
         }).start();
     }
 
@@ -78,7 +79,11 @@ public class SelectionSort implements SortingStrategy {
         if (actualRun) {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));
-            logicHelper();
+            try {
+                Thread.sleep(sortingHubController.getSpeed());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         if (!actualRun) {
             loop++;

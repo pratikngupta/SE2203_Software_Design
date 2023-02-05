@@ -56,13 +56,14 @@ public class BubbleSort implements SortingStrategy {
     public void run() {
         new Thread(() -> {
             actualRun = true;
-            sortingHubController.disableButtons(true);
+            sortingHubController.disableDuringSorting(true);
             printPURPLE("Starting Bubble Sort", "DEBUG: BubbleSort.java ---> ");
             sort(intArray);
             printPURPLE("Bubble Sort Complete", "DEBUG: BubbleSort.java ---> ");
             sortingHubController.updateGraph(intArray);
             sortingHubController.disableButtons(false);
             printLine();
+            sortingHubController.disableDuringSorting(false);
         }).start();
     }
 
@@ -71,7 +72,11 @@ public class BubbleSort implements SortingStrategy {
         if (actualRun) {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));
-            logicHelper();
+            try {
+                Thread.sleep(sortingHubController.getSpeed());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         if (!actualRun) {
             loop++;

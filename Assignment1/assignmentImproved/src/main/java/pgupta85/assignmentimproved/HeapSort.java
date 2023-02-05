@@ -57,13 +57,14 @@ public class HeapSort implements SortingStrategy {
     public void run() {
         new Thread(() -> {
             actualRun = true;
-            sortingHubController.disableButtons(true);
+            sortingHubController.disableDuringSorting(true);
             printPURPLE("Heap Selection Sort", "DEBUG: HeapSort.java ---> ");
             sort(intArray);
             printPURPLE("Heap Sort Complete", "DEBUG: HeapSort.java ---> ");
             sortingHubController.updateGraph(intArray);
             sortingHubController.disableButtons(false);
             printLine();
+            sortingHubController.disableDuringSorting(false);
         }).start();
     }
 
@@ -103,7 +104,11 @@ public class HeapSort implements SortingStrategy {
         if (actualRun) {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));
-            logicHelper();
+            try {
+                Thread.sleep(sortingHubController.getSpeed());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         if (!actualRun) {
             loop++;

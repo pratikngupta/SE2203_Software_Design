@@ -73,7 +73,11 @@ public class QuickSort implements SortingStrategy {
         if (actualRun) {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));
-            logicHelper();
+            try {
+                Thread.sleep(sortingHubController.getSpeed());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         if (!actualRun) {
             loop++;
@@ -118,6 +122,7 @@ public class QuickSort implements SortingStrategy {
     @Override
     public void run() {
         new Thread(() -> {
+            sortingHubController.disableDuringSorting(true);
             actualRun = true;
             sortingHubController.disableButtons(true);
             printPURPLE("Quick Selection Sort", "DEBUG: QuickSort.java ---> ");
@@ -126,6 +131,7 @@ public class QuickSort implements SortingStrategy {
             sortingHubController.updateGraph(intArray);
             sortingHubController.disableButtons(false);
             printLine();
+            sortingHubController.disableDuringSorting(false);
         }).start();
     }
 

@@ -54,6 +54,7 @@ public class InsertionSort implements SortingStrategy{
     @Override
     public void run() {
         new Thread(() -> {
+            sortingHubController.disableDuringSorting(true);
             actualRun = true;
             sortingHubController.disableButtons(true);
             printPURPLE("Insertion Selection Sort", "DEBUG: InsertionSort.java ---> ");
@@ -62,6 +63,7 @@ public class InsertionSort implements SortingStrategy{
             sortingHubController.updateGraph(intArray);
             sortingHubController.setStatusBar(false);
             printLine();
+            sortingHubController.disableDuringSorting(false);
         }).start();
     }
 
@@ -70,7 +72,11 @@ public class InsertionSort implements SortingStrategy{
         if (actualRun) {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));
-            logicHelper();
+            try {
+                Thread.sleep(sortingHubController.getSpeed());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         if (!actualRun) {
             loop++;
