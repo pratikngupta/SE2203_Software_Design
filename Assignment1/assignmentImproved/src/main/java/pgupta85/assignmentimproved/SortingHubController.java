@@ -90,7 +90,7 @@ public class SortingHubController {
         IndicatorLabel.setVisible(false);
 
         //create 128 bars
-        for (int i = 0; i < 128; i++) {
+        for (int i = 0; i < 200; i++) {
             //create a rectangle
             Rectangle rectangle = new Rectangle();
             bars.add(rectangle);
@@ -98,7 +98,10 @@ public class SortingHubController {
             bars.get(i).setStyle("-fx-fill: #142174" + "; -fx-border-color: #f40202; -fx-border-width: 50px;");
         }
 
-        //set the ar
+        //slider
+        ArraySizeSlider.setMin(2);
+        ArraySizeSlider.setMax(200);
+        ArraySizeSlider.setValue(64);
 
         //set the arraySize to 64
         arraySize = 64;
@@ -107,8 +110,12 @@ public class SortingHubController {
         //call the updateGraph method
         updateGraph(intArray);
         //set slider value to 64
-        ArraySizeSlider.setValue(64);
-
+        ArraySizeLabel.setAnimated(false);
+        ArraySizeLabel.setValue(64);
+        ArraySizeLabel.setUnit("Bars");
+        ArraySizeLabel.setDecimals(0);
+        ArraySizeLabel.setMinValue(2);
+        ArraySizeLabel.setMaxValue(200);
     }
 
     @FXML
@@ -228,6 +235,7 @@ public class SortingHubController {
             IndicatorLabel.setText(//format the progress to 2 decimal places
                     String.format("%.0f", progress * 100) + "%");
             gauge.setValue(progress * 100);
+            StatusBar.setProgress(progress);
             //update status bar
 
         } else {
