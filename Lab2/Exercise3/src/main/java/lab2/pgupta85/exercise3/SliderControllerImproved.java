@@ -151,25 +151,23 @@ public class SliderControllerImproved {
 
     //Action method for radio buttons
     public void CelsiusRadioButtonClicked() {
-        BaseUnit.setText("Celsius");
-        SecondUnit.setText("Fahrenheit");
-        ThirdUnit.setText("Kelvin");
-        TempConverter();
+        TempButtonHelper("Celsius", "Fahrenheit", "Kelvin");
     }
 
     //Action method for radio buttons
     public void FahrenheitRadioButtonClicked() {
-        BaseUnit.setText("Fahrenheit");
-        SecondUnit.setText("Celsius");
-        ThirdUnit.setText("Kelvin");
-        TempConverter();
+        TempButtonHelper("Fahrenheit", "Celsius", "Kelvin");
     }
 
     //Action method for radio buttons
     public void KelvinRadioButtonClicked() {
-        BaseUnit.setText("Kelvin");
-        SecondUnit.setText("Celsius");
-        ThirdUnit.setText("Fahrenheit");
+        TempButtonHelper("Kelvin", "Celsius", "Fahrenheit");
+    }
+
+    public void TempButtonHelper(String baseUnitText, String secondUnitText, String thirdUnitText) {
+        BaseUnit.setText(baseUnitText);
+        SecondUnit.setText(secondUnitText);
+        ThirdUnit.setText(thirdUnitText);
         TempConverter();
     }
 
@@ -191,7 +189,6 @@ public class SliderControllerImproved {
             celsius = sliderValue;
             fahrenheit = (celsius * 9 / 5) + 32;
             kelvin = celsius + 273.15;
-
             //set value with 2 decimal places
             BaseUnitBValue.setText(String.format("%.2f", celsius));
             SecondUnitValue.setText(String.format("%.2f", fahrenheit));
@@ -208,7 +205,6 @@ public class SliderControllerImproved {
             kelvin = sliderValue;
             celsius = kelvin - 273.15;
             fahrenheit = (celsius * 9 / 5) + 32;
-
             //set value with 2 decimal places
             BaseUnitBValue.setText(String.format("%.2f", kelvin));
             SecondUnitValue.setText(String.format("%.2f", celsius));
