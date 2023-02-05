@@ -60,12 +60,15 @@ public class SelectionSort implements SortingStrategy {
     @Override
     public void run() {
         new Thread(() -> {
+            sortingHubController.disableDuringSorting(true);
+
             actualRun = true;
             printPURPLE("Starting Selection Sort", "DEBUG: SelectionSort.java ---> ");
             sort(intArray);
             printPURPLE("Selection Sort Complete", "DEBUG: SelectionSort.java ---> ");
             sortingHubController.updateGraph(intArray);
             printLine();
+            sortingHubController.disableDuringSorting(false);
         }).start();
     }
 

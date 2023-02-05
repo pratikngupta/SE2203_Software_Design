@@ -27,12 +27,14 @@ public class MergeSort implements SortingStrategy {
     @Override
     public void run() {
         new Thread(() -> {
+            sortingHubController.disableDuringSorting(true);
             actualRun = true;
             printPURPLE("Merge Selection Sort", "DEBUG: MergeSort.java ---> ");
             sort(intArray);
             printPURPLE("Merge Sort Complete", "DEBUG: MergeSort.java ---> ");
             sortingHubController.updateGraph(intArray);
             printLine();
+            sortingHubController.disableDuringSorting(false);
         }).start();
     }
 

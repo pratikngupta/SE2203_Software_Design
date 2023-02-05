@@ -54,12 +54,14 @@ public class InsertionSort implements SortingStrategy{
     @Override
     public void run() {
         new Thread(() -> {
+            sortingHubController.disableDuringSorting(true);
             actualRun = true;
             printPURPLE("Insertion Selection Sort", "DEBUG: InsertionSort.java ---> ");
             sort(intArray);
             printPURPLE("Insertion Sort Complete", "DEBUG: InsertionSort.java ---> ");
             sortingHubController.updateGraph(intArray);
             printLine();
+            sortingHubController.disableDuringSorting(false);
         }).start();
     }
 

@@ -12,7 +12,7 @@ public class SortingHub extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SortingHub.class.getResource("SortingHub-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("Sorting Hub");
         stage.setScene(scene);
         stage.show();
     }

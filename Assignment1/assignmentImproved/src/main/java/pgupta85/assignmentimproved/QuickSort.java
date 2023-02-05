@@ -87,12 +87,14 @@ public class QuickSort implements SortingStrategy {
     @Override
     public void run() {
         new Thread(() -> {
+            sortingHubController.disableDuringSorting(true);
             actualRun = true;
             printPURPLE("Quick Selection Sort", "DEBUG: QuickSort.java ---> ");
             sort(intArray);
             printPURPLE("Quick Sort Complete", "DEBUG: QuickSort.java ---> ");
             sortingHubController.updateGraph(intArray);
             printLine();
+            sortingHubController.disableDuringSorting(false);
         }).start();
     }
 

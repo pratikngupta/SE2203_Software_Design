@@ -56,6 +56,8 @@ public class SortingHubController {
 
     private int[] dummyArray;
 
+    private int[] backupArray;
+
     private int arraySize, arrayCounter, runNeeded;
 
     private HashMap<String, Long> speed = new HashMap<>();
@@ -67,20 +69,28 @@ public class SortingHubController {
     void ResetButtonClicked() {
         //hide all bars
         bars.listIterator().forEachRemaining(bar -> bar.setVisible(false));
-        //set the arraySize to 64
-        arraySize = 64;
-        //call the fillArray method
-        fillArray(arraySize);
-        //call the updateGraph method
+
+        if (resetType.isSelected()) {
+            //copy back the backup array to the int array
+            System.arraycopy(backupArray, 0, intArray, 0, intArray.length);
+            //update the graph
+            updateGraph(intArray);
+            //set the progress bar to 0
+
+        } else {
+            //set the arraySize to 64
+            arraySize = 64;
+            //call the fillArray method
+            fillArray(arraySize);
+            //call the updateGraph method
+            ArraySizeSlider.setValue(64);
+            //set combo box to merge sort
+            SelectionMethodSelector.setValue("Merge Sort");
+        }
         updateGraph(intArray);
-        //set slider value to 64
-        ArraySizeSlider.setValue(64);
-        //set the progress bar to 0
         StatusBar.setProgress(0);
-        //hide the indicator label
-        IndicatorLabel.setVisible(false);
-        //set combo box to merge sort
-        SelectionMethodSelector.setValue("Merge Sort");
+        percentageGauge.setValue(0);
+
     }
 
     //create initialize method to initialize the bars
@@ -126,6 +136,8 @@ public class SortingHubController {
         ArraySizeGauge.setDecimals(0);
         ArraySizeGauge.setMinValue(2);
         ArraySizeGauge.setMaxValue(200);
+
+        percentageGauge.setBarColor((getGaugeBlue()));
     }
 
     @FXML
@@ -141,6 +153,7 @@ public class SortingHubController {
     public void fillArray(int arraySize) {
         intArray = new int[arraySize];
         dummyArray = new int[arraySize];
+        backupArray = new int[arraySize];
 
         int min = 1;
 
@@ -161,6 +174,7 @@ public class SortingHubController {
 
         //copy the values from the intArray to the backup array
         System.arraycopy(intArray, 0, dummyArray, 0, arraySize);
+        System.arraycopy(intArray, 0, backupArray, 0, arraySize);
     }
 
     public void updateGraph(int[] intArray) {
@@ -190,7 +204,8 @@ public class SortingHubController {
 
         try {
             //call constructor of the sorting strategy
-            StatusBar.setProgress(0);
+            ResetButtonClicked();
+            //set the progress bar to 0
             arrayCounter = 0;
             runNeeded = sortingStrategy.getRunNeeded(dummyArray);
 
@@ -228,27 +243,34 @@ public class SortingHubController {
     }
 
     public void setStatusBar(boolean counter) {
-        IndicatorLabel.setVisible(true);
-        if (counter) {
-            arrayCounter ++;
-            double progress = (double) arrayCounter / runNeeded;
+        if (SortSpeedSelector.equals("No Delay")|| SortSpeedSelector == null) {
+            StatusBar.setProgress(100);
+            percentageGauge.setValue(100);
+            return;
+        }
+        else {
+            IndicatorLabel.setVisible(true);
+            if (counter) {
+                arrayCounter++;
+                double progress = (double) arrayCounter / runNeeded;
 
-            if (arrayCounter % 100 == 0 | arrayCounter == runNeeded | arrayCounter == 1 && runNeeded>100) {
-                String text = "\b\b Total run: "+runNeeded + "  -----  " + "Run Completed: "+ arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
-                printSameLine(text, "DEBUG: Progress Bar ---> ");
+                if (arrayCounter % 100 == 0 | arrayCounter == runNeeded | arrayCounter == 1 && runNeeded > 100) {
+                    String text = "\b\b Total run: " + runNeeded + "  -----  " + "Run Completed: " + arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
+                    printSameLine(text, "DEBUG: Progress Bar ---> ");
+                }
+                if (runNeeded < 100 && arrayCounter % 10 == 0 | arrayCounter == runNeeded | arrayCounter == 1) {
+                    String text = "Total run: " + runNeeded + "  -----  " + "Run Completed: " + arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
+                    printSameLine(text, "DEBUG: Progress Bar ---> ");
+                }
+
+                percentageGauge.setValue(progress * 100);
+                StatusBar.setProgress(progress);
+                //update status bar
+
+            } else {
+                arrayCounter = 0;
+                StatusBar.setProgress(0);
             }
-            if (runNeeded < 100 && arrayCounter % 10 == 0 | arrayCounter == runNeeded | arrayCounter == 1) {
-                String text = "Total run: " + runNeeded + "  -----  " + "Run Completed: " + arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
-                printSameLine(text, "DEBUG: Progress Bar ---> ");
-            }
-
-            percentageGauge.setValue(progress * 100);
-            StatusBar.setProgress(progress);
-            //update status bar
-
-        } else {
-            arrayCounter = 0;
-            StatusBar.setProgress(0);
         }
     }
 
@@ -275,10 +297,25 @@ public class SortingHubController {
         else {
             bars.listIterator().forEachRemaining(bar -> bar.setFill(Color.valueOf(color)));
             ArraySizeGauge.setBarColor(Color.valueOf(color));
+            percentageGauge.setBarColor(Color.valueOf(color));
         }
     }
 
     public void changeColor( ) {
         changeColor(ColorSelector.getValue());
+    }
+
+    public void softResetToggle() {
+        if (resetType.isSelected()) {
+            resetType.setText("Soft Reset: Will keep the current sorting method and array size");
+        } else {
+            resetType.setText("Hard Reset: Will revert to merge sort and array size of 64");
+        }
+    }
+
+    public void disableDuringSorting(boolean state){
+        ArraySizeSlider.setDisable(state);
+        SortButton.setDisable(state);
+        ResetButton.setDisable(state);
     }
 }
