@@ -1,42 +1,83 @@
 package pgupta85.assignmentimproved;
 
+
 import eu.hansolo.medusa.Gauge;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
+import io.github.palexdev.materialfx.controls.MFXSlider;
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.Tab;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import static pgupta85.method.Debug.*;
+
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
+import static pgupta85.method.Debug.*;
+
 public class SortingHubController {
+
+    @FXML
+    private Tab AboutMeTab;
+
+    @FXML
+    private Tab AnimationTab;
+
     @FXML
     private Gauge ArraySizeLabel;
 
     @FXML
-    private Slider ArraySizeSlider;
+    private MFXSlider ArraySizeSlider;
+
+    @FXML
+    private MFXTextField HeaderInfo;
 
     @FXML
     private Label IndicatorLabel;
 
     @FXML
+    private Tab InfoTab;
+
+    @FXML
     private Pane MainFrame;
 
     @FXML
-    private Button ResetButton;
+    private MFXButton ResetButton;
+
+    @FXML
+    private MFXButton ResetButton1;
 
     @FXML
     private MFXComboBox<String> SelectionMethodSelector;
 
     @FXML
-    private Button SortButton;
+    private MFXButton SortButton;
+
+    @FXML
+    private MFXComboBox<String> SortSpeedSelector;
 
     @FXML
     private AnchorPane Stage;
@@ -45,7 +86,13 @@ public class SortingHubController {
     private MFXProgressBar StatusBar;
 
     @FXML
+    private Tab WelcomeTab;
+
+    @FXML
     private Gauge gauge;
+
+    @FXML
+    private MFXToggleButton resetType;
 
     private SortingStrategy sortingStrategy;
 
@@ -66,28 +113,44 @@ public class SortingHubController {
         //hide all bars
         bars.listIterator().forEachRemaining(bar -> bar.setVisible(false));
         //set the arraySize to 64
-        arraySize = 64;
-        //call the fillArray method
-        fillArray(arraySize);
-        //call the updateGraph method
-        updateGraph(intArray);
-        //set slider value to 64
-        ArraySizeSlider.setValue(64);
-        //set the progress bar to 0
-        StatusBar.setProgress(0);
-        //hide the indicator label
-        IndicatorLabel.setVisible(false);
-        //set combo box to merge sort
-        SelectionMethodSelector.setValue("Merge Sort");
+
+        if (!resetType.isSelected()) {
+            arraySize = 64;
+            //call the fillArray method
+            fillArray(arraySize);
+            //call the updateGraph method
+            updateGraph(intArray);
+            //set slider value to 64
+            ArraySizeSlider.setValue(64);
+            //set the progress bar to 0
+            StatusBar.setProgress(0);
+            //hide the indicator label
+            IndicatorLabel.setVisible(false);
+            //set combo box to merge sort
+            SelectionMethodSelector.setValue("Merge Sort");
+        } else {
+            //call the fillArray method
+            fillArray(arraySize);
+            //call the updateGraph method
+            updateGraph(intArray);
+            //set the progress bar to 0
+            StatusBar.setProgress(0);
+            //hide the indicator label
+            IndicatorLabel.setVisible(false);
+        }
     }
 
     //create initialize method to initialize the bars
     public void initialize() {
         SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "Insertion Sort", "Quick Sort", "Heap Sort");
+        SortSpeedSelector.getItems().addAll("Slow", "Medium", "Fast", "No Delay");
 
         StatusBar.setStyle("-fx-accent: #142174");
         StatusBar.setProgress(0);
         IndicatorLabel.setVisible(false);
+
+        //set combo box to show 5 items at a time
+        SelectionMethodSelector.setCaretVisible(true);
 
         //create 128 bars
         for (int i = 0; i < 200; i++) {
@@ -177,9 +240,9 @@ public class SortingHubController {
 
     @FXML
     void SortButtonClicked() {
-
         try {
             //call constructor of the sorting strategy
+            ResetButtonClicked();
             StatusBar.setProgress(0);
             arrayCounter = 0;
             runNeeded = sortingStrategy.getRunNeeded(dummyArray);
@@ -187,6 +250,10 @@ public class SortingHubController {
             sortingStrategy.SortingStrategy(intArray,this);
             //start the thread
             new Thread(sortingStrategy).start();
+
+            //disable the sort and reset buttons until the sorting is done
+            SortButton.setDisable(true);
+            ResetButton.setDisable(true);
 
             IndicatorLabel.setStyle("-fx-text-fill: green");
 
@@ -214,7 +281,6 @@ public class SortingHubController {
             case "Heap Sort" -> sortingStrategy = new HeapSort();
         }
         SelectionMethodSelector.setStyle("-fx-border-color: green; -fx-border-radius: 5px; -fx-border-width: 2px;");
-
     }
 
     public void setStatusBar(boolean counter) {
@@ -231,9 +297,6 @@ public class SortingHubController {
                 String text = "Total run: " + runNeeded + "  -----  " + "Run Completed: " + arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
                 printSameLine(text, "DEBUG: Progress Bar ---> ");
             }
-
-            IndicatorLabel.setText(//format the progress to 2 decimal places
-                    String.format("%.0f", progress * 100) + "%");
             gauge.setValue(progress * 100);
             StatusBar.setProgress(progress);
             //update status bar
@@ -243,5 +306,32 @@ public class SortingHubController {
             StatusBar.setProgress(0);
         }
 
+    }
+
+    public String getSpeed(){
+        try {
+            return SortSpeedSelector.getValue();
+        } catch (Exception e) {
+            return "Medium";
+        }
+    }
+
+    public void setSortingSpeed( ) {
+    }
+
+
+    public void disableButtons(boolean disable){
+        SortButton.setDisable(disable);
+        ResetButton.setDisable(disable);
+        ResetButton1.setDisable(disable);
+    }
+
+    public void WelcomeTabClicked( ) {
+    }
+
+    public void InfoTabClicked( ) {
+    }
+
+    public void AboutMeTabClicked( ) {
     }
 }

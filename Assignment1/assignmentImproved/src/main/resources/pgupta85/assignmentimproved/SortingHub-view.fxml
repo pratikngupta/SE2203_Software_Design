@@ -1,42 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import eu.hansolo.medusa.Gauge?>
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXProgressBar?>
+<?import io.github.palexdev.materialfx.controls.MFXSlider?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView
 
-<AnchorPane fx:id="Stage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="1094.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pgupta85.assignmentimproved.SortingHubController">
-    <children>
-        <Label layoutX="14.0" layoutY="451.0" prefHeight="48.0" prefWidth="82.0" text="Algorithm">
-            <font>
-                <Font size="18.0" />
-            </font></Label>
-        <Slider fx:id="ArraySizeSlider" layoutX="55.0" layoutY="535.0" max="200.0" min="32.0" onDragDetected="#SetArraySize" onInputMethodTextChanged="#SetArraySize" onMouseClicked="#SetArraySize" onMouseDragged="#SetArraySize" prefHeight="16.0" prefWidth="542.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-        <Pane fx:id="MainFrame" layoutX="9" layoutY="9" prefHeight="425.0" prefWidth="1075.0" style="-fx-border-color: Black;" />
-        <Label fx:id="IndicatorLabel" layoutX="941.0" layoutY="584.0" prefHeight="17.0" prefWidth="46.0" text="Label" />
-        <Gauge fx:id="gauge" layoutX="859.0" layoutY="462.0" lcdDesign="FLAT_CUSTOM" needleBehavior="OPTIMIZED" needleShape="ROUND" needleSize="THIN" needleType="AVIONIC" prefHeight="161.0" prefWidth="210.0" returnToZero="true" skinType="SIMPLE_DIGITAL" />
-        <MFXComboBox fx:id="SelectionMethodSelector" alignment="TOP_CENTER" floatMode="ABOVE" floatingTextGap="0.0" graphicTextGap="0.0" layoutX="109.0" layoutY="454.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#setSortStrategy" prefHeight="42.0" prefWidth="225.0" text="Select Sorting Method">
-         <effect>
-            <Blend />
-         </effect>
-         <font>
-            <Font size="14.0" />
-         </font></MFXComboBox>
-        <MFXProgressBar fx:id="StatusBar" layoutX="10.0" layoutY="434.0" prefHeight="4.0" prefWidth="1075.0" progress="1.0" />
-        <Gauge fx:id="ArraySizeLabel" alert="true" animated="true" customTickLabelsEnabled="true" foregroundPaint="#ffffff00" knobType="METAL" layoutX="625.0" layoutY="439.0" lcdCrystalEnabled="true" lcdDesign="BLACK" ledBlinking="true" maxMeasuredValue="200.0" maxMeasuredValueVisible="true" maxValue="200.0" minMeasuredValue="0.0" minValue="32.0" needleShape="ROUND" needleSize="THICK" needleType="AVIONIC" prefHeight="222.0" prefWidth="200.0" returnToZero="true" skinType="SIMPLE_SECTION" />
-        <MFXButton fx:id="SortButton" buttonType="RAISED" depthLevel="LEVEL1" layoutX="217.0" layoutY="580.0" onAction="#SortButtonClicked" prefHeight="42.0" prefWidth="109.0" rippleAnimateShadow="true" rippleColor="#1b0cee" text="Sort" />
-      <MFXButton fx:id="ResetButton" buttonType="RAISED" layoutX="415.0" layoutY="577.0" onAction="#ResetButtonClicked" prefHeight="42.0" prefWidth="109.0" rippleColor="#3b41e1">
-         <effect>
-            <Bloom />
-         </effect>
-      </MFXButton>
-    </children>
-</AnchorPane>
+
+
+<TabPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pgupta85.assignmentimproved.SortingHubController">
+   <tabs>
+      <Tab fx:id="WelcomeTab" closable="false" onSelectionChanged="#WelcomeTabClicked" text="Welcome">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+      <Tab fx:id="AnimationTab" closable="false" onSelectionChanged="#AnimationTabClicked" text="Animation">
+         <content>
+            <AnchorPane fx:id="Stage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="890.0">
+                <children>
+                    <Pane fx:id="MainFrame" layoutX="9.0" layoutY="9.0" prefHeight="425.0" prefWidth="872.0" style="-fx-border-color: Black;" />
+                    <Label fx:id="IndicatorLabel" layoutX="728.0" layoutY="586.0" prefHeight="17.0" prefWidth="71.0" text="\% Complete" />
+                    <Gauge fx:id="gauge" layoutX="689.0" layoutY="466.0" lcdDesign="FLAT_CUSTOM" needleBehavior="OPTIMIZED" needleShape="ROUND" needleSize="THIN" needleType="AVIONIC" prefHeight="150.0" prefWidth="150.0" returnToZero="true" skinType="SIMPLE_DIGITAL" />
+                    <MFXComboBox fx:id="SelectionMethodSelector" alignment="TOP_CENTER" floatMode="ABOVE" floatingTextGap="0.0" graphicTextGap="0.0" layoutX="117.0" layoutY="460.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#setSortStrategy" prefHeight="30.0" prefWidth="225.0" text="Select Sorting Method">
+                     <effect>
+                        <Blend />
+                     </effect>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </MFXComboBox>
+                    <MFXProgressBar fx:id="StatusBar" layoutX="10.0" layoutY="432.0" prefHeight="6.0" prefWidth="872.0" progress="1.0" />
+                    <Gauge fx:id="ArraySizeLabel" alert="true" animated="true" customTickLabelsEnabled="true" foregroundPaint="#ffffff00" knobType="METAL" layoutX="478.0" layoutY="444.0" lcdCrystalEnabled="true" lcdDesign="BLACK" ledBlinking="true" maxMeasuredValue="200.0" maxMeasuredValueVisible="true" maxValue="200.0" minMeasuredValue="0.0" minValue="32.0" needleShape="ROUND" needleSize="THICK" needleType="AVIONIC" prefHeight="193.0" prefWidth="185.0" returnToZero="true" skinType="SIMPLE_SECTION" />
+                    <MFXButton fx:id="SortButton" buttonType="RAISED" layoutX="100.0" layoutY="582.0" onAction="#SortButtonClicked" prefHeight="42.0" prefWidth="109.0" rippleAnimateShadow="true" rippleColor="#1b0cee" text="Sort" />
+                  <MFXButton fx:id="ResetButton" buttonType="RAISED" layoutX="223.0" layoutY="580.0" onAction="#ResetButtonClicked" prefHeight="42.0" prefWidth="109.0" rippleColor="#3b41e1" text="Reset">
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </MFXButton>
+                  <MFXSlider fx:id="ArraySizeSlider" accessibleText="Array Size" layoutX="124.0" layoutY="552.0" max="200.0" min="2.0" onDragDetected="#SetArraySize" onInputMethodTextChanged="#SetArraySize" onMouseClicked="#SetArraySize" onMouseDragged="#SetArraySize" popupSide="OTHER_SIDE" prefHeight="4.0" prefWidth="225.0" showTicksAtEdges="false">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </MFXSlider>
+                  <MFXTextField alignment="CENTER" depthTest="DISABLE" floatMode="ABOVE" layoutX="10.0" layoutY="500.0" text="Speed" />
+                  <MFXTextField alignment="CENTER" depthTest="DISABLE" floatMode="ABOVE" layoutX="10.0" layoutY="460.0" text="Algorithm" />
+                  <MFXComboBox fx:id="SortSpeedSelector" alignment="TOP_CENTER" floatMode="ABOVE" floatingTextGap="0.0" graphicTextGap="0.0" layoutX="117.0" layoutY="500.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#setSortingSpeed" prefHeight="30.0" prefWidth="225.0" text="Select Sorting Speed">
+                     <effect>
+                        <Blend />
+                     </effect>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </MFXComboBox>
+                  <MFXTextField alignment="CENTER" depthTest="DISABLE" floatMode="ABOVE" layoutX="10.0" layoutY="540.0" text="Array Size" />
+                  <MFXButton fx:id="ResetButton1" buttonType="RAISED" depthLevel="LEVEL1" layoutX="354.0" layoutY="580.0" onAction="#ResetButtonClicked" prefHeight="42.0" prefWidth="109.0" rippleColor="#3b41e1" text="Demo">
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </MFXButton>
+                  <MFXToggleButton fx:id="resetType" layoutX="350.0" layoutY="500.0" prefHeight="17.0" prefWidth="120.0" text="Soft Reset" />
+                  <MFXButton buttonType="RAISED" depthLevel="LEVEL1" layoutX="354.0" layoutY="463.0" rippleColor="#17c4f8" text="learn More" />
+                </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="InfoTab" closable="false" onSelectionChanged="#InfoTabClicked" text="Sorting Method">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <MFXTextField fx:id="HeaderInfo" alignment="CENTER" floatMode="ABOVE" layoutX="334.0" layoutY="56.0" prefWidth="207.0" text="What is Sorting">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </MFXTextField>
+                  <MFXComboBox floatMode="ABOVE" layoutX="61.0" layoutY="14.0" prefHeight="42.0" prefWidth="182.0" text="Select Sort Method" />
+                  <ImageView fitHeight="172.0" fitWidth="234.0" layoutX="846.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="203.0" fitWidth="236.0" layoutX="846.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
+                  <WebView layoutX="6.0" layoutY="97.0" prefHeight="543.0" prefWidth="878.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab fx:id="AboutMeTab" closable="false" onSelectionChanged="#AboutMeTabClicked" text="About me">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <MFXTextField alignment="CENTER" editable="false" floatMode="ABOVE" layoutX="14.0" layoutY="14.0" prefHeight="45.0" prefWidth="204.0" text="Name: Pratik Narendra Gupta" />
+                  <MFXTextField alignment="CENTER" editable="false" floatMode="ABOVE" layoutX="14.0" layoutY="127.0" prefHeight="45.0" prefWidth="204.0" text="Name: Pratik Narendra Gupta" />
+                  <MFXTextField alignment="CENTER" editable="false" floatMode="ABOVE" layoutX="14.0" layoutY="69.0" prefHeight="45.0" prefWidth="204.0" text="Name: Pratik Narendra Gupta" />
+                  <ImageView fitHeight="79.0" fitWidth="87.0" layoutX="789.0" layoutY="14.0" pickOnBounds="true" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+   </tabs>
+</TabPane>

@@ -73,14 +73,45 @@ public class QuickSort implements SortingStrategy {
         if (actualRun) {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            logicHelper();
         }
         if (!actualRun) {
             loop++;
+        }
+    }
+
+    public void logicHelper(){
+        String speed = sortingHubController.getSpeed();
+        switch (speed) {
+            case "Fast" -> {
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            case "Medium" -> {
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            case "Slow" -> {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            case "No Delay" -> {
+                try {
+                    Thread.sleep(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
 
@@ -88,10 +119,12 @@ public class QuickSort implements SortingStrategy {
     public void run() {
         new Thread(() -> {
             actualRun = true;
+            sortingHubController.disableButtons(true);
             printPURPLE("Quick Selection Sort", "DEBUG: QuickSort.java ---> ");
             sort(intArray);
             printPURPLE("Quick Sort Complete", "DEBUG: QuickSort.java ---> ");
             sortingHubController.updateGraph(intArray);
+            sortingHubController.disableButtons(false);
             printLine();
         }).start();
     }

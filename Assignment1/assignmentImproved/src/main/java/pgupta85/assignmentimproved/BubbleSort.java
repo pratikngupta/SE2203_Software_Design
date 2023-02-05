@@ -56,26 +56,60 @@ public class BubbleSort implements SortingStrategy {
     public void run() {
         new Thread(() -> {
             actualRun = true;
+            sortingHubController.disableButtons(true);
             printPURPLE("Starting Bubble Sort", "DEBUG: BubbleSort.java ---> ");
             sort(intArray);
             printPURPLE("Bubble Sort Complete", "DEBUG: BubbleSort.java ---> ");
             sortingHubController.updateGraph(intArray);
+            sortingHubController.disableButtons(false);
             printLine();
         }).start();
     }
 
     public void logic (int [] arr ) {
+
         if (actualRun) {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));
-            try {
-                Thread.sleep(25);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            logicHelper();
         }
         if (!actualRun) {
             loop++;
+        }
+    }
+
+    public void logicHelper(){
+        String speed = sortingHubController.getSpeed();
+        switch (speed) {
+            case "Fast" -> {
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            case "Medium" -> {
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            case "Slow" -> {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            case "No Delay" -> {
+                try {
+                    Thread.sleep(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
 }
