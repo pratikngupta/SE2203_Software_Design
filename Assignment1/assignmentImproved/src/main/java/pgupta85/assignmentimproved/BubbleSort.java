@@ -69,7 +69,7 @@ public class BubbleSort implements SortingStrategy {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));
             try {
-                Thread.sleep(25);
+                Thread.sleep(sortingHubController.getSpeed());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -5,25 +5,24 @@ import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
 import io.github.palexdev.materialfx.controls.MFXSlider;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import static pgupta85.method.Debug.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SortingHubController {
     public Gauge percentageGauge;
     public Gauge ArraySizeGauge;
-    public MFXComboBox SortSpeedSelector;
+
     public MFXToggleButton resetType;
-    public MFXComboBox ColorSelector;
+
     public MFXSlider ArraySizeSlider;
     @FXML
     private Label IndicatorLabel;
@@ -35,7 +34,7 @@ public class SortingHubController {
     private Button ResetButton;
 
     @FXML
-    private MFXComboBox<String> SelectionMethodSelector;
+    private MFXComboBox<String> SelectionMethodSelector, SortSpeedSelector, ColorSelector;
 
     @FXML
     private Button SortButton;
@@ -56,6 +55,8 @@ public class SortingHubController {
     private int[] dummyArray;
 
     private int arraySize, arrayCounter, runNeeded;
+
+    private HashMap<String, Long> speed = new HashMap<>();
 
     //create sortingStrategy thread
 
@@ -82,7 +83,15 @@ public class SortingHubController {
 
     //create initialize method to initialize the bars
     public void initialize() {
+
+        speed.put("Slow", 100L);
+        speed.put("Medium", 50L);
+        speed.put("Fast", 10L);
+        speed.put("No Delay", 0L);
+
         SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "Insertion Sort", "Quick Sort", "Heap Sort");
+
+        SortSpeedSelector.getItems().addAll(speed.keySet());
 
         StatusBar.setStyle("-fx-accent: #142174");
         StatusBar.setProgress(0);
@@ -109,6 +118,7 @@ public class SortingHubController {
         //call the updateGraph method
         updateGraph(intArray);
         //set slider value to 64
+        ArraySizeGauge.setAnimated(true);
         ArraySizeGauge.setValue(64);
         ArraySizeGauge.setUnit("Bars");
         ArraySizeGauge.setDecimals(0);
@@ -230,8 +240,6 @@ public class SortingHubController {
                 printSameLine(text, "DEBUG: Progress Bar ---> ");
             }
 
-            IndicatorLabel.setText(//format the progress to 2 decimal places
-                    String.format("%.0f", progress * 100) + "%");
             percentageGauge.setValue(progress * 100);
             StatusBar.setProgress(progress);
             //update status bar
@@ -240,6 +248,12 @@ public class SortingHubController {
             arrayCounter = 0;
             StatusBar.setProgress(0);
         }
+    }
 
+    public long getSpeed() {
+        if (SortSpeedSelector.getValue() == null) {
+            return speed.get("Medium");
+        }
+        return (speed.get(SortSpeedSelector.getValue()));
     }
 }

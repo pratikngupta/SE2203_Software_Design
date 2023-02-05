@@ -125,7 +125,7 @@ public class MergeSort implements SortingStrategy {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));
             try {
-                Thread.sleep(10);
+                Thread.sleep(sortingHubController.getSpeed());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

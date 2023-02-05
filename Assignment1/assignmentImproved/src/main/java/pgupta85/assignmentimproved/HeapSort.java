@@ -101,7 +101,7 @@ public class HeapSort implements SortingStrategy {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));
             try {
-                Thread.sleep(100);
+                Thread.sleep(sortingHubController.getSpeed());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
