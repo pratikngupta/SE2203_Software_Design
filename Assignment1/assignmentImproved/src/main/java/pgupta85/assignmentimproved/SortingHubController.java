@@ -2,10 +2,7 @@ package pgupta85.assignmentimproved;
 
 
 import eu.hansolo.medusa.Gauge;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
-import io.github.palexdev.materialfx.controls.MFXProgressBar;
-import io.github.palexdev.materialfx.controls.MFXSlider;
-import io.github.palexdev.materialfx.controls.MFXToggleButton;
+import io.github.palexdev.materialfx.controls.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,19 +21,19 @@ import static pgupta85.method.Debug.printSameLine;
 
 public class SortingHubController {
     public Gauge percentageGauge;
+    
     public Gauge ArraySizeGauge;
 
     public MFXToggleButton resetType;
 
     public MFXSlider ArraySizeSlider;
+    public MFXButton SortButton;
+    public MFXButton ResetButton;
     @FXML
     private Label IndicatorLabel;
 
     @FXML
     private Pane MainFrame;
-
-    @FXML
-    private MFXButton ResetButton, SortButton;
 
     @FXML
     private MFXComboBox<String> SelectionMethodSelector, SortSpeedSelector, ColorSelector;

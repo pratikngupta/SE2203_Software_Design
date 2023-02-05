@@ -56,7 +56,6 @@ public class InsertionSort implements SortingStrategy{
         new Thread(() -> {
             sortingHubController.disableDuringSorting(true);
             actualRun = true;
-            sortingHubController.disableButtons(true);
             printPURPLE("Insertion Selection Sort", "DEBUG: InsertionSort.java ---> ");
             sort(intArray);
             printPURPLE("Insertion Sort Complete", "DEBUG: InsertionSort.java ---> ");
@@ -80,41 +79,6 @@ public class InsertionSort implements SortingStrategy{
         }
         if (!actualRun) {
             loop++;
-        }
-    }
-
-    public void logicHelper(){
-        String speed = sortingHubController.getSpeed();
-        switch (speed) {
-            case "Fast" -> {
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            case "Medium" -> {
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            case "Slow" -> {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            case "No Delay" -> {
-                try {
-                    Thread.sleep(0);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
         }
     }
 }

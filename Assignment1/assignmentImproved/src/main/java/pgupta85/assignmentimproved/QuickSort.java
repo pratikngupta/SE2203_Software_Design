@@ -84,52 +84,17 @@ public class QuickSort implements SortingStrategy {
         }
     }
 
-    public void logicHelper(){
-        String speed = sortingHubController.getSpeed();
-        switch (speed) {
-            case "Fast" -> {
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            case "Medium" -> {
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            case "Slow" -> {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            case "No Delay" -> {
-                try {
-                    Thread.sleep(0);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-    }
-
     @Override
     public void run() {
         new Thread(() -> {
             sortingHubController.disableDuringSorting(true);
             actualRun = true;
-            sortingHubController.disableButtons(true);
+
             printPURPLE("Quick Selection Sort", "DEBUG: QuickSort.java ---> ");
             sort(intArray);
             printPURPLE("Quick Sort Complete", "DEBUG: QuickSort.java ---> ");
             sortingHubController.updateGraph(intArray);
-            sortingHubController.disableButtons(false);
+
             printLine();
             sortingHubController.disableDuringSorting(false);
         }).start();
