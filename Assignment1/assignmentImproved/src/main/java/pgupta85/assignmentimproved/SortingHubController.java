@@ -6,12 +6,14 @@ import io.github.palexdev.materialfx.controls.MFXProgressBar;
 import io.github.palexdev.materialfx.controls.MFXSlider;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import static pgupta85.method.Debug.*;
 import java.util.ArrayList;
@@ -90,8 +92,8 @@ public class SortingHubController {
         speed.put("No Delay", 0L);
 
         SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "Insertion Sort", "Quick Sort", "Heap Sort");
-
         SortSpeedSelector.getItems().addAll(speed.keySet());
+        ColorSelector.getItems().addAll("Default", "Red", "Green", "Purple", "Orange", "Black");
 
         StatusBar.setStyle("-fx-accent: #142174");
         StatusBar.setProgress(0);
@@ -255,5 +257,28 @@ public class SortingHubController {
             return speed.get("Medium");
         }
         return (speed.get(SortSpeedSelector.getValue()));
+    }
+
+    public static Color getCustomColor() {
+        return Color.rgb(20, 33, 116, 1);
+    }
+
+    public static Color getGaugeBlue() {
+        return Color.rgb(80, 115, 215, 1);
+    }
+
+    public void changeColor (String color){
+        if (color.equals("Default")){
+            bars.listIterator().forEachRemaining(bar -> bar.setFill(getCustomColor()));
+            ArraySizeGauge.setBarColor(getGaugeBlue());
+        }
+        else {
+            bars.listIterator().forEachRemaining(bar -> bar.setFill(Color.valueOf(color)));
+            ArraySizeGauge.setBarColor(Color.valueOf(color));
+        }
+    }
+
+    public void changeColor( ) {
+        changeColor(ColorSelector.getValue());
     }
 }

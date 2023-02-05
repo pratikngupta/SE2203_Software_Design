@@ -53,7 +53,7 @@
         </MFXComboBox>
         <MFXTextField alignment="CENTER" depthTest="DISABLE" floatMode="ABOVE" layoutX="10.0" layoutY="580.0" text="Array Size" />
         <MFXToggleButton fx:id="resetType" layoutX="755.0" layoutY="617.0" prefHeight="17.0" prefWidth="120.0" text="Soft Reset" />
-        <MFXComboBox fx:id="ColorSelector" alignment="CENTER" floatMode="ABOVE" layoutX="117.0" layoutY="539.0" prefHeight="32.0" prefWidth="225.0" scrollOnOpen="true" text="Select Color" />
+        <MFXComboBox fx:id="ColorSelector" alignment="CENTER" floatMode="ABOVE" layoutX="117.0" layoutY="539.0" onAction="#changeColor" prefHeight="32.0" prefWidth="225.0" scrollOnOpen="true" text="Select Color" />
         <MFXTextField alignment="CENTER" floatMode="ABOVE" layoutX="10.0" layoutY="540.0" text="Color" />
     </children>
 </AnchorPane>
