@@ -2,9 +2,9 @@ package pgupta85.assignmentimproved;
 
 import javafx.application.Platform;
 
-import static pgupta85.method.Debug.*;
+//implement and extend the interface and class
 
-public class BubbleSort implements SortingStrategy {
+public class BubbleSort extends Debug implements SortingStrategy {
     private SortingHubController sortingHubController;
 
     private int[] intArray;
@@ -23,7 +23,7 @@ public class BubbleSort implements SortingStrategy {
         actualRun = false;
         loop = 0;
         sort(intArray);
-        printCYAN("Number of loops needed for Selection Sort: " + loop, "DEBUG: BubbleSort.java ---> ");
+        Debug.printCYAN("Number of loops needed for Selection Sort: " + loop, "DEBUG: BubbleSort.java ---> ");
         return loop;
     }
 

@@ -13,7 +13,7 @@
  5) Hence I would only need to import this method and can access any method of Ask class.
  *********************************************************/
 
-package pgupta85.method;
+package pgupta85.assignmentimproved;
 
 public class Intro extends Ask {
 

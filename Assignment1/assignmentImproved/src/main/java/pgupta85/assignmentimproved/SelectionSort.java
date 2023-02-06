@@ -2,9 +2,7 @@ package pgupta85.assignmentimproved;
 
 import javafx.application.Platform;
 
-import static pgupta85.method.Debug.*;
-
-public class SelectionSort implements SortingStrategy {
+public class SelectionSort extends Debug implements SortingStrategy {
 
     private SortingHubController sortingHubController;
 
@@ -73,7 +71,6 @@ public class SelectionSort implements SortingStrategy {
     }
 
     public void logic (int [] arr ) {
-
         if (actualRun) {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));

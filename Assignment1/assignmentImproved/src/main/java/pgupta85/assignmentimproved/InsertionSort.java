@@ -2,9 +2,9 @@ package pgupta85.assignmentimproved;
 
 import javafx.application.Platform;
 
-import static pgupta85.method.Debug.*;
+import static pgupta85.assignmentimproved.Debug.*;
 
-public class InsertionSort implements SortingStrategy{
+public class InsertionSort extends Debug implements SortingStrategy {
 
     private SortingHubController sortingHubController;
 

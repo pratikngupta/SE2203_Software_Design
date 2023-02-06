@@ -4,9 +4,7 @@ package pgupta85.assignmentimproved;
 import eu.hansolo.medusa.Gauge;
 import io.github.palexdev.materialfx.controls.*;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 
 import javafx.scene.layout.AnchorPane;
@@ -17,9 +15,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static pgupta85.method.Debug.printSameLine;
-
-public class SortingHubController {
+public class SortingHubController extends Debug{
     public Gauge percentageGauge;
     
     public Gauge ArraySizeGauge;
@@ -58,6 +54,8 @@ public class SortingHubController {
     private int arraySize, arrayCounter, runNeeded;
 
     private HashMap<String, Long> speed = new HashMap<>();
+
+    private Debug debug = new Debug();
 
     //create sortingStrategy thread
 
@@ -101,6 +99,8 @@ public class SortingHubController {
         SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "Insertion Sort", "Quick Sort", "Heap Sort");
         SortSpeedSelector.getItems().addAll(speed.keySet());
         ColorSelector.getItems().addAll("Default", "Red", "Green", "Purple", "Orange", "Black");
+
+        printColor("Hello World", green);
 
         StatusBar.setStyle("-fx-accent: #142174");
         StatusBar.setProgress(0);
