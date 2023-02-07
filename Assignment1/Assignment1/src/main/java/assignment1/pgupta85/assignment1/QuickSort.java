@@ -13,9 +13,9 @@ public class QuickSort implements SortingStrategy {
     private boolean actualRun;
 
     @Override
-    public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
+    public void SortingStrategy(int[] numbers, SortingHubController sortingHubController) {
         this.sortingHubController = sortingHubController;
-        this.list = arr;
+        this.list = numbers;
     }
 
     @Override
@@ -86,14 +86,14 @@ public class QuickSort implements SortingStrategy {
 
     @Override
     public void run() {
-        new Thread(() -> {
+        sortingHubController.disableButtons(true);
             actualRun = true;
             printPURPLE("Quick Selection Sort", "DEBUG: QuickSort.java ---> ");
             sort(list);
             printPURPLE("Quick Sort Complete", "DEBUG: QuickSort.java ---> ");
             sortingHubController.updateGraph(list);
             printLine();
-        }).start();
+        sortingHubController.disableButtons(false);
     }
 
     @Override

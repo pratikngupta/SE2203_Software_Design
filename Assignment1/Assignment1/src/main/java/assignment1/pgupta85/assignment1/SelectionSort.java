@@ -13,9 +13,9 @@ public class SelectionSort implements SortingStrategy {
     private boolean actualRun;
 
     @Override
-    public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
+    public void SortingStrategy(int[] numbers, SortingHubController sortingHubController) {
         this.sortingHubController = sortingHubController;
-        this.list = arr;
+        this.list = numbers;
     }
 
     @Override
@@ -41,7 +41,6 @@ public class SelectionSort implements SortingStrategy {
             arr[i] = temp;
 
             logic(arr);
-
             //update the graph
         }
     }
@@ -58,14 +57,14 @@ public class SelectionSort implements SortingStrategy {
 
     @Override
     public void run() {
-        new Thread(() -> {
+        sortingHubController.disableButtons(true);
             actualRun = true;
             printPURPLE("Starting Selection Sort", "DEBUG: SelectionSort.java ---> ");
             sort(list);
             printPURPLE("Selection Sort Complete", "DEBUG: SelectionSort.java ---> ");
             sortingHubController.updateGraph(list);
             printLine();
-        }).start();
+        sortingHubController.disableButtons(false);
     }
 
     public void logic (int [] arr ) {

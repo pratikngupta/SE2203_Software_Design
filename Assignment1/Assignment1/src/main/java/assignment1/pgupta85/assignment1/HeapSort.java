@@ -13,9 +13,9 @@ public class HeapSort implements SortingStrategy {
     private boolean actualRun;
 
     @Override
-    public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
+    public void SortingStrategy(int[] numbers, SortingHubController sortingHubController) {
         this.sortingHubController = sortingHubController;
-        this.list = arr;
+        this.list = numbers;
     }
 
 
@@ -55,14 +55,14 @@ public class HeapSort implements SortingStrategy {
 
     @Override
     public void run() {
-        new Thread(() -> {
+        sortingHubController.disableButtons(true);
             actualRun = true;
             printPURPLE("Heap Selection Sort", "DEBUG: HeapSort.java ---> ");
             sort(list);
             printPURPLE("Heap Sort Complete", "DEBUG: HeapSort.java ---> ");
             sortingHubController.updateGraph(list);
             printLine();
-        }).start();
+        sortingHubController.disableButtons(false);
     }
 
 

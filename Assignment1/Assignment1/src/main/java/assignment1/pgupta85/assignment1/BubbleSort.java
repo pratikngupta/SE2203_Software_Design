@@ -1,7 +1,6 @@
 package assignment1.pgupta85.assignment1;
 
 import javafx.application.Platform;
-
 import static assignment1.pgupta85.method.Debug.*;
 
 public class BubbleSort implements SortingStrategy {
@@ -12,9 +11,9 @@ public class BubbleSort implements SortingStrategy {
     private boolean actualRun;
 
     @Override
-    public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
+    public void SortingStrategy(int[] numbers, SortingHubController sortingHubController) {
         this.sortingHubController = sortingHubController;
-        this.list = arr;
+        this.list = numbers;
     }
 
     @Override
@@ -47,21 +46,20 @@ public class BubbleSort implements SortingStrategy {
                 }
                 logic(arr);
             }
-
         }
     }
 
-
     @Override
     public void run() {
-        new Thread(() -> {
+
             actualRun = true;
+            sortingHubController.disableButtons(true);
             printPURPLE("Starting Bubble Sort", "DEBUG: BubbleSort.java ---> ");
             sort(list);
             printPURPLE("Bubble Sort Complete", "DEBUG: BubbleSort.java ---> ");
             sortingHubController.updateGraph(list);
             printLine();
-        }).start();
+            sortingHubController.disableButtons(false);
     }
 
     public void logic (int [] arr ) {

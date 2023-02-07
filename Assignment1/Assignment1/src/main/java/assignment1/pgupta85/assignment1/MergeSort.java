@@ -13,9 +13,9 @@ public class MergeSort implements SortingStrategy {
     private boolean actualRun;
 
     @Override
-    public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
+    public void SortingStrategy(int[] numbers, SortingHubController sortingHubController) {
         this.sortingHubController = sortingHubController;
-        this.list = arr;
+        this.list = numbers;
     }
 
     @Override
@@ -24,7 +24,6 @@ public class MergeSort implements SortingStrategy {
 
     @Override
     public void run() {
-        new Thread(() -> {
             actualRun = true;
             sortingHubController.disableButtons(true);
             printPURPLE("Merge Selection Sort", "DEBUG: MergeSort.java ---> ");
@@ -33,7 +32,6 @@ public class MergeSort implements SortingStrategy {
             sortingHubController.updateGraph(list);
             sortingHubController.disableButtons(false);
             printLine();
-        }).start();
     }
 
     public void logic (int [] arr ) {
