@@ -8,14 +8,14 @@ public class SelectionSort implements SortingStrategy {
 
     private SortingHubController sortingHubController;
 
-    private int[] intArray;
+    private int[] list;
     private int loop;
     private boolean actualRun;
 
     @Override
     public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
         this.sortingHubController = sortingHubController;
-        this.intArray = arr;
+        this.list = arr;
     }
 
     @Override
@@ -32,7 +32,6 @@ public class SelectionSort implements SortingStrategy {
                     //assign the value at j to the value at minIndex
                     minIndex = j;
                 }
-
             }
             //create a variable to store the value at minIndex
             int temp = arr[minIndex];
@@ -41,7 +40,7 @@ public class SelectionSort implements SortingStrategy {
             //assign the value at temp to the value at i
             arr[i] = temp;
 
-                logic(arr);
+            logic(arr);
 
             //update the graph
         }
@@ -62,9 +61,9 @@ public class SelectionSort implements SortingStrategy {
         new Thread(() -> {
             actualRun = true;
             printPURPLE("Starting Selection Sort", "DEBUG: SelectionSort.java ---> ");
-            sort(intArray);
+            sort(list);
             printPURPLE("Selection Sort Complete", "DEBUG: SelectionSort.java ---> ");
-            sortingHubController.updateGraph(intArray);
+            sortingHubController.updateGraph(list);
             printLine();
         }).start();
     }

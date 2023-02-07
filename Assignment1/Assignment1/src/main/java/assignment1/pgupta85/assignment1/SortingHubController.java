@@ -2,7 +2,6 @@ package assignment1.pgupta85.assignment1;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -13,11 +12,9 @@ import static assignment1.pgupta85.method.Debug.printSameLine;
 public class SortingHubController {
 
     public Label IndicatorLabel;
-    @FXML
-    private ProgressBar StatusBar;
 
     @FXML
-    private AnchorPane Stage;
+    private ProgressBar StatusBar;
 
     @FXML
     private Label ArraySizeLabel;
@@ -45,29 +42,6 @@ public class SortingHubController {
 
     private int arraySize, arrayCounter, runNeeded;
 
-    //create sortingStrategy thread
-
-
-    @FXML
-    void ResetButtonClicked() {
-        //hide all bars
-        bars.listIterator().forEachRemaining(bar -> bar.setVisible(false));
-        //set the arraySize to 64
-        arraySize = 64;
-        //call the fillArray method
-        fillArray(arraySize);
-        //call the updateGraph method
-        updateGraph(intArray);
-        //set slider value to 64
-        ArraySizeSlider.setValue(64);
-        //set the progress bar to 0
-        StatusBar.setProgress(0);
-        //hide the indicator label
-        IndicatorLabel.setVisible(false);
-        //set combo box to merge sort
-        SelectionMethodSelector.setValue("Merge Sort");
-    }
-
     //create initialize method to initialize the bars
     public void initialize() {
         SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "Insertion Sort", "Quick Sort", "Heap Sort");
@@ -82,7 +56,7 @@ public class SortingHubController {
             Rectangle rectangle = new Rectangle();
             bars.add(rectangle);
             MainFrame.getChildren().add(bars.get(i));
-            bars.get(i).setStyle("-fx-fill: #142174" + "; -fx-border-color: #f40202; -fx-border-width: 50px;");
+            bars.get(i).setStyle("-fx-fill: rgb(236,40,3)");
         }
 
         //set the ar
@@ -202,6 +176,26 @@ public class SortingHubController {
 
     }
 
+    @FXML
+    void ResetButtonClicked() {
+        //hide all bars
+        bars.listIterator().forEachRemaining(bar -> bar.setVisible(false));
+        //set the arraySize to 64
+        arraySize = 64;
+        //call the fillArray method
+        fillArray(arraySize);
+        //call the updateGraph method
+        updateGraph(intArray);
+        //set slider value to 64
+        ArraySizeSlider.setValue(64);
+        //set the progress bar to 0
+        StatusBar.setProgress(0);
+        //hide the indicator label
+        IndicatorLabel.setVisible(false);
+        //set combo box to merge sort
+        SelectionMethodSelector.setValue("Merge Sort");
+    }
+
     public void setStatusBar(boolean counter) {
         IndicatorLabel.setVisible(true);
         if (counter) {
@@ -226,7 +220,11 @@ public class SortingHubController {
             arrayCounter = 0;
             StatusBar.setProgress(0);
         }
-
     }
 
+    public void disableButtons(boolean disable) {
+        SortButton.setDisable(disable);
+        ResetButton.setDisable(disable);
+        ArraySizeSlider.setDisable(disable);
+    }
 }

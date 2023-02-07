@@ -8,14 +8,14 @@ public class InsertionSort implements SortingStrategy{
 
     private SortingHubController sortingHubController;
 
-    private int[] intArray;
+    private int[] list;
     private int loop = 0;
     private boolean actualRun;
 
     @Override
     public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
         this.sortingHubController = sortingHubController;
-        this.intArray = arr;
+        this.list = arr;
     }
 
     @Override
@@ -56,9 +56,9 @@ public class InsertionSort implements SortingStrategy{
         new Thread(() -> {
             actualRun = true;
             printPURPLE("Insertion Selection Sort", "DEBUG: InsertionSort.java ---> ");
-            sort(intArray);
+            sort(list);
             printPURPLE("Insertion Sort Complete", "DEBUG: InsertionSort.java ---> ");
-            sortingHubController.updateGraph(intArray);
+            sortingHubController.updateGraph(list);
             printLine();
         }).start();
     }

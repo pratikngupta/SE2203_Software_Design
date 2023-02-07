@@ -54,8 +54,11 @@ public class SortingHubController extends Debug{
     private int arraySize, arrayCounter, runNeeded;
 
     private HashMap<String, Long> speed = new HashMap<>();
+    private HashMap<Integer, Integer> map = new HashMap<>();
 
     private Debug debug = new Debug();
+
+    private int key = 0;
 
     //create sortingStrategy thread
 
@@ -112,6 +115,7 @@ public class SortingHubController extends Debug{
             Rectangle rectangle = new Rectangle();
             bars.add(rectangle);
             MainFrame.getChildren().add(bars.get(i));
+            //bars.get(i).setFill(Color.color(Math.random(), Math.random(), Math.random()));
             bars.get(i).setStyle("-fx-fill: #142174" + "; -fx-border-color: #f40202; -fx-border-width: 50px;");
         }
 
@@ -148,6 +152,8 @@ public class SortingHubController extends Debug{
     }
 
     public void fillArray(int arraySize) {
+        //clear the map
+        map.clear();
         intArray = new int[arraySize];
         dummyArray = new int[arraySize];
         backupArray = new int[arraySize];
@@ -166,6 +172,8 @@ public class SortingHubController extends Debug{
                     break;
                 }
             }
+            //add the value to the map
+            map.put(rand, i);
         }
         //initialize the backup array
 
@@ -194,6 +202,16 @@ public class SortingHubController extends Debug{
             bars.get(j).setHeight(height);
             bars.get(j).setVisible(true);
         }
+    }
+
+    public void changeColor(int index) {
+        //find out which index is being changed using the map
+        //reset previous color
+        bars.get(map.get(intArray[key])).setFill(getCustomColor());
+
+        key = map.get(intArray[index]);
+        //change the color of the bar
+        bars.get(index).setFill(getGaugeBlue());
     }
 
     @FXML

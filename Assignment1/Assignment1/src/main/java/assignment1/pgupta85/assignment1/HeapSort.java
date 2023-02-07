@@ -8,14 +8,14 @@ public class HeapSort implements SortingStrategy {
 
     private SortingHubController sortingHubController;
 
-    private int[] intArray;
+    private int[] list;
     private int loop;
     private boolean actualRun;
 
     @Override
     public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
         this.sortingHubController = sortingHubController;
-        this.intArray = arr;
+        this.list = arr;
     }
 
 
@@ -58,9 +58,9 @@ public class HeapSort implements SortingStrategy {
         new Thread(() -> {
             actualRun = true;
             printPURPLE("Heap Selection Sort", "DEBUG: HeapSort.java ---> ");
-            sort(intArray);
+            sort(list);
             printPURPLE("Heap Sort Complete", "DEBUG: HeapSort.java ---> ");
-            sortingHubController.updateGraph(intArray);
+            sortingHubController.updateGraph(list);
             printLine();
         }).start();
     }

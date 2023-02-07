@@ -9,6 +9,7 @@ public class SelectionSort extends Debug implements SortingStrategy {
     private int[] intArray;
     private int loop;
     private boolean actualRun;
+    private int number;
 
     @Override
     public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
@@ -31,7 +32,6 @@ public class SelectionSort extends Debug implements SortingStrategy {
                     //assign the value at j to the value at minIndex
                     minIndex = j;
                 }
-
             }
             //create a variable to store the value at minIndex
             int temp = arr[minIndex];
@@ -39,8 +39,8 @@ public class SelectionSort extends Debug implements SortingStrategy {
             arr[minIndex] = arr[i];
             //assign the value at temp to the value at i
             arr[i] = temp;
-
-                logic(arr);
+            number = arr[i];
+            logic(arr);
 
             //update the graph
         }
@@ -74,6 +74,7 @@ public class SelectionSort extends Debug implements SortingStrategy {
         if (actualRun) {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));
+            Platform.runLater(() -> sortingHubController.changeColor(number));
             try {
                 Thread.sleep(sortingHubController.getSpeed());
             } catch (InterruptedException e) {

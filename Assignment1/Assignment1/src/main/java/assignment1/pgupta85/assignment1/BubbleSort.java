@@ -7,14 +7,14 @@ import static assignment1.pgupta85.method.Debug.*;
 public class BubbleSort implements SortingStrategy {
     private SortingHubController sortingHubController;
 
-    private int[] intArray;
+    private int[] list;
     private int loop;
     private boolean actualRun;
 
     @Override
     public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
         this.sortingHubController = sortingHubController;
-        this.intArray = arr;
+        this.list = arr;
     }
 
     @Override
@@ -57,9 +57,9 @@ public class BubbleSort implements SortingStrategy {
         new Thread(() -> {
             actualRun = true;
             printPURPLE("Starting Bubble Sort", "DEBUG: BubbleSort.java ---> ");
-            sort(intArray);
+            sort(list);
             printPURPLE("Bubble Sort Complete", "DEBUG: BubbleSort.java ---> ");
-            sortingHubController.updateGraph(intArray);
+            sortingHubController.updateGraph(list);
             printLine();
         }).start();
     }
