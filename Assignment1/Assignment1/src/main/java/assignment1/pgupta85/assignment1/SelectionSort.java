@@ -46,11 +46,11 @@ public class SelectionSort implements SortingStrategy {
     }
 
     @Override
-    public int getRunNeeded(int[] intArray) {
+    public int getRunNeeded(int[] dummyArray){
         printCYAN("Finding the number of loops needed for Selection Sort", "DEBUG: SelectionSort.java ---> ");
         actualRun = false;
         loop = 0;
-        sort(intArray);
+        sort(dummyArray);
         printCYAN("Number of loops needed for Selection Sort: " + loop, "DEBUG: SelectionSort.java ---> ");
         return loop;
     }

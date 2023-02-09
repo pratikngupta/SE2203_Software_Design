@@ -11,19 +11,16 @@ import static assignment1.pgupta85.method.Debug.printSameLine;
 
 public class SortingHubController {
 
-    public Label IndicatorLabel;
+    public Label IndicatorLabel, ArraySizeLabel;
 
     @FXML
     private ProgressBar StatusBar;
 
     @FXML
-    private Label ArraySizeLabel;
-
-    @FXML
     private Slider ArraySizeSlider;
 
     @FXML
-    private Pane MainFrame;
+    private Pane rectanglePane;
 
     @FXML
     private Button ResetButton, SortButton;
@@ -31,7 +28,7 @@ public class SortingHubController {
     @FXML
     private ComboBox<String> SelectionMethodSelector;
 
-    private SortingStrategy sortingStrategy;
+    private SortingStrategy sortingMethod;
 
     //create a Rectangle arrayList to store the bars
     private final ArrayList<Rectangle> bars = new ArrayList<>();
@@ -46,7 +43,8 @@ public class SortingHubController {
     public void initialize() {
         SelectionMethodSelector.getItems().addAll("Merge Sort", "Selection Sort", "Bubble Sort", "Insertion Sort", "Quick Sort", "Heap Sort");
 
-        StatusBar.setStyle("-fx-accent: #142174");
+        rectanglePane.setStyle("-fx-background-color: rgb(229,229,229); -fx-border-color: rgb(0,0,0)");
+
         StatusBar.setProgress(0);
         IndicatorLabel.setVisible(false);
 
@@ -55,11 +53,9 @@ public class SortingHubController {
             //create a rectangle
             Rectangle rectangle = new Rectangle();
             bars.add(rectangle);
-            MainFrame.getChildren().add(bars.get(i));
+            rectanglePane.getChildren().add(bars.get(i));
             bars.get(i).setStyle("-fx-fill: rgb(236,40,3)");
         }
-
-        //set the ar
 
         //set the arraySize to 64
         arraySize = 64;
@@ -69,7 +65,6 @@ public class SortingHubController {
         updateGraph(intArray);
         //set slider value to 64
         ArraySizeSlider.setValue(64);
-
     }
 
     @FXML
@@ -102,25 +97,23 @@ public class SortingHubController {
                 }
             }
         }
-        //initialize the backup array
-
-        //copy the values from the intArray to the backup array
+        //copy the values from the intArray to the Dummy array
         System.arraycopy(intArray, 0, dummyArray, 0, arraySize);
     }
 
-    public void updateGraph(int[] intArray) {
+    public void updateGraph(int[] data) {
 
         bars.listIterator().forEachRemaining(bar -> bar.setVisible(false));
 
-        double width = (MainFrame.getPrefWidth() / intArray.length) - 2;
+        double width = (rectanglePane.getPrefWidth() / data.length) - 2;
         double x;
         double height;
         int y;
         //find max value in array
-        for (int j = 0; j < intArray.length; j++) {
-            height = (intArray[j] * MainFrame.getPrefHeight()) / arraySize;
+        for (int j = 0; j < data.length; j++) {
+            height = (data[j] * rectanglePane.getPrefHeight()) / arraySize;
             x = ((j * (width + 2)));
-            y = (int) (MainFrame.getPrefHeight() - height);
+            y = (int) (rectanglePane.getPrefHeight() - height);
 
             bars.get(j).setX(x);
             bars.get(j).setY(y);
@@ -137,11 +130,11 @@ public class SortingHubController {
             //call constructor of the sorting strategy
             StatusBar.setProgress(0);
             arrayCounter = 0;
-            runNeeded = sortingStrategy.getRunNeeded(dummyArray);
+            runNeeded = sortingMethod.getRunNeeded(dummyArray);
 
-            sortingStrategy.SortingStrategy(intArray,this);
+            sortingMethod.SortingStrategy(intArray,this);
             //start the thread
-            new Thread(sortingStrategy).start();
+            new Thread(sortingMethod).start();
 
             IndicatorLabel.setStyle("-fx-text-fill: green");
 
@@ -159,18 +152,18 @@ public class SortingHubController {
         }
     }
 
-    @FXML
-    void setSortStrategy() {
+
+    public void setSortStrategy() {
 
         String sortStrategy = SelectionMethodSelector.getValue();
 
         switch (sortStrategy) {
-            case "Insertion Sort" -> sortingStrategy = new InsertionSort();
-            case "Selection Sort" -> sortingStrategy = new SelectionSort();
-            case "Bubble Sort" -> sortingStrategy = new BubbleSort();
-            case "Merge Sort" -> sortingStrategy = new MergeSort();
-            case "Quick Sort" -> sortingStrategy = new QuickSort();
-            case "Heap Sort" -> sortingStrategy = new HeapSort();
+            case "Insertion Sort" -> sortingMethod = new InsertionSort();
+            case "Selection Sort" -> sortingMethod = new SelectionSort();
+            case "Bubble Sort" -> sortingMethod = new BubbleSort();
+            case "Merge Sort" -> sortingMethod = new MergeSort();
+            case "Quick Sort" -> sortingMethod = new QuickSort();
+            case "Heap Sort" -> sortingMethod = new HeapSort();
         }
         SelectionMethodSelector.setStyle("-fx-border-color: green; -fx-border-radius: 5px; -fx-border-width: 2px;");
 
@@ -206,13 +199,13 @@ public class SortingHubController {
                 String text = "\b\b Total run: "+runNeeded + "  -----  " + "Run Completed: "+ arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
                 printSameLine(text, "DEBUG: Progress Bar ---> ");
             }
-            if (runNeeded < 100 && arrayCounter % 10 == 0 | arrayCounter == runNeeded | arrayCounter == 1) {
+            if (runNeeded < 150 && arrayCounter % 10 == 0 | arrayCounter == runNeeded | arrayCounter == 1) {
                 String text = "Total run: " + runNeeded + "  -----  " + "Run Completed: " + arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
                 printSameLine(text, "DEBUG: Progress Bar ---> ");
             }
 
-            IndicatorLabel.setText(//format the progress to 2 decimal places
-                    String.format("%.0f", progress * 100) + "%");
+            //format the progress to 2 decimal places
+            IndicatorLabel.setText(String.format("%.0f", progress * 100) + "%");
             StatusBar.setProgress(progress);
             //update status bar
 
@@ -226,5 +219,10 @@ public class SortingHubController {
         SortButton.setDisable(disable);
         ResetButton.setDisable(disable);
         ArraySizeSlider.setDisable(disable);
+    }
+
+    @FXML
+    void sortSelector() {
+        setSortStrategy();
     }
 }

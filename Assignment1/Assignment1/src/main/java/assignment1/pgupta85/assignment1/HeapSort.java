@@ -44,11 +44,11 @@ public class HeapSort implements SortingStrategy {
     }
 
     @Override
-    public int getRunNeeded(int[] arr) {
+    public int getRunNeeded(int[] dummyArray) {
         printCYAN("Finding the number of loops needed for Heap Sort", "DEBUG: HeapSort.java ---> ");
         actualRun = false;
         loop = 0;
-        sort(arr);
+        sort(dummyArray);
         printCYAN("Number of loops needed for Heap Sort: " + loop, "DEBUG: HeapSort.java ---> ");
         return loop;
     }

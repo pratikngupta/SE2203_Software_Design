@@ -42,11 +42,11 @@ public class InsertionSort implements SortingStrategy{
     }
 
     @Override
-    public int getRunNeeded(int[] intArray) {
+    public int getRunNeeded(int[] dummyArray) {
         printCYAN("Finding the number of loops needed for Insertion Sort", "DEBUG: InsertionSort.java ---> ");
         actualRun = false;
         loop = 0;
-        sort(intArray);
+        sort(dummyArray);
         printCYAN("Number of loops needed for Insertion Sort: " + loop, "DEBUG: InsertionSort.java ---> ");
         return loop;
     }

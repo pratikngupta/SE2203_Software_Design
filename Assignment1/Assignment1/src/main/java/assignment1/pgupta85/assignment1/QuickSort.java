@@ -97,11 +97,11 @@ public class QuickSort implements SortingStrategy {
     }
 
     @Override
-    public int getRunNeeded(int[] intArray) {
+    public int getRunNeeded(int[] dummyArray) {
         printCYAN("Finding the number of loops needed for Quick Sort", "DEBUG: QuickSort.java ---> ");
         actualRun = false;
         loop = 0;
-        sort(intArray);
+        sort(dummyArray);
         printCYAN("Number of loops needed for Quick Sort: " + loop, "DEBUG: QuickSort.java ---> ");
         return loop;
     }
