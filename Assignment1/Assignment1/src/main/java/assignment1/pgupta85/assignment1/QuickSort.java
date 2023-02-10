@@ -6,21 +6,21 @@ import static assignment1.pgupta85.method.Debug.*;
 
 public class QuickSort implements SortingStrategy {
 
-    private SortingHubController sortingHubController;
+    private SortingHubController controller;
 
     private int[] list;
     private int loop;
     private boolean actualRun;
 
     @Override
-    public void SortingStrategy(int[] numbers, SortingHubController sortingHubController) {
-        this.sortingHubController = sortingHubController;
+    public void SortingStrategy(int[] numbers, SortingHubController controller) {
+        this.controller = controller;
         this.list = numbers;
     }
 
     @Override
-    public void sort(int[] arr) {
-        quickSort(arr, 0, arr.length - 1);
+    public void sort(int[] numbers) {
+        quickSort(numbers, 0, numbers.length - 1);
     }
 
     private void quickSort(int[] arr, int i, int i1) {
@@ -68,32 +68,39 @@ public class QuickSort implements SortingStrategy {
         return index + 1;
     }
 
-    public void logic (int [] arr ) {
-
+    //code to update the graph and sleep the thread
+    @Override
+    public void logic(int[] arr) {
+        //check if the actualRun is true
         if (actualRun) {
-            Platform.runLater(() -> sortingHubController.updateGraph(arr));
-            Platform.runLater(() -> sortingHubController.setStatusBar(true));
+            //update the graph
+            Platform.runLater(() -> controller.updateGraph(arr));
+            Platform.runLater(() -> controller.setStatusBar(true));
+
+            //sleep the thread for 25 milliseconds
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        //if the actualRun is false
         if (!actualRun) {
+            //increment the loop
             loop++;
         }
     }
 
     @Override
     public void run() {
-        sortingHubController.disableButtons(true);
+        controller.disableButtons(true);
             actualRun = true;
             printPURPLE("Quick Selection Sort", "DEBUG: QuickSort.java ---> ");
             sort(list);
             printPURPLE("Quick Sort Complete", "DEBUG: QuickSort.java ---> ");
-            sortingHubController.updateGraph(list);
+            controller.updateGraph(list);
             printLine();
-        sortingHubController.disableButtons(false);
+        controller.disableButtons(false);
     }
 
     @Override

@@ -6,30 +6,32 @@ import static assignment1.pgupta85.method.Debug.*;
 
 public class MergeSort implements SortingStrategy {
 
-    private SortingHubController sortingHubController;
+    private SortingHubController controller;
 
     private int[] list;
     private int loop;
     private boolean actualRun;
 
     @Override
-    public void SortingStrategy(int[] numbers, SortingHubController sortingHubController) {
-        this.sortingHubController = sortingHubController;
+    public void SortingStrategy(int[] numbers, SortingHubController controller) {
+        this.controller = controller;
         this.list = numbers;
     }
 
     @Override
-    public void sort(int[] arr) {
-        //implement the in-place merge sort algorithm here
-        mergeSort(arr, 0, arr.length - 1);
+    public void sort(int[] numbers) {
+        //implement the in-place merge sort algorithm
+        mergeSort(numbers, 0, numbers.length - 1);
     }
 
     void merge(int arr[], int start, int mid, int end) {
-        logic(arr);
+
+        //create a variable to store the start of the second array
         int start2 = mid + 1;
 
         // If the direct merge is already sorted
         if (arr[mid] <= arr[start2]) {
+            //update the graph
             return;
         }
 
@@ -56,8 +58,8 @@ public class MergeSort implements SortingStrategy {
                 start++;
                 mid++;
                 start2++;
+                logic(arr);
             }
-            logic(arr);
         }
     }
 
@@ -65,17 +67,18 @@ public class MergeSort implements SortingStrategy {
        sub-array of arr to be sorted */
     void mergeSort(int arr[], int l, int r) {
         if (l < r) {
-
             // Same as (l + r) / 2, but avoids overflow
             // for large l and r
             int m = l + (r - l) / 2;
 
             // Sort first  and second halves
             mergeSort(arr, l, m);
-
             mergeSort(arr, m + 1, r);
 
+            //merge the two halves
             merge(arr, l, m, r);
+
+            //update the graph
             logic(arr);
         }
     }
@@ -83,37 +86,46 @@ public class MergeSort implements SortingStrategy {
     @Override
     public void run() {
         actualRun = true;
-        sortingHubController.disableButtons(true);
+        controller.disableButtons(true);
         printPURPLE("Merge Selection Sort", "DEBUG: MergeSort.java ---> ");
         sort(list);
         printPURPLE("Merge Sort Complete", "DEBUG: MergeSort.java ---> ");
-        sortingHubController.updateGraph(list);
-        sortingHubController.disableButtons(false);
+        controller.updateGraph(list);
+        controller.disableButtons(false);
         printLine();
     }
 
+    //code to update the graph and sleep the thread
+    @Override
     public void logic(int[] arr) {
+        //check if the actualRun is true
         if (actualRun) {
-            Platform.runLater(() -> sortingHubController.updateGraph(arr));
-            Platform.runLater(() -> sortingHubController.setStatusBar(true));
+            //update the graph
+            Platform.runLater(() -> controller.updateGraph(arr));
+            Platform.runLater(() -> controller.setStatusBar(true));
+
+            //sleep the thread for 20 milliseconds
             try {
-                Thread.sleep(20);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        //if the actualRun is false
         if (!actualRun) {
+            //increment the loop
             loop++;
         }
     }
 
     @Override
     public int getRunNeeded(int[] dummyArray) {
+        //find the number of loops needed for the algorithm
         printCYAN("Finding the number of loops needed for Merge Sort", "DEBUG: MergeSort.java ---> ");
         actualRun = false;
         loop = 0;
         sort(dummyArray);
         printCYAN("Number of loops needed for Merge Sort: " + loop, "DEBUG: MergeSort.java ---> ");
-        return loop;
+        return loop; //return the number of loops
     }
 }

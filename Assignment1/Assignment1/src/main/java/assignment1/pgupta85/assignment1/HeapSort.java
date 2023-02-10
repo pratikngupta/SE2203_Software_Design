@@ -6,43 +6,47 @@ import static assignment1.pgupta85.method.Debug.*;
 
 public class HeapSort implements SortingStrategy {
 
-    private SortingHubController sortingHubController;
+    //create a controller object
+    private SortingHubController controller;
 
+    //create an array to store the list
     private int[] list;
     private int loop;
     private boolean actualRun;
 
+    //create a constructor
     @Override
-    public void SortingStrategy(int[] numbers, SortingHubController sortingHubController) {
-        this.sortingHubController = sortingHubController;
+    public void SortingStrategy(int[] numbers, SortingHubController controller) {
+        this.controller = controller;
         this.list = numbers;
     }
 
-
+    //Sorting method
     @Override
-    public void sort(int[] arr) {
-        int n = arr.length;
+    public void sort(int[] numbers) {
+        int n = numbers.length;
         //create a for loop to iterate through the array
         for (int i = n / 2 - 1; i >= 0; i--) {
             //call the heapify method
-            heapify(arr, n, i);
-            logic(arr);
+            heapify(numbers, n, i);
+            logic(numbers);
         }
         //create a for loop to iterate through the array
         for (int i = n - 1; i >= 0; i--) {
             //create a variable to store the value at 0
-            int temp = arr[0];
+            int temp = numbers[0];
             //assign the value at i to the value at 0
-            arr[0] = arr[i];
+            numbers[0] = numbers[i];
             //assign the value at temp to the value at i
-            arr[i] = temp;
+            numbers[i] = temp;
             //call the heapify method
-            heapify(arr, i, 0);
+            heapify(numbers, i, 0);
             //update the graph while sorting is in progress
-            logic(arr);
+            logic(numbers);
         }
     }
 
+    //method to get run needed
     @Override
     public int getRunNeeded(int[] dummyArray) {
         printCYAN("Finding the number of loops needed for Heap Sort", "DEBUG: HeapSort.java ---> ");
@@ -53,19 +57,20 @@ public class HeapSort implements SortingStrategy {
         return loop;
     }
 
+    //method to update the graph
     @Override
     public void run() {
-        sortingHubController.disableButtons(true);
+        controller.disableButtons(true);
             actualRun = true;
             printPURPLE("Heap Selection Sort", "DEBUG: HeapSort.java ---> ");
             sort(list);
             printPURPLE("Heap Sort Complete", "DEBUG: HeapSort.java ---> ");
-            sortingHubController.updateGraph(list);
+            controller.updateGraph(list);
             printLine();
-        sortingHubController.disableButtons(false);
+        controller.disableButtons(false);
     }
 
-
+    //method to sort the array
     private void heapify(int[] arr, int n, int i) {
         //create a variable to store the largest value
         int largest = i;
@@ -96,17 +101,25 @@ public class HeapSort implements SortingStrategy {
         }
     }
 
-    public void logic (int [] arr ) {
+    //code to update the graph and sleep the thread
+    @Override
+    public void logic(int[] arr) {
+        //check if the actualRun is true
         if (actualRun) {
-            Platform.runLater(() -> sortingHubController.updateGraph(arr));
-            Platform.runLater(() -> sortingHubController.setStatusBar(true));
+            //update the graph
+            Platform.runLater(() -> controller.updateGraph(arr));
+            Platform.runLater(() -> controller.setStatusBar(true));
+
+            //sleep the thread for 25 milliseconds
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        //if the actualRun is false
         if (!actualRun) {
+            //increment the loop
             loop++;
         }
     }
