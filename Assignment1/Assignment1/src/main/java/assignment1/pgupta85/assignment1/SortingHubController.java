@@ -20,6 +20,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
+import static assignment1.pgupta85.method.Debug.printGREEN;
 import static assignment1.pgupta85.method.Debug.printSameLine;
 
 public class SortingHubController {
@@ -88,19 +89,17 @@ public class SortingHubController {
 
     @FXML
     void SetArraySize() {
-        //set the arraySize to the value of the slider
-        arraySize = (int) ArraySizeSlider.getValue();
-
-        //call the fillArray method and pass the arraySize as a parameter
-        fillArray(arraySize);
-
-        //call the updateGraph method and pass the intArray as a parameter
-        updateGraph(intArray);
-
-        //set progress bar to 0
-        StatusBar.setProgress(0);
-        IndicatorLabel.setVisible(false);
-        //printGreen("User set array size to " + arraySize);
+        //use javaFX to check if the slider value has changed
+        if (arraySize != (int) ArraySizeSlider.getValue()) {
+            //set the arraySize to the value of the slider
+            arraySize = (int) ArraySizeSlider.getValue();
+            //call the fillArray method
+            fillArray(arraySize);
+            //call the updateGraph method
+            updateGraph(intArray);
+            StatusBar.setProgress(0);
+            IndicatorLabel.setVisible(false);
+        }
     }
 
     public void fillArray(int arraySize) {
@@ -113,10 +112,16 @@ public class SortingHubController {
 
         //add values to the array without duplicates
         for (int i = 0; i < arraySize; i++) {
+            //generate a random number between 1 and arraySize
             int rand = (int) (Math.random() * arraySize) + 1;
+            //add the random number to the array
             intArray[i] = rand;
+
+            //check if the random number is already in the array
             for (int j = 0; j < i; j++) {
+                //if the random number is already in the array, then loop again
                 if (intArray[j] == rand) {
+                    //decrement i so that the same index is filled again
                     i--;
                     break;
                 }
@@ -146,10 +151,10 @@ public class SortingHubController {
             y = (int) (rectanglePane.getPrefHeight() - height);
 
             //set everything in 1 line
-            bars.get(j).setWidth(width);   //set width
-            bars.get(j).setHeight(height); //set height
             bars.get(j).setX(x);           //set x
             bars.get(j).setY(y);           //set y
+            bars.get(j).setWidth(width);   //set width
+            bars.get(j).setHeight(height); //set height
             bars.get(j).setVisible(true);  //set visible
         }
     }
@@ -194,10 +199,9 @@ public class SortingHubController {
         }
     }
 
-
     @FXML
     void sortSelector() {
-        //call the setSortStrategy method
+
         setSortStrategy();
     }
 
@@ -208,6 +212,9 @@ public class SortingHubController {
 
         //using switch case to set the sorting method
         switch (sortStrategy) {
+
+            //Merge and Selection sort is my first preference: rest were created as a side project
+
             case "Insertion Sort" -> sortingMethod = new InsertionSort();
             case "Selection Sort" -> sortingMethod = new SelectionSort();
             case "Bubble Sort" -> sortingMethod = new BubbleSort();
@@ -275,5 +282,12 @@ public class SortingHubController {
         SortButton.setDisable(disable);
         ResetButton.setDisable(disable);
         ArraySizeSlider.setDisable(disable);
+    }
+
+    //if the user clicks on the array size slider
+    public void onClicked( ) {
+        arraySize = 0; //set arraySize to 0
+        printGREEN("Array Size: "  + arraySize, "DEBUG: Array Size Slider Clicked---> "); //print the array size
+        SetArraySize(); //call the setSortStrategy method
     }
 }
