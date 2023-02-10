@@ -6,142 +6,126 @@ import static assignment1.pgupta85.method.Debug.*;
 
 public class MergeSort implements SortingStrategy {
 
-    private SortingHubController sortingHubController;
+    private SortingHubController controller;
 
-    private int[] intArray;
+    private int[] list;
     private int loop;
     private boolean actualRun;
 
     @Override
-    public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
-        this.sortingHubController = sortingHubController;
-        this.intArray = arr;
+    public void setValue(int[] numbers, SortingHubController controller) {
+        this.controller = controller;
+        this.list = numbers;
     }
 
-
     @Override
-    public void sort(int[] arr) {
-        mergeSort(arr, 0, arr.length - 1);
+    public void sort(int[] numbers) {
+        //implement the in-place merge sort algorithm
+        mergeSort(numbers, 0, numbers.length - 1);
+    }
+
+    void merge(int[] arr, int start, int mid, int end) {
+
+        //create a variable to store the start of the second array
+        int start2 = mid + 1;
+
+        // If the direct merge is already sorted
+        if (arr[mid] <= arr[start2]) {
+            //update the graph
+            return;
+        }
+
+        // Two pointers to maintain start
+        // of both arrays to merge
+        while (start <= mid && start2 <= end) {
+
+            // If element 1 is in right place
+            if (arr[start] <= arr[start2]) {
+                start++;
+            } else {
+                int value = arr[start2];
+                int index = start2;
+
+                // Shift all the elements between element 1
+                // element 2, right by 1.
+                while (index != start) {
+                    arr[index] = arr[index - 1];
+                    index--;
+                }
+                arr[start] = value;
+
+                // Update all the pointers
+                start++;
+                mid++;
+                start2++;
+                logic(arr);
+            }
+        }
+    }
+
+    /* l is for left index and r is right index of the
+       sub-array of arr to be sorted */
+    void mergeSort(int[] arr, int l, int r) {
+        if (l < r) {
+            // Same as (l + r) / 2, but avoids overflow
+            // for large l and r
+            int m = l + (r - l) / 2;
+
+            // Sort first  and second halves
+            mergeSort(arr, l, m);
+            mergeSort(arr, m + 1, r);
+
+            //merge the two halves
+            merge(arr, l, m, r);
+
+            //update the graph
+            logic(arr);
+        }
     }
 
     @Override
     public void run() {
-        new Thread(() -> {
-            actualRun = true;
-            printPURPLE("Merge Selection Sort", "DEBUG: MergeSort.java ---> ");
-            sort(intArray);
-            printPURPLE("Merge Sort Complete", "DEBUG: MergeSort.java ---> ");
-            sortingHubController.updateGraph(intArray);
-            printLine();
-        }).start();
+        actualRun = true;
+        controller.disableButtons(true);
+        printPURPLE("Merge Selection Sort", "DEBUG: MergeSort.java ---> ");
+        sort(list);
+        printPURPLE("Merge Sort Complete", "DEBUG: MergeSort.java ---> ");
+        controller.updateGraph(list);
+        controller.disableButtons(false);
+        printLine();
     }
 
-    public void mergeSort(int[] arr, int i, int i1) {
-
-        logic(arr);
-
-        //check if the value of i is less than the value of i1
-        if (i < i1) {
-            //create a variable to store the middle
-            int middle = (i + i1) / 2;
-            //call the mergeSort method
-            mergeSort(arr, i, middle);
-            //call the mergeSort method
-            mergeSort(arr, middle + 1, i1);
-            //call the merge method
-            merge(arr, i, middle, i1);
-        }
-    }
-
-    //create a method to merge the array
-    public void merge(int[] arr, int i, int middle, int i1) {
-
-        logic(arr);
-
-        //create a variable to store the size of the left array
-        int sizeOfLeftArray = middle - i + 1;
-        //create a variable to store the size of the right array
-        int sizeOfRightArray = i1 - middle;
-        //create a variable to store the left array
-        int[] leftArray = new int[sizeOfLeftArray];
-        //create a variable to store the right array
-        int[] rightArray = new int[sizeOfRightArray];
-        //create a for loop to iterate through the left array
-        //assign the value of the left array
-        System.arraycopy(arr, i, leftArray, 0, sizeOfLeftArray);
-        //create a for loop to iterate through the right array
-        for (int j = 0; j < sizeOfRightArray; j++) {
-            //assign the value of the right array
-            rightArray[j] = arr[middle + 1 + j];
-        }
-        //create a variable to store the index of the left array
-        int indexOfLeftArray = 0;
-        //create a variable to store the index of the right array
-        int indexOfRightArray = 0;
-        //create a variable to store the index of the merged array
-        int indexOfMergedArray = i;
-        //create a while loop to iterate through the left and right array
-        while (indexOfLeftArray < sizeOfLeftArray && indexOfRightArray < sizeOfRightArray) {
-            //check if the value of the left array is less than the value of the right array
-            if (leftArray[indexOfLeftArray] <= rightArray[indexOfRightArray]) {
-                //assign the value of the left array to the merged array
-                arr[indexOfMergedArray] = leftArray[indexOfLeftArray];
-                //increment the value of the left array
-                indexOfLeftArray++;
-            } else {
-                //assign the value of the right array to the merged array
-                arr[indexOfMergedArray] = rightArray[indexOfRightArray];
-                //increment the value of the right array
-                indexOfRightArray++;
-            }
-            //increment the value of the merged array
-            indexOfMergedArray++;
-            logic(arr);
-        }
-        //create a while loop to iterate through the left array
-        while (indexOfLeftArray < sizeOfLeftArray) {
-            //assign the value of the left array to the merged array
-            arr[indexOfMergedArray] = leftArray[indexOfLeftArray];
-            //increment the value of the left array
-            indexOfLeftArray++;
-            //increment the value of the merged array
-            indexOfMergedArray++;
-            logic(arr);
-        }
-        //create a while loop to iterate through the right array
-        while (indexOfRightArray < sizeOfRightArray) {
-            //assign the value of the right array to the merged array
-            arr[indexOfMergedArray] = rightArray[indexOfRightArray];
-            //increment the value of the right array
-            indexOfRightArray++;
-            //increment the value of the merged array
-            indexOfMergedArray++;
-            logic(arr);
-        }
-    }
-
-    public void logic (int [] arr ) {
+    //code to update the graph and sleep the thread
+    @Override
+    public void logic(int[] arr) {
+        //check if the actualRun is true
         if (actualRun) {
-            Platform.runLater(() -> sortingHubController.updateGraph(arr));
-            Platform.runLater(() -> sortingHubController.setStatusBar(true));
+            //update the graph
+            Platform.runLater(() -> controller.updateGraph(arr));
+            Platform.runLater(() -> controller.setStatusBar(true));
+
+            //sleep the thread for 20 milliseconds
             try {
-                Thread.sleep(10);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        //if the actualRun is false
         if (!actualRun) {
+            //increment the loop
             loop++;
         }
     }
 
     @Override
-    public int getRunNeeded(int[] intArray) {
+    public int getRunNeeded(int[] dummyArray) {
+        //find the number of loops needed for the algorithm
         printCYAN("Finding the number of loops needed for Merge Sort", "DEBUG: MergeSort.java ---> ");
         actualRun = false;
         loop = 0;
-        sort(intArray);
+        sort(dummyArray);
         printCYAN("Number of loops needed for Merge Sort: " + loop, "DEBUG: MergeSort.java ---> ");
-        return loop;
+        return loop; //return the number of loops
     }
 }

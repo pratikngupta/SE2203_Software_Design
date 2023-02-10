@@ -2,15 +2,14 @@ package pgupta85.assignmentimproved;
 
 import javafx.application.Platform;
 
-import static pgupta85.method.Debug.*;
-
-public class SelectionSort implements SortingStrategy {
+public class SelectionSort extends Debug implements SortingStrategy {
 
     private SortingHubController sortingHubController;
 
     private int[] intArray;
     private int loop;
     private boolean actualRun;
+    private int number;
 
     @Override
     public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
@@ -33,7 +32,6 @@ public class SelectionSort implements SortingStrategy {
                     //assign the value at j to the value at minIndex
                     minIndex = j;
                 }
-
             }
             //create a variable to store the value at minIndex
             int temp = arr[minIndex];
@@ -41,8 +39,8 @@ public class SelectionSort implements SortingStrategy {
             arr[minIndex] = arr[i];
             //assign the value at temp to the value at i
             arr[i] = temp;
-
-                logic(arr);
+            number = arr[i];
+            logic(arr);
 
             //update the graph
         }
@@ -73,10 +71,10 @@ public class SelectionSort implements SortingStrategy {
     }
 
     public void logic (int [] arr ) {
-
         if (actualRun) {
             Platform.runLater(() -> sortingHubController.updateGraph(arr));
             Platform.runLater(() -> sortingHubController.setStatusBar(true));
+            Platform.runLater(() -> sortingHubController.changeColor(number));
             try {
                 Thread.sleep(sortingHubController.getSpeed());
             } catch (InterruptedException e) {

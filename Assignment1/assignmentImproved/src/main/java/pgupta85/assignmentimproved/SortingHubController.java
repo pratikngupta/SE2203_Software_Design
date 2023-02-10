@@ -4,9 +4,7 @@ package pgupta85.assignmentimproved;
 import eu.hansolo.medusa.Gauge;
 import io.github.palexdev.materialfx.controls.*;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 
 import javafx.scene.layout.AnchorPane;
@@ -17,9 +15,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static pgupta85.method.Debug.printSameLine;
-
-public class SortingHubController {
+public class SortingHubController extends Debug{
     public Gauge percentageGauge;
     
     public Gauge ArraySizeGauge;
@@ -58,6 +54,11 @@ public class SortingHubController {
     private int arraySize, arrayCounter, runNeeded;
 
     private HashMap<String, Long> speed = new HashMap<>();
+    private HashMap<Integer, Integer> map = new HashMap<>();
+
+    private Debug debug = new Debug();
+
+    private int key = 0;
 
     //create sortingStrategy thread
 
@@ -102,6 +103,8 @@ public class SortingHubController {
         SortSpeedSelector.getItems().addAll(speed.keySet());
         ColorSelector.getItems().addAll("Default", "Red", "Green", "Purple", "Orange", "Black");
 
+        printColor("Hello World", green);
+
         StatusBar.setStyle("-fx-accent: #142174");
         StatusBar.setProgress(0);
         IndicatorLabel.setVisible(false);
@@ -112,6 +115,7 @@ public class SortingHubController {
             Rectangle rectangle = new Rectangle();
             bars.add(rectangle);
             MainFrame.getChildren().add(bars.get(i));
+            //bars.get(i).setFill(Color.color(Math.random(), Math.random(), Math.random()));
             bars.get(i).setStyle("-fx-fill: #142174" + "; -fx-border-color: #f40202; -fx-border-width: 50px;");
         }
 
@@ -148,6 +152,8 @@ public class SortingHubController {
     }
 
     public void fillArray(int arraySize) {
+        //clear the map
+        map.clear();
         intArray = new int[arraySize];
         dummyArray = new int[arraySize];
         backupArray = new int[arraySize];
@@ -166,6 +172,8 @@ public class SortingHubController {
                     break;
                 }
             }
+            //add the value to the map
+            map.put(rand, i);
         }
         //initialize the backup array
 
@@ -194,6 +202,16 @@ public class SortingHubController {
             bars.get(j).setHeight(height);
             bars.get(j).setVisible(true);
         }
+    }
+
+    public void changeColor(int index) {
+        //find out which index is being changed using the map
+        //reset previous color
+        bars.get(map.get(intArray[key])).setFill(getCustomColor());
+
+        key = map.get(intArray[index]);
+        //change the color of the bar
+        bars.get(index).setFill(getGaugeBlue());
     }
 
     @FXML

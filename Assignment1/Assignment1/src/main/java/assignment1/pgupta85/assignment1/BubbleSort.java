@@ -1,3 +1,13 @@
+/**************************************************************************************************************
+ Name: Pratik Narendra Gupta
+ Student ID: 251211859
+ Date: 9th February
+ Task: Bubble Sort Algorithm
+ - This class implements the SortingStrategy interface and implements the methods defined in the interface
+ - This class implements the Bubble Sort algorithm
+ - This class is used to sort the array of numbers using the Bubble Sort algorithm
+ *****************************************************************************************************************/
+
 package assignment1.pgupta85.assignment1;
 
 import javafx.application.Platform;
@@ -5,16 +15,20 @@ import javafx.application.Platform;
 import static assignment1.pgupta85.method.Debug.*;
 
 public class BubbleSort implements SortingStrategy {
-    private SortingHubController sortingHubController;
 
-    private int[] intArray;
+    //create a variable to store the controller
+    private SortingHubController controller;
+
+    //create a variable to store the list
+    private int[] list;
     private int loop;
     private boolean actualRun;
 
+    //create a constructor to initialize the variables
     @Override
-    public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
-        this.sortingHubController = sortingHubController;
-        this.intArray = arr;
+    public void setValue(int[] numbers, SortingHubController controller) {
+        this.controller = controller;
+        this.list = numbers;
     }
 
     @Override
@@ -28,53 +42,63 @@ public class BubbleSort implements SortingStrategy {
     }
 
     @Override
-    public void sort(int[] arr) {
-
-        //write code as a thread
+    public void sort(int[] numbers) {
         //create a for loop to iterate through the array
-        for (int i = 0; i < arr.length - 1; i++) {
+        for (int i = 0; i < numbers.length - 1; i++) {
             //create a for loop to iterate through the array
-            for (int j = 0; j < arr.length - i - 1; j++) {
+            for (int j = 0; j < numbers.length - i - 1; j++) {
                 //check if the value at j is greater than the value at j + 1
-                if (arr[j] > arr[j + 1]) {
+                if (numbers[j] > numbers[j + 1]) {
                     //create a temporary variable to store the value at j
-                    int temp = arr[j];
+                    int temp = numbers[j];
                     //assign the value at j + 1 to the value at j
-                    arr[j] = arr[j + 1];
+                    numbers[j] = numbers[j + 1];
                     //assign the value at j to the value at j + 1
-                    arr[j + 1] = temp;
+                    numbers[j + 1] = temp;
                     //update the graph
                 }
-                logic(arr);
+                logic(numbers);
             }
-
         }
     }
 
-
     @Override
     public void run() {
-        new Thread(() -> {
-            actualRun = true;
-            printPURPLE("Starting Bubble Sort", "DEBUG: BubbleSort.java ---> ");
-            sort(intArray);
-            printPURPLE("Bubble Sort Complete", "DEBUG: BubbleSort.java ---> ");
-            sortingHubController.updateGraph(intArray);
-            printLine();
-        }).start();
+        //set the actualRun to true
+        actualRun = true;
+        //disable the buttons
+        controller.disableButtons(true);
+        printPURPLE("Starting Bubble Sort", "DEBUG: BubbleSort.java ---> ");
+        //call the sort method
+        sort(list);
+        printPURPLE("Bubble Sort Complete", "DEBUG: BubbleSort.java ---> ");
+        //update the graph
+        controller.updateGraph(list);
+        printLine();
+        //enable the buttons
+        controller.disableButtons(false);
     }
 
-    public void logic (int [] arr ) {
+
+    //code to update the graph and sleep the thread
+    @Override
+    public void logic(int[] arr) {
+        //check if the actualRun is true
         if (actualRun) {
-            Platform.runLater(() -> sortingHubController.updateGraph(arr));
-            Platform.runLater(() -> sortingHubController.setStatusBar(true));
+            //update the graph
+            Platform.runLater(() -> controller.updateGraph(arr));
+            Platform.runLater(() -> controller.setStatusBar(true));
+
+            //sleep the thread for 25 milliseconds
             try {
-                Thread.sleep(25);
+                Thread.sleep(15);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        //if the actualRun is false
         if (!actualRun) {
+            //increment the loop
             loop++;
         }
     }

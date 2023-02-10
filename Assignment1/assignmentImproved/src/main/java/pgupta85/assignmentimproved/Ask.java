@@ -14,7 +14,7 @@
  6) With help of try/catch this will avoid any exception and ensure that user will only enter the type of input requested.
  *********************************************************/
 
-package pgupta85.method;
+package pgupta85.assignmentimproved;
 
 //Import Scanner Class
 import java.util.InputMismatchException;
@@ -38,6 +38,10 @@ public class Ask {
         if (message.length()>0){
             System.out.print(message);
         }
+    }
+
+    public static void printColor(String message, String color){
+        System.out.println(color + message + reset);
     }
 
     //This will accept string message and will return integer value it got from user.

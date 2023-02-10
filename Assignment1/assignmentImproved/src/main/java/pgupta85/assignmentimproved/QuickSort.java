@@ -2,9 +2,7 @@ package pgupta85.assignmentimproved;
 
 import javafx.application.Platform;
 
-import static pgupta85.method.Debug.*;
-
-public class QuickSort implements SortingStrategy {
+public class QuickSort extends Debug implements SortingStrategy  {
 
     private SortingHubController sortingHubController;
 
