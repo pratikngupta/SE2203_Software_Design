@@ -21,16 +21,16 @@ public class MergeSort implements SortingStrategy {
     @Override
     public void sort(int[] numbers) {
         //implement the in-place merge sort algorithm
-        mergeSort(numbers, 0, numbers.length - 1);
+        mergeHelper(numbers, 0, numbers.length - 1);
     }
 
-    void merge(int[] arr, int start, int mid, int end) {
+    void merge(int[] array, int start, int mid, int end) {
 
         //create a variable to store the start of the second array
         int start2 = mid + 1;
 
         // If the direct merge is already sorted
-        if (arr[mid] <= arr[start2]) {
+        if (array[mid] <= array[start2]) {
             //update the graph
             return;
         }
@@ -40,46 +40,46 @@ public class MergeSort implements SortingStrategy {
         while (start <= mid && start2 <= end) {
 
             // If element 1 is in right place
-            if (arr[start] <= arr[start2]) {
+            if (array[start] <= array[start2]) {
                 start++;
             } else {
-                int value = arr[start2];
+                int value = array[start2];
                 int index = start2;
 
                 // Shift all the elements between element 1
                 // element 2, right by 1.
                 while (index != start) {
-                    arr[index] = arr[index - 1];
+                    array[index] = array[index - 1];
                     index--;
                 }
-                arr[start] = value;
+                array[start] = value;
 
                 // Update all the pointers
                 start++;
                 mid++;
                 start2++;
-                logic(arr);
+                logic(array);
             }
         }
     }
 
-    /* l is for left index and r is right index of the
-       sub-array of arr to be sorted */
-    void mergeSort(int[] arr, int l, int r) {
-        if (l < r) {
-            // Same as (l + r) / 2, but avoids overflow
-            // for large l and r
-            int m = l + (r - l) / 2;
+    /* l is for left index and right is right index of the
+       sub-array of array to be sorted */
+    void mergeHelper(int[] array, int left, int right) {
+        if (left < right) {
+            // Same as (l + right) / 2, but avoids overflow
+            // for large l and right
+            int m = left + (right - left) / 2;
 
             // Sort first  and second halves
-            mergeSort(arr, l, m);
-            mergeSort(arr, m + 1, r);
+            mergeHelper(array, left, m);
+            mergeHelper(array, m + 1, right);
 
             //merge the two halves
-            merge(arr, l, m, r);
+            merge(array, left, m, right);
 
             //update the graph
-            logic(arr);
+            logic(array);
         }
     }
 
