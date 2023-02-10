@@ -6,74 +6,82 @@ import static assignment1.pgupta85.method.Debug.*;
 
 public class InsertionSort implements SortingStrategy{
 
-    private SortingHubController sortingHubController;
+    private SortingHubController controller;
 
-    private int[] intArray;
+    private int[] list;
     private int loop = 0;
     private boolean actualRun;
 
     @Override
-    public void SortingStrategy(int[] arr, SortingHubController sortingHubController) {
-        this.sortingHubController = sortingHubController;
-        this.intArray = arr;
+    public void setValue(int[] numbers, SortingHubController controller) {
+        this.controller = controller;
+        this.list = numbers;
     }
 
     @Override
-    public void sort(int[] arr) {
+    public void sort(int[] numbers) {
         //write code as a thread
             //create a for loop to iterate through the array
-            for (int i = 1; i < arr.length; i++) {
+            for (int i = 1; i < numbers.length; i++) {
                 //create a variable to store the value at i
-                int key = arr[i];
+                int key = numbers[i];
                 //create a variable to store the value of i - 1
                 int j = i - 1;
                 //create awhile loop to iterate through the array
-                while (j >= 0 && arr[j] > key) {
+                while (j >= 0 && numbers[j] > key) {
                     //assign the value at j to the value at j + 1
-                    arr[j + 1] = arr[j];
+                    numbers[j + 1] = numbers[j];
                     //decrement j
                     j = j - 1;
                     //update the graph
-                    logic(arr);
+                    logic(numbers);
                 }
                 //assign the value at j + 1 to the value at key
-                arr[j + 1] = key;
+                numbers[j + 1] = key;
             }
     }
 
     @Override
-    public int getRunNeeded(int[] intArray) {
+    public int getRunNeeded(int[] dummyArray) {
         printCYAN("Finding the number of loops needed for Insertion Sort", "DEBUG: InsertionSort.java ---> ");
         actualRun = false;
         loop = 0;
-        sort(intArray);
+        sort(dummyArray);
         printCYAN("Number of loops needed for Insertion Sort: " + loop, "DEBUG: InsertionSort.java ---> ");
         return loop;
     }
 
     @Override
     public void run() {
-        new Thread(() -> {
+        controller.disableButtons(true);
             actualRun = true;
             printPURPLE("Insertion Selection Sort", "DEBUG: InsertionSort.java ---> ");
-            sort(intArray);
+            sort(list);
             printPURPLE("Insertion Sort Complete", "DEBUG: InsertionSort.java ---> ");
-            sortingHubController.updateGraph(intArray);
+            controller.updateGraph(list);
             printLine();
-        }).start();
+        controller.disableButtons(false);
     }
 
-    public void logic (int [] arr ) {
+    //code to update the graph and sleep the thread
+    @Override
+    public void logic(int[] arr) {
+        //check if the actualRun is true
         if (actualRun) {
-            Platform.runLater(() -> sortingHubController.updateGraph(arr));
-            Platform.runLater(() -> sortingHubController.setStatusBar(true));
+            //update the graph
+            Platform.runLater(() -> controller.updateGraph(arr));
+            Platform.runLater(() -> controller.setStatusBar(true));
+
+            //sleep the thread for 25 milliseconds
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        //if the actualRun is false
         if (!actualRun) {
+            //increment the loop
             loop++;
         }
     }
