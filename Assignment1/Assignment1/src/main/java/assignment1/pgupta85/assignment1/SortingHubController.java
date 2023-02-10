@@ -24,7 +24,8 @@ import static assignment1.pgupta85.method.Debug.printSameLine;
 
 public class SortingHubController {
 
-    public Label IndicatorLabel, ArraySizeLabel;
+    @FXML
+    private Label IndicatorLabel, ArraySizeLabel;
 
     @FXML
     private ProgressBar StatusBar;
@@ -61,6 +62,9 @@ public class SortingHubController {
         StatusBar.setProgress(0);
         StatusBar.setStyle("-fx-accent: rgb(236,40,3)");
         IndicatorLabel.setVisible(false);
+
+        SelectionMethodSelector.setValue("Merge Sort");
+        setSortStrategy();
 
         //create 128 bars
         for (int i = 0; i < 128; i++) {
@@ -107,11 +111,9 @@ public class SortingHubController {
         intArray = new int[arraySize];
         dummyArray = new int[arraySize];
 
-        int range = arraySize - 1 + 1;
-
         //add values to the array without duplicates
         for (int i = 0; i < arraySize; i++) {
-            int rand = (int) (Math.random() * range) + 1;
+            int rand = (int) (Math.random() * arraySize) + 1;
             intArray[i] = rand;
             for (int j = 0; j < i; j++) {
                 if (intArray[j] == rand) {
@@ -166,7 +168,8 @@ public class SortingHubController {
             runNeeded = sortingMethod.getRunNeeded(dummyArray);
 
             //call the sort method
-            sortingMethod.SortingStrategy(intArray,this);
+            sortingMethod.setValue(intArray,this);
+
             //start the thread
             new Thread(sortingMethod).start();
 
@@ -246,7 +249,6 @@ public class SortingHubController {
             arrayCounter ++;
             double progress = (double) arrayCounter / runNeeded;
 
-
             if (arrayCounter % 100 == 0 | arrayCounter == runNeeded | arrayCounter == 1 && runNeeded>150) {
                 String text = "\b\b Total run: "+runNeeded + "  -----  " + "Run Completed: "+ arrayCounter + "  -----  " + String.format("Percentage: %.2f", progress * 100) + "%";
                 printSameLine(text, "DEBUG: Progress Bar ---> ");
@@ -266,7 +268,6 @@ public class SortingHubController {
             arrayCounter = 0;
             StatusBar.setProgress(0);
         }
-
     }
 
     public void disableButtons(boolean disable) {
@@ -275,5 +276,4 @@ public class SortingHubController {
         ResetButton.setDisable(disable);
         ArraySizeSlider.setDisable(disable);
     }
-
 }

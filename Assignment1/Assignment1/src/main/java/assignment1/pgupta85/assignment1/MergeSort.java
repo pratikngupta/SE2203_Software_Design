@@ -13,7 +13,7 @@ public class MergeSort implements SortingStrategy {
     private boolean actualRun;
 
     @Override
-    public void SortingStrategy(int[] numbers, SortingHubController controller) {
+    public void setValue(int[] numbers, SortingHubController controller) {
         this.controller = controller;
         this.list = numbers;
     }
@@ -24,7 +24,7 @@ public class MergeSort implements SortingStrategy {
         mergeSort(numbers, 0, numbers.length - 1);
     }
 
-    void merge(int arr[], int start, int mid, int end) {
+    void merge(int[] arr, int start, int mid, int end) {
 
         //create a variable to store the start of the second array
         int start2 = mid + 1;
@@ -65,7 +65,7 @@ public class MergeSort implements SortingStrategy {
 
     /* l is for left index and r is right index of the
        sub-array of arr to be sorted */
-    void mergeSort(int arr[], int l, int r) {
+    void mergeSort(int[] arr, int l, int r) {
         if (l < r) {
             // Same as (l + r) / 2, but avoids overflow
             // for large l and r

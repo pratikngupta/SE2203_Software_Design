@@ -16,7 +16,7 @@ public class HeapSort implements SortingStrategy {
 
     //create a constructor
     @Override
-    public void SortingStrategy(int[] numbers, SortingHubController controller) {
+    public void setValue(int[] numbers, SortingHubController controller) {
         this.controller = controller;
         this.list = numbers;
     }

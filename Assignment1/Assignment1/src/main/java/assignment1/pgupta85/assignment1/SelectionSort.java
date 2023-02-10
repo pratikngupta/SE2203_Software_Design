@@ -14,7 +14,7 @@ public class SelectionSort implements SortingStrategy {
 
     //create a constructor
     @Override
-    public void SortingStrategy(int[] numbers, SortingHubController controller) {
+    public void setValue(int[] numbers, SortingHubController controller) {
         //assign the value of sortingHubController to the value of this.sortingHubController
         this.controller = controller;
         this.list = numbers;

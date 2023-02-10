@@ -13,7 +13,7 @@ public class QuickSort implements SortingStrategy {
     private boolean actualRun;
 
     @Override
-    public void SortingStrategy(int[] numbers, SortingHubController controller) {
+    public void setValue(int[] numbers, SortingHubController controller) {
         this.controller = controller;
         this.list = numbers;
     }
