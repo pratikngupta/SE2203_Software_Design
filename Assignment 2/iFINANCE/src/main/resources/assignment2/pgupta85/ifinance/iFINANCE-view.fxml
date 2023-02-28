@@ -3,39 +3,57 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment2.pgupta85.ifinance.iFinanceController">
-   <children>
-      <MenuBar>
+<BorderPane fx:id="MainStage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment2.pgupta85.ifinance.iFinanceController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#CloseOptionClicked" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Account">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Login" />
+                  <MenuItem mnemonicParsing="false" text="Change Password" />
+                  <Menu mnemonicParsing="false" text="Manager User">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Add User" />
+                        <MenuItem mnemonicParsing="false" text="Edit User" />
+                        <MenuItem mnemonicParsing="false" text="Delete User" />
+                    </items>
+                  </Menu>
+               </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Group">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Add" />
+                  <MenuItem mnemonicParsing="false" text="Update" />
+                  <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-            <Menu fx:id="aboutMenu" mnemonicParsing="false" onAction="#openAboutMenu" text="About">
+            <Menu mnemonicParsing="false" text="Chart of Account">
               <items>
-                <MenuItem fx:id="AboutUs" mnemonicParsing="false" onAction="#AboutUsClicked" text="About Us">
-                     <graphic>
-                        <AnchorPane fx:id="anchor" prefHeight="200.0" prefWidth="200.0" />
-                     </graphic>
-                  </MenuItem>
+                <MenuItem mnemonicParsing="false" text="Add" />
+                <MenuItem mnemonicParsing="false" text="Update" />
+                <MenuItem mnemonicParsing="false" text="Delete" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Report">
+              <items>
+                  <MenuItem mnemonicParsing="false" text="Trial Balance" />
+                  <MenuItem mnemonicParsing="false" text="Balance Sheet" />
+                  <MenuItem mnemonicParsing="false" text="Cash Flow" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="About">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#AboutUsClicked" text="About us" />
               </items>
             </Menu>
         </menus>
       </MenuBar>
-   </children>
-</VBox>
+   </top>
+</BorderPane>
