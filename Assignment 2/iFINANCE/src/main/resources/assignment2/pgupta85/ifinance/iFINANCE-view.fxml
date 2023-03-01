@@ -18,7 +18,7 @@
                <items>
                   <MenuItem mnemonicParsing="false" text="Login" />
                   <MenuItem mnemonicParsing="false" text="Change Password" />
-                  <Menu mnemonicParsing="false" text="Manager User">
+                  <Menu mnemonicParsing="false" text="ADMIN">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Add User" />
                         <MenuItem mnemonicParsing="false" text="Edit User" />
