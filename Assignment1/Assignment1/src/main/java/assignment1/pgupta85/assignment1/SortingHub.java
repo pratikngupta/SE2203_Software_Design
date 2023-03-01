@@ -15,6 +15,9 @@ public class SortingHub extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Sorting Hub");
         stage.getIcons().add(new Image("file:src/main/resources/assignment1/pgupta85/assignment1/WesternLogo.png"));
+        //set application icon
+        
+
         stage.setScene(scene);
         stage.show();
     }
