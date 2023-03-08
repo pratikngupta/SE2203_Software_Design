@@ -90,7 +90,6 @@ public class MatchesScheduleController implements Initializable {
         visitorTeamCol.setCellValueFactory(cellData -> cellData.getValue().visitorTeamProperty());
         homeScoreCol.setCellValueFactory(cellData -> cellData.getValue().homeTeamScoreProperty().asObject());
         visitorScoreCol.setCellValueFactory(cellData -> cellData.getValue().visitorTeamScoreProperty().asObject());
-        
         tableView.setItems(data);
     }    
     

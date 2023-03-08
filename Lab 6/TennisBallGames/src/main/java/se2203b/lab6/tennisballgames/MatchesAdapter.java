@@ -2,6 +2,7 @@ package se2203b.lab6.tennisballgames;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.Match;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,7 +15,7 @@ import java.sql.Statement;
  */
 public class MatchesAdapter {
 
-    Connection connection;
+    static Connection connection;
 
     public MatchesAdapter(Connection conn, Boolean reset) throws SQLException {
         connection = conn;
@@ -51,12 +52,22 @@ public class MatchesAdapter {
     }
         
     
-    public int getMax() throws SQLException {
+    public static int getMax() throws SQLException {
         int num = 0;
+        // num is a serial number generated automatically and equal to the maximum match number in the table plus one.
+        //Write an SQL statement to select all columns from the Matches table.
+        String sql = "SELECT MAX(MatchNumber) FROM Matches";
 
-        // Add your work code here for Task #3
-        
-        return num;
+        //Execute the query by sending the SQL statement to the DBMS.
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //Loop the entire rows of rs and set the string values of list
+        while (rs.next()) {
+            num = Integer.parseInt(rs.getString(1));
+        }
+
+        return num + 1;
     }
     
     public void insertMatch(int num, String home, String visitor) throws SQLException {
@@ -96,17 +107,61 @@ public class MatchesAdapter {
     }
 
     // Get a String list of matches to populate the ComboBox used in Task #4.
-    public ObservableList<String> getMatchesNamesList() throws SQLException {
+    public static ObservableList<String> getMatchesNamesList() throws SQLException {
         ObservableList<String> list = FXCollections.observableArrayList();
         //Write an SQL statement to select all columns from the Matches table.
-       
-        
+        String sql = "SELECT * FROM Matches";
+
+        //Execute the query by sending the SQL statement to the DBMS.
+        sql = sql + " ORDER BY MatchNumber";
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //Loop the entire rows of rs and set the string values of list
+        while (rs.next()) {
+            int matchNumber = Integer.parseInt(rs.getString(1));
+            String homeTeam = rs.getString(2);
+            String visitorTeam = rs.getString(3);
+            int homeTeamScore = Integer.parseInt(rs.getString(4));
+            int visitorTeamScore = Integer.parseInt(rs.getString(5));
+
+            System.out.println(matchNumber + " " + homeTeam + " " + visitorTeam + " " + homeTeamScore + " " + visitorTeamScore);
+
+            // add string to list
+            // format it in the form of "MatchNumber: HomeTeam       - VisitorTeam "
+            String match = String.format("%-3d: %-15s - %-15s", matchNumber, homeTeam, visitorTeam);
+            list.add(match);
+        }
         return list;
     }
     
     
     public void setTeamsScore(int matchNumber, int hScore, int vScore) throws SQLException
    {
-        // Add your code here for Task #4
-   }  
+         Statement stmt = connection.createStatement();
+         System.out.println("UPDATE Matches SET HomeTeamScore = " + hScore + ", VisitorTeamScore = " + vScore + " WHERE MatchNumber = " + matchNumber);
+         stmt.executeUpdate("UPDATE Matches SET HomeTeamScore = " + hScore + ", VisitorTeamScore = " + vScore + " WHERE MatchNumber = " + matchNumber);
+   }
+
+    public String getHomeTeamName(int index, String location) throws SQLException {
+        String homeTeam = null, visitorTeam = null;
+        String sql = "SELECT * FROM Matches";
+
+        //Execute the query by sending the SQL statement to the DBMS.
+        sql = sql + " ORDER BY MatchNumber";
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+
+        //Loop the entire rows of rs and set the string values of list
+        while (rs.next()) {
+            homeTeam = rs.getString(2);
+            visitorTeam = rs.getString(3);
+        }
+
+        if (location.equals("home")) {
+            return homeTeam;
+        } else {
+            return visitorTeam;
+        }
+    }
 }

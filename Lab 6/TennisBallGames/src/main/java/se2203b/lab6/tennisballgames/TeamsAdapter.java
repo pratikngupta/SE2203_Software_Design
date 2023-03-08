@@ -83,25 +83,61 @@ public class TeamsAdapter {
         ResultSet rs;
 
         // Create a Statement object
-        
+        Statement stmt = connection.createStatement();
 
         // Create a string with a SELECT statement
-        
+        String sqlStatement = "SELECT TeamName FROM Teams";
 
         // Execute the statement and return the result
-        
-        
+        rs = stmt.executeQuery(sqlStatement);
+
         // loop for the all rs rows and update list
+        while (rs.next()) {
+            list.add(rs.getString("TeamName"));
+        }
         
         return list;
     }
 
     public void setStatus(String hTeam, String vTeam, int hScore, int vScore) throws SQLException {
-        // Create a Statement object
         Statement stmt = connection.createStatement();
-        ResultSet rs;
-        
-        // Write your code here for Task #4
-        
+        // Update the home team
+        if (hScore > vScore) {
+            stmt.executeUpdate("UPDATE Teams SET Wins = Wins + 1 WHERE TeamName = '" + hTeam + "'");
+            stmt.executeUpdate("UPDATE Teams SET Losses = Losses + 1 WHERE TeamName = '" + vTeam + "'");
+        } else if (hScore < vScore) {
+            stmt.executeUpdate("UPDATE Teams SET Wins = Wins + 1 WHERE TeamName = '" + vTeam + "'");
+            stmt.executeUpdate("UPDATE Teams SET Losses = Losses + 1 WHERE TeamName = '" + hTeam + "'");
+        } else {
+            stmt.executeUpdate("UPDATE Teams SET Ties = Ties + 1 WHERE TeamName = '" + hTeam + "'");
+            stmt.executeUpdate("UPDATE Teams SET Ties = Ties + 1 WHERE TeamName = '" + vTeam + "'");
+        }
+
+        // move the team base on the score
+        // get the teams data
+        ObservableList<Teams> teams = getTeamsList();
+        // loop for the all teams
+        while (teams.size() > 0) {
+            // get the first team
+            Teams team = teams.get(0);
+            // remove the first team
+            teams.remove(0);
+            // loop for the all teams
+            for (int i = 0; i < teams.size(); i++) {
+                // get the current team
+                Teams currentTeam = teams.get(i);
+                // check if the current team is better than the team
+                if (team.compareTo(currentTeam)) {
+                    // remove the current team
+                    teams.remove(i);
+                    // add the team before the current team
+                    teams.add(i, team);
+                    // add the current team after the team
+                    teams.add(i + 1, currentTeam);
+                    // break the loop
+                    break;
+                }
+            }
+        }
     }
 }

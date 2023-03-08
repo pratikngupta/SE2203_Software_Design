@@ -2,6 +2,7 @@ package se2203b.lab6.tennisballgames;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,25 +20,30 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class AddMatchController implements Initializable {
+public class AddScoreController implements Initializable {
 
-    public Button cancelBtn;
+    public TextField homeTeamScore;
     @FXML
-    private ComboBox<String> homeTeamBox;
+    private Button cancelBtn;
 
     @FXML
-    private ComboBox<String> visitorTeamBox;
+    private TextField visitorTeamScore;
 
-    // The data variable is used to populate the ComboBoxs
-    final ObservableList<String> data = FXCollections.observableArrayList();
+    @FXML
+    private ComboBox<String> matchSelectorBox;
+
+    ObservableList<String> data = FXCollections.observableArrayList();
     private MatchesAdapter matchesAdapter;
     private TeamsAdapter teamsAdapter;
-    public void setModel(MatchesAdapter match, TeamsAdapter team) {
-        matchesAdapter = match; teamsAdapter = team; buildComboBoxData();
+
+    public void setModel(MatchesAdapter match, TeamsAdapter team) throws SQLException {
+        matchesAdapter = match;
+        teamsAdapter = team;
+        buildComboBoxData();
     }
 
     @FXML
-    void cancel() {
+    void cancel(ActionEvent event) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
@@ -44,20 +51,20 @@ public class AddMatchController implements Initializable {
     @FXML
     void save() {
         try {
-            matchesAdapter.insertMatch(MatchesAdapter.getMax(), homeTeamBox.getValue(), visitorTeamBox.getValue());
+            //get index of selected match
+            int index = matchSelectorBox.getSelectionModel().getSelectedIndex() + 1;
+            matchesAdapter.setTeamsScore(index, Integer.parseInt(homeTeamScore.getText()), Integer.parseInt(visitorTeamScore.getText()));
+
+            // get Home Team Name
+            String homeTeamName = matchesAdapter.getHomeTeamName(index, "home");
+            // get Visitor Team Name
+            String visitorTeamName = matchesAdapter.getHomeTeamName(index, "visitor");
+
+            teamsAdapter.setStatus(homeTeamName, visitorTeamName, Integer.parseInt(homeTeamScore.getText()), Integer.parseInt(visitorTeamScore.getText()));
+
             Stage stage = (Stage) cancelBtn.getScene().getWindow();
             stage.close();
         } catch (SQLException ex) {
-            displayAlert("ERROR: " + ex.getMessage());
-        }
-    }
-
-    public void buildComboBoxData() {
-        try {
-        data.addAll(teamsAdapter.getTeamsNames());
-            System.out.println(data);
-        }
-    catch (SQLException ex) {
             displayAlert("ERROR: " + ex.getMessage());
         }
     }
@@ -66,7 +73,7 @@ public class AddMatchController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Alert.fxml"));
             Parent ERROR = loader.load();
-            AlertController controller = (AlertController) loader.getController();
+            AlertController controller = loader.getController();
 
             Scene scene = new Scene(ERROR);
             Stage stage = new Stage();
@@ -82,10 +89,16 @@ public class AddMatchController implements Initializable {
         }
     }
 
+    private void buildComboBoxData() throws SQLException {
+        //set the data for the combo box
+        //Write an SQL statement to select all columns from the Matches table.
+        data = MatchesAdapter.getMatchesNamesList();
+        matchSelectorBox.setItems(data);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        homeTeamBox.setItems(data);
-        visitorTeamBox.setItems(data);
+        matchSelectorBox.setItems(data);
     }
 
 }
