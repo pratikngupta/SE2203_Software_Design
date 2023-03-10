@@ -2,7 +2,6 @@ package se2203b.lab6.tennisballgames;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.css.Match;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -96,8 +95,6 @@ public class MatchesAdapter {
             int homeTeamScore = Integer.parseInt(rs.getString(4));
             int visitorTeamScore = Integer.parseInt(rs.getString(5));
 
-            System.out.println(matchNumber + " " + homeTeam + " " + visitorTeam + " " + homeTeamScore + " " + visitorTeamScore);
-
             // add string to matchesList
             Matches match = new Matches(matchNumber, homeTeam, visitorTeam, homeTeamScore, visitorTeamScore);
             matchesList.add(match);
@@ -122,10 +119,6 @@ public class MatchesAdapter {
             int matchNumber = Integer.parseInt(rs.getString(1));
             String homeTeam = rs.getString(2);
             String visitorTeam = rs.getString(3);
-            int homeTeamScore = Integer.parseInt(rs.getString(4));
-            int visitorTeamScore = Integer.parseInt(rs.getString(5));
-
-            System.out.println(matchNumber + " " + homeTeam + " " + visitorTeam + " " + homeTeamScore + " " + visitorTeamScore);
 
             // add string to list
             // format it in the form of "MatchNumber: HomeTeam       - VisitorTeam "
@@ -144,7 +137,7 @@ public class MatchesAdapter {
    }
 
     public String[] getTeamsNamesList(int index) throws SQLException {
-        String homeTeam = null, visitorTeam = null;
+        String homeTeam, visitorTeam;
         String sql = "SELECT * FROM Matches";
 
         //Execute the query by sending the SQL statement to the DBMS.
@@ -161,9 +154,6 @@ public class MatchesAdapter {
         homeTeam = rs.getString(2);
         visitorTeam = rs.getString(3);
 
-        System.out.println("from getHomeTeamName");
-        System.out.println("Home Team: " + homeTeam);
-        System.out.println("Visitor Team: " + visitorTeam);
 
         return new String[]{homeTeam, visitorTeam};
     }

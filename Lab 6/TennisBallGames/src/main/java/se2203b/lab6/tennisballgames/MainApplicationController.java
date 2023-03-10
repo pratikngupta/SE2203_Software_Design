@@ -1,25 +1,22 @@
 package se2203b.lab6.tennisballgames;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import static se2203b.lab6.tennisballgames.DisplayAlert.displayAlert;
 /**
  *
  * @author Abdelkader Ouda
@@ -121,7 +118,6 @@ public class MainApplicationController implements Initializable {
 
     @FXML
     public void addMatch() throws Exception {
-        // Toggle the comments below after you finish the requirement of Task #3
 
         // create Teams model
         teams = new TeamsAdapter(conn, false);
@@ -145,8 +141,6 @@ public class MainApplicationController implements Initializable {
 
     @FXML
     public void addScore() throws Exception {
-        // Toggle the comments below after you finish the requirement of Task #4
-
         // create Teams model
         teams = new TeamsAdapter(conn, false);
         // create matches model
@@ -191,27 +185,6 @@ public class MainApplicationController implements Initializable {
 
         } catch (SQLException ex) {
             displayAlert("ERROR: " + ex.getMessage());
-        }
-    }
-
-
-    private void displayAlert(String msg) {
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Alert.fxml"));
-            Parent ERROR = loader.load();
-            AlertController controller = (AlertController) loader.getController();
-
-            Scene scene = new Scene(ERROR);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-
-            stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
-            controller.setAlertText(msg);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-
-        } catch (IOException ex1) {
         }
     }
 

@@ -3,20 +3,16 @@ package se2203b.lab6.tennisballgames;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.image.Image;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import static se2203b.lab6.tennisballgames.DisplayAlert.displayAlert;
 
 public class AddMatchController implements Initializable {
 
@@ -45,6 +41,7 @@ public class AddMatchController implements Initializable {
     void save() {
         try {
             if (homeTeamBox.getValue().equals(visitorTeamBox.getValue())) {
+                //call displayAlert method from DisplayAlert class to display error message
                 displayAlert("ERROR: Home team and visitor team cannot be the same");
                 return;
             }
@@ -61,28 +58,8 @@ public class AddMatchController implements Initializable {
         data.addAll(teamsAdapter.getTeamsNames());
             System.out.println(data);
         }
-    catch (SQLException ex) {
+        catch (SQLException ex) {
             displayAlert("ERROR: " + ex.getMessage());
-        }
-    }
-
-    private void displayAlert(String msg) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Alert.fxml"));
-            Parent ERROR = loader.load();
-            AlertController controller = (AlertController) loader.getController();
-
-            Scene scene = new Scene(ERROR);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-
-            stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab6/tennisballgames/WesternLogo.png"));
-            controller.setAlertText(msg);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-
-        } catch (IOException ex1) {
-            System.out.println("ERROR: " + ex1.getMessage());
         }
     }
 
@@ -90,6 +67,8 @@ public class AddMatchController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         homeTeamBox.setItems(data);
         visitorTeamBox.setItems(data);
+
+
     }
 
 }

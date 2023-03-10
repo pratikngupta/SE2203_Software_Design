@@ -13,8 +13,6 @@ public class TeamsAdapter {
 
     Connection connection;
 
-
-
     public TeamsAdapter(Connection conn, Boolean reset) throws SQLException {
         connection = conn;
         if (reset) {
@@ -101,38 +99,22 @@ public class TeamsAdapter {
     public void setStatus(String hTeam, String vTeam, int hScore, int vScore) throws SQLException {
         // Create a Statement object
         Statement stmt = connection.createStatement();
-        ResultSet rs;
-
-        // Get the number of wins, losses, and ties for the home team
-        String query = "SELECT wins, losses, ties FROM Teams WHERE teamName = '" + hTeam + "'";
-        rs = stmt.executeQuery(query);
-
-        // Get the number of wins, losses, and ties for the visitor team
-        String query2 = "SELECT wins, losses, ties FROM Teams WHERE teamName = '" + vTeam + "'";
-        ResultSet rs2 = stmt.executeQuery(query2);
-
-
 
         // Update the home team's record
         if (hScore > vScore) {
             // Home team won
             stmt.executeUpdate("UPDATE Teams SET wins = wins + 1 WHERE teamName = '" + hTeam + "'");
+            // Visitor team lost
+            stmt.executeUpdate("UPDATE Teams SET losses = losses + 1 WHERE teamName = '" + vTeam + "'");
+
         } else if (hScore < vScore) {
             // Home team lost
             stmt.executeUpdate("UPDATE Teams SET losses = losses + 1 WHERE teamName = '" + hTeam + "'");
+            // Visitor team won
+            stmt.executeUpdate("UPDATE Teams SET wins = wins + 1 WHERE teamName = '" + vTeam + "'");
         } else {
             // Home team tied
             stmt.executeUpdate("UPDATE Teams SET ties = ties + 1 WHERE teamName = '" + hTeam + "'");
-        }
-
-        // Update the visitor team's record
-        if (hScore < vScore) {
-            // Visitor team won
-            stmt.executeUpdate("UPDATE Teams SET wins = wins + 1 WHERE teamName = '" + vTeam + "'");
-        } else if (hScore > vScore) {
-            // Visitor team lost
-            stmt.executeUpdate("UPDATE Teams SET losses = losses + 1 WHERE teamName = '" + vTeam + "'");
-        } else {
             // Visitor team tied
             stmt.executeUpdate("UPDATE Teams SET ties = ties + 1 WHERE teamName = '" + vTeam + "'");
         }
