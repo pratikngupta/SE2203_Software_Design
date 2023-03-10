@@ -143,7 +143,7 @@ public class MatchesAdapter {
          stmt.executeUpdate("UPDATE Matches SET HomeTeamScore = " + hScore + ", VisitorTeamScore = " + vScore + " WHERE MatchNumber = " + matchNumber);
    }
 
-    public String getHomeTeamName(int index, String location) throws SQLException {
+    public String[] getTeamsNamesList(int index) throws SQLException {
         String homeTeam = null, visitorTeam = null;
         String sql = "SELECT * FROM Matches";
 
@@ -152,16 +152,19 @@ public class MatchesAdapter {
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
 
-        //Loop the entire rows of rs and set the string values of list
-        while (rs.next()) {
-            homeTeam = rs.getString(2);
-            visitorTeam = rs.getString(3);
+        //navigate to the index
+        for (int i = 0; i <= index; i++) {
+            rs.next();
         }
 
-        if (location.equals("home")) {
-            return homeTeam;
-        } else {
-            return visitorTeam;
-        }
+        //get the home team name
+        homeTeam = rs.getString(2);
+        visitorTeam = rs.getString(3);
+
+        System.out.println("from getHomeTeamName");
+        System.out.println("Home Team: " + homeTeam);
+        System.out.println("Visitor Team: " + visitorTeam);
+
+        return new String[]{homeTeam, visitorTeam};
     }
 }

@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -20,9 +21,12 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import static se2203b.lab6.tennisballgames.MainApplicationController.*;
+
 public class AddScoreController implements Initializable {
 
     public TextField homeTeamScore;
+    public AnchorPane scorePlane;
     @FXML
     private Button cancelBtn;
 
@@ -31,7 +35,6 @@ public class AddScoreController implements Initializable {
 
     @FXML
     private ComboBox<String> matchSelectorBox;
-
     ObservableList<String> data = FXCollections.observableArrayList();
     private MatchesAdapter matchesAdapter;
     private TeamsAdapter teamsAdapter;
@@ -52,15 +55,13 @@ public class AddScoreController implements Initializable {
     void save() {
         try {
             //get index of selected match
-            int index = matchSelectorBox.getSelectionModel().getSelectedIndex() + 1;
-            matchesAdapter.setTeamsScore(index, Integer.parseInt(homeTeamScore.getText()), Integer.parseInt(visitorTeamScore.getText()));
+            int index = matchSelectorBox.getSelectionModel().getSelectedIndex();
+            matchesAdapter.setTeamsScore(index + 1, Integer.parseInt(homeTeamScore.getText()), Integer.parseInt(visitorTeamScore.getText()));
 
-            // get Home Team Name
-            String homeTeamName = matchesAdapter.getHomeTeamName(index, "home");
-            // get Visitor Team Name
-            String visitorTeamName = matchesAdapter.getHomeTeamName(index, "visitor");
+            //copy the array returned by getTeamsNamesList() to a local array
+            String[] teams = matchesAdapter.getTeamsNamesList(index);
 
-            teamsAdapter.setStatus(homeTeamName, visitorTeamName, Integer.parseInt(homeTeamScore.getText()), Integer.parseInt(visitorTeamScore.getText()));
+            teamsAdapter.setStatus(teams[0], teams[1], Integer.parseInt(homeTeamScore.getText()), Integer.parseInt(visitorTeamScore.getText()));
 
             Stage stage = (Stage) cancelBtn.getScene().getWindow();
             stage.close();

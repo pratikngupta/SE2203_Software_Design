@@ -3,10 +3,7 @@ package se2203b.lab6.tennisballgames;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  *
@@ -15,6 +12,8 @@ import java.sql.Statement;
 public class TeamsAdapter {
 
     Connection connection;
+
+
 
     public TeamsAdapter(Connection conn, Boolean reset) throws SQLException {
         connection = conn;
@@ -100,44 +99,42 @@ public class TeamsAdapter {
     }
 
     public void setStatus(String hTeam, String vTeam, int hScore, int vScore) throws SQLException {
+        // Create a Statement object
         Statement stmt = connection.createStatement();
-        // Update the home team
+        ResultSet rs;
+
+        // Get the number of wins, losses, and ties for the home team
+        String query = "SELECT wins, losses, ties FROM Teams WHERE teamName = '" + hTeam + "'";
+        rs = stmt.executeQuery(query);
+
+        // Get the number of wins, losses, and ties for the visitor team
+        String query2 = "SELECT wins, losses, ties FROM Teams WHERE teamName = '" + vTeam + "'";
+        ResultSet rs2 = stmt.executeQuery(query2);
+
+
+
+        // Update the home team's record
         if (hScore > vScore) {
-            stmt.executeUpdate("UPDATE Teams SET Wins = Wins + 1 WHERE TeamName = '" + hTeam + "'");
-            stmt.executeUpdate("UPDATE Teams SET Losses = Losses + 1 WHERE TeamName = '" + vTeam + "'");
+            // Home team won
+            stmt.executeUpdate("UPDATE Teams SET wins = wins + 1 WHERE teamName = '" + hTeam + "'");
         } else if (hScore < vScore) {
-            stmt.executeUpdate("UPDATE Teams SET Wins = Wins + 1 WHERE TeamName = '" + vTeam + "'");
-            stmt.executeUpdate("UPDATE Teams SET Losses = Losses + 1 WHERE TeamName = '" + hTeam + "'");
+            // Home team lost
+            stmt.executeUpdate("UPDATE Teams SET losses = losses + 1 WHERE teamName = '" + hTeam + "'");
         } else {
-            stmt.executeUpdate("UPDATE Teams SET Ties = Ties + 1 WHERE TeamName = '" + hTeam + "'");
-            stmt.executeUpdate("UPDATE Teams SET Ties = Ties + 1 WHERE TeamName = '" + vTeam + "'");
+            // Home team tied
+            stmt.executeUpdate("UPDATE Teams SET ties = ties + 1 WHERE teamName = '" + hTeam + "'");
         }
 
-        // move the team base on the score
-        // get the teams data
-        ObservableList<Teams> teams = getTeamsList();
-        // loop for the all teams
-        while (teams.size() > 0) {
-            // get the first team
-            Teams team = teams.get(0);
-            // remove the first team
-            teams.remove(0);
-            // loop for the all teams
-            for (int i = 0; i < teams.size(); i++) {
-                // get the current team
-                Teams currentTeam = teams.get(i);
-                // check if the current team is better than the team
-                if (team.compareTo(currentTeam)) {
-                    // remove the current team
-                    teams.remove(i);
-                    // add the team before the current team
-                    teams.add(i, team);
-                    // add the current team after the team
-                    teams.add(i + 1, currentTeam);
-                    // break the loop
-                    break;
-                }
-            }
+        // Update the visitor team's record
+        if (hScore < vScore) {
+            // Visitor team won
+            stmt.executeUpdate("UPDATE Teams SET wins = wins + 1 WHERE teamName = '" + vTeam + "'");
+        } else if (hScore > vScore) {
+            // Visitor team lost
+            stmt.executeUpdate("UPDATE Teams SET losses = losses + 1 WHERE teamName = '" + vTeam + "'");
+        } else {
+            // Visitor team tied
+            stmt.executeUpdate("UPDATE Teams SET ties = ties + 1 WHERE teamName = '" + vTeam + "'");
         }
     }
 }

@@ -23,7 +23,6 @@ public class Teams {
         this.ties = new SimpleIntegerProperty(tie);
     }
 
-
     public void setTeamName(String name) {
         teamName.set(name);
     }
@@ -62,12 +61,5 @@ public class Teams {
     }
     public int getTies() {
         return ties.get();
-    }
-
-    public boolean compareTo(Teams currentTeam) {
-        if (this.getTemName().equals(currentTeam.getTemName())) {
-            return true;
-        }
-        return false;
     }
 }

@@ -1,12 +1,16 @@
 package se2203b.lab6.tennisballgames;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -25,6 +29,8 @@ public class MainApplicationController implements Initializable {
     private TeamsAdapter teams;
     private MatchesAdapter matches;
     private Connection conn;
+
+    static boolean darkModeOn = false;
 
     @FXML
     private MenuBar mainMenu;
@@ -67,6 +73,10 @@ public class MainApplicationController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         stage.show();
+    }
+
+    public boolean getMode(){
+        return darkModeOn;
     }
 
     @FXML

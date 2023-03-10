@@ -44,6 +44,10 @@ public class AddMatchController implements Initializable {
     @FXML
     void save() {
         try {
+            if (homeTeamBox.getValue().equals(visitorTeamBox.getValue())) {
+                displayAlert("ERROR: Home team and visitor team cannot be the same");
+                return;
+            }
             matchesAdapter.insertMatch(MatchesAdapter.getMax(), homeTeamBox.getValue(), visitorTeamBox.getValue());
             Stage stage = (Stage) cancelBtn.getScene().getWindow();
             stage.close();
@@ -78,7 +82,7 @@ public class AddMatchController implements Initializable {
             stage.showAndWait();
 
         } catch (IOException ex1) {
-
+            System.out.println("ERROR: " + ex1.getMessage());
         }
     }
 
