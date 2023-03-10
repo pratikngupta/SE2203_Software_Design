@@ -18,6 +18,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import static se2203b.lab6.tennisballgames.DisplayAlert.displayAlert;
+
 /**
  *
  * @author Abdelkader Ouda
@@ -47,27 +49,6 @@ public class TeamsStandingsController implements Initializable {
 
     }
 
-    private void displayAlert(String msg) {
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Alert.fxml"));
-            Parent ERROR = loader.load();
-            AlertController controller = (AlertController) loader.getController();
-
-            Scene scene = new Scene(ERROR);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-
-            stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
-            controller.setAlertText(msg);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-
-        } catch (IOException ex1) {
-
-        }
-    }
-
     @FXML
     public void buildData() {
         try {
@@ -89,7 +70,6 @@ public class TeamsStandingsController implements Initializable {
         winsCol.setCellValueFactory(cellData -> cellData.getValue().winsProperty().asObject());
         lossesCol.setCellValueFactory(cellData -> cellData.getValue().lossesProperty().asObject());
         tiesCol.setCellValueFactory(cellData -> cellData.getValue().tiesProperty().asObject());
-
         tableView.setItems(data);
 
     }

@@ -10,12 +10,13 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import static se2203b.lab6.tennisballgames.DisplayAlert.displayAlert;
 /**
  *
  * @author Abdelkader Ouda
@@ -25,9 +26,9 @@ public class MainApplicationController implements Initializable {
     private TeamsAdapter teams;
     private MatchesAdapter matches;
     private Connection conn;
-
     @FXML
     private MenuBar mainMenu;
+    private final String logoPath = "file:src/main/resources/se2203b/lab6/tennisballgames/WesternLogo.png";
 
     @FXML
     public void showAbout() throws Exception {
@@ -37,10 +38,9 @@ public class MainApplicationController implements Initializable {
 
         Scene scene = new Scene(About);
         Stage stage = new Stage();
-        //stage.initStyle(StageStyle.UNDECORATED);
 
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
+        stage.getIcons().add(new Image(logoPath));
         stage.setTitle("About Us");
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -62,7 +62,7 @@ public class MainApplicationController implements Initializable {
         Stage stage = new Stage();
 
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab6/tennisballgames/WesternLogo.png"));
+        stage.getIcons().add(new Image(logoPath));
         stage.setTitle("Current Teams Standings");
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -82,7 +82,7 @@ public class MainApplicationController implements Initializable {
         Stage stage = new Stage();
 
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
+        stage.getIcons().add(new Image(logoPath));
         stage.setTitle("Current Matches Schedule");
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -102,7 +102,7 @@ public class MainApplicationController implements Initializable {
         Stage stage = new Stage();
 
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
+        stage.getIcons().add(new Image(logoPath));
         stage.setTitle("Add New Team");
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -111,50 +111,47 @@ public class MainApplicationController implements Initializable {
 
     @FXML
     public void addMatch() throws Exception {
-        // Toggle the comments below after you finish the requirement of Task #3
 
-//        // create Teams model
-//        teams = new TeamsAdapter(conn, false);
-//        // create matches model
-//        matches = new MatchesAdapter(conn, false);
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddMatch.fxml"));
-//        Parent addMatch = (Parent) fxmlLoader.load();
-//        AddMatchController addMatchController = (AddMatchController) fxmlLoader.getController();
-//        addMatchController.setModel(matches, teams);
-//
-//        Scene scene = new Scene(addMatch);
-//        Stage stage = new Stage();
-//
-//        stage.setScene(scene);
-//        stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
-//        stage.setTitle("Add New Match");
-//        stage.initModality(Modality.APPLICATION_MODAL);
-//
-//        stage.show();
+        // create Teams model
+        teams = new TeamsAdapter(conn, false);
+        // create matches model
+        matches = new MatchesAdapter(conn, false);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddMatch.fxml"));
+        Parent addMatch = (Parent) fxmlLoader.load();
+        AddMatchController addMatchController = (AddMatchController) fxmlLoader.getController();
+        addMatchController.setModel(matches, teams);
+
+        Scene scene = new Scene(addMatch);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.getIcons().add(new Image(logoPath));
+        stage.setTitle("Add New Match");
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.show();
     }
 
     @FXML
     public void addScore() throws Exception {
-        // Toggle the comments below after you finish the requirement of Task #4
+        // create Teams model
+        teams = new TeamsAdapter(conn, false);
+        // create matches model
+        matches = new MatchesAdapter(conn, false);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddScore.fxml"));
+        Parent addScore = (Parent) fxmlLoader.load();
+        AddScoreController addScoreController = (AddScoreController) fxmlLoader.getController();
+        addScoreController.setModel(matches, teams);
 
-//        // create Teams model
-//        teams = new TeamsAdapter(conn, false);
-//        // create matches model
-//        matches = new MatchesAdapter(conn, false);
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddScore.fxml"));
-//        Parent addScore = (Parent) fxmlLoader.load();
-//        AddScoreController addScoreController = (AddScoreController) fxmlLoader.getController();
-//        addScoreController.setModel(matches, teams);
-//
-//        Scene scene = new Scene(addScore);
-//        Stage stage = new Stage();
-//
-//        stage.setScene(scene);
-//        stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
-//        stage.setTitle("Add Match Score");
-//        stage.initModality(Modality.APPLICATION_MODAL);
-//
-//        stage.show();
+        Scene scene = new Scene(addScore);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.getIcons().add(new Image(logoPath));
+        stage.setTitle("Add Match Score");
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.show();
     }
 
     @FXML
@@ -184,31 +181,8 @@ public class MainApplicationController implements Initializable {
         }
     }
 
-
-    private void displayAlert(String msg) {
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Alert.fxml"));
-            Parent ERROR = loader.load();
-            AlertController controller = (AlertController) loader.getController();
-
-            Scene scene = new Scene(ERROR);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-
-            stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
-            controller.setAlertText(msg);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-
-        } catch (IOException ex1) {
-
-        }
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         try {
             // Create a named constant for the URL
             // NOTE: This value is specific for Java DB
@@ -219,7 +193,6 @@ public class MainApplicationController implements Initializable {
         } catch (SQLException ex) {
             displayAlert(ex.getMessage());
         }
-
     }
 }
 

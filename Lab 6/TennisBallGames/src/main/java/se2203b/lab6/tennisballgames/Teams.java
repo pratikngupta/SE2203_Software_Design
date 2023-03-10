@@ -23,7 +23,6 @@ public class Teams {
         this.ties = new SimpleIntegerProperty(tie);
     }
 
-
     public void setTeamName(String name) {
         teamName.set(name);
     }

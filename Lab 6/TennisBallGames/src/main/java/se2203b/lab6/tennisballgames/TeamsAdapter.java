@@ -3,10 +3,7 @@ package se2203b.lab6.tennisballgames;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  *
@@ -83,25 +80,42 @@ public class TeamsAdapter {
         ResultSet rs;
 
         // Create a Statement object
-        
+        Statement stmt = connection.createStatement();
 
         // Create a string with a SELECT statement
-        
+        String sqlStatement = "SELECT TeamName FROM Teams";
 
         // Execute the statement and return the result
-        
-        
+        rs = stmt.executeQuery(sqlStatement);
+
         // loop for the all rs rows and update list
+        while (rs.next()) {
+            list.add(rs.getString("TeamName"));
+        }
         
         return list;
     }
 
-    public void setStatus(String hTeam, String vTeam, int hScore, int vScore) throws SQLException {
+    public void setStatus(String homeTeam, String visitorTeam, int homeTeamScore, int visitorTeamScore) throws SQLException {
         // Create a Statement object
-        Statement stmt = connection.createStatement();
-        ResultSet rs;
-        
-        // Write your code here for Task #4
-        
+        Statement statement = connection.createStatement();
+
+        // Update the status of the teams
+        if (homeTeamScore > visitorTeamScore) {
+            // Home team won
+            statement.executeUpdate("UPDATE Teams SET wins = wins + 1 WHERE teamName = '" + homeTeam + "'");
+            // Visitor team lost
+            statement.executeUpdate("UPDATE Teams SET losses = losses + 1 WHERE teamName = '" + visitorTeam + "'");
+        } else if (homeTeamScore < visitorTeamScore) {
+            // Home team lost
+            statement.executeUpdate("UPDATE Teams SET losses = losses + 1 WHERE teamName = '" + homeTeam + "'");
+            // Visitor team won
+            statement.executeUpdate("UPDATE Teams SET wins = wins + 1 WHERE teamName = '" + visitorTeam + "'");
+        } else {
+            // Home team tied
+            statement.executeUpdate("UPDATE Teams SET ties = ties + 1 WHERE teamName = '" + homeTeam + "'");
+            // Visitor team tied
+            statement.executeUpdate("UPDATE Teams SET ties = ties + 1 WHERE teamName = '" + visitorTeam + "'");
+        }
     }
 }

@@ -13,7 +13,6 @@ public class AboutController  {
     @FXML
     Button okBtn;
 
-
     public void exit() {
         Stage stage = (Stage) okBtn.getScene().getWindow();
         stage.close();
