@@ -26,11 +26,9 @@ public class MainApplicationController implements Initializable {
     private TeamsAdapter teams;
     private MatchesAdapter matches;
     private Connection conn;
-
-    static boolean darkModeOn = false;
-
     @FXML
     private MenuBar mainMenu;
+    private final String logoPath = "file:src/main/resources/se2203b/lab6/tennisballgames/WesternLogo.png";
 
     @FXML
     public void showAbout() throws Exception {
@@ -40,10 +38,9 @@ public class MainApplicationController implements Initializable {
 
         Scene scene = new Scene(About);
         Stage stage = new Stage();
-        //stage.initStyle(StageStyle.UNDECORATED);
 
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
+        stage.getIcons().add(new Image(logoPath));
         stage.setTitle("About Us");
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -65,15 +62,11 @@ public class MainApplicationController implements Initializable {
         Stage stage = new Stage();
 
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab6/tennisballgames/WesternLogo.png"));
+        stage.getIcons().add(new Image(logoPath));
         stage.setTitle("Current Teams Standings");
         stage.initModality(Modality.APPLICATION_MODAL);
 
         stage.show();
-    }
-
-    public boolean getMode(){
-        return darkModeOn;
     }
 
     @FXML
@@ -89,7 +82,7 @@ public class MainApplicationController implements Initializable {
         Stage stage = new Stage();
 
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
+        stage.getIcons().add(new Image(logoPath));
         stage.setTitle("Current Matches Schedule");
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -109,7 +102,7 @@ public class MainApplicationController implements Initializable {
         Stage stage = new Stage();
 
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
+        stage.getIcons().add(new Image(logoPath));
         stage.setTitle("Add New Team");
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -132,7 +125,7 @@ public class MainApplicationController implements Initializable {
         Stage stage = new Stage();
 
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
+        stage.getIcons().add(new Image(logoPath));
         stage.setTitle("Add New Match");
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -154,7 +147,7 @@ public class MainApplicationController implements Initializable {
         Stage stage = new Stage();
 
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab5/tennisballgames/WesternLogo.png"));
+        stage.getIcons().add(new Image(logoPath));
         stage.setTitle("Add Match Score");
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -190,7 +183,6 @@ public class MainApplicationController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         try {
             // Create a named constant for the URL
             // NOTE: This value is specific for Java DB
@@ -201,7 +193,6 @@ public class MainApplicationController implements Initializable {
         } catch (SQLException ex) {
             displayAlert(ex.getMessage());
         }
-
     }
 }
 

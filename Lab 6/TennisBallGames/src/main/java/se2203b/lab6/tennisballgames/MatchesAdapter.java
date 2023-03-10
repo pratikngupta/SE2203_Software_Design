@@ -154,7 +154,6 @@ public class MatchesAdapter {
         homeTeam = rs.getString(2);
         visitorTeam = rs.getString(3);
 
-
         return new String[]{homeTeam, visitorTeam};
     }
 }

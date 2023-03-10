@@ -67,8 +67,6 @@ public class AddMatchController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         homeTeamBox.setItems(data);
         visitorTeamBox.setItems(data);
-
-
     }
 
 }

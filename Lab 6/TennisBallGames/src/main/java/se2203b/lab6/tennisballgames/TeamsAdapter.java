@@ -96,27 +96,26 @@ public class TeamsAdapter {
         return list;
     }
 
-    public void setStatus(String hTeam, String vTeam, int hScore, int vScore) throws SQLException {
+    public void setStatus(String homeTeam, String visitorTeam, int homeTeamScore, int visitorTeamScore) throws SQLException {
         // Create a Statement object
-        Statement stmt = connection.createStatement();
+        Statement statement = connection.createStatement();
 
-        // Update the home team's record
-        if (hScore > vScore) {
+        // Update the status of the teams
+        if (homeTeamScore > visitorTeamScore) {
             // Home team won
-            stmt.executeUpdate("UPDATE Teams SET wins = wins + 1 WHERE teamName = '" + hTeam + "'");
+            statement.executeUpdate("UPDATE Teams SET wins = wins + 1 WHERE teamName = '" + homeTeam + "'");
             // Visitor team lost
-            stmt.executeUpdate("UPDATE Teams SET losses = losses + 1 WHERE teamName = '" + vTeam + "'");
-
-        } else if (hScore < vScore) {
+            statement.executeUpdate("UPDATE Teams SET losses = losses + 1 WHERE teamName = '" + visitorTeam + "'");
+        } else if (homeTeamScore < visitorTeamScore) {
             // Home team lost
-            stmt.executeUpdate("UPDATE Teams SET losses = losses + 1 WHERE teamName = '" + hTeam + "'");
+            statement.executeUpdate("UPDATE Teams SET losses = losses + 1 WHERE teamName = '" + homeTeam + "'");
             // Visitor team won
-            stmt.executeUpdate("UPDATE Teams SET wins = wins + 1 WHERE teamName = '" + vTeam + "'");
+            statement.executeUpdate("UPDATE Teams SET wins = wins + 1 WHERE teamName = '" + visitorTeam + "'");
         } else {
             // Home team tied
-            stmt.executeUpdate("UPDATE Teams SET ties = ties + 1 WHERE teamName = '" + hTeam + "'");
+            statement.executeUpdate("UPDATE Teams SET ties = ties + 1 WHERE teamName = '" + homeTeam + "'");
             // Visitor team tied
-            stmt.executeUpdate("UPDATE Teams SET ties = ties + 1 WHERE teamName = '" + vTeam + "'");
+            statement.executeUpdate("UPDATE Teams SET ties = ties + 1 WHERE teamName = '" + visitorTeam + "'");
         }
     }
 }

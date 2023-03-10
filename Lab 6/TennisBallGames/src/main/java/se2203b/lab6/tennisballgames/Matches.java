@@ -59,7 +59,6 @@ public class Matches {
     public String getVisitorTeam() {
         return visitorTeam.get();
     }
-    
 
     public void setHomeTeamScore(int num) {
         homeTeamScore.set(num);
