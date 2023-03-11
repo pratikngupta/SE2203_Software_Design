@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
  * @author Abdelkader Ouda
  */
 public class MatchesAdapter {
@@ -22,8 +21,8 @@ public class MatchesAdapter {
             Statement stmt = connection.createStatement();
             try {
                 // Remove tables if database tables have been created.
-            // This will throw an exception if the tables do not exist
-            stmt.execute("DROP TABLE Matches");
+                // This will throw an exception if the tables do not exist
+                stmt.execute("DROP TABLE Matches");
                 // then do finally
             } catch (SQLException ex) {
                 // No need to report an error.
@@ -42,15 +41,15 @@ public class MatchesAdapter {
             }
         }
     }
-    
-    private void populateSamples() throws SQLException{
-            // Create a listing of the matches to be played
-            this.insertMatch(1, "Astros", "Brewers");
-            this.insertMatch(2, "Brewers", "Cubs");
-            this.insertMatch(3, "Cubs", "Astros");
+
+    private void populateSamples() throws SQLException {
+        // Create a listing of the matches to be played
+        this.insertMatch(1, "Astros", "Brewers");
+        this.insertMatch(2, "Brewers", "Cubs");
+        this.insertMatch(3, "Cubs", "Astros");
     }
-        
-    
+
+
     public static int getMax() throws SQLException {
         int num = 0;
         // num is a serial number generated automatically and equal to the maximum match number in the table plus one.
@@ -68,13 +67,16 @@ public class MatchesAdapter {
 
         return num + 1;
     }
-    
+
     public void insertMatch(int num, String home, String visitor) throws SQLException {
+        // num is a serial number generated automatically and equal to the maximum match number in the table plus one.
         Statement stmt = connection.createStatement();
+
+        // Insert a new row into the Matches table
         stmt.executeUpdate("INSERT INTO Matches (MatchNumber, HomeTeam, VisitorTeam, HomeTeamScore, VisitorTeamScore) "
                 + "VALUES (" + num + " , '" + home + "' , '" + visitor + "', 0, 0)");
     }
-    
+
     // Get all Matches
     public ObservableList<Matches> getMatchesList() throws SQLException {
         ObservableList<Matches> matchesList = FXCollections.observableArrayList();
@@ -117,11 +119,8 @@ public class MatchesAdapter {
         //Loop the entire rows of rs and set the string values of list
         while (rs.next()) {
             int matchNumber = Integer.parseInt(rs.getString(1));
-            String homeTeam = rs.getString(2).trim().strip();
-            String visitorTeam = rs.getString(3).trim().strip();
-
-            // add string to list
-            // format it in the form of "MatchNumber: HomeTeam       - VisitorTeam ", align the strings to the left
+            String homeTeam = rs.getString(2);
+            String visitorTeam = rs.getString(3);
 
             String match = String.format("%-1d: %-15s <->  %10s", matchNumber, homeTeam, visitorTeam);
 
@@ -129,23 +128,24 @@ public class MatchesAdapter {
         }
         return list;
     }
-    
-    
-    public void setTeamsScore(int matchNumber, int hScore, int vScore) throws SQLException
-   {
-         Statement stmt = connection.createStatement();
-         System.out.println("UPDATE Matches SET HomeTeamScore = " + hScore + ", VisitorTeamScore = " + vScore + " WHERE MatchNumber = " + matchNumber);
-         stmt.executeUpdate("UPDATE Matches SET HomeTeamScore = " + hScore + ", VisitorTeamScore = " + vScore + " WHERE MatchNumber = " + matchNumber);
-   }
+
+
+    public void setTeamsScore(int matchNumber, int homeScore, int visitorScore) throws SQLException {
+        //Write an SQL statement to select all columns from the Matches table.
+        Statement statement = connection.createStatement();
+
+        //print the update statement to the console for debugging purposes
+        System.out.println("UPDATE Matches SET HomeTeamScore = " + homeScore + ", VisitorTeamScore = " + visitorScore + " WHERE MatchNumber = " + matchNumber);
+
+        //execute the update statement to update the database table with the new scores for the match number passed in the parameters
+        statement.executeUpdate("UPDATE Matches SET HomeTeamScore = " + homeScore + ", VisitorTeamScore = " + visitorScore + " WHERE MatchNumber = " + matchNumber);
+    }
 
     public String[] getTeamsNamesList(int index) throws SQLException {
         String homeTeam, visitorTeam;
-        String sql = "SELECT * FROM Matches";
 
-        //Execute the query by sending the SQL statement to the DBMS.
-        sql = sql + " ORDER BY MatchNumber";
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM Matches ORDER BY MatchNumber");
 
         //navigate to the index
         for (int i = 0; i <= index; i++) {
