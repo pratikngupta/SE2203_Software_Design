@@ -22,10 +22,8 @@ public class AddScoreController implements Initializable {
     public AnchorPane scorePlane;
     @FXML
     private Button cancelBtn;
-
     @FXML
     private TextField visitorTeamScore;
-
     @FXML
     private ComboBox<String> matchSelectorBox;
     ObservableList<String> data = FXCollections.observableArrayList();
@@ -47,6 +45,30 @@ public class AddScoreController implements Initializable {
     @FXML
     void save() {
         try {
+            if (matchSelectorBox.getSelectionModel().isEmpty()) {
+                //call displayAlert method from DisplayAlert class to display error message
+                displayAlert("ERROR: Please select a match");
+                return;
+            }
+            else if (homeTeamScore.getText().isEmpty() || visitorTeamScore.getText().isEmpty()) {
+                //call displayAlert method from DisplayAlert class to display error message
+                if (homeTeamScore.getText().isEmpty()) {
+                    displayAlert("ERROR: Home team score is empty");
+                } else {
+                    displayAlert("ERROR: Visitor team score is empty");
+                }
+                return;
+            }
+            else if (Integer.parseInt(homeTeamScore.getText()) < 0 || Integer.parseInt(visitorTeamScore.getText()) < 0) {
+                //call displayAlert method from DisplayAlert class to display error message
+                if (Integer.parseInt(homeTeamScore.getText()) < 0) {
+                    displayAlert("ERROR: Home team score cannot be negative");
+                } else {
+                    displayAlert("ERROR: Visitor team score cannot be negative");
+                }
+                return;
+            }
+
             //get index of selected match
             int index = matchSelectorBox.getSelectionModel().getSelectedIndex();
             matchesAdapter.setTeamsScore(index + 1, Integer.parseInt(homeTeamScore.getText()), Integer.parseInt(visitorTeamScore.getText()));
@@ -60,6 +82,9 @@ public class AddScoreController implements Initializable {
             stage.close();
         } catch (SQLException ex) {
             displayAlert("ERROR: " + ex.getMessage());
+        }
+        catch (NumberFormatException ex) {
+            displayAlert("ERROR: SCORE MUST BE A NUMBER");
         }
     }
 

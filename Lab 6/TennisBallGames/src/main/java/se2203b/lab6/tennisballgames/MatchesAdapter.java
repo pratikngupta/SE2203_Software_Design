@@ -117,12 +117,14 @@ public class MatchesAdapter {
         //Loop the entire rows of rs and set the string values of list
         while (rs.next()) {
             int matchNumber = Integer.parseInt(rs.getString(1));
-            String homeTeam = rs.getString(2);
-            String visitorTeam = rs.getString(3);
+            String homeTeam = rs.getString(2).trim().strip();
+            String visitorTeam = rs.getString(3).trim().strip();
 
             // add string to list
-            // format it in the form of "MatchNumber: HomeTeam       - VisitorTeam "
-            String match = String.format("%-3d: %-15s - %-15s", matchNumber, homeTeam, visitorTeam);
+            // format it in the form of "MatchNumber: HomeTeam       - VisitorTeam ", align the strings to the left
+
+            String match = String.format("%-1d: %-15s <->  %10s", matchNumber, homeTeam, visitorTeam);
+
             list.add(match);
         }
         return list;

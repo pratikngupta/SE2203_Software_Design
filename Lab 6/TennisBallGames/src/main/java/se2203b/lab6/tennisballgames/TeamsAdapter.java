@@ -92,7 +92,6 @@ public class TeamsAdapter {
         while (rs.next()) {
             list.add(rs.getString("TeamName"));
         }
-        
         return list;
     }
 
