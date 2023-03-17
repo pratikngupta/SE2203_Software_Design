@@ -33,12 +33,12 @@ public class TeamsAdapter {
                 stmt.execute("CREATE TABLE Teams ("
                         + "TeamName CHAR(15) NOT NULL PRIMARY KEY, "
                         + "Wins INT, Losses INT, Ties INT)");
-                populateSampls();
+                populateSample();
             }
         }
     }
 
-    private void populateSampls() throws SQLException {
+    private void populateSample() throws SQLException {
         // Add some teams
         this.insertTeam("Astros");
         this.insertTeam("Marlins");
