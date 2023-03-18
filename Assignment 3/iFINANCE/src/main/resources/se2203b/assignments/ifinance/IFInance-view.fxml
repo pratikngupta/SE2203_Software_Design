@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="727.0" prefWidth="1030.0" style="             -fx-background-image: url(&quot;file:src/main/resources/se2203b/assignments/ifinance/WesternBackground.png&quot;);             -fx-background-repeat: no-repeat;             -fx-background-size: 100% 100%;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se2203b.assignments.ifinance.IFinanceController">
+    <top>
+        <MenuBar fx:id="mainMenu" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Manage Account Groups">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items></Menu>
+                <Menu mnemonicParsing="false" text="Chart of Accounts">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items></Menu>
+                <Menu mnemonicParsing="false" text="Duble-Entry Transactions">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+               </items></Menu>
+                <Menu mnemonicParsing="false" text="Financial Reports">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Change Password">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="About">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About Us" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+</BorderPane>
