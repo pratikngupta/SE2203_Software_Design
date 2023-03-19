@@ -11,15 +11,17 @@ public class User {
 
     private IntegerProperty id;
     private StringProperty username;
+    private StringProperty fullname;
     private StringProperty password;
     private StringProperty address;
     private StringProperty email;
     private BooleanProperty isAdmin;
     private BooleanProperty isLogged;
 
-    public User(int id,String username, String password, String address, String email, boolean isAdmin, boolean isLogged) {
+    public User(int id,String username,String fullname ,String password, String address, String email, boolean isAdmin, boolean isLogged) {
         this.id = new SimpleIntegerProperty(id);
         this.username = new SimpleStringProperty(username);
+        this.fullname = new SimpleStringProperty(fullname);
         this.password = new SimpleStringProperty(password);
         this.address = new SimpleStringProperty(address);
         this.email = new SimpleStringProperty(email);
@@ -28,7 +30,7 @@ public class User {
     }
 
     public User() {
-        this(-1, null, null, null, null, false, false);
+        this(-1, null,null ,null, null, null, false, false);
     }
 
     public String getUsername() {
@@ -109,5 +111,21 @@ public class User {
 
     public IntegerProperty idProperty() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
+    }
+
+    public String getFullname() {
+        return fullname.get();
+    }
+
+    public StringProperty fullnameProperty() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname.set(fullname);
     }
 }

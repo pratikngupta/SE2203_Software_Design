@@ -142,7 +142,7 @@ public class IFinanceController implements Initializable {
 
     @FXML
     void showChangePassword( ) throws SQLException, IOException {
-        users = new UserAdapter(connection, true);
+        users = new UserAdapter(connection, false);
 
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("ChangePassword-view.fxml"));
@@ -157,15 +157,33 @@ public class IFinanceController implements Initializable {
 
         stage.setScene(scene);
         stage.getIcons().add(new Image(logoPath));
-        stage.setTitle("Login");
+        stage.setTitle("Change Password");
         stage.initModality(Modality.APPLICATION_MODAL);
 
         stage.showAndWait();
     }
 
     @FXML
-    void showCreateUserAccount( ) {
+    void showCreateUserAccount( ) throws SQLException, IOException {
+        users = new UserAdapter(connection, false);
 
+        // load the fxml file (the UI elements)
+        FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("CreateUserAccount-view.fxml"));
+        Parent standings = (Parent) fxmlLoader.load();
+
+        CreateUserAccountController createAccount = (CreateUserAccountController) fxmlLoader.getController();
+        createAccount.setModel(users);
+
+        // create new stage
+        Scene scene = new Scene(standings);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.getIcons().add(new Image(logoPath));
+        stage.setTitle("Create User Account");
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.showAndWait();
     }
 
     @FXML

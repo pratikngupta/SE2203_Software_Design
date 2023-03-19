@@ -34,6 +34,7 @@ public class UserAdapter {
                 stmt.execute("CREATE TABLE Users (" +
                         "id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1), " +
                         "username VARCHAR(30), " +
+                        "fullname VARCHAR(30), " +
                         "password VARCHAR(30), " +
                         "address VARCHAR(30), " +
                         "email VARCHAR(30), " +
@@ -54,7 +55,7 @@ public class UserAdapter {
         String hashed = hash.hashPassword("admin", "admin");
         this.insertUser("admin", hashed, true, false);
         hashed = (hash.hashPassword("user", "user"));
-        this.insertUser("user", hashed, "1030 Oakcrossing Gate","pratikngutpa@outlook.com",false, false);
+        this.insertUser("user","Pratik" ,hashed, "1030 Oakcrossing Gate","pratikngutpa@outlook.com",false, false);
         printUsers();
     }
 
@@ -63,9 +64,9 @@ public class UserAdapter {
         stmt.executeUpdate("INSERT INTO Users (username, password, isAdmin, isLogged) VALUES ('" + username + "', '" + password + "', '" + admin + "', '" + logged + "')");
     }
 
-    public void insertUser(String username, String  password, String address, String email, Boolean admin, boolean logged) throws SQLException {
+    public void insertUser(String username, String fullName, String password, String email, String address, Boolean admin, boolean logged) throws SQLException {
         Statement stmt = connection.createStatement();
-        stmt.executeUpdate("INSERT INTO Users (username, password, address, email, isAdmin, isLogged) VALUES ('" + username + "', '" + password + "', '" + address + "', '" + email + "', '" + admin + "', '" + logged + "')");
+        stmt.executeUpdate("INSERT INTO Users (username, fullname, password, email, address, isAdmin, isLogged) VALUES ('" + username + "', '" + fullName + "', '" + password + "', '" + email + "', '" + address + "', '" + admin + "', '" + logged + "')");
     }
 
     public void deleteUser(String username) throws SQLException {
@@ -90,14 +91,30 @@ public class UserAdapter {
         return stmt.executeQuery("SELECT * FROM Users WHERE username = '" + username + "' AND password = '" + pass + "'").next();
     }
 
+    public boolean checkUser(String username) throws SQLException {
+        Statement stmt = connection.createStatement();
+        return stmt.executeQuery("SELECT * FROM Users WHERE username = '" + username + "'").next();
+    }
+
     public static User setCurrentUser() throws SQLException{
         //find the user that is logged in
         Statement stmt = connection.createStatement();
         var rs = stmt.executeQuery("SELECT * FROM Users WHERE isLogged = true");
         while (rs.next()) {
-            currentUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getBoolean(7));
+            currentUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8));
         }
         return currentUser;
+    }
+
+    public void addUser(User user) throws SQLException {
+        Statement stmt = connection.createStatement();
+        String username = user.getUsername();
+        String fullName = user.getFullname();
+        String password = user.getPassword();
+        String email = user.getEmail();
+        String address = user.getAddress();
+        String hashed = hash.hashPassword(password, username);
+        stmt.executeUpdate("INSERT INTO Users (username, fullname, password, email, address, isAdmin, isLogged) VALUES ('" + username + "', '" + fullName + "', '" + hashed + "', '" + email + "', '" + address + "', false, false)");
     }
 
     // print all users in the database with their passwords to console
@@ -105,10 +122,10 @@ public class UserAdapter {
         Statement stmt = connection.createStatement();
         var rs = stmt.executeQuery("SELECT * FROM Users");
         //print header for table
-        System.out.println("id username password address email isAdmin isLogged");
+        System.out.println("id username fullname password address email isAdmin isLogged");
 
         while (rs.next()) {
-            System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getBoolean(6) + " " + rs.getBoolean(7));
+            System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6) + " " + rs.getBoolean(7) + " " + rs.getBoolean(8));
         }
     }
 }
