@@ -1,11 +1,13 @@
 package se2203b.assignments.ifinance;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
@@ -19,6 +21,8 @@ import java.util.ResourceBundle;
  */
 public class IFinanceController implements Initializable {
 
+    @FXML
+    private Menu aboutMenu, fileMenu, manageAccountGroupsMenu, chartsOfAccountMenu, doubleEntryMenu, financialMenu, changePasswordMenu;
     @FXML
     private MenuBar mainMenu;
 
@@ -48,7 +52,19 @@ public class IFinanceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        //disable all menu items
+        setMenuItems(false);
     }
 
+    public void login() {
+        System.out.println("Login");
+    }
+
+    public void setMenuItems(boolean status) {
+        manageAccountGroupsMenu.setDisable(!status);
+        chartsOfAccountMenu.setDisable(!status);
+        doubleEntryMenu.setDisable(!status);
+        financialMenu.setDisable(!status);
+        changePasswordMenu.setDisable(!status);
+    }
 }
