@@ -78,6 +78,8 @@ public class IFinanceController implements Initializable {
             // Create a connection to the database
             connection = DriverManager.getConnection(DB_URL);
 
+            reset();
+
         } catch (SQLException ex) {
             displayAlert(ex.getMessage());
         }
@@ -140,7 +142,7 @@ public class IFinanceController implements Initializable {
 
     @FXML
     void showChangePassword( ) throws SQLException, IOException {
-        users = new UserAdapter(connection, false);
+        users = new UserAdapter(connection, true);
 
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("ChangePassword-view.fxml"));
@@ -187,7 +189,7 @@ public class IFinanceController implements Initializable {
         try {
             // create Teams model
             users = new UserAdapter(connection, true);
-            displayAlert("Teams table has been created");
+            displayAlert("User table has been created");
 
         } catch (SQLException ex) {
             displayAlert("ERROR: " + ex.getMessage());

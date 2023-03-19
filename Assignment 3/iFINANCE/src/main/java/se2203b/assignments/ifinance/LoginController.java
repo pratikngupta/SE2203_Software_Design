@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static se2203b.assignments.ifinance.Debug.*;
+
 public class LoginController implements Initializable {
 
     public Text errorTextField;
@@ -22,12 +24,8 @@ public class LoginController implements Initializable {
     private TextField usernameField;
     private UserAdapter userAdapter;
 
-    private User currentUser;
-
-    //Array list to store username and password
-    private ArrayList<String> info = new ArrayList<>();
-
     public void setModel(UserAdapter userAdapter) {
+        printPURPLE("LoginController", "setModel");
         this.userAdapter = userAdapter;
     }
     @FXML
@@ -46,16 +44,19 @@ public class LoginController implements Initializable {
             // show error message
             errorTextField.setVisible(true);
             errorTextField.setText("Please enter username and password");
+            printRED("LoginController", "Login failed --> username and password are empty");
 
         } else if (usernameField.getText().isEmpty()) {
             // show error message
             errorTextField.setVisible(true);
             errorTextField.setText("Please enter username");
+            printRED("LoginController", "Login failed --> username is empty");
 
         } else if (passwordField.getText().isEmpty()) {
             // show error message
             errorTextField.setVisible(true);
             errorTextField.setText("Please enter password");
+            printRED("LoginController", "Login failed --> password is empty");
         }
 
         String username = usernameField.getText();
@@ -67,12 +68,14 @@ public class LoginController implements Initializable {
         userAdapter.updateUser(username, login);
 
         if (login) {
+            printGREEN("LoginController", "Login successful");
             // Get current stage reference
             Stage stage = (Stage) passwordField.getScene().getWindow();
             // Close stage
             stage.close();
         } else {
             // show error message
+            printRED("LoginController", "Login failed");
             errorTextField.setVisible(true);
             errorTextField.setText("Username or password is incorrect");
         }
@@ -80,6 +83,6 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        printBLUE("LoginController", "initialize");
     }
 }

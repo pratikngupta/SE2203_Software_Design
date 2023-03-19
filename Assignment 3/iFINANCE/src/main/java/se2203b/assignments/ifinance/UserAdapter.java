@@ -29,7 +29,19 @@ public class UserAdapter {
                 // the table simply did not exist
             } finally {
                 // create the table with userName, Password, isAdmin, isLogged
-                stmt.execute("CREATE TABLE Users (username VARCHAR(30), password VARCHAR(30), isAdmin BOOLEAN, isLogged BOOLEAN)");
+
+                // create a table with 7 columns: id, username, password, address, email, isAdmin, isLogged
+                stmt.execute("CREATE TABLE Users (" +
+                        "id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1), " +
+                        "username VARCHAR(30), " +
+                        "password VARCHAR(30), " +
+                        "address VARCHAR(30), " +
+                        "email VARCHAR(30), " +
+                        "isAdmin BOOLEAN, " +
+                        "isLogged BOOLEAN, " +
+                        "PRIMARY KEY (id))");
+
+                //stmt.execute("CREATE TABLE Users (username VARCHAR(30), password VARCHAR(30), isAdmin BOOLEAN, isLogged BOOLEAN)");
 
                 // populate the table with an admin user
                 populateSample();
@@ -41,12 +53,19 @@ public class UserAdapter {
     public void populateSample() throws SQLException {
         String hashed = hash.hashPassword("admin", "admin");
         this.insertUser("admin", hashed, true, false);
+        hashed = (hash.hashPassword("user", "user"));
+        this.insertUser("user", hashed, "1030 Oakcrossing Gate","pratikngutpa@outlook.com",false, false);
         printUsers();
     }
 
     public void insertUser(String username, String  password, Boolean admin, boolean logged) throws SQLException {
         Statement stmt = connection.createStatement();
         stmt.executeUpdate("INSERT INTO Users (username, password, isAdmin, isLogged) VALUES ('" + username + "', '" + password + "', '" + admin + "', '" + logged + "')");
+    }
+
+    public void insertUser(String username, String  password, String address, String email, Boolean admin, boolean logged) throws SQLException {
+        Statement stmt = connection.createStatement();
+        stmt.executeUpdate("INSERT INTO Users (username, password, address, email, isAdmin, isLogged) VALUES ('" + username + "', '" + password + "', '" + address + "', '" + email + "', '" + admin + "', '" + logged + "')");
     }
 
     public void deleteUser(String username) throws SQLException {
@@ -63,14 +82,11 @@ public class UserAdapter {
     public void updateUser(String username, boolean logged) throws SQLException {
         Statement stmt = connection.createStatement();
         stmt.executeUpdate("UPDATE Users SET isLogged = '" + logged + "' WHERE username = '" + username + "'");
-        printUsers();
     }
 
     public boolean checkUser(String username, String password) throws SQLException {
         Statement stmt = connection.createStatement();
-
         String pass = hash.hashPassword(password, username);
-        printUsers();
         return stmt.executeQuery("SELECT * FROM Users WHERE username = '" + username + "' AND password = '" + pass + "'").next();
     }
 
@@ -79,7 +95,7 @@ public class UserAdapter {
         Statement stmt = connection.createStatement();
         var rs = stmt.executeQuery("SELECT * FROM Users WHERE isLogged = true");
         while (rs.next()) {
-            currentUser = new User(rs.getString(1), rs.getString(2), rs.getBoolean(3), rs.getBoolean(4));
+            currentUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getBoolean(6), rs.getBoolean(7));
         }
         return currentUser;
     }
@@ -88,8 +104,11 @@ public class UserAdapter {
     public void printUsers() throws SQLException {
         Statement stmt = connection.createStatement();
         var rs = stmt.executeQuery("SELECT * FROM Users");
+        //print header for table
+        System.out.println("id username password address email isAdmin isLogged");
+
         while (rs.next()) {
-            System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getBoolean(3) + " " + rs.getBoolean(4));
+            System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getBoolean(6) + " " + rs.getBoolean(7));
         }
     }
 }

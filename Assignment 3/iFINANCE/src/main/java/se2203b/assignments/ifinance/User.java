@@ -8,20 +8,27 @@ import javafx.beans.property.*;
 
 public class User {
 
+
+    private IntegerProperty id;
     private StringProperty username;
     private StringProperty password;
+    private StringProperty address;
+    private StringProperty email;
     private BooleanProperty isAdmin;
     private BooleanProperty isLogged;
 
-    public User(String username, String password, boolean isAdmin, boolean isLogged) {
+    public User(int id,String username, String password, String address, String email, boolean isAdmin, boolean isLogged) {
+        this.id = new SimpleIntegerProperty(id);
         this.username = new SimpleStringProperty(username);
         this.password = new SimpleStringProperty(password);
+        this.address = new SimpleStringProperty(address);
+        this.email = new SimpleStringProperty(email);
         this.isAdmin = new SimpleBooleanProperty(isAdmin);
         this.isLogged = new SimpleBooleanProperty(isLogged);
     }
 
     public User() {
-        this(null, null, false, false);
+        this(-1, null, null, null, null, false, false);
     }
 
     public String getUsername() {
@@ -70,5 +77,37 @@ public class User {
 
     public void setLogged(boolean logged) {
         isLogged.set(logged);
+    }
+
+    public String getAddress() {
+        return address.get();
+    }
+
+    public StringProperty addressProperty() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address.set(address);
+    }
+
+    public String getEmail() {
+        return email.get();
+    }
+
+    public StringProperty emailProperty() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email.set(email);
+    }
+
+    public int getId() {
+        return id.get();
+    }
+
+    public IntegerProperty idProperty() {
+        return id;
     }
 }
