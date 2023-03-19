@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -31,12 +32,15 @@ import static se2203b.assignments.ifinance.DisplayAlert.displayAlert;
 public class IFinanceController implements Initializable {
 
     @FXML
-    private Menu aboutMenu, fileMenu, manageAccountGroupsMenu, chartsOfAccountMenu, doubleEntryMenu, financialMenu, changePasswordMenu;
+    private Menu aboutMenu, fileMenu, manageAccountGroupsMenu, chartsOfAccountMenu, doubleEntryMenu, financialMenu, manageUserAccountMenu, userInfoMenu;
     @FXML
     private MenuBar mainMenu;
-
     private Connection connection;
+    private UserAdapter users;
 
+    User currentUser = null;
+
+    private final String logoPath = "file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png";
 
     public void showAbout() throws Exception {
         // load the fxml file (the UI elements)
@@ -64,7 +68,8 @@ public class IFinanceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //disable all menu items
-        setMenuItems(false);
+        setMenuItems();
+        userInfoMenu.setVisible(false);
 
         try {
             // Create a named constant for the URL
@@ -78,33 +83,102 @@ public class IFinanceController implements Initializable {
         }
     }
 
-    public void login() {
+    public void login() throws SQLException, IOException {
+        users = new UserAdapter(connection, false);
+
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("Login-view.fxml"));
-        // create the root node
-        Parent Login = null;
-        try {
-            Login = fxmlLoader.load();
-            // create new stage
-            Stage stage = new Stage();
-            // add the about's UI elements to the stage
-            stage.setScene(new Scene(Login));
-            // add icon to the About window
-            stage.getIcons().add(new Image("file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png"));
-            stage.setTitle("Login");
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
-            System.out.println("Login");
-        } catch (Exception e) {
-            e.printStackTrace();
+        Parent standings = (Parent) fxmlLoader.load();
+
+        LoginController loginController = (LoginController) fxmlLoader.getController();
+        loginController.setModel(users);
+
+        // create new stage
+        Scene scene = new Scene(standings);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.getIcons().add(new Image(logoPath));
+        stage.setTitle("Login");
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.showAndWait();
+
+        currentUser = UserAdapter.setCurrentUser();
+
+        setMenuItems();
+    }
+
+    public void setMenuItems() {
+        if (currentUser == null) {
+            manageAccountGroupsMenu.setDisable(true);
+            chartsOfAccountMenu.setDisable(true);
+            doubleEntryMenu.setDisable(true);
+            financialMenu.setDisable(true);
+            manageUserAccountMenu.setDisable(true);
+            userInfoMenu.setVisible(false);
+
+        } else {
+            userInfoMenu.setText(currentUser.getUsername());
+            userInfoMenu.setVisible(true);
+
+            if (currentUser.isAdmin()) {
+                manageAccountGroupsMenu.setDisable(true);
+                chartsOfAccountMenu.setDisable(true);
+                doubleEntryMenu.setDisable(true);
+                financialMenu.setDisable(true);
+                manageUserAccountMenu.setDisable(false);
+            } else {
+                manageAccountGroupsMenu.setDisable(false);
+                chartsOfAccountMenu.setDisable(false);
+                doubleEntryMenu.setDisable(false);
+                financialMenu.setDisable(false);
+                manageUserAccountMenu.setDisable(true);
+            }
         }
     }
 
-    public void setMenuItems(boolean status) {
-        manageAccountGroupsMenu.setDisable(!status);
-        chartsOfAccountMenu.setDisable(!status);
-        doubleEntryMenu.setDisable(!status);
-        financialMenu.setDisable(!status);
-        changePasswordMenu.setDisable(!status);
+    @FXML
+    void showChangePassword( ) {
+
+    }
+
+    @FXML
+    void showCreateUserAccount( ) {
+
+    }
+
+    @FXML
+    void showDeleteUserAccount( ) {
+
+    }
+
+    @FXML
+    void showLogout( ) {
+        currentUser = null;
+        displayAlert("You have been logged out");
+        setMenuItems();
+    }
+
+    @FXML
+    void showModifyUserAccount( ) {
+
+    }
+
+    public void reset() {
+        try {
+            // create Teams model
+            users = new UserAdapter(connection, true);
+            displayAlert("Teams table has been created");
+
+        } catch (SQLException ex) {
+            displayAlert("ERROR: " + ex.getMessage());
+        }
+    }
+
+    public void loginAction(){
+        //enable all menu items
+//        setMenuItems(true);
+        userInfoMenu.setVisible(true);
     }
 }

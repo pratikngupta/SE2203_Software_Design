@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import javafx.scene.control.Button?>
+<AnchorPane prefHeight="146.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se2203b.assignments.ifinance.AlertController">
+   <children>
+      <Label fx:id="error" layoutX="50.0" layoutY="15.0" prefHeight="103.0" prefWidth="552.0" style="-fx-alignment: center;" text="Label" wrapText="true" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="22.0" />
+      <Button fx:id="ok" layoutX="250.0" layoutY="100.0" mnemonicParsing="false" onAction="#ok" prefHeight="25.0" prefWidth="75.0" text="OK" />
+   </children>
+</AnchorPane>

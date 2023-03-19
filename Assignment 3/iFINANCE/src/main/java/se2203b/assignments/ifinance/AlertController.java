@@ -1,5 +1,6 @@
 package se2203b.assignments.ifinance;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -26,6 +27,10 @@ public class AlertController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
+    public void ok() {
+        // close the window
+        error.getScene().getWindow().hide();
+    }
 }

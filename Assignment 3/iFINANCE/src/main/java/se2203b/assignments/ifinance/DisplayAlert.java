@@ -20,7 +20,7 @@ public class DisplayAlert {
             Stage stage = new Stage();
             stage.setScene(scene);
 
-            stage.getIcons().add(new Image("file:src/main/resources/se2203b/lab6/tennisballgames/WesternLogo.png"));
+            stage.getIcons().add(new Image("file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png"));
             controller.setAlertText(msg);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
