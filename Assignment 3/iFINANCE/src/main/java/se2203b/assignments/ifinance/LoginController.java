@@ -70,7 +70,6 @@ public class LoginController implements Initializable {
             // Get current stage reference
             Stage stage = (Stage) passwordField.getScene().getWindow();
             // Close stage
-
             stage.close();
         } else {
             // show error message

@@ -56,7 +56,8 @@ public class UserAdapter {
 
     public void updateUser(String username, String password) throws SQLException {
         Statement stmt = connection.createStatement();
-        stmt.executeUpdate("UPDATE Users SET password = '" + hash + "' WHERE username = '" + username + "'");
+        String hashed = hash.hashPassword(password, username);
+        stmt.executeUpdate("UPDATE Users SET password = '" + hashed + "' WHERE username = '" + username + "'");
     }
 
     public void updateUser(String username, boolean logged) throws SQLException {
