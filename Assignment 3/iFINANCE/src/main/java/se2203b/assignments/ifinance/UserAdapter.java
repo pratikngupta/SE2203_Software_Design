@@ -1,6 +1,9 @@
 package se2203b.assignments.ifinance;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -106,6 +109,18 @@ public class UserAdapter {
         return currentUser;
     }
 
+    public static User getUserInfo(String username) throws SQLException{
+        //find the user that is logged in
+        Statement stmt = connection.createStatement();
+        var rs = stmt.executeQuery("SELECT * FROM Users WHERE username = '" + username + "'");
+        while (rs.next()) {
+            currentUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8));
+            System.out.println(currentUser.getId());
+        }
+
+        return currentUser;
+    }
+
     public void addUser(User user) throws SQLException {
         Statement stmt = connection.createStatement();
         String username = user.getUsername();
@@ -127,5 +142,21 @@ public class UserAdapter {
         while (rs.next()) {
             System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6) + " " + rs.getBoolean(7) + " " + rs.getBoolean(8));
         }
+    }
+
+    public ObservableList<String> getUsersList() throws SQLException {
+        // this will return a list of users from the database excluding the admin user
+        Statement stmt = connection.createStatement();
+
+        var rs = stmt.executeQuery("SELECT * FROM Users WHERE isAdmin = false");
+
+        ObservableList<String> users = FXCollections.observableArrayList();;
+
+        while (rs.next()) {
+            //only add username to list
+            users.add(rs.getString(2));
+        }
+
+        return users;
     }
 }

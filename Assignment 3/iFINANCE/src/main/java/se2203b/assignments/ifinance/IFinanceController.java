@@ -1,13 +1,11 @@
 package se2203b.assignments.ifinance;
 
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.Image;
@@ -18,11 +16,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 import static se2203b.assignments.ifinance.DisplayAlert.displayAlert;
 
@@ -78,8 +74,6 @@ public class IFinanceController implements Initializable {
             // Create a connection to the database
             connection = DriverManager.getConnection(DB_URL);
 
-            reset();
-
         } catch (SQLException ex) {
             displayAlert(ex.getMessage());
         }
@@ -93,7 +87,8 @@ public class IFinanceController implements Initializable {
         Parent standings = (Parent) fxmlLoader.load();
 
         LoginController loginController = (LoginController) fxmlLoader.getController();
-        loginController.setModel(users);
+
+        loginController.setModel(users, currentUser);
 
         // create new stage
         Scene scene = new Scene(standings);
@@ -187,20 +182,59 @@ public class IFinanceController implements Initializable {
     }
 
     @FXML
-    void showDeleteUserAccount( ) {
+    void showDeleteUserAccount( ) throws SQLException, IOException {
+        users = new UserAdapter(connection, false);
 
+        // load the fxml file (the UI elements)
+        FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("DeleteUser-view.fxml"));
+        Parent standings = (Parent) fxmlLoader.load();
+
+        DeleteUserController deleteUser = (DeleteUserController) fxmlLoader.getController();
+        deleteUser.setModel(users);
+
+        // create new stage
+        Scene scene = new Scene(standings);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.getIcons().add(new Image(logoPath));
+        stage.setTitle("Delete User Account");
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.showAndWait();
     }
 
     @FXML
-    void showLogout( ) {
+    void showLogout() throws SQLException {
+        currentUser.setLogged(false);
+        users = new UserAdapter(connection, false);
+        users.updateUser(currentUser.getUsername(), currentUser.isLogged());
         currentUser = null;
         displayAlert("You have been logged out");
         setMenuItems();
     }
 
     @FXML
-    void showModifyUserAccount( ) {
+    void showModifyUserAccount( ) throws IOException, SQLException {
+        users = new UserAdapter(connection, false);
 
+        // load the fxml file (the UI elements)
+        FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("ModifyUser-view.fxml"));
+        Parent standings = (Parent) fxmlLoader.load();
+
+        ModifyUserController modifyUser = (ModifyUserController) fxmlLoader.getController();
+        modifyUser.setModel(users);
+
+        // create new stage
+        Scene scene = new Scene(standings);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.getIcons().add(new Image(logoPath));
+        stage.setTitle("Modify User Account");
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.showAndWait();
     }
 
     public void reset() {

@@ -23,10 +23,12 @@ public class LoginController implements Initializable {
     @FXML
     private TextField usernameField;
     private UserAdapter userAdapter;
+    private User currentUser;
 
-    public void setModel(UserAdapter userAdapter) {
+    public void setModel(UserAdapter userAdapter, User currentUser) {
         printPURPLE("LoginController", "setModel");
         this.userAdapter = userAdapter;
+        this.currentUser = currentUser;
     }
     @FXML
     void cancelButtonClicked(ActionEvent event) {
@@ -39,24 +41,8 @@ public class LoginController implements Initializable {
     @FXML
     void okButtonClicked() throws SQLException {
 
-        // check if username and password are filled
-        if (usernameField.getText().isEmpty() && passwordField.getText().isEmpty()) {
-            // show error message
-            errorTextField.setVisible(true);
-            errorTextField.setText("Please enter username and password");
-            printRED("LoginController", "Login failed --> username and password are empty");
-
-        } else if (usernameField.getText().isEmpty()) {
-            // show error message
-            errorTextField.setVisible(true);
-            errorTextField.setText("Please enter username");
-            printRED("LoginController", "Login failed --> username is empty");
-
-        } else if (passwordField.getText().isEmpty()) {
-            // show error message
-            errorTextField.setVisible(true);
-            errorTextField.setText("Please enter password");
-            printRED("LoginController", "Login failed --> password is empty");
+        if(!check()){
+            return;
         }
 
         String username = usernameField.getText();
@@ -64,10 +50,13 @@ public class LoginController implements Initializable {
 
         boolean login = userAdapter.checkUser(username, password);
 
-
         userAdapter.updateUser(username, login);
 
         if (login) {
+            if (currentUser != null) {
+                userAdapter.updateUser(currentUser.getUsername(), false);
+            }
+            
             printGREEN("LoginController", "Login successful");
             // Get current stage reference
             Stage stage = (Stage) passwordField.getScene().getWindow();
@@ -79,6 +68,33 @@ public class LoginController implements Initializable {
             errorTextField.setVisible(true);
             errorTextField.setText("Username or password is incorrect");
         }
+    }
+
+    public boolean check(){
+
+        // check if username and password are filled
+        if (usernameField.getText().isEmpty() && passwordField.getText().isEmpty()) {
+            // show error message
+            errorTextField.setVisible(true);
+            errorTextField.setText("Please enter username and password");
+            printRED("LoginController", "Login failed --> username and password are empty");
+            return false;
+
+        } else if (usernameField.getText().isEmpty()) {
+            // show error message
+            errorTextField.setVisible(true);
+            errorTextField.setText("Please enter username");
+            printRED("LoginController", "Login failed --> username is empty");
+            return false;
+
+        } else if (passwordField.getText().isEmpty()) {
+            // show error message
+            errorTextField.setVisible(true);
+            errorTextField.setText("Please enter password");
+            printRED("LoginController", "Login failed --> password is empty");
+            return false;
+        }
+        return true;
     }
 
     @Override
