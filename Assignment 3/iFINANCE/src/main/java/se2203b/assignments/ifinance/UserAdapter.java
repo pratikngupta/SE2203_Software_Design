@@ -45,8 +45,6 @@ public class UserAdapter {
                         "isLogged BOOLEAN, " +
                         "PRIMARY KEY (id))");
 
-                //stmt.execute("CREATE TABLE Users (username VARCHAR(30), password VARCHAR(30), isAdmin BOOLEAN, isLogged BOOLEAN)");
-
                 // populate the table with an admin user
                 populateSample();
             }
@@ -134,6 +132,18 @@ public class UserAdapter {
         String address = user.getAddress();
         String hashed = hash.hashPassword(password, username);
         stmt.executeUpdate("INSERT INTO Users (id,username, fullname, password, email, address, isAdmin, isLogged) VALUES (" + id + ", '" + username + "', '" + fullName + "', '" + hashed + "', '" + email + "', '" + address + "', false, false)");
+    }
+
+    public void updateUser(User user) throws SQLException {
+        Statement stmt = connection.createStatement();
+        int id = user.getId();
+        String username = user.getUsername();
+        String fullName = user.getFullname();
+        String email = user.getEmail();
+        String address = user.getAddress();
+
+        //update where username is the same
+        stmt.executeUpdate("UPDATE Users SET fullname = '" + fullName + "', email = '" + email + "', address = '" + address + "' WHERE username = '" + username + "'");
     }
 
     // print all users in the database with their passwords to console

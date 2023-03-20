@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static se2203b.assignments.ifinance.Debug.printRED;
+
 public class DisplayAlert {
     public static void displayAlert(String msg) {
         try {
@@ -23,6 +25,9 @@ public class DisplayAlert {
             stage.getIcons().add(new Image("file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png"));
             controller.setAlertText(msg);
             stage.initModality(Modality.APPLICATION_MODAL);
+
+            printRED("ALERT", msg);
+
             stage.showAndWait();
 
         } catch (IOException ex1) {

@@ -14,6 +14,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import static se2203b.assignments.ifinance.Debug.*;
 import static se2203b.assignments.ifinance.DisplayAlert.displayAlert;
 
 public class DeleteUserController implements Initializable {
@@ -41,6 +42,15 @@ public class DeleteUserController implements Initializable {
     @FXML
     void save(ActionEvent event) {
         try {
+
+            if (usernameList.getValue() == null) {
+                errorMessageField.setText("Please select a user to delete");
+                errorMessageField.setVisible(true);
+                printRED("DeleteUser", "failed --> Please select a user to delete");
+                return;
+            }
+
+            errorMessageField.setVisible(false);
             userAdapter.deleteUser(usernameList.getValue());
             data.clear();
             usernameList.getItems().clear();
@@ -48,8 +58,12 @@ public class DeleteUserController implements Initializable {
             emailField.clear();
             fullnameField.clear();
             idField.clear();
+
+            printGREEN("DeleteUser", "User deleted successfully");
             buildData();
-        } catch (SQLException ex) {
+        }
+
+        catch (SQLException ex) {
             displayAlert("ERROR: " + ex.getMessage());
         }
     }
@@ -64,6 +78,7 @@ public class DeleteUserController implements Initializable {
     }
 
     public void setModel(UserAdapter users) {
+        printPURPLE("DeleteUser", "Setting model");
         this.userAdapter = users;
         buildData();
         errorMessageField.setVisible(false);
@@ -71,6 +86,7 @@ public class DeleteUserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        printBLUE("DeleteUser", "Initializing...");
         usernameList.setOnAction(e -> {
             try {
                 User user = UserAdapter.getUserInfo(usernameList.getValue());
