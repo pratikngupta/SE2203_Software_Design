@@ -23,14 +23,8 @@ public class PasswordHash {
         //get first character of the password
         char firstCharPassword = password.charAt(0);
 
-        //get the ascii value of the first character
-        int asciiValueChar = firstChar;
-
-        //get the ascii value of the first character
-        int asciiValueCharPassword = firstCharPassword;
-
         //add both ascii values
-        int asciiValue = asciiValueChar + asciiValueCharPassword;
+        int asciiValue = (int) firstChar + (int) firstCharPassword;
 
         //hash the password
         for (int i = asciiValue; i < 1000; i++) {

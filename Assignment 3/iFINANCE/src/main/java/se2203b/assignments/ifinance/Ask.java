@@ -32,7 +32,7 @@ public class Ask {
     public static final String cyan = "\u001B[36m";
 
     //Declaring Scanner type reference variable
-    public static Scanner input = new Scanner(System.in);
+    public static final Scanner input = new Scanner(System.in);
 
     //This will accept string message and will print it on screen
     public static void printMessage(String message) {

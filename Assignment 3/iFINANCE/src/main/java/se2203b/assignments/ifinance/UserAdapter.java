@@ -13,11 +13,12 @@ import java.io.*;
 import java.util.Scanner;
 
 // this class is responsible for creating the connection between the database and the table
+@SuppressWarnings({"SqlResolve", "SqlNoDataSourceInspection"})
 public class UserAdapter {
 
     static Connection connection;
     static User currentUser = null;
-    PasswordHash hash = new PasswordHash();
+    final PasswordHash hash = new PasswordHash();
 
     public UserAdapter(Connection connection, boolean reset) throws SQLException {
         UserAdapter.connection = connection;
@@ -157,7 +158,6 @@ public class UserAdapter {
 
     public void updateUser(User user) throws SQLException {
         Statement stmt = connection.createStatement();
-        int id = user.getId();
         String username = user.getUsername();
         String fullName = user.getFullname();
         String email = user.getEmail();

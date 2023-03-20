@@ -42,7 +42,7 @@ public class IFinanceController implements Initializable {
         Parent About = fxmlLoader.load();
         // create new stage
         Stage stage = new Stage();
-        // add the about's UI elements to the stage
+        // add the about UI elements to the stage
         stage.setScene(new Scene(About));
         // add icon to the About window
         stage.getIcons().add(new Image("file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png"));
@@ -85,7 +85,7 @@ public class IFinanceController implements Initializable {
 
         LoginController loginController = fxmlLoader.getController();
 
-        loginController.setModel(users, currentUser, mainMenu);
+        loginController.setModel(users, currentUser);
 
         // create new stage
         Scene scene = new Scene(standings);

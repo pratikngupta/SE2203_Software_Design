@@ -49,25 +49,22 @@ public class CreateUserAccountController implements Initializable {
 
     @FXML
     void save(ActionEvent event) throws SQLException {
-        if (verify()) {
-            if (firstPasswordField.getText().equals(secondPasswordField.getText())) {
-
-                newUser.setAddress(addressField.getText());
-                newUser.setEmail(emailField.getText());
-                newUser.setFullname(fullnameField.getText());
-                newUser.setPassword(firstPasswordField.getText());
-                newUser.setUsername(usernameField.getText());
-
-                userAdapter.addUser(newUser);
-
-                printGREEN("CreateUser", "success");
-                Stage stage = (Stage) usernameField.getScene().getWindow();
-                // Close stage
-                stage.close();
-            } else {
-                printRED("CreateUser", "failed");
-            }
+        if (!verify()) {
+            return;
         }
+
+        newUser.setAddress(addressField.getText());
+        newUser.setEmail(emailField.getText());
+        newUser.setFullname(fullnameField.getText());
+        newUser.setPassword(firstPasswordField.getText());
+        newUser.setUsername(usernameField.getText());
+
+        userAdapter.addUser(newUser);
+
+        printGREEN("CreateUser", "success");
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        // Close stage
+        stage.close();
     }
 
     boolean verify() throws SQLException {

@@ -40,58 +40,70 @@ public class ChangePasswordController implements Initializable {
 
     @FXML
     void save() throws SQLException {
+        if (!verify()) {
+            return;
+        }
+
+        String oldPassword = oldPasswordField.getText();
+        String newPassword = FirstNewPasswordField.getText();
+        String username = currentUser.getUsername();
+
+        boolean login = userAdapter.checkUser(username, oldPassword);
+
+        if (!login) {
+            errorMessageField.setVisible(true);
+            errorMessageField.setText("Old password is incorrect");
+            printRED("ChangePassword", "failed --> Old password is incorrect");
+            return;
+        }
+
+        userAdapter.updateUser(username, newPassword);
+
+        printGREEN("ChangePassword", "Password changed successfully");
+
+        // Get current stage reference
+        Stage stage = (Stage) infoField.getScene().getWindow();
+        // Close stage
+        stage.close();
+    }
+
+    public boolean verify() {
         if (oldPasswordField.getText().isEmpty() && FirstNewPasswordField.getText().isEmpty() && secondNewPasswordField.getText().isEmpty()) {
             // show error message
             errorMessageField.setVisible(true);
             errorMessageField.setText("Please enter all fields");
             printRED("ChangePassword", "failed --> Please enter all fields");
+            return false;
 
         } else if (oldPasswordField.getText().isEmpty()) {
             // show error message
             errorMessageField.setVisible(true);
             errorMessageField.setText("Please enter old password");
             printRED("ChangePassword", "failed --> Please enter old password");
+            return false;
 
         } else if (FirstNewPasswordField.getText().isEmpty()) {
             // show error message
             errorMessageField.setVisible(true);
             errorMessageField.setText("Please enter new password");
             printRED("ChangePassword", "failed --> Please enter new password");
+            return false;
 
         } else if (secondNewPasswordField.getText().isEmpty()) {
             // show error message
             errorMessageField.setVisible(true);
             errorMessageField.setText("Please enter new password again");
             printRED("ChangePassword", "failed --> Please enter new password again");
+            return false;
         } else if (!FirstNewPasswordField.getText().equals(secondNewPasswordField.getText())) {
             // show error message
             errorMessageField.setVisible(true);
             errorMessageField.setText("New passwords do not match");
             printRED("ChangePassword", "failed --> New passwords do not match");
-        } else {
-
-            String oldPassword = oldPasswordField.getText();
-            String newPassword = FirstNewPasswordField.getText();
-            String username = currentUser.getUsername();
-
-            boolean login = userAdapter.checkUser(username, oldPassword);
-            if (login) {
-                userAdapter.updateUser(username, newPassword);
-
-                printGREEN("ChangePassword", "Password changed successfully");
-
-                // Get current stage reference
-                Stage stage = (Stage) infoField.getScene().getWindow();
-                // Close stage
-                stage.close();
-
-            } else {
-                errorMessageField.setVisible(true);
-                errorMessageField.setText("Old password is incorrect");
-                printRED("ChangePassword", "failed --> Old password is incorrect");
-            }
+            return false;
         }
 
+        return true;
     }
 
     public void setModel(UserAdapter userAdapter, User currentUser) {
