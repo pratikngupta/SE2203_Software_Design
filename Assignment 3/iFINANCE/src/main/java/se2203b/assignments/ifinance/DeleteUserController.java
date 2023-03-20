@@ -19,16 +19,13 @@ import static se2203b.assignments.ifinance.DisplayAlert.displayAlert;
 
 public class DeleteUserController implements Initializable {
 
+    @FXML
+    final ObservableList<String> data = FXCollections.observableArrayList();
     public ComboBox<String> usernameList;
     @FXML
     private TextField addressField, emailField, fullnameField, idField;
-
     @FXML
     private Text errorMessageField;
-
-    @FXML
-    final ObservableList<String> data = FXCollections.observableArrayList();
-
     private UserAdapter userAdapter;
 
     @FXML
@@ -61,16 +58,14 @@ public class DeleteUserController implements Initializable {
 
             printGREEN("DeleteUser", "User deleted successfully");
             buildData();
-        }
-
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             displayAlert("ERROR: " + ex.getMessage());
         }
     }
 
     public void buildData() {
         try {
-            data.addAll(userAdapter.getUsersList());
+            data.addAll(userAdapter.getUsernameList());
             usernameList.setItems(data);
         } catch (SQLException ex) {
             displayAlert("ERROR: " + ex.getMessage());

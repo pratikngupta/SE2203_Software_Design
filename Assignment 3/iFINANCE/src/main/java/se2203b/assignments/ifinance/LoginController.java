@@ -32,6 +32,7 @@ public class LoginController implements Initializable {
         this.currentUser = currentUser;
         this.mainMenu = mainMenu;
     }
+
     @FXML
     void cancelButtonClicked(ActionEvent event) {
         // Get current stage reference
@@ -43,7 +44,7 @@ public class LoginController implements Initializable {
     @FXML
     void okButtonClicked() throws SQLException {
 
-        if(!check()){
+        if (!check()) {
             return;
         }
 
@@ -72,7 +73,7 @@ public class LoginController implements Initializable {
         }
     }
 
-    public boolean check(){
+    public boolean check() {
 
         // check if username and password are filled
         if (usernameField.getText().isEmpty() && passwordField.getText().isEmpty()) {

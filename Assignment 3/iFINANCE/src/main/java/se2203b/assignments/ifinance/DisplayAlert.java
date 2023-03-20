@@ -16,7 +16,7 @@ public class DisplayAlert {
         try {
             FXMLLoader loader = new FXMLLoader(DisplayAlert.class.getResource("Alert.fxml"));
             Parent ERROR = loader.load();
-            AlertController controller = (AlertController) loader.getController();
+            AlertController controller = loader.getController();
 
             Scene scene = new Scene(ERROR);
             Stage stage = new Stage();

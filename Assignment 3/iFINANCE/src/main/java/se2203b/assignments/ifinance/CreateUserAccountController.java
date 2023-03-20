@@ -12,7 +12,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import static se2203b.assignments.ifinance.Debug.*;
+import static se2203b.assignments.ifinance.Debug.printGREEN;
+import static se2203b.assignments.ifinance.Debug.printRED;
 
 public class CreateUserAccountController implements Initializable {
 
@@ -37,7 +38,7 @@ public class CreateUserAccountController implements Initializable {
 
     private UserAdapter userAdapter;
 
-    private User newUser = new User();
+    private final User newUser = new User();
 
     @FXML
     void cancel(ActionEvent event) {
@@ -112,15 +113,13 @@ public class CreateUserAccountController implements Initializable {
             errorMessageField.setText("Please enter confirm password");
             printRED("CreateUser", "failed --> Please enter confirm password");
             return false;
-        }
-        else if (!firstPasswordField.getText().equals(secondPasswordField.getText())) {
+        } else if (!firstPasswordField.getText().equals(secondPasswordField.getText())) {
             // show error message
             errorMessageField.setVisible(true);
             errorMessageField.setText("Password does not match");
             printRED("CreateUser", "failed --> Password does not match");
             return false;
-        }
-        else if (userAdapter.checkUser(usernameField.getText())){
+        } else if (userAdapter.checkUser(usernameField.getText())) {
             // show error message
             errorMessageField.setVisible(true);
             errorMessageField.setText("Username already exists");

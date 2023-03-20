@@ -8,8 +8,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 /**
- *
  * @author Abdelkader Ouda
  */
 public class IFinanceApplication extends Application {

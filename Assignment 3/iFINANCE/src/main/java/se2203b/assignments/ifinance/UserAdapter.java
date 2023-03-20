@@ -5,20 +5,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import java.io.*;
+import java.util.Scanner;
 
 // this class is responsible for creating the connection between the database and the table
 public class UserAdapter {
 
     static Connection connection;
-
+    static User currentUser = null;
     PasswordHash hash = new PasswordHash();
 
-    static User currentUser = null;
-
     public UserAdapter(Connection connection, boolean reset) throws SQLException {
-        this.connection = connection;
+        UserAdapter.connection = connection;
 
         if (reset) {
             // create the table
@@ -39,8 +41,8 @@ public class UserAdapter {
                         "username VARCHAR(30), " +
                         "fullname VARCHAR(30), " +
                         "password VARCHAR(30), " +
-                        "address VARCHAR(30), " +
-                        "email VARCHAR(30), " +
+                        "address VARCHAR(50), " +
+                        "email VARCHAR(50), " +
                         "isAdmin BOOLEAN, " +
                         "isLogged BOOLEAN, " +
                         "PRIMARY KEY (id))");
@@ -51,24 +53,64 @@ public class UserAdapter {
         }
     }
 
+    public static User getLoggedUser() throws SQLException {
+        //find the user that is logged in
+        Statement stmt = connection.createStatement();
+        var rs = stmt.executeQuery("SELECT * FROM Users WHERE isLogged = true");
+        while (rs.next()) {
+            currentUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8));
+        }
+        return currentUser;
+    }
+
+    public static User getUserInfo(String username) throws SQLException {
+        //find the user that is logged in
+        Statement stmt = connection.createStatement();
+        var rs = stmt.executeQuery("SELECT * FROM Users WHERE username = '" + username + "'");
+        while (rs.next()) {
+            currentUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8));
+        }
+
+        return currentUser;
+    }
+
     // Start table with admin user
     public void populateSample() throws SQLException {
         String hashed = hash.hashPassword("admin", "admin");
-        System.out.println("reach here");
-        this.insertUser(0,"admin", hashed, true, false);
-        System.out.println("Added admin user");
+        this.insertUser(0, "admin", hashed, true, false);
         hashed = (hash.hashPassword("user", "user"));
-        this.insertUser(getMaxId(),"user","Pratik" ,hashed, "1030 Oakcrossing Gate","pratikngutpa@outlook.com",false, false);
+        this.insertUser(getMaxId(), "user", "Pratik", hashed, "1030 Oakcrossing Gate", "pratikngutpa@outlook.com", false, false);
+        //read csv file
+        try {
+            Scanner sc = new Scanner(new File("src/main/resources/se2203b/assignments/ifinance/user.csv"));
+            sc.useDelimiter(",");   //sets the delimiter pattern
+            sc.nextLine();
+
+            while (sc.hasNext()){
+                //skip the first line
+                String line = sc.nextLine();
+                //remove ' from the string
+                line = line.replace("'", "");
+
+                String[] values = line.split(",");
+                this.insertUser(getMaxId(), values[0], values[1], values[4], values[3], values[2], false, false);
+            }
+
+            sc.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         printUsers();
     }
 
-    public void insertUser(int id, String username, String  password, Boolean admin, boolean logged) throws SQLException {
+    public void insertUser(int id, String username, String password, Boolean admin, boolean logged) throws SQLException {
         Statement stmt = connection.createStatement();
         // ID is integer, username is string, password is string, isAdmin is boolean, isLogged is boolean
         stmt.executeUpdate("INSERT INTO Users (id, username, password, isAdmin, isLogged) VALUES (" + id + ", '" + username + "', '" + password + "', '" + admin + "', '" + logged + "')");
     }
 
-    public void insertUser(int id,String username, String fullName, String password, String email, String address, Boolean admin, boolean logged) throws SQLException {
+    public void insertUser(int id, String username, String fullName, String password, String email, String address, Boolean admin, boolean logged) throws SQLException {
         Statement stmt = connection.createStatement();
         stmt.executeUpdate("INSERT INTO Users (id, username, fullname, password, email, address, isAdmin, isLogged) VALUES (" + id + ", '" + username + "', '" + fullName + "', '" + password + "', '" + email + "', '" + address + "', '" + admin + "', '" + logged + "')");
         System.out.println("Summery: " + id + " " + username + " " + password + " " + admin + " " + logged);
@@ -99,27 +141,6 @@ public class UserAdapter {
     public boolean checkUser(String username) throws SQLException {
         Statement stmt = connection.createStatement();
         return stmt.executeQuery("SELECT * FROM Users WHERE username = '" + username + "'").next();
-    }
-
-    public static User getLoggedUser() throws SQLException{
-        //find the user that is logged in
-        Statement stmt = connection.createStatement();
-        var rs = stmt.executeQuery("SELECT * FROM Users WHERE isLogged = true");
-        while (rs.next()) {
-            currentUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8));
-        }
-        return currentUser;
-    }
-
-    public static User getUserInfo(String username) throws SQLException{
-        //find the user that is logged in
-        Statement stmt = connection.createStatement();
-        var rs = stmt.executeQuery("SELECT * FROM Users WHERE username = '" + username + "'");
-        while (rs.next()) {
-            currentUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8));
-        }
-
-        return currentUser;
     }
 
     public void addUser(User user) throws SQLException {
@@ -158,13 +179,13 @@ public class UserAdapter {
         }
     }
 
-    public ObservableList<String> getUsersList() throws SQLException {
+    public ObservableList<String> getUsernameList() throws SQLException {
         // this will return a list of users from the database excluding the admin user
         Statement stmt = connection.createStatement();
 
         var rs = stmt.executeQuery("SELECT * FROM Users WHERE isAdmin = false");
 
-        ObservableList<String> users = FXCollections.observableArrayList();;
+        ObservableList<String> users = FXCollections.observableArrayList();
 
         while (rs.next()) {
             //only add username to list
@@ -183,5 +204,29 @@ public class UserAdapter {
         }
         System.out.println("Max id: " + maxId);
         return maxId + 1;
+    }
+
+    public ObservableList<User> getUserList() throws SQLException {
+        ObservableList<User> list = FXCollections.observableArrayList();
+        ResultSet rs;
+
+        // Create a Statement object
+        Statement stmt = connection.createStatement();
+
+        // Execute a statement
+        rs = stmt.executeQuery("SELECT * FROM Users WHERE isAdmin = false");
+
+        while (rs.next()) {
+            list.add(new User(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getBoolean(7),
+                    rs.getBoolean(8)));
+        }
+        return list;
     }
 }

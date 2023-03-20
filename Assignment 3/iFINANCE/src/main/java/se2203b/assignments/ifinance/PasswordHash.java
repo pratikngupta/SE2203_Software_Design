@@ -1,4 +1,5 @@
 package se2203b.assignments.ifinance;
+
 import java.util.Arrays;
 
 public class PasswordHash {
@@ -23,17 +24,17 @@ public class PasswordHash {
         char firstCharPassword = password.charAt(0);
 
         //get the ascii value of the first character
-        int asciiValueChar = (int) firstChar;
+        int asciiValueChar = firstChar;
 
         //get the ascii value of the first character
-        int asciiValueCharPassword = (int) firstCharPassword;
+        int asciiValueCharPassword = firstCharPassword;
 
         //add both ascii values
         int asciiValue = asciiValueChar + asciiValueCharPassword;
 
         //hash the password
         for (int i = asciiValue; i < 1000; i++) {
-            hashedPassword = hashedPassword.hashCode() + "" ;
+            hashedPassword = hashedPassword.hashCode() + "";
             //System.out.println("hashedPassword: " + hashedPassword);
         }
 

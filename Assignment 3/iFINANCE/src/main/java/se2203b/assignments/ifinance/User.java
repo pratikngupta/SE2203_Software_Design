@@ -9,16 +9,16 @@ import javafx.beans.property.*;
 public class User {
 
 
-    private IntegerProperty id;
-    private StringProperty username;
-    private StringProperty fullname;
-    private StringProperty password;
-    private StringProperty address;
-    private StringProperty email;
-    private BooleanProperty isAdmin;
-    private BooleanProperty isLogged;
+    private final IntegerProperty id;
+    private final StringProperty username;
+    private final StringProperty fullname;
+    private final StringProperty password;
+    private final StringProperty address;
+    private final StringProperty email;
+    private final BooleanProperty isAdmin;
+    private final BooleanProperty isLogged;
 
-    public User(int id,String username,String fullname ,String password, String address, String email, boolean isAdmin, boolean isLogged) {
+    public User(int id, String username, String fullname, String password, String address, String email, boolean isAdmin, boolean isLogged) {
         this.id = new SimpleIntegerProperty(id);
         this.username = new SimpleStringProperty(username);
         this.fullname = new SimpleStringProperty(fullname);
@@ -30,103 +30,103 @@ public class User {
     }
 
     public User() {
-        this(-1, null,null ,null, null, null, false, false);
+        this(-1, null, null, null, null, null, false, false);
     }
 
     public String getUsername() {
         return username.get();
     }
 
-    public StringProperty usernameProperty() {
-        return username;
-    }
-
     public void setUsername(String username) {
         this.username.set(username);
+    }
+
+    public StringProperty usernameProperty() {
+        return username;
     }
 
     public String getPassword() {
         return password.get();
     }
 
-    public StringProperty passwordProperty() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password.set(password);
+    }
+
+    public StringProperty passwordProperty() {
+        return password;
     }
 
     public boolean isAdmin() {
         return isAdmin.get();
     }
 
-    public BooleanProperty adminProperty() {
-        return isAdmin;
-    }
-
     public void setAdmin(boolean admin) {
         isAdmin.set(admin);
+    }
+
+    public BooleanProperty adminProperty() {
+        return isAdmin;
     }
 
     public boolean isLogged() {
         return isLogged.get();
     }
 
-    public BooleanProperty loggedProperty() {
-        return isLogged;
-    }
-
     public void setLogged(boolean logged) {
         isLogged.set(logged);
+    }
+
+    public BooleanProperty loggedProperty() {
+        return isLogged;
     }
 
     public String getAddress() {
         return address.get();
     }
 
-    public StringProperty addressProperty() {
-        return address;
-    }
-
     public void setAddress(String address) {
         this.address.set(address);
+    }
+
+    public StringProperty addressProperty() {
+        return address;
     }
 
     public String getEmail() {
         return email.get();
     }
 
-    public StringProperty emailProperty() {
-        return email;
-    }
-
     public void setEmail(String email) {
         this.email.set(email);
+    }
+
+    public StringProperty emailProperty() {
+        return email;
     }
 
     public int getId() {
         return id.get();
     }
 
-    public IntegerProperty idProperty() {
-        return id;
-    }
-
     public void setId(int id) {
         this.id.set(id);
+    }
+
+    public IntegerProperty idProperty() {
+        return id;
     }
 
     public String getFullname() {
         return fullname.get();
     }
 
-    public StringProperty fullnameProperty() {
-        return fullname;
-    }
-
     public void setFullname(String fullname) {
         this.fullname.set(fullname);
+    }
+
+    public StringProperty fullnameProperty() {
+        return fullname;
     }
 
 

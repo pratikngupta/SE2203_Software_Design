@@ -63,14 +63,12 @@ public class ChangePasswordController implements Initializable {
             errorMessageField.setVisible(true);
             errorMessageField.setText("Please enter new password again");
             printRED("ChangePassword", "failed --> Please enter new password again");
-        }
-        else if (!FirstNewPasswordField.getText().equals(secondNewPasswordField.getText())) {
+        } else if (!FirstNewPasswordField.getText().equals(secondNewPasswordField.getText())) {
             // show error message
             errorMessageField.setVisible(true);
             errorMessageField.setText("New passwords do not match");
             printRED("ChangePassword", "failed --> New passwords do not match");
-        }
-        else {
+        } else {
 
             String oldPassword = oldPasswordField.getText();
             String newPassword = FirstNewPasswordField.getText();

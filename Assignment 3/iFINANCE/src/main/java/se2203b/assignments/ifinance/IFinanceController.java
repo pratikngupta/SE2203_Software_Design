@@ -14,11 +14,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import static se2203b.assignments.ifinance.DisplayAlert.displayAlert;
 
@@ -27,16 +26,14 @@ import static se2203b.assignments.ifinance.DisplayAlert.displayAlert;
  */
 public class IFinanceController implements Initializable {
 
+    private final String logoPath = "file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png";
+    User currentUser = null;
     @FXML
     private Menu aboutMenu, fileMenu, manageAccountGroupsMenu, chartsOfAccountMenu, doubleEntryMenu, financialMenu, manageUserAccountMenu, userInfoMenu;
     @FXML
     private MenuBar mainMenu;
     private Connection connection;
     private UserAdapter users;
-
-    User currentUser = null;
-
-    private final String logoPath = "file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png";
 
     public void showAbout() throws Exception {
         // load the fxml file (the UI elements)
@@ -84,9 +81,9 @@ public class IFinanceController implements Initializable {
 
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("Login-view.fxml"));
-        Parent standings = (Parent) fxmlLoader.load();
+        Parent standings = fxmlLoader.load();
 
-        LoginController loginController = (LoginController) fxmlLoader.getController();
+        LoginController loginController = fxmlLoader.getController();
 
         loginController.setModel(users, currentUser, mainMenu);
 
@@ -136,14 +133,14 @@ public class IFinanceController implements Initializable {
     }
 
     @FXML
-    void showChangePassword( ) throws SQLException, IOException {
+    void showChangePassword() throws SQLException, IOException {
         users = new UserAdapter(connection, false);
 
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("ChangePassword-view.fxml"));
-        Parent standings = (Parent) fxmlLoader.load();
+        Parent standings = fxmlLoader.load();
 
-        ChangePasswordController changePassword = (ChangePasswordController) fxmlLoader.getController();
+        ChangePasswordController changePassword = fxmlLoader.getController();
         changePassword.setModel(users, currentUser);
 
         // create new stage
@@ -159,14 +156,14 @@ public class IFinanceController implements Initializable {
     }
 
     @FXML
-    void showCreateUserAccount( ) throws SQLException, IOException {
+    void showCreateUserAccount() throws SQLException, IOException {
         users = new UserAdapter(connection, false);
 
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("CreateUserAccount-view.fxml"));
-        Parent standings = (Parent) fxmlLoader.load();
+        Parent standings = fxmlLoader.load();
 
-        CreateUserAccountController createAccount = (CreateUserAccountController) fxmlLoader.getController();
+        CreateUserAccountController createAccount = fxmlLoader.getController();
         createAccount.setModel(users);
 
         // create new stage
@@ -182,14 +179,14 @@ public class IFinanceController implements Initializable {
     }
 
     @FXML
-    void showDeleteUserAccount( ) throws SQLException, IOException {
+    void showDeleteUserAccount() throws SQLException, IOException {
         users = new UserAdapter(connection, false);
 
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("DeleteUser-view.fxml"));
-        Parent standings = (Parent) fxmlLoader.load();
+        Parent standings = fxmlLoader.load();
 
-        DeleteUserController deleteUser = (DeleteUserController) fxmlLoader.getController();
+        DeleteUserController deleteUser = fxmlLoader.getController();
         deleteUser.setModel(users);
 
         // create new stage
@@ -215,14 +212,14 @@ public class IFinanceController implements Initializable {
     }
 
     @FXML
-    void showModifyUserAccount( ) throws IOException, SQLException {
+    void showModifyUserAccount() throws IOException, SQLException {
         users = new UserAdapter(connection, false);
 
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("ModifyUser-view.fxml"));
-        Parent standings = (Parent) fxmlLoader.load();
+        Parent standings = fxmlLoader.load();
 
-        ModifyUserController modifyUser = (ModifyUserController) fxmlLoader.getController();
+        ModifyUserController modifyUser = fxmlLoader.getController();
         modifyUser.setModel(users);
 
         // create new stage
@@ -248,9 +245,26 @@ public class IFinanceController implements Initializable {
         }
     }
 
-    public void loginAction(){
-        //enable all menu items
-//        setMenuItems(true);
-        userInfoMenu.setVisible(true);
+    public void showAllUserAccount() throws SQLException, IOException {
+
+        users = new UserAdapter(connection, false);
+
+        // load the fxml file (the UI elements)
+        FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("OverviewUser-view.fxml"));
+        Parent standings = fxmlLoader.load();
+
+        OverviewUserController overUser = fxmlLoader.getController();
+        overUser.setModel(users);
+
+        // create new stage
+        Scene scene = new Scene(standings);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.getIcons().add(new Image(logoPath));
+        stage.setTitle("Overview User Account");
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.showAndWait();
     }
 }

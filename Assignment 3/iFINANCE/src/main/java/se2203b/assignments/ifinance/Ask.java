@@ -17,6 +17,7 @@
 package se2203b.assignments.ifinance;
 
 //Import Scanner Class
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -34,22 +35,22 @@ public class Ask {
     public static Scanner input = new Scanner(System.in);
 
     //This will accept string message and will print it on screen
-    public static void printMessage(String message){
-        if (message.length()>0){
+    public static void printMessage(String message) {
+        if (message.length() > 0) {
             System.out.print(message);
         }
     }
 
-    public static void printColor(String message, String color){
+    public static void printColor(String message, String color) {
         System.out.println(color + message + reset);
     }
 
     //This will accept string message and will return integer value it got from user.
     //This make use of try/catch to avoid any exception removing the flaw it once had.
     //If user enter any other type of value, it will print error message and ask user to enter integer value again.
-    public static int getInt (String message, int opt){
+    public static int getInt(String message, int opt) {
         if (opt == 1) {
-            while (true){
+            while (true) {
                 try {
                     printMessage(message);
                     return input.nextInt();
@@ -66,7 +67,7 @@ public class Ask {
     }
 
     //This will accept string message and will return double value it got from user.
-    public static double getDouble (String message){
+    public static double getDouble(String message) {
         printMessage(message);
         return input.nextDouble();
     }
@@ -75,23 +76,22 @@ public class Ask {
     //Once advantage is that coder can request to return char in lowercase or uppercase.
     //For example if I set option to 0, then char will be converted to lowercase before returning value.
     //For example if I set option to 1, then char will be converted to uppercase before returning value.
-    public static char getChar (String message, int options){
+    public static char getChar(String message, int options) {
         char getChar;
         printMessage(message);
         getChar = input.next().charAt(0);
-        if (options == 0){
+        if (options == 0) {
             return Character.toLowerCase(getChar);
-        }
-        else if (options == 1){
+        } else if (options == 1) {
             return Character.toUpperCase(getChar);
         }
         return input.next().charAt(0);
     }
 
     //This will accept string message and print it on screen.
-    public static String getString (String message){
+    public static String getString(String message) {
         printMessage(message);
-        if (input.hasNextLine()){
+        if (input.hasNextLine()) {
             input.nextLine();
         }
         return input.nextLine();
