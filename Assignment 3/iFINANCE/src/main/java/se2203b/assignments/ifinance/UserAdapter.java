@@ -35,12 +35,12 @@ public class UserAdapter {
 
                 // create a table with 7 columns: id, username, password, address, email, isAdmin, isLogged
                 stmt.execute("CREATE TABLE Users (" +
-                        "id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1), " +
-                        "username VARCHAR(30), " +
-                        "fullname VARCHAR(30), " +
-                        "password VARCHAR(30), " +
-                        "address VARCHAR(30), " +
-                        "email VARCHAR(30), " +
+                        "id INT NOT NULL, " +
+                        "username CHAR(30), " +
+                        "fullname CHAR(30), " +
+                        "password CHAR(30), " +
+                        "address CHAR(30), " +
+                        "email CHAR(30), " +
                         "isAdmin BOOLEAN, " +
                         "isLogged BOOLEAN, " +
                         "PRIMARY KEY (id))");
@@ -56,20 +56,24 @@ public class UserAdapter {
     // Start table with admin user
     public void populateSample() throws SQLException {
         String hashed = hash.hashPassword("admin", "admin");
-        this.insertUser("admin", hashed, true, false);
+        System.out.println("reach here");
+        this.insertUser(0,"admin", hashed, true, false);
+        System.out.println("Added admin user");
         hashed = (hash.hashPassword("user", "user"));
-        this.insertUser("user","Pratik" ,hashed, "1030 Oakcrossing Gate","pratikngutpa@outlook.com",false, false);
+        this.insertUser(getMaxId(),"user","Pratik" ,hashed, "1030 Oakcrossing Gate","pratikngutpa@outlook.com",false, false);
         printUsers();
     }
 
-    public void insertUser(String username, String  password, Boolean admin, boolean logged) throws SQLException {
+    public void insertUser(int id, String username, String  password, Boolean admin, boolean logged) throws SQLException {
         Statement stmt = connection.createStatement();
-        stmt.executeUpdate("INSERT INTO Users (username, password, isAdmin, isLogged) VALUES ('" + username + "', '" + password + "', '" + admin + "', '" + logged + "')");
+        // ID is integer, username is string, password is string, isAdmin is boolean, isLogged is boolean
+        stmt.executeUpdate("INSERT INTO Users (id, username, password, isAdmin, isLogged) VALUES (" + id + ", '" + username + "', '" + password + "', '" + admin + "', '" + logged + "')");
     }
 
-    public void insertUser(String username, String fullName, String password, String email, String address, Boolean admin, boolean logged) throws SQLException {
+    public void insertUser(int id,String username, String fullName, String password, String email, String address, Boolean admin, boolean logged) throws SQLException {
         Statement stmt = connection.createStatement();
-        stmt.executeUpdate("INSERT INTO Users (username, fullname, password, email, address, isAdmin, isLogged) VALUES ('" + username + "', '" + fullName + "', '" + password + "', '" + email + "', '" + address + "', '" + admin + "', '" + logged + "')");
+        stmt.executeUpdate("INSERT INTO Users (id, username, fullname, password, email, address, isAdmin, isLogged) VALUES (" + id + ", '" + username + "', '" + fullName + "', '" + password + "', '" + email + "', '" + address + "', '" + admin + "', '" + logged + "')");
+        System.out.println("Summery: " + id + " " + username + " " + password + " " + admin + " " + logged);
     }
 
     public void deleteUser(String username) throws SQLException {
@@ -99,7 +103,7 @@ public class UserAdapter {
         return stmt.executeQuery("SELECT * FROM Users WHERE username = '" + username + "'").next();
     }
 
-    public static User setCurrentUser() throws SQLException{
+    public static User getLoggedUser() throws SQLException{
         //find the user that is logged in
         Statement stmt = connection.createStatement();
         var rs = stmt.executeQuery("SELECT * FROM Users WHERE isLogged = true");
@@ -115,7 +119,6 @@ public class UserAdapter {
         var rs = stmt.executeQuery("SELECT * FROM Users WHERE username = '" + username + "'");
         while (rs.next()) {
             currentUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8));
-            System.out.println(currentUser.getId());
         }
 
         return currentUser;
@@ -123,13 +126,14 @@ public class UserAdapter {
 
     public void addUser(User user) throws SQLException {
         Statement stmt = connection.createStatement();
+        int id = getMaxId();
         String username = user.getUsername();
         String fullName = user.getFullname();
         String password = user.getPassword();
         String email = user.getEmail();
         String address = user.getAddress();
         String hashed = hash.hashPassword(password, username);
-        stmt.executeUpdate("INSERT INTO Users (username, fullname, password, email, address, isAdmin, isLogged) VALUES ('" + username + "', '" + fullName + "', '" + hashed + "', '" + email + "', '" + address + "', false, false)");
+        stmt.executeUpdate("INSERT INTO Users (id,username, fullname, password, email, address, isAdmin, isLogged) VALUES (" + id + ", '" + username + "', '" + fullName + "', '" + hashed + "', '" + email + "', '" + address + "', false, false)");
     }
 
     // print all users in the database with their passwords to console
@@ -158,5 +162,16 @@ public class UserAdapter {
         }
 
         return users;
+    }
+
+    public int getMaxId() throws SQLException {
+        Statement stmt = connection.createStatement();
+        var rs = stmt.executeQuery("SELECT MAX(id) FROM Users");
+        int maxId = 0;
+        while (rs.next()) {
+            maxId = rs.getInt(1);
+        }
+        System.out.println("Max id: " + maxId);
+        return maxId + 1;
     }
 }

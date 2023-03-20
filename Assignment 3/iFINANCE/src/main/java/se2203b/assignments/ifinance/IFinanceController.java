@@ -101,7 +101,7 @@ public class IFinanceController implements Initializable {
 
         stage.showAndWait();
 
-        currentUser = UserAdapter.setCurrentUser();
+        currentUser = UserAdapter.getLoggedUser();
 
         setMenuItems();
     }
