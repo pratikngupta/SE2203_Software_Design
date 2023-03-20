@@ -36,11 +36,11 @@ public class UserAdapter {
                 // create a table with 7 columns: id, username, password, address, email, isAdmin, isLogged
                 stmt.execute("CREATE TABLE Users (" +
                         "id INT NOT NULL, " +
-                        "username CHAR(30), " +
-                        "fullname CHAR(30), " +
-                        "password CHAR(30), " +
-                        "address CHAR(30), " +
-                        "email CHAR(30), " +
+                        "username VARCHAR(30), " +
+                        "fullname VARCHAR(30), " +
+                        "password VARCHAR(30), " +
+                        "address VARCHAR(30), " +
+                        "email VARCHAR(30), " +
                         "isAdmin BOOLEAN, " +
                         "isLogged BOOLEAN, " +
                         "PRIMARY KEY (id))");

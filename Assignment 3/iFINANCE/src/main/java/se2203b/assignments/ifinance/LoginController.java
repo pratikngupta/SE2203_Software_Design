@@ -3,6 +3,7 @@ package se2203b.assignments.ifinance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -10,7 +11,6 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static se2203b.assignments.ifinance.Debug.*;
@@ -24,11 +24,13 @@ public class LoginController implements Initializable {
     private TextField usernameField;
     private UserAdapter userAdapter;
     private User currentUser;
+    private MenuBar mainMenu;
 
-    public void setModel(UserAdapter userAdapter, User currentUser) {
+    public void setModel(UserAdapter userAdapter, User currentUser, MenuBar mainMenu) {
         printPURPLE("LoginController", "setModel");
         this.userAdapter = userAdapter;
         this.currentUser = currentUser;
+        this.mainMenu = mainMenu;
     }
     @FXML
     void cancelButtonClicked(ActionEvent event) {
@@ -56,7 +58,7 @@ public class LoginController implements Initializable {
             if (currentUser != null) {
                 userAdapter.updateUser(currentUser.getUsername(), false);
             }
-            
+
             printGREEN("LoginController", "Login successful");
             // Get current stage reference
             Stage stage = (Stage) passwordField.getScene().getWindow();

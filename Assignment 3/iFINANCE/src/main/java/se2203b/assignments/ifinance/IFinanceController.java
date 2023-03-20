@@ -88,7 +88,7 @@ public class IFinanceController implements Initializable {
 
         LoginController loginController = (LoginController) fxmlLoader.getController();
 
-        loginController.setModel(users, currentUser);
+        loginController.setModel(users, currentUser, mainMenu);
 
         // create new stage
         Scene scene = new Scene(standings);
