@@ -94,7 +94,15 @@ public class UserAdapter {
                 line = line.replace("'", "");
 
                 String[] values = line.split(",");
-                this.insertUser(getMaxId(), values[0], values[1], values[4], values[3], values[2], false, false);
+                this.insertUser(
+                        getMaxId(),
+                        values[0],
+                        values[1],
+                        values[4],
+                        values[3],
+                        values[2],
+                        false,
+                        false);
             }
 
             sc.close();

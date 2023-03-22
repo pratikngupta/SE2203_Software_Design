@@ -2,9 +2,7 @@ package se2203b.assignments.ifinance;
 
 import javafx.beans.property.*;
 
-
 // this class is used to store the user data in the table
-
 
 public class User {
 

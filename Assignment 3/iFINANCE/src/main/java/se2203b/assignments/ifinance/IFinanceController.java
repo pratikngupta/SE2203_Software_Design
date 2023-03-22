@@ -111,25 +111,26 @@ public class IFinanceController implements Initializable {
             financialMenu.setDisable(true);
             manageUserAccountMenu.setDisable(true);
             userInfoMenu.setVisible(false);
-
-        } else {
-            userInfoMenu.setText(currentUser.getUsername());
-            userInfoMenu.setVisible(true);
-
-            if (currentUser.isAdmin()) {
-                manageAccountGroupsMenu.setDisable(true);
-                chartsOfAccountMenu.setDisable(true);
-                doubleEntryMenu.setDisable(true);
-                financialMenu.setDisable(true);
-                manageUserAccountMenu.setDisable(false);
-            } else {
-                manageAccountGroupsMenu.setDisable(false);
-                chartsOfAccountMenu.setDisable(false);
-                doubleEntryMenu.setDisable(false);
-                financialMenu.setDisable(false);
-                manageUserAccountMenu.setDisable(true);
-            }
+            return;
         }
+
+        userInfoMenu.setText(currentUser.getUsername());
+        userInfoMenu.setVisible(true);
+
+        if (!currentUser.isAdmin()) {
+            manageAccountGroupsMenu.setDisable(false);
+            chartsOfAccountMenu.setDisable(false);
+            doubleEntryMenu.setDisable(false);
+            financialMenu.setDisable(false);
+            manageUserAccountMenu.setDisable(true);
+            return;
+        }
+
+        manageAccountGroupsMenu.setDisable(true);
+        chartsOfAccountMenu.setDisable(true);
+        doubleEntryMenu.setDisable(true);
+        financialMenu.setDisable(true);
+        manageUserAccountMenu.setDisable(false);
     }
 
     @FXML

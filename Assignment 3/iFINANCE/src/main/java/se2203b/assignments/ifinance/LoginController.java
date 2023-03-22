@@ -72,7 +72,6 @@ public class LoginController implements Initializable {
     }
 
     public boolean check() {
-
         // check if username and password are filled
         if (usernameField.getText().isEmpty() && passwordField.getText().isEmpty()) {
             // show error message
@@ -95,6 +94,7 @@ public class LoginController implements Initializable {
             printRED("LoginController", "Login failed --> password is empty");
             return false;
         }
+
         return true;
     }
 
