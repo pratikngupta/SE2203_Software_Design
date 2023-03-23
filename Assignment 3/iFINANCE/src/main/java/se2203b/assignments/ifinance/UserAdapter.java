@@ -9,9 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import java.io.*;
-import java.util.Scanner;
-
 // this class is responsible for creating the connection between the database and the table
 @SuppressWarnings({"SqlResolve", "SqlNoDataSourceInspection"})
 public class UserAdapter {
@@ -58,9 +55,12 @@ public class UserAdapter {
         //find the user that is logged in
         Statement stmt = connection.createStatement();
         var rs = stmt.executeQuery("SELECT * FROM Users WHERE isLogged = true");
-        while (rs.next()) {
-            currentUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8));
+        //if there is no user logged in, return null
+        if (!rs.next()) {
+            return null;
         }
+        currentUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8));
+
         return currentUser;
     }
 
@@ -82,34 +82,34 @@ public class UserAdapter {
         hashed = (hash.hashPassword("user", "user"));
         this.insertUser(getMaxId(), "user", "Pratik", hashed, "1030 Oakcrossing Gate", "pratikngutpa@outlook.com", false, false);
         //read csv file
-        try {
-            Scanner sc = new Scanner(new File("src/main/resources/se2203b/assignments/ifinance/user.csv"));
-            sc.useDelimiter(",");   //sets the delimiter pattern
-            sc.nextLine();
-
-            while (sc.hasNext()){
-                //skip the first line
-                String line = sc.nextLine();
-                //remove ' from the string
-                line = line.replace("'", "");
-
-                String[] values = line.split(",");
-                this.insertUser(
-                        getMaxId(),
-                        values[0],
-                        values[1],
-                        values[4],
-                        values[3],
-                        values[2],
-                        false,
-                        false);
-            }
-
-            sc.close();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Scanner sc = new Scanner(new File("src/main/resources/se2203b/assignments/ifinance/user.csv"));
+//            sc.useDelimiter(",");   //sets the delimiter pattern
+//            sc.nextLine();
+//
+//            while (sc.hasNext()){
+//                //skip the first line
+//                String line = sc.nextLine();
+//                //remove ' from the string
+//                line = line.replace("'", "");
+//
+//                String[] values = line.split(",");
+//                this.insertUser(
+//                        getMaxId(),
+//                        values[0],
+//                        values[1],
+//                        values[4],
+//                        values[3],
+//                        values[2],
+//                        false,
+//                        false);
+//            }
+//
+//            sc.close();
+//        }
+//        catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
         printUsers();
     }
 
@@ -236,5 +236,14 @@ public class UserAdapter {
                     rs.getBoolean(8)));
         }
         return list;
+    }
+
+    public void logout() throws SQLException {
+        //set all users to logged out
+        Statement stmt = connection.createStatement();
+
+        stmt.executeUpdate("UPDATE Users SET isLogged = false");
+
+        printUsers();
     }
 }

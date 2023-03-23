@@ -1,8 +1,8 @@
 package se2203b.assignments.ifinance;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -17,6 +17,7 @@ import static se2203b.assignments.ifinance.Debug.*;
 public class LoginController implements Initializable {
 
     public Text errorTextField;
+    public Button cancelBtn;
     @FXML
     private PasswordField passwordField;
     @FXML
@@ -31,9 +32,9 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    void cancelButtonClicked(ActionEvent event) {
+    void cancelButtonClicked() {
         // Get current stage reference
-        Stage stage = (Stage) passwordField.getScene().getWindow();
+        Stage stage = (Stage) cancelBtn.getScene().getWindow();
         // Close stage
         stage.close();
     }
@@ -64,11 +65,8 @@ public class LoginController implements Initializable {
         }
 
         printGREEN("LoginController", "Login successful");
-        // Get current stage reference
-        Stage stage = (Stage) passwordField.getScene().getWindow();
 
-        // Close stage
-        stage.close();
+        cancelButtonClicked();
     }
 
     public boolean check() {

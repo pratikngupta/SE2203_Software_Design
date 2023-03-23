@@ -71,12 +71,16 @@ public class IFinanceController implements Initializable {
             // Create a connection to the database
             connection = DriverManager.getConnection(DB_URL);
 
+            users = new UserAdapter(connection, true);
+            users.logout();
+
         } catch (SQLException ex) {
             displayAlert(ex.getMessage());
         }
     }
 
     public void login() throws SQLException, IOException {
+
         users = new UserAdapter(connection, false);
 
         // load the fxml file (the UI elements)
@@ -135,6 +139,7 @@ public class IFinanceController implements Initializable {
 
     @FXML
     void showChangePassword() throws SQLException, IOException {
+
         users = new UserAdapter(connection, false);
 
         // load the fxml file (the UI elements)
@@ -153,11 +158,12 @@ public class IFinanceController implements Initializable {
         stage.setTitle("Change Password");
         stage.initModality(Modality.APPLICATION_MODAL);
 
-        stage.showAndWait();
+        stage.show();
     }
 
     @FXML
     void showCreateUserAccount() throws SQLException, IOException {
+
         users = new UserAdapter(connection, false);
 
         // load the fxml file (the UI elements)
@@ -176,11 +182,12 @@ public class IFinanceController implements Initializable {
         stage.setTitle("Create User Account");
         stage.initModality(Modality.APPLICATION_MODAL);
 
-        stage.showAndWait();
+        stage.show();
     }
 
     @FXML
     void showDeleteUserAccount() throws SQLException, IOException {
+
         users = new UserAdapter(connection, false);
 
         // load the fxml file (the UI elements)
@@ -199,21 +206,22 @@ public class IFinanceController implements Initializable {
         stage.setTitle("Delete User Account");
         stage.initModality(Modality.APPLICATION_MODAL);
 
-        stage.showAndWait();
+        stage.show();
     }
 
     @FXML
     void showLogout() throws SQLException {
         currentUser.setLogged(false);
-        users = new UserAdapter(connection, false);
-        users.updateUser(currentUser.getUsername(), currentUser.isLogged());
+        users.logout();
         currentUser = null;
+        users = null;
         displayAlert("You have been logged out");
         setMenuItems();
     }
 
     @FXML
     void showModifyUserAccount() throws IOException, SQLException {
+
         users = new UserAdapter(connection, false);
 
         // load the fxml file (the UI elements)
@@ -232,7 +240,7 @@ public class IFinanceController implements Initializable {
         stage.setTitle("Modify User Account");
         stage.initModality(Modality.APPLICATION_MODAL);
 
-        stage.showAndWait();
+        stage.show();
     }
 
     public void reset() {
@@ -266,6 +274,6 @@ public class IFinanceController implements Initializable {
         stage.setTitle("Overview User Account");
         stage.initModality(Modality.APPLICATION_MODAL);
 
-        stage.showAndWait();
+        stage.show();
     }
 }

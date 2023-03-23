@@ -11,7 +11,7 @@
         <TextField fx:id="usernameField" layoutX="136.0" layoutY="38.0" promptText="Enter Username"/>
         <Label layoutX="53.0" layoutY="77.0" text="Password"/>
         <PasswordField fx:id="passwordField" layoutX="136.0" layoutY="73.0" promptText="Enter Password"/>
-        <Button layoutX="115.0" layoutY="144.0" mnemonicParsing="false" onAction="#cancelButtonClicked" text="Cancel"/>
+        <Button fx:id="cancelBtn" layoutX="115.0" layoutY="144.0" mnemonicParsing="false" onAction="#cancelButtonClicked" text="Cancel"/>
         <Button layoutX="191.0" layoutY="143.0" mnemonicParsing="false" onAction="#okButtonClicked" prefHeight="26.0"
                 prefWidth="56.0" text="Ok"/>
         <Text fx:id="errorTextField" fill="#f20000" layoutX="52.0" layoutY="128.0" strokeType="OUTSIDE"
