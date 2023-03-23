@@ -35,6 +35,14 @@ public class IFinanceController implements Initializable {
     private Connection connection;
     private UserAdapter users;
 
+    private FinancialAdapter financialAdapter;
+
+    private TransactionAdapter transactionAdapter;
+
+    private AccountAdapter accountAdapter;
+
+    private AccountGroupAdapter accountGroupAdapter;
+
     public void showAbout() throws Exception {
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("About-view.fxml"));
@@ -71,7 +79,19 @@ public class IFinanceController implements Initializable {
             // Create a connection to the database
             connection = DriverManager.getConnection(DB_URL);
 
-            users = new UserAdapter(connection, true);
+            users = new UserAdapter(connection, false);
+            financialAdapter = new FinancialAdapter(connection, false);
+            transactionAdapter = new TransactionAdapter(connection, false);
+            accountAdapter = new AccountAdapter(connection, false);
+            accountGroupAdapter = new AccountGroupAdapter(connection, false);
+
+            //what are other tables that we need to create?
+
+            //create a table for account groups
+            //create a table for accounts
+            //create a table for transactions
+            //create a table for financial statements
+
             users.logout();
 
         } catch (SQLException ex) {

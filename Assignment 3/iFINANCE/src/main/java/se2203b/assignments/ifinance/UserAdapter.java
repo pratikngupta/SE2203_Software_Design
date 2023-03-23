@@ -4,10 +4,13 @@ package se2203b.assignments.ifinance;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 // this class is responsible for creating the connection between the database and the table
 @SuppressWarnings({"SqlResolve", "SqlNoDataSourceInspection"})
@@ -43,7 +46,7 @@ public class UserAdapter {
                         "email VARCHAR(50), " +
                         "isAdmin BOOLEAN, " +
                         "isLogged BOOLEAN, " +
-                        "PRIMARY KEY (id))");
+                        "PRIMARY KEY (username))");
 
                 // populate the table with an admin user
                 populateSample();
@@ -82,34 +85,34 @@ public class UserAdapter {
         hashed = (hash.hashPassword("user", "user"));
         this.insertUser(getMaxId(), "user", "Pratik", hashed, "1030 Oakcrossing Gate", "pratikngutpa@outlook.com", false, false);
         //read csv file
-//        try {
-//            Scanner sc = new Scanner(new File("src/main/resources/se2203b/assignments/ifinance/user.csv"));
-//            sc.useDelimiter(",");   //sets the delimiter pattern
-//            sc.nextLine();
-//
-//            while (sc.hasNext()){
-//                //skip the first line
-//                String line = sc.nextLine();
-//                //remove ' from the string
-//                line = line.replace("'", "");
-//
-//                String[] values = line.split(",");
-//                this.insertUser(
-//                        getMaxId(),
-//                        values[0],
-//                        values[1],
-//                        values[4],
-//                        values[3],
-//                        values[2],
-//                        false,
-//                        false);
-//            }
-//
-//            sc.close();
-//        }
-//        catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Scanner sc = new Scanner(new File("src/main/resources/se2203b/assignments/ifinance/user.csv"));
+            sc.useDelimiter(",");   //sets the delimiter pattern
+            sc.nextLine();
+
+            while (sc.hasNext()){
+                //skip the first line
+                String line = sc.nextLine();
+                //remove ' from the string
+                line = line.replace("'", "");
+
+                String[] values = line.split(",");
+                this.insertUser(
+                        getMaxId(),
+                        values[0],
+                        values[1],
+                        values[4],
+                        values[3],
+                        values[2],
+                        false,
+                        false);
+            }
+
+            sc.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         printUsers();
     }
 
@@ -171,8 +174,26 @@ public class UserAdapter {
         String email = user.getEmail();
         String address = user.getAddress();
 
+        stmt.executeUpdate("UPDATE Users SET id = " + user.getId() + " WHERE username = '" + user.getUsername() + "'");
         //update where username is the same
         stmt.executeUpdate("UPDATE Users SET fullname = '" + fullName + "', email = '" + email + "', address = '" + address + "' WHERE username = '" + username + "'");
+    }
+
+    //check if ID exists
+    public boolean checkId(int id, String username) throws SQLException {
+        Statement stmt = connection.createStatement();
+        //get all users with the same id
+        var rs = stmt.executeQuery("SELECT * FROM Users WHERE id = " + id);
+        //if there is no user with the same id, other than the current user, return true (id is unique)
+        if (!rs.next()) {
+            return true;
+        } else {
+            //if there is a user with the same id, check if the username is the same
+            if (rs.getString(2).equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // print all users in the database with their passwords to console

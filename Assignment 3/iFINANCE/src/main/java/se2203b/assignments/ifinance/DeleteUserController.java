@@ -29,7 +29,7 @@ public class DeleteUserController implements Initializable {
     private UserAdapter userAdapter;
 
     @FXML
-    void cancel(ActionEvent event) {
+    void cancel() {
         // Get current stage reference
         Stage stage = (Stage) addressField.getScene().getWindow();
         // Close stage
@@ -58,6 +58,8 @@ public class DeleteUserController implements Initializable {
 
             printGREEN("DeleteUser", "User deleted successfully");
             buildData();
+
+            cancel();
         } catch (SQLException ex) {
             displayAlert("ERROR: " + ex.getMessage());
         }

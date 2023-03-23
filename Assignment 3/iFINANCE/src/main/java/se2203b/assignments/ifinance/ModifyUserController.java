@@ -2,7 +2,6 @@ package se2203b.assignments.ifinance;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -29,7 +28,7 @@ public class ModifyUserController implements Initializable {
     private UserAdapter userAdapter;
 
     @FXML
-    void cancel(ActionEvent event) {
+    void cancel() {
         // Get current stage reference
         Stage stage = (Stage) addressField.getScene().getWindow();
         // Close stage
@@ -47,12 +46,16 @@ public class ModifyUserController implements Initializable {
             user.setUsername(usernameList.getValue());
             userAdapter.updateUser(user);
             errorMessageField.setFill(javafx.scene.paint.Color.GREEN);
+            errorMessageField.setVisible(true);
             errorMessageField.setText("User updated successfully");
+
             errorMessageField.setVisible(true);
             printGREEN("ModifyUser", "User updated successfully");
             data.clear();
             buildData();
             usernameList.setValue(user.getUsername());
+
+            cancel();
 
         } catch (NumberFormatException ex) {
             errorMessageField.setFill(javafx.scene.paint.Color.RED);
