@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity"
+            prefHeight="727.0"
+            prefWidth="1030.0"
+            style=" -fx-background-image: url(file:src/main/resources/se2203b/assignments/ifinance/WesternBackground.png);-fx-background-repeat: no-repeat;-fx-background-size: 100% 100%;"
+            xmlns="http://javafx.com/javafx/19"
+            fx:controller="se2203b.assignments.ifinance.IFinanceController">
+    <top>
+        <MenuBar fx:id="mainMenu" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#login" text="Login"/>
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="Close"/>
+                        <MenuItem mnemonicParsing="false" onAction="#reset" text="Reset"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="manageAccountGroupsMenu" mnemonicParsing="false" text="Manage Account Groups">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="chartsOfAccountMenu" mnemonicParsing="false" text="Chart of Accounts">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="doubleEntryMenu" mnemonicParsing="false" text="Double-Entry Transactions">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="financialMenu" mnemonicParsing="false" text="Financial Reports">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="manageUserAccountMenu" mnemonicParsing="false" text="Manage User Account">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#showCreateUserAccount" text="Create User Account"/>
+                        <MenuItem mnemonicParsing="false" onAction="#showModifyUserAccount" text="Modify User Account"/>
+                        <MenuItem mnemonicParsing="false" onAction="#showDeleteUserAccount" text="Delete User Account"/>
+                        <MenuItem mnemonicParsing="false" onAction="#showAllUserAccount" text="View All User"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="aboutMenu" mnemonicParsing="false" text="About">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About Us"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="userInfoMenu" mnemonicParsing="false" text="Username">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#showChangePassword" text="Change Password"/>
+                        <MenuItem mnemonicParsing="false" onAction="#showLogout" text="Logout"/>
+                    </items>
+                    <graphic>
+                        <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@user.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+</BorderPane>
