@@ -23,7 +23,7 @@ public class DeleteUserController implements Initializable {
     final ObservableList<String> data = FXCollections.observableArrayList();
     public ComboBox<String> usernameList;
     @FXML
-    private TextField addressField, emailField, fullnameField, idField;
+    private TextField addressField, emailField, fullNameField, idField;
     @FXML
     private Text errorMessageField;
     private UserAdapter userAdapter;
@@ -53,7 +53,7 @@ public class DeleteUserController implements Initializable {
             usernameList.getItems().clear();
             addressField.clear();
             emailField.clear();
-            fullnameField.clear();
+            fullNameField.clear();
             idField.clear();
 
             printGREEN("DeleteUser", "User deleted successfully");
@@ -88,7 +88,7 @@ public class DeleteUserController implements Initializable {
             try {
                 User user = UserAdapter.getUserInfo(usernameList.getValue());
                 idField.setText(String.valueOf(user.getId()));
-                fullnameField.setText(user.getFullname());
+                fullNameField.setText(user.getFullname());
                 emailField.setText(user.getEmail());
                 addressField.setText(user.getAddress());
             } catch (SQLException ex) {

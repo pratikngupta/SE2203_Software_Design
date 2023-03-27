@@ -85,13 +85,6 @@ public class IFinanceController implements Initializable {
             accountAdapter = new AccountAdapter(connection, false);
             accountGroupAdapter = new AccountGroupAdapter(connection, false);
 
-            //what are other tables that we need to create?
-
-            //create a table for account groups
-            //create a table for accounts
-            //create a table for transactions
-            //create a table for financial statements
-
             users.logout();
 
         } catch (SQLException ex) {

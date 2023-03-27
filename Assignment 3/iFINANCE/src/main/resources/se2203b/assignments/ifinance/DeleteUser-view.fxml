@@ -19,7 +19,7 @@
         <TextField fx:id="idField" disable="true" editable="false" layoutX="191.0" layoutY="116.0" prefWidth="170.0"/>
         <TextField fx:id="addressField" disable="true" editable="false" layoutX="191.0" layoutY="181.0"
                    prefWidth="170.0"/>
-        <TextField fx:id="fullnameField" disable="true" editable="false" layoutX="192.0" layoutY="149.0"
+        <TextField fx:id="fullNameField" disable="true" editable="false" layoutX="192.0" layoutY="149.0"
                    prefWidth="170.0"/>
         <Button layoutX="205.0" layoutY="285.0" mnemonicParsing="false" onAction="#cancel" text="Cancel"/>
         <Button layoutX="274.0" layoutY="285.0" mnemonicParsing="false" onAction="#save" text="Delete"/>
