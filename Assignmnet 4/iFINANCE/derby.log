@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Fri Mar 24 00:06:21 EDT 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0187-11cb-cd25-00003f5121d0 
-on database directory D:\ECEUWO\Teaching\Winter2023\SE2203b\Assignments\3\iFINANCE\iFinanceDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@533ddba 
-Loaded from file:/D:/ECEUWO/Teaching/Winter2023/SE2203b/Assignments/3/lib/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=19.0.2+7-44
-user.dir=D:\ECEUWO\Teaching\Winter2023\SE2203b\Assignments\3\iFINANCE
-os.name=Windows 11
-os.arch=amd64
-os.version=10.0
+Mon Mar 27 12:19:00 EDT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0187-23dd-a36c-00000ebe1a28 
+on database directory /Users/pratikgupta/GitHub-Repository/SE2203_Software_Design/Assignmnet 4/iFINANCE/iFinanceDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5b480cf9 
+Loaded from file:/Users/pratikgupta/GitHub-Repository/SE2203_Software_Design/Assignmnet%204/iFINANCE/Derby/Lib/derby.jar
+java.vendor=Azul Systems, Inc.
+java.runtime.version=19.0.1+10
+user.dir=/Users/pratikgupta/GitHub-Repository/SE2203_Software_Design/Assignmnet 4/iFINANCE
+os.name=Mac OS X
+os.arch=aarch64
+os.version=13.2.1
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
