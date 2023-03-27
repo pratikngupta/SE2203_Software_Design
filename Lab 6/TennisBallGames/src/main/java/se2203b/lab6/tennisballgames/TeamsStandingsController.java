@@ -71,7 +71,6 @@ public class TeamsStandingsController implements Initializable {
         lossesCol.setCellValueFactory(cellData -> cellData.getValue().lossesProperty().asObject());
         tiesCol.setCellValueFactory(cellData -> cellData.getValue().tiesProperty().asObject());
         tableView.setItems(data);
-
     }
 
 }
