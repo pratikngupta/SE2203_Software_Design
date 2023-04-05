@@ -26,40 +26,13 @@ import java.util.ResourceBundle;
 public class IFinanceController implements Initializable {
 
     @FXML
-    private Menu userMenuItem;
+    private Menu userMenuItem, chartOfAccountMenuItem, fileMenu, financialReportMenuItem, doubleEntryMenuItem, manageAccountGroupsMenuItem, manageUserAccountsMenu;
 
     @FXML
-    private Menu chartOfAccountMenuItem;
-
-    @FXML
-    private MenuItem closeMenuItem;
-
-    @FXML
-    private Menu doubleEntryMenuItem;
-
-    @FXML
-    private Menu fileMenu;
-
-    @FXML
-    private Menu financialReportMenuItem;
-
-    @FXML
-    private MenuItem loginMenuItem;
-
-    @FXML
-    private MenuItem logoutMenuItem;
+    private MenuItem closeMenuItem, loginMenuItem, logoutMenuItem;
 
     @FXML
     private MenuBar mainMenu;
-
-    @FXML
-    private Menu manageAccountGroupsMenuItem;
-
-    @FXML
-    private Menu manageUserAccountsMenu;
-
-    @FXML
-    private MenuItem changePasswordMenuItem;
 
     private Connection conn;
 
@@ -271,7 +244,28 @@ public class IFinanceController implements Initializable {
 
         } catch (SQLException ex) {
             displayAlert(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
+    public void manageGroup() throws IOException, SQLException {
+        // load the fxml file (the UI elements)
+        FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("AccountGroups.fxml"));
+        // create the root node
+        Parent aUser = fxmlLoader.load();
+        AccountGroupsController accountGroupsController = (AccountGroupsController) fxmlLoader.getController();
+        accountGroupsController.setIFinanceController(this);
+        accountGroupsController.setAdapters(conn);
+        // pass account group adapter to the controller
+
+        // create new stage
+        Stage stage = new Stage();
+        stage.setScene(new Scene(aUser));
+        // add icon to the About window
+        stage.getIcons().add(new Image("file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png"));
+        stage.setTitle("Modify User Profile");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+    }
 }

@@ -33,6 +33,10 @@ public class LoginController implements Initializable {
 
     public void setUserAccountModel(UserAccountAdapter accountAdapter) {
         userAccountAdapter = accountAdapter;
+
+        user.setText("ouda");
+        password.setText("123");
+        authorize();
     }
 
     /**

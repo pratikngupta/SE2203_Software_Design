@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="iFinanceDB" uuid="1db2a79e-ed23-4934-a2d9-3cca17b26466">
+    <data-source source="LOCAL" name="iFinanceDB" uuid="236ec256-3161-415b-9d6c-67bd45739066">
       <driver-ref>derby.embedded</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.apache.derby.iapi.jdbc.AutoloadedDriver</jdbc-driver>
+      <jdbc-driver>org.apache.derby.jdbc.EmbeddedDriver</jdbc-driver>
       <jdbc-url>jdbc:derby:iFinanceDB;create=true</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
