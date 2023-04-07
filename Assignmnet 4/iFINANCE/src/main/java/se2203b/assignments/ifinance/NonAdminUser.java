@@ -4,8 +4,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class NonAdminUser extends iFINANCEUser {
-    private StringProperty address;
-    private StringProperty email;
+    private final StringProperty address;
+    private final StringProperty email;
 
 
     // Constructors
@@ -24,27 +24,31 @@ public class NonAdminUser extends iFINANCEUser {
         setuAccount(account);
     }
 
+    public StringProperty addressProperty() {
+        return this.address;
+    }
+
+    public String getAddress() {
+        return this.address.get();
+    }
+
     //set and get methods
     // address property
     public void setAddress(String address) {
         this.address.set(address);
     }
-    public StringProperty addressProperty() {
-        return this.address;
+
+    public StringProperty emailProperty() {
+        return this.email;
     }
-    public String getAddress() {
-        return this.address.get();
+
+    public String getEmail() {
+        return this.email.get();
     }
 
     // email property
     public void setEmail(String email) {
         this.email.set(email);
-    }
-    public StringProperty emailProperty() {
-        return this.email;
-    }
-    public String getEmail() {
-        return this.email.get();
     }
 
 }

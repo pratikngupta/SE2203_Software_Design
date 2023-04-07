@@ -14,18 +14,16 @@ import java.util.ResourceBundle;
  */
 public class AlertController implements Initializable {
 
-    
-    
-    @FXML public Label error;
-   
+
+    @FXML
+    public Label error;
+
     public void setAlertText(String text) {
         // set text from another class
         error.setText(text);
-    } 
+    }
 
-    
-    
-    
+
     /**
      * Initializes the controller class.
      */
@@ -33,6 +31,6 @@ public class AlertController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
-    }    
-    
+    }
+
 }

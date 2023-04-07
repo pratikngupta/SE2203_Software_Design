@@ -7,42 +7,48 @@ public abstract class iFINANCEUser {
     private IntegerProperty id;
     private StringProperty fullName;
 
-    private ObjectProperty<UserAccount> uAccount
+    private final ObjectProperty<UserAccount> uAccount
             = new SimpleObjectProperty(new UserAccount());
+
+    public IntegerProperty idProperty() {
+        return this.id;
+    }
+
+    public int getID() {
+        return this.id.get();
+    }
 
     //set and get methods
     // id property
     public void setID(int id) {
         this.id = new SimpleIntegerProperty(id);
     }
-    public IntegerProperty idProperty() {
-        return this.id;
+
+    public StringProperty fullNameProperty() {
+        return this.fullName;
     }
-    public int getID() {
-        return this.id.get();
+
+    public String getFullName() {
+        return this.fullName.get();
     }
 
     // name property
     public void setFullName(String name) {
         this.fullName = new SimpleStringProperty(name);
     }
-    public StringProperty fullNameProperty() {
-        return this.fullName;
+
+    public ObjectProperty<UserAccount> uAccountProperty() {
+        return this.uAccount;
     }
-    public String getFullName() {
-        return this.fullName.get();
+
+    public UserAccount getuAccount() {
+        return this.uAccount.get();
     }
 
     // userAccount Property
     public void setuAccount(UserAccount uAccount) {
 
         this.uAccount.set(uAccount);
-    }
-    public ObjectProperty<UserAccount> uAccountProperty() {
-        return this.uAccount;
-    }
-    public UserAccount getuAccount() {
-        return this.uAccount.get();
     }
 
 }

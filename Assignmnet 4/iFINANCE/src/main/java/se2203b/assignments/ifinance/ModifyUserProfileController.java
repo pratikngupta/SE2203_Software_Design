@@ -4,7 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -12,36 +15,28 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ModifyUserProfileController implements Initializable {
+    private final ObservableList<String> usernamesList = FXCollections.observableArrayList();
+    private final ObservableList<UserAccount> userAccountList = FXCollections.observableArrayList();
+    IFinanceController iFinanceController;
     @FXML
     private TextField id;
     @FXML
     private TextField address;
-
     @FXML
     private Button cancelBtn;
-
     @FXML
     private TextField email;
-
     @FXML
     private Label errorMsg;
-
     @FXML
     private TextField fullName;
-
     @FXML
     private Button saveBtn;
-
     @FXML
     private ComboBox userName;
-
     private String loggedInUser;
-    IFinanceController iFinanceController;
-
     private UserAccountAdapter userAccountAdapter;
     private NonAdminUserAdapter nonAdminUserAdapter;
-    private final ObservableList<String> usernamesList = FXCollections.observableArrayList();
-    private final ObservableList<UserAccount> userAccountList = FXCollections.observableArrayList();
 
     public void setAdapters(UserAccountAdapter account, NonAdminUserAdapter profile) {
         userAccountAdapter = account;
@@ -64,7 +59,7 @@ public class ModifyUserProfileController implements Initializable {
     public void saveAccount() {
         try {
             UserAccount account = userAccountAdapter.findRecord(userName.getValue().toString());
-            NonAdminUser userProfile = new NonAdminUser(Integer.valueOf(id.getText()),fullName.getText(), address.getText(), email.getText(), account);
+            NonAdminUser userProfile = new NonAdminUser(Integer.valueOf(id.getText()), fullName.getText(), address.getText(), email.getText(), account);
             nonAdminUserAdapter.updateRecord(userProfile);
 
             // Get current stage reference

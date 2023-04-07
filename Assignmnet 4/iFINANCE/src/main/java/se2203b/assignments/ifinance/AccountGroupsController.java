@@ -19,10 +19,7 @@ import java.util.ResourceBundle;
 import java.util.Stack;
 
 public class AccountGroupsController implements Initializable {
-    public final TreeItem<String> Assets = new TreeItem<String>("Assets");
-    public final TreeItem<String> Liabilities = new TreeItem<String>("Liabilities");
-    public final TreeItem<String> Income = new TreeItem<String>("Income");
-    public final TreeItem<String> Expenses = new TreeItem<String>("Expenses");
+
     @FXML
     public TextField GroupField;
     @FXML
@@ -42,7 +39,7 @@ public class AccountGroupsController implements Initializable {
     public NonAdminUserAdapter nonAdminUserAdapter;
 
     public ObservableList<Group> glist = FXCollections.observableArrayList();
-    public AccountGroupsAdapter gAdapter;
+    public GroupAdapter gAdapter;
     public String MenuCheck = "";
     private final Map<TreeItem<String>, Group> treeGroup = new HashMap<>();
 
@@ -50,7 +47,7 @@ public class AccountGroupsController implements Initializable {
         iFinanceController = controller;
     }
 
-    public void Adapters(UserAccountAdapter userAcc, NonAdminUserAdapter userProfile, AccountCategoryAdapter accountCategory, AccountGroupsAdapter group, String userName) throws SQLException {
+    public void Adapters(UserAccountAdapter userAcc, NonAdminUserAdapter userProfile, AccountCategoryAdapter accountCategory, GroupAdapter group, String userName) throws SQLException {
         userAccountAdapter = userAcc;
         nonAdminUserAdapter = userProfile;
         accountCategoryAdapter = accountCategory;
@@ -107,6 +104,8 @@ public class AccountGroupsController implements Initializable {
                 stack.push(child);
             }
         }
+
+
     }//populates the treeview table
 
     @FXML

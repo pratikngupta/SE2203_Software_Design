@@ -69,7 +69,7 @@ public class NonAdminUserAdapter {
                 + "address = '" + data.getAddress() + "', "
                 + "email = '" + data.getEmail() + "', "
                 + "uAccount = '" + data.getuAccount().getUName() + "' "
-                + "WHERE id = " + data.getID() );
+                + "WHERE id = " + data.getID());
     }
 
 
@@ -78,7 +78,7 @@ public class NonAdminUserAdapter {
         Statement stmt = connection.createStatement();
         // user profile
         System.out.println("DELETE FROM NonAdminUser WHERE id = " + data.getID());
-        stmt.executeUpdate("DELETE FROM NonAdminUser WHERE id = " + data.getID() );
+        stmt.executeUpdate("DELETE FROM NonAdminUser WHERE id = " + data.getID());
         // delete user account
         stmt.executeUpdate("DELETE FROM UserAccount WHERE uName = '" + data.getuAccount().getUName() + "'");
     }
@@ -93,7 +93,7 @@ public class NonAdminUserAdapter {
         Statement stmt = connection.createStatement();
 
         // Create a string with a SELECT statement
-        String sqlStatement = "SELECT * FROM NonAdminUser WHERE uAccount = '" + id +"'";
+        String sqlStatement = "SELECT * FROM NonAdminUser WHERE uAccount = '" + id + "'";
 
         // Execute the statement and return the result
         rs = stmt.executeQuery(sqlStatement);

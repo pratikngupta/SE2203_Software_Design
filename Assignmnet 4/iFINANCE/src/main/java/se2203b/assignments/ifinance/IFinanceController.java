@@ -258,7 +258,7 @@ public class IFinanceController implements Initializable {
 
         naua = new NonAdminUserAdapter(conn, false);
         int userID = naua.findRecord(getUserName()).getID();
-        accGrpController.Adapters(new UserAccountAdapter(conn, false), naua, new AccountCategoryAdapter(conn, false), new AccountGroupsAdapter(conn, false, userID), getUserName());
+        accGrpController.Adapters(new UserAccountAdapter(conn, false), naua, new AccountCategoryAdapter(conn, false), new GroupAdapter(conn, false, userID), getUserName());
 
 
         // create new stage

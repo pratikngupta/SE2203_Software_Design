@@ -5,15 +5,15 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 
-public class AccountGroupsAdapter {
+public class GroupAdapter {
     Connection connection;
     String tableName = "";
 
-    public AccountGroupsAdapter(Connection conn) throws SQLException {
+    public GroupAdapter(Connection conn) throws SQLException {
         connection = conn;
     }
 
-    public AccountGroupsAdapter(Connection conn, Boolean reset, int userID) throws SQLException {
+    public GroupAdapter(Connection conn, Boolean reset, int userID) throws SQLException {
         connection = conn;
         Statement stmt = connection.createStatement();
         tableName = "Groups" + userID;

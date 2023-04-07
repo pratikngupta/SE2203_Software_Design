@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
  * Controls the login screen
  */
 public class LoginController implements Initializable {
+    IFinanceController iFinanceController;
     @FXML
     private TextField user;
     @FXML
@@ -26,9 +27,6 @@ public class LoginController implements Initializable {
     private Button cancelBtn;
     @FXML
     private Label errorMsg;
-
-    IFinanceController iFinanceController;
-
     private UserAccountAdapter userAccountAdapter;
 
     public void setUserAccountModel(UserAccountAdapter accountAdapter) {

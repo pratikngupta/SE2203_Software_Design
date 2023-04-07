@@ -15,7 +15,7 @@
                 </Menu>
                 <Menu fx:id="manageAccountGroupsMenuItem" disable="true" mnemonicParsing="false" text="Manage Account Groups">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#manageGroup" text="Manager Group" />
+                  <MenuItem mnemonicParsing="false" onAction="#openAccountGroups" text="Manager Group" />
                </items></Menu>
                 <Menu fx:id="chartOfAccountMenuItem" disable="true" mnemonicParsing="false" text="Chart of Accounts" />
                 <Menu fx:id="doubleEntryMenuItem" disable="true" mnemonicParsing="false" text="Duble-Entry Transactions" />

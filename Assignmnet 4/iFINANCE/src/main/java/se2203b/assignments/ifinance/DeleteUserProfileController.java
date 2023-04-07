@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -15,32 +14,25 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class DeleteUserProfileController implements Initializable {
+    private final ObservableList<String> usernamesList = FXCollections.observableArrayList();
+    private final ObservableList<UserAccount> userAccountList = FXCollections.observableArrayList();
+    IFinanceController iFinanceController;
     @FXML
     private TextField id;
     @FXML
     private TextField address;
-
     @FXML
     private Button cancelBtn;
-
     @FXML
     private TextField email;
-
     @FXML
     private TextField fullName;
-
     @FXML
     private Button deleteBtn;
-
     @FXML
     private ComboBox userName;
-
-    IFinanceController iFinanceController;
-
     private UserAccountAdapter userAccountAdapter;
     private NonAdminUserAdapter nonAdminUserAdapter;
-    private final ObservableList<String> usernamesList = FXCollections.observableArrayList();
-    private final ObservableList<UserAccount> userAccountList = FXCollections.observableArrayList();
 
     public void setAdapters(UserAccountAdapter account, NonAdminUserAdapter profile) {
         userAccountAdapter = account;
@@ -63,7 +55,7 @@ public class DeleteUserProfileController implements Initializable {
     public void deleteAccount() {
         try {
             UserAccount account = userAccountAdapter.findRecord(userName.getValue().toString());
-            NonAdminUser userProfile = new NonAdminUser(Integer.valueOf(id.getText()),fullName.getText(), address.getText(), email.getText(), account);
+            NonAdminUser userProfile = new NonAdminUser(Integer.valueOf(id.getText()), fullName.getText(), address.getText(), email.getText(), account);
 
             nonAdminUserAdapter.deleteRecord(userProfile);
 

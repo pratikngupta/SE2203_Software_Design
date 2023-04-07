@@ -92,7 +92,7 @@ public class UserAccountAdapter {
         return account;
     }
 
-//    // Get all User Account Objects
+    //    // Get all User Account Objects
 //    public ObservableList<UserAccount> getUserAccountsList() throws SQLException {
 //        ObservableList<UserAccount> uAccountsList = FXCollections.observableArrayList();
 //
@@ -131,10 +131,10 @@ public class UserAccountAdapter {
         String sqlStatement = "SELECT uName FROM UserAccount WHERE accountType <> 'admin'";
 
         // Execute the statement and return the result
-        rs =  stmt.executeQuery(sqlStatement);
+        rs = stmt.executeQuery(sqlStatement);
 
         while (rs.next()) {
-            list.add( rs.getString(1));
+            list.add(rs.getString(1));
         }
         return list;
 

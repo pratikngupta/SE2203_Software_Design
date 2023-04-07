@@ -13,36 +13,26 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CreateUserAccountController implements Initializable {
+    IFinanceController iFinanceController;
     @FXML
     private TextField address;
-
     @FXML
     private Button cancelBtn;
-
     @FXML
     private TextField email;
-
     @FXML
     private Label errorMsg;
-
     @FXML
     private TextField fullName;
-
     @FXML
     private PasswordField password1;
-
     @FXML
     private PasswordField password2;
-
     @FXML
     private Button saveBtn;
-
     @FXML
     private TextField userName;
-
     private String loggedInUser;
-    IFinanceController iFinanceController;
-
     private UserAccountAdapter userAccountAdapter;
     private NonAdminUserAdapter nonAdminUserAdapter;
 
@@ -84,7 +74,7 @@ public class CreateUserAccountController implements Initializable {
                             } catch (SQLException ex) {
                                 iFinanceController.displayAlert("Insert User Account: " + ex.getMessage());
                             }
-                            NonAdminUser userProfile = new NonAdminUser(0,fullName.getText(), address.getText(), email.getText(), account);
+                            NonAdminUser userProfile = new NonAdminUser(0, fullName.getText(), address.getText(), email.getText(), account);
 
                             try {
                                 nonAdminUserAdapter.insertRecord(userProfile);
