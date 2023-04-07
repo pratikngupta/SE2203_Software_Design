@@ -45,7 +45,7 @@ public class AccountCategoryAdapter {
             sc.useDelimiter(",");   //sets the delimiter pattern
             sc.nextLine();
 
-            while (sc.hasNext()){
+            while (sc.hasNext()) {
                 //skip the first line
                 String line = sc.nextLine();
                 //remove ' from the string
@@ -56,8 +56,7 @@ public class AccountCategoryAdapter {
             }
 
             sc.close();
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }

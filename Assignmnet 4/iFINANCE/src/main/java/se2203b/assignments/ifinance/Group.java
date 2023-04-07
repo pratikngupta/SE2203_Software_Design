@@ -3,10 +3,10 @@ package se2203b.assignments.ifinance;
 import javafx.beans.property.*;
 
 public class Group {
-    private IntegerProperty id;
     private final StringProperty name;
     private final ObjectProperty<Group> parent;
     private final ObjectProperty<AccountCategory> element;
+    private IntegerProperty id;
 
     // Constructors
     public Group() {

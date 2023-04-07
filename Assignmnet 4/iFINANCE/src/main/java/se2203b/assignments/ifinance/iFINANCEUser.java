@@ -4,11 +4,10 @@ import javafx.beans.property.*;
 
 public abstract class iFINANCEUser {
 
-    private IntegerProperty id;
-    private StringProperty fullName;
-
     private final ObjectProperty<UserAccount> uAccount
             = new SimpleObjectProperty(new UserAccount());
+    private IntegerProperty id;
+    private StringProperty fullName;
 
     public IntegerProperty idProperty() {
         return this.id;

@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -20,6 +19,7 @@ import java.util.Stack;
 
 public class AccountGroupsController implements Initializable {
 
+    private final Map<TreeItem<String>, Group> treeGroup = new HashMap<>();
     @FXML
     public TextField GroupField;
     @FXML
@@ -29,7 +29,6 @@ public class AccountGroupsController implements Initializable {
     @FXML
     public TreeItem<String> rootItem = new TreeItem<>("Account Groups");
     public ContextMenu Menu = new ContextMenu();
-
     public MenuItem add = new MenuItem("Add New Group");
     public MenuItem change = new MenuItem("Change Group Name");
     public MenuItem delete = new MenuItem("Delete Group");
@@ -37,11 +36,9 @@ public class AccountGroupsController implements Initializable {
     public IFinanceController iFinanceController;
     public UserAccountAdapter userAccountAdapter;
     public NonAdminUserAdapter nonAdminUserAdapter;
-
     public ObservableList<Group> glist = FXCollections.observableArrayList();
     public GroupAdapter gAdapter;
     public String MenuCheck = "";
-    private final Map<TreeItem<String>, Group> treeGroup = new HashMap<>();
 
     public void setIFinanceController(IFinanceController controller) {
         iFinanceController = controller;
@@ -56,7 +53,7 @@ public class AccountGroupsController implements Initializable {
         String userLog = userName;
         int userID = nonAdminUserAdapter.findRecord(userLog).getID();
 
-        glist = gAdapter.groupList(accountCategoryAdapter);
+        glist = gAdapter.getGroupList(accountCategoryAdapter);
 
         rootItem.setExpanded(true);
         ObservableList<String> accounts = accountCategoryAdapter.getAccountCatList();
@@ -67,7 +64,7 @@ public class AccountGroupsController implements Initializable {
                 addToTable(rootItem, g.getName(), g.getElement().getName());
             } else {
                 try {
-                    addToTable(rootItem, g.getName(), gAdapter.groupName(g.getParent().getID()));
+                    addToTable(rootItem, g.getName(), gAdapter.getGroupName(g.getParent().getID()));
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -110,7 +107,7 @@ public class AccountGroupsController implements Initializable {
 
     @FXML
     void save(ActionEvent event) throws SQLException {
-        glist = gAdapter.groupList(accountCategoryAdapter);
+        glist = gAdapter.getGroupList(accountCategoryAdapter);
         if (!GroupField.getText().isEmpty()) {
             String inputText = GroupField.getText();
             TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
@@ -125,7 +122,7 @@ public class AccountGroupsController implements Initializable {
 
                             try {
                                 Group newGroup = new Group((gAdapter.getMaxId() + 1), inputText, group1, group1.getElement());
-                                gAdapter.insertRecord(newGroup, newGroup.getName());
+                                gAdapter.insertGroup(newGroup, newGroup.getName());
                             } catch (SQLException e) {
                                 System.out.println("Error1: " + e.getMessage());
                             }
@@ -133,7 +130,7 @@ public class AccountGroupsController implements Initializable {
                         if (group1.getElement().getName().equals(selectedItem.getValue()) && toggle) {
                             try {
                                 Group newGroup = new Group(gAdapter.getMaxId() + 1, inputText, null, group1.getElement());
-                                gAdapter.insertRecord(newGroup, inputText);
+                                gAdapter.insertGroup(newGroup, inputText);
                             } catch (SQLException e) {
                                 System.out.println("Error2: " + e.getMessage());
                             }
@@ -162,67 +159,12 @@ public class AccountGroupsController implements Initializable {
         }
     }
 
-//    @FXML
-//    void save() throws SQLException {
-//        glist = gAdapter.groupList(accountCategoryAdapter);
-//        if (!GroupField.getText().isEmpty()) {
-//            String inputText = GroupField.getText();
-//            TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
-//            Group parentGroup = treeGroup.get(selectedItem);
-//
-//            switch (MenuCheck) {
-//                case "add":
-//                    TreeItem<String> newGroupTreeItem = new TreeItem<>(inputText);
-//                    selectedItem.getChildren().add(newGroupTreeItem);
-//                    glist.forEach(g1 -> {
-//                        if (g1.getName().equals(selectedItem.getValue())) {
-//                            try {
-//                                Group newGroup = new Group((gAdapter.getMaxId() + 1), inputText, g1, g1.getElement());
-//                                gAdapter.insertRecord(newGroup, newGroup.getName());
-//                            } catch (SQLException e) {
-//                                System.out.println("Error1: " + e.getMessage());
-//                            }
-//                        }
-//                        if (g1.getElement().getName().equals(selectedItem.getValue())) {
-//                            try {
-//                                Group newGroup = new Group(gAdapter.getMaxId() + 1, inputText, null, g1.getElement());
-//                                gAdapter.insertRecord(newGroup, inputText);
-//                            } catch (SQLException e) {
-//                                System.out.println("Error2: " + e.getMessage());
-//                            }
-//                        }
-//                    });
-//                    break;
-//                case "change":
-//                    String toEditStr = selectedItem.getValue();
-//                    glist.forEach(group1 -> {
-//                        if (group1.getName().equals(toEditStr)) {
-//                            try {
-//                                gAdapter.updateRecord(group1, inputText);
-//                            } catch (SQLException e) {
-//                                System.out.println("Error: " + e.getMessage());
-//                            }
-//                        }
-//                    });
-//                    selectedItem.setValue(inputText);
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Menu.getItems().addAll(add, change, delete);
 
-        tree.addEventHandler(ContextMenuEvent.CONTEXT_MENU_REQUESTED, event -> {
-            TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
-            if (selectedItem != null) {
-                Menu.show(tree, event.getScreenX(), event.getScreenY());
-            }
-        });
+        tree.setContextMenu(Menu);
 
         tree.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
@@ -264,7 +206,7 @@ public class AccountGroupsController implements Initializable {
                 for (Group g : glist) {
                     if (g.getName().equals(delete)) {
                         try {
-                            gAdapter.deleteRecord(g);
+                            gAdapter.deleteGroup(g);
                         } catch (SQLException e) {
                             System.out.println("Error: " + e.getMessage());
                         }

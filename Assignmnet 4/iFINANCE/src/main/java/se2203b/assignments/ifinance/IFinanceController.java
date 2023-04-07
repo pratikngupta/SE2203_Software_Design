@@ -102,7 +102,8 @@ public class IFinanceController implements Initializable {
         stage.getIcons().add(new Image("file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png"));
         stage.setTitle("Login");
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
+        stage.showAndWait();
+        openAccountGroups();
     }
 
     public void changePassword() throws Exception {
