@@ -26,47 +26,19 @@ import java.util.ResourceBundle;
 public class IFinanceController implements Initializable {
 
     @FXML
-    private Menu userMenuItem;
+    private Menu userMenuItem, chartOfAccountMenuItem, manageUserAccountsMenu, manageAccountGroupsMenuItem, doubleEntryMenuItem, financialReportMenuItem, fileMenu;
 
     @FXML
-    private Menu chartOfAccountMenuItem;
-
-    @FXML
-    private MenuItem closeMenuItem;
-
-    @FXML
-    private Menu doubleEntryMenuItem;
-
-    @FXML
-    private Menu fileMenu;
-
-    @FXML
-    private Menu financialReportMenuItem;
-
-    @FXML
-    private MenuItem loginMenuItem;
-
-    @FXML
-    private MenuItem logoutMenuItem;
+    private MenuItem closeMenuItem, loginMenuItem, logoutMenuItem, changePasswordMenuItem;
 
     @FXML
     private MenuBar mainMenu;
-
-
-    @FXML
-    private Menu manageAccountGroupsMenuItem;
-
-    @FXML
-    private Menu manageUserAccountsMenu;
-
-    @FXML
-    private MenuItem changePasswordMenuItem;
 
     private Connection conn;
 
     private UserAccountAdapter account;
 
-    private NonAdminUserAdapter naua;
+    private NonAdminUserAdapter nonAdminUserAdapter;
 
     public void showAbout() throws Exception {
         // load the fxml file (the UI elements)
@@ -102,8 +74,7 @@ public class IFinanceController implements Initializable {
         stage.getIcons().add(new Image("file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png"));
         stage.setTitle("Login");
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
-        openAccountGroups();
+        stage.show();
     }
 
     public void changePassword() throws Exception {
@@ -253,18 +224,16 @@ public class IFinanceController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("AccountGroups.fxml"));
 
         // create the root node
-        Parent accGrp = fxmlLoader.load();
-        AccountGroupsController accGrpController = fxmlLoader.getController();
-        accGrpController.setIFinanceController(this);
+        Parent accountGroup = fxmlLoader.load();
+        AccountGroupsController accountGroupsController = fxmlLoader.getController();
+        accountGroupsController.setIFinanceController(this);
 
-        naua = new NonAdminUserAdapter(conn, false);
-        int userID = naua.findRecord(getUserName()).getID();
-        accGrpController.Adapters(new UserAccountAdapter(conn, false), naua, new AccountCategoryAdapter(conn, false), new GroupAdapter(conn, false, userID), getUserName());
-
+        int userID = nonAdminUserAdapter.findRecord(getUserName()).getID();
+        accountGroupsController.Adapters(new UserAccountAdapter(conn, false), new NonAdminUserAdapter(conn, false), new AccountCategoryAdapter(conn, false), new GroupAdapter(conn, false, userID));
 
         // create new stage
         Stage stage = new Stage();
-        stage.setScene(new Scene(accGrp));
+        stage.setScene(new Scene(accountGroup));
         // add icon to the About window
         stage.getIcons().add(new Image("file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png"));
         stage.setTitle("Manage Account Groups");

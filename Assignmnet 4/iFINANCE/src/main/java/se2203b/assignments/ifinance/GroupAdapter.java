@@ -141,7 +141,7 @@ public class GroupAdapter {
 
             String elementId = rs.getString("element");
             if (!rs.wasNull()) {
-                AccountCategory element = accountCategoryAdapter.checkList(elementId);
+                AccountCategory element = accountCategoryAdapter.getAccountObject(elementId);
                 group.setElement(element);
             } else {
                 group.setElement(null);
@@ -182,7 +182,7 @@ public class GroupAdapter {
 
             String elementId = rs.getString("element");
             if (!rs.wasNull()) {
-                AccountCategory element = adapter.checkList(elementId);
+                AccountCategory element = adapter.getAccountObject(elementId);
                 group.setElement(element);
             } else {
                 group.setElement(null);

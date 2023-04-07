@@ -16,6 +16,9 @@ import java.util.Stack;
 
 public class AccountGroupsController implements Initializable {
 
+    private final MenuItem add = new MenuItem("Add New Group");
+    private final MenuItem change = new MenuItem("Change Group Name");
+    private final MenuItem delete = new MenuItem("Delete Group");
     @FXML
     public TextField GroupField;
     @FXML
@@ -25,9 +28,6 @@ public class AccountGroupsController implements Initializable {
     @FXML
     public TreeItem<String> rootItem = new TreeItem<>("Account Groups");
     public ContextMenu Menu = new ContextMenu();
-    private final MenuItem add = new MenuItem("Add New Group");
-    private final MenuItem change = new MenuItem("Change Group Name");
-    private final MenuItem delete = new MenuItem("Delete Group");
     public AccountCategoryAdapter accountCategoryAdapter;
     public IFinanceController iFinanceController;
     public UserAccountAdapter userAccountAdapter;
@@ -40,7 +40,7 @@ public class AccountGroupsController implements Initializable {
         iFinanceController = controller;
     }
 
-    public void Adapters(UserAccountAdapter userAcc, NonAdminUserAdapter userProfile, AccountCategoryAdapter accountCategory, GroupAdapter group, String userName) throws SQLException {
+    public void Adapters(UserAccountAdapter userAcc, NonAdminUserAdapter userProfile, AccountCategoryAdapter accountCategory, GroupAdapter group) throws SQLException {
         userAccountAdapter = userAcc;
         nonAdminUserAdapter = userProfile;
         accountCategoryAdapter = accountCategory;
