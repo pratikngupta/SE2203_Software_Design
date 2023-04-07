@@ -26,17 +26,48 @@ import java.util.ResourceBundle;
 public class IFinanceController implements Initializable {
 
     @FXML
-    private Menu userMenuItem, chartOfAccountMenuItem, fileMenu, financialReportMenuItem, doubleEntryMenuItem, manageAccountGroupsMenuItem, manageUserAccountsMenu;
+    private Menu userMenuItem;
 
     @FXML
-    private MenuItem closeMenuItem, loginMenuItem, logoutMenuItem;
+    private Menu chartOfAccountMenuItem;
+
+    @FXML
+    private MenuItem closeMenuItem;
+
+    @FXML
+    private Menu doubleEntryMenuItem;
+
+    @FXML
+    private Menu fileMenu;
+
+    @FXML
+    private Menu financialReportMenuItem;
+
+    @FXML
+    private MenuItem loginMenuItem;
+
+    @FXML
+    private MenuItem logoutMenuItem;
 
     @FXML
     private MenuBar mainMenu;
 
+
+    @FXML
+    private Menu manageAccountGroupsMenuItem;
+
+    @FXML
+    private Menu manageUserAccountsMenu;
+
+    @FXML
+    private MenuItem changePasswordMenuItem;
+
     private Connection conn;
 
     private UserAccountAdapter account;
+
+    private NonAdminUserAdapter naua;
+
     public void showAbout() throws Exception {
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("About-view.fxml"));
@@ -60,7 +91,7 @@ public class IFinanceController implements Initializable {
 
         // create the root node
         Parent Login = fxmlLoader.load();
-        LoginController loginController = (LoginController) fxmlLoader.getController();
+        LoginController loginController = fxmlLoader.getController();
         loginController.setIFinanceController(this);
         loginController.setUserAccountModel(account);
 
@@ -73,6 +104,7 @@ public class IFinanceController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
+
     public void changePassword() throws Exception {
         account = new UserAccountAdapter(conn, false);
         // load the fxml file (the UI elements)
@@ -80,7 +112,7 @@ public class IFinanceController implements Initializable {
 
         // create the root node
         Parent changePassword = fxmlLoader.load();
-        ChangePasswordController changePasswordController = (ChangePasswordController) fxmlLoader.getController();
+        ChangePasswordController changePasswordController = fxmlLoader.getController();
         changePasswordController.setIFinanceController(this);
         changePasswordController.setUserAccountModel(account);
 
@@ -93,14 +125,15 @@ public class IFinanceController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
+
     public void createUserAccount() throws Exception {
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("CreateUserAccount-view.fxml"));
         // create the root node
         Parent newUser = fxmlLoader.load();
-        CreateUserAccountController createUserAccountController = (CreateUserAccountController) fxmlLoader.getController();
+        CreateUserAccountController createUserAccountController = fxmlLoader.getController();
         createUserAccountController.setIFinanceController(this);
-        createUserAccountController.setAdapters(new UserAccountAdapter(conn, false), new NonAdminUserAdapter(conn, false) );
+        createUserAccountController.setAdapters(new UserAccountAdapter(conn, false), new NonAdminUserAdapter(conn, false));
         // create new stage
         Stage stage = new Stage();
         stage.setScene(new Scene(newUser));
@@ -110,14 +143,15 @@ public class IFinanceController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
+
     public void modifyUserProfile() throws Exception {
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("ModifyUserProfile-view.fxml"));
         // create the root node
         Parent aUser = fxmlLoader.load();
-        ModifyUserProfileController modifyUserProfileController = (ModifyUserProfileController) fxmlLoader.getController();
+        ModifyUserProfileController modifyUserProfileController = fxmlLoader.getController();
         modifyUserProfileController.setIFinanceController(this);
-        modifyUserProfileController.setAdapters(new UserAccountAdapter(conn, false), new NonAdminUserAdapter(conn, false) );
+        modifyUserProfileController.setAdapters(new UserAccountAdapter(conn, false), new NonAdminUserAdapter(conn, false));
         // create new stage
         Stage stage = new Stage();
         stage.setScene(new Scene(aUser));
@@ -127,14 +161,15 @@ public class IFinanceController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
+
     public void deleteUserProfile() throws Exception {
         // load the fxml file (the UI elements)
         FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("DeleteUserProfile-view.fxml"));
         // create the root node
         Parent toDelete = fxmlLoader.load();
-        DeleteUserProfileController deleteUserProfileController = (DeleteUserProfileController) fxmlLoader.getController();
+        DeleteUserProfileController deleteUserProfileController = fxmlLoader.getController();
         deleteUserProfileController.setIFinanceController(this);
-        deleteUserProfileController.setAdapters(new UserAccountAdapter(conn, false), new NonAdminUserAdapter(conn, false) );
+        deleteUserProfileController.setAdapters(new UserAccountAdapter(conn, false), new NonAdminUserAdapter(conn, false));
         // create new stage
         Stage stage = new Stage();
         stage.setScene(new Scene(toDelete));
@@ -144,9 +179,11 @@ public class IFinanceController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
+
     public void logout() {
         disableMenuItems();
     }
+
     public void exit() {
         // Get current stage reference
         Stage stage = (Stage) mainMenu.getScene().getWindow();
@@ -198,13 +235,40 @@ public class IFinanceController implements Initializable {
         closeMenuItem.setDisable(false);
         loginMenuItem.setDisable(false);
     }
+
+    public String getUserName() {
+        return userMenuItem.getText();
+    }
+
     // set the logged-in username into the menu item
     public void setUserName(String userName) {
         userMenuItem.setText(userName);
     }
 
-    public String getUserName() {
-        return userMenuItem.getText();
+    @FXML
+    void openAccountGroups() throws Exception {
+        //account = new UserAccountAdapter(conn, false);
+        // load the fxml file (the UI elements)
+        FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("AccountGroups.fxml"));
+
+        // create the root node
+        Parent accGrp = fxmlLoader.load();
+        AccountGroupsController accGrpController = fxmlLoader.getController();
+        accGrpController.setIFinanceController(this);
+
+        naua = new NonAdminUserAdapter(conn, false);
+        int userID = naua.findRecord(getUserName()).getID();
+        accGrpController.Adapters(new UserAccountAdapter(conn, false), naua, new AccountCategoryAdapter(conn, false), new AccountGroupsAdapter(conn, false, userID), getUserName());
+
+
+        // create new stage
+        Stage stage = new Stage();
+        stage.setScene(new Scene(accGrp));
+        // add icon to the About window
+        stage.getIcons().add(new Image("file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png"));
+        stage.setTitle("Manage Account Groups");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 
     public void displayAlert(String msg) {
@@ -212,7 +276,7 @@ public class IFinanceController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(IFinanceApplication.class.getResource("Alert.fxml"));
             // create the root node
             Parent alertWindow = fxmlLoader.load();
-            AlertController alertController = (AlertController) fxmlLoader.getController();
+            AlertController alertController = fxmlLoader.getController();
 
             Stage stage = new Stage();
             stage.setScene(new Scene(alertWindow));
@@ -244,28 +308,7 @@ public class IFinanceController implements Initializable {
 
         } catch (SQLException ex) {
             displayAlert(ex.getMessage());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
 
-    public void manageGroup() throws IOException, SQLException {
-        // load the fxml file (the UI elements)
-        FXMLLoader fxmlLoader = new FXMLLoader(IFinanceController.class.getResource("AccountGroups.fxml"));
-        // create the root node
-        Parent aUser = fxmlLoader.load();
-        AccountGroupsController accountGroupsController = (AccountGroupsController) fxmlLoader.getController();
-        accountGroupsController.setIFinanceController(this);
-        accountGroupsController.setAdapters(conn);
-        // pass account group adapter to the controller
-
-        // create new stage
-        Stage stage = new Stage();
-        stage.setScene(new Scene(aUser));
-        // add icon to the About window
-        stage.getIcons().add(new Image("file:src/main/resources/se2203b/assignments/ifinance/WesternLogo.png"));
-        stage.setTitle("Modify User Profile");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
-    }
 }

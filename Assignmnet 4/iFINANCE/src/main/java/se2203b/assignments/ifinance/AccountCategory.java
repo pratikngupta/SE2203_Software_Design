@@ -4,12 +4,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class AccountCategory {
-    private StringProperty name;
-    private StringProperty type;
+    private final StringProperty name;
+    private final StringProperty type;
 
     // Constructors
     public AccountCategory() {
-        this( "", "");
+        this("", "");
     }
 
     public AccountCategory(String name, String type) {
@@ -17,26 +17,30 @@ public class AccountCategory {
         this.type = new SimpleStringProperty(type);
     }
 
+    public StringProperty nameProperty() {
+        return this.name;
+    }
+
+    public String getName() {
+        return this.name.get();
+    }
+
     //set and get methods
     // name property
     public void setName(String name) {
         this.name.set(name);
     }
-    public StringProperty nameProperty() {
-        return this.name;
+
+    public StringProperty typeProperty() {
+        return this.type;
     }
-    public String getName() {
-        return this.name.get();
+
+    public String getType() {
+        return this.type.get();
     }
 
     // type property
     public void setType(String type) {
         this.type.set(type);
-    }
-    public StringProperty typeProperty() {
-        return this.type;
-    }
-    public String getType() {
-        return this.type.get();
     }
 }
