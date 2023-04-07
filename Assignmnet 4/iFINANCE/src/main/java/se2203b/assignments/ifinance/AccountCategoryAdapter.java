@@ -18,29 +18,22 @@ public class AccountCategoryAdapter {
     public AccountCategoryAdapter(Connection conn, Boolean reset) throws SQLException {
         this.connection = conn;
         Statement stm = conn.createStatement();
+
         if (reset) {
-            try {
                 Statement stmt = conn.createStatement();
                 stmt.execute("DROP TABLE AccountCategory");
-            } catch (SQLException ex) {
-
-            }
-
         }
-        try {
 
             stm.execute("CREATE TABLE AccountCategory ("
                     + "name VARCHAR(30) NOT NULL PRIMARY KEY,"
                     + "type VARCHAR(20) NOT NULL"
                     + ")");
             populateSample();
-        } catch (SQLException ex) {
 
-        }
     }
 
-    public void populateSample() throws SQLException {
-        try {
+    public void populateSample() throws SQLException, FileNotFoundException {
+        
             Scanner sc = new Scanner(new File("src/main/resources/se2203b/assignments/ifinance/AccountCategory.csv"));
             sc.useDelimiter(",");   //sets the delimiter pattern
             sc.nextLine();
@@ -56,9 +49,7 @@ public class AccountCategoryAdapter {
             }
 
             sc.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
     }
 
 
