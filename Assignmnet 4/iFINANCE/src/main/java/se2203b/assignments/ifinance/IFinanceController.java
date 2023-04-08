@@ -228,6 +228,7 @@ public class IFinanceController implements Initializable {
         AccountGroupsController accountGroupsController = fxmlLoader.getController();
         accountGroupsController.setIFinanceController(this);
 
+        NonAdminUserAdapter nonAdminUserAdapter = new NonAdminUserAdapter(conn, false);
         int userID = nonAdminUserAdapter.findRecord(getUserName()).getID();
         accountGroupsController.Adapters(new UserAccountAdapter(conn, false), new NonAdminUserAdapter(conn, false), new AccountCategoryAdapter(conn, false), new GroupAdapter(conn, false, userID));
 
