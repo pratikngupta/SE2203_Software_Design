@@ -22,9 +22,9 @@ public class AccountGroupsController implements Initializable {
     @FXML
     public TextField GroupField;
     @FXML
-    public TreeView<String> tree;
+    public TreeView<String> mainView;
     @FXML
-    public Button saveBtn;
+    public Button saveButton;
     @FXML
     public TreeItem<String> rootItem = new TreeItem<>("Account Groups");
     public ContextMenu Menu = new ContextMenu();
@@ -64,13 +64,13 @@ public class AccountGroupsController implements Initializable {
             }
         });
 
-        tree.setRoot(rootItem);
+        mainView.setRoot(rootItem);
     }//initializes the adapter and the variables to be used in other classes
 
     @FXML
     void close() {
 
-        Stage stage = (Stage) tree.getScene().getWindow();
+        Stage stage = (Stage) mainView.getScene().getWindow();
 
         stage.close();
     }//closes
@@ -103,7 +103,7 @@ public class AccountGroupsController implements Initializable {
         groupList = groupAdapter.getGroupList(accountCategoryAdapter);
         if (!GroupField.getText().isEmpty()) {
             String inputText = GroupField.getText();
-            TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
+            TreeItem<String> selectedItem = mainView.getSelectionModel().getSelectedItem();
 
             if (MenuCheck.equals("add")) {
                 TreeItem<String> newGroupTreeItem = new TreeItem<>(inputText);
@@ -138,15 +138,15 @@ public class AccountGroupsController implements Initializable {
 
         Menu.getItems().addAll(add, change, delete);
 
-        tree.setContextMenu(Menu);
+        mainView.setContextMenu(Menu);
 
-        tree.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        mainView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
                 Menu.hide();
             }
             delete.setDisable(false);
             change.setDisable(false);
-            TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
+            TreeItem<String> selectedItem = mainView.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
                 delete.setDisable(selectedItem.getChildren().size() > 0);
                 change.setDisable(selectedItem.getParent() == rootItem || selectedItem.getChildren().size() > 0);
@@ -154,7 +154,7 @@ public class AccountGroupsController implements Initializable {
         });
 
         add.setOnAction(event -> {
-            TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
+            TreeItem<String> selectedItem = mainView.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
                 GroupField.setDisable(false);
                 GroupField.requestFocus();
@@ -164,7 +164,7 @@ public class AccountGroupsController implements Initializable {
         });
 
         change.setOnAction(event -> {
-            TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
+            TreeItem<String> selectedItem = mainView.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
                 GroupField.setDisable(false);
                 GroupField.requestFocus();
@@ -174,7 +174,7 @@ public class AccountGroupsController implements Initializable {
         });
 
         delete.setOnAction(event -> {
-            TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
+            TreeItem<String> selectedItem = mainView.getSelectionModel().getSelectedItem();
             if (selectedItem != null && selectedItem.isLeaf()) {
                 String delete = selectedItem.getValue();
                 for (Group list : groupList) {

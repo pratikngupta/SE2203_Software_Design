@@ -230,7 +230,7 @@ public class IFinanceController implements Initializable {
 
         NonAdminUserAdapter nonAdminUserAdapter = new NonAdminUserAdapter(conn, false);
         int userID = nonAdminUserAdapter.findRecord(getUserName()).getID();
-        accountGroupsController.Adapters(new UserAccountAdapter(conn, false), new NonAdminUserAdapter(conn, false), new AccountCategoryAdapter(conn, false), new GroupAdapter(conn, false, userID));
+        accountGroupsController.Adapters(new UserAccountAdapter(conn, false), nonAdminUserAdapter, new AccountCategoryAdapter(conn, false), new GroupAdapter(conn, false, userID));
 
         // create new stage
         Stage stage = new Stage();

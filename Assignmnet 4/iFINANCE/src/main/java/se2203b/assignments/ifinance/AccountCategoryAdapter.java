@@ -24,12 +24,15 @@ public class AccountCategoryAdapter {
             stmt.execute("DROP TABLE AccountCategory");
         }
 
-        stm.execute("CREATE TABLE AccountCategory ("
-                + "name VARCHAR(30) NOT NULL PRIMARY KEY,"
-                + "type VARCHAR(20) NOT NULL"
-                + ")");
+        try {
+            stm.execute("CREATE TABLE AccountCategory ("
+                    + "name VARCHAR(30) NOT NULL PRIMARY KEY,"
+                    + "type VARCHAR(20) NOT NULL"
+                    + ")");
+            populateSample();
+        } catch (SQLException ex) {
 
-        populateSample();
+        }
     }
 
     public void populateSample() throws SQLException, FileNotFoundException {
