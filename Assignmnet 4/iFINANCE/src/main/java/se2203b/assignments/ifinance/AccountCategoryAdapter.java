@@ -30,7 +30,7 @@ public class AccountCategoryAdapter {
                     + "type VARCHAR(20) NOT NULL"
                     + ")");
             populateSample();
-        } catch (SQLException ex) {
+        } catch (SQLException ignored) {
 
         }
     }

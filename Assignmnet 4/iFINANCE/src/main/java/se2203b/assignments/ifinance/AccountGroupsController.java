@@ -69,9 +69,7 @@ public class AccountGroupsController implements Initializable {
 
     @FXML
     void close() {
-
         Stage stage = (Stage) mainView.getScene().getWindow();
-
         stage.close();
     }//closes
 
@@ -133,6 +131,20 @@ public class AccountGroupsController implements Initializable {
         }
     }
 
+    public void delete() throws SQLException {
+        groupList = groupAdapter.getGroupList(accountCategoryAdapter);
+        TreeItem<String> selectedItem = mainView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            String toDeleteStr = selectedItem.getValue();
+            for (Group list : groupList) {
+                if (list.getName().equals(toDeleteStr)) {
+                    groupAdapter.deleteGroup(list);
+                }
+            }
+            selectedItem.getParent().getChildren().remove(selectedItem);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -174,20 +186,10 @@ public class AccountGroupsController implements Initializable {
         });
 
         delete.setOnAction(event -> {
-            TreeItem<String> selectedItem = mainView.getSelectionModel().getSelectedItem();
-            if (selectedItem != null && selectedItem.isLeaf()) {
-                String delete = selectedItem.getValue();
-                for (Group list : groupList) {
-                    if (list.getName().equals(delete)) {
-                        try {
-                            groupAdapter.deleteGroup(list);
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-
-                    }
-                }
-                selectedItem.getParent().getChildren().remove(selectedItem);
+            try {
+                delete();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         });
     }

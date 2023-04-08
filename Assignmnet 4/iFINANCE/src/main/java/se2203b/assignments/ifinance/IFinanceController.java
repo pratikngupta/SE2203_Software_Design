@@ -29,7 +29,7 @@ public class IFinanceController implements Initializable {
     private Menu userMenuItem, chartOfAccountMenuItem, manageUserAccountsMenu, manageAccountGroupsMenuItem, doubleEntryMenuItem, financialReportMenuItem, fileMenu;
 
     @FXML
-    private MenuItem closeMenuItem, loginMenuItem, logoutMenuItem, changePasswordMenuItem;
+    private MenuItem closeMenuItem, loginMenuItem, logoutMenuItem;
 
     @FXML
     private MenuBar mainMenu;
@@ -37,8 +37,6 @@ public class IFinanceController implements Initializable {
     private Connection conn;
 
     private UserAccountAdapter account;
-
-    private NonAdminUserAdapter nonAdminUserAdapter;
 
     public void showAbout() throws Exception {
         // load the fxml file (the UI elements)
@@ -230,7 +228,7 @@ public class IFinanceController implements Initializable {
 
         NonAdminUserAdapter nonAdminUserAdapter = new NonAdminUserAdapter(conn, false);
         int userID = nonAdminUserAdapter.findRecord(getUserName()).getID();
-        accountGroupsController.Adapters(new UserAccountAdapter(conn, false), nonAdminUserAdapter, new AccountCategoryAdapter(conn, false), new GroupAdapter(conn, false, userID));
+        accountGroupsController.Adapters(new UserAccountAdapter(conn, false), nonAdminUserAdapter, new AccountCategoryAdapter(conn, false), new GroupAdapter(conn, userID, false));
 
         // create new stage
         Stage stage = new Stage();

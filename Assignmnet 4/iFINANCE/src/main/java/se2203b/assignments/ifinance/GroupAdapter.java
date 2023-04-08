@@ -10,14 +10,13 @@ import java.util.Scanner;
 
 public class GroupAdapter {
     Connection connection;
-    String tableName = "";
+    String tableName;
 
-    public GroupAdapter(Connection conn, Boolean reset, int userID) throws SQLException, FileNotFoundException {
+    public GroupAdapter(Connection conn, int userID, boolean reset) throws SQLException, FileNotFoundException {
         connection = conn;
         Statement stmt = connection.createStatement();
         tableName = "Groups" + userID;
 
-        reset = true;
         if (reset) {
             dropTable(tableName);
         }
@@ -30,7 +29,7 @@ public class GroupAdapter {
                     + "element VARCHAR(30) REFERENCES AccountCategory(name)"
                     + ")");
 
-        } catch (SQLException ex) {
+        } catch (SQLException ignored) {
 
         }
         if (isTableEmpty()) {
@@ -53,7 +52,7 @@ public class GroupAdapter {
         Statement stmt = connection.createStatement();
         try {
             stmt.execute("DROP TABLE " + tableName);
-        } catch (SQLException ex) {
+        } catch (SQLException ignored) {
 
         }
     }
