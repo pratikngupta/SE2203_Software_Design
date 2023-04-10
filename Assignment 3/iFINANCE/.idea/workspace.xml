@@ -5,34 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc5e3817-e89f-426c-80a2-a55c4d84f0b8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../iFINANCE.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/derby.log" beforeDir="false" afterPath="$PROJECT_DIR$/derby.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/db.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/log/log.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/log/log.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/log/log9.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/log/logmirror.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/log/logmirror.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c101.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c101.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c111.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c111.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c121.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c121.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c1220.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c1231.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c130.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c130.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c141.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c141.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c20.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c20.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c31.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c31.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c41.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c41.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c51.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c51.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c60.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c60.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c71.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c71.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c81.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c81.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/c90.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/c90.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/ca1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/ca1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/cb1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/cb1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iFinanceDatabase/seg0/cf0.dat" beforeDir="false" afterPath="$PROJECT_DIR$/iFinanceDatabase/seg0/cf0.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se2203b/assignments/ifinance/DeleteUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/se2203b/assignments/ifinance/DeleteUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se2203b/assignments/ifinance/IFinanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/se2203b/assignments/ifinance/IFinanceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/se2203b/assignments/ifinance/DeleteUser-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/se2203b/assignments/ifinance/DeleteUser-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/se2203b/assignments/ifinance/user.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/se2203b/assignments/ifinance/user.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,6 +140,7 @@
       <workItem from="1679592855310" duration="2557000" />
       <workItem from="1679599838947" duration="6629000" />
       <workItem from="1679609310644" duration="1404000" />
+      <workItem from="1680717384412" duration="1228000" />
     </task>
     <servers />
   </component>

@@ -1,0 +1,22 @@
+﻿ID,NAME,PARENT,ELEMENT
+1,Fixed assets,0,Assets
+2,Investments,0,Assets
+3,Branch/divisions,0,Assets
+4,Cash in hand,0,Assets
+5,Bank accounts,0,Assets
+6,Deposits (assets),0,Assets
+7,Advances (assets),0,Assets
+8,Capital account,0,Liabilities
+9,Long term loans,0,Liabilities
+10,Current liabilities,0,Liabilities
+11,Reserves and surplus,0,Liabilities
+12,Sales account,0,Income
+13,Purchase account,0,Expenses
+14,Expenses (direct),0,Expenses
+15,Expenses (indirect),0,Expenses
+16,Secured loans,9,Liabilities
+17,Unsecured loans,9,Liabilities
+18,Duties taxes payable,10,Liabilities
+19,Provisions,10,Liabilities
+20,Sundry creditors,10,Liabilities
+21,Bank od & limits,10,Liabilities
