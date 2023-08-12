@@ -5,7 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="253f1253-c319-4c4e-a513-25e5c0e73dc1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1db2a79e-ed23-4934-a2d9-3cca17b26466/storage_v2/_src_/schema/SYS.rUIBAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1db2a79e-ed23-4934-a2d9-3cca17b26466/storage_v2/_src_/schema/SYSCS_UTIL.JC_i2A.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1db2a79e-ed23-4934-a2d9-3cca17b26466/storage_v2/_src_/schema/SYSIBM.hzyvkg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jupyter-settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jupyter-settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_mac_aarch64_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_mac_aarch64_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_mac_aarch64_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_mac_aarch64_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE.iml" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/AccountCategory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/AccountCategory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/AccountGroupsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/AccountGroupsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/Administrator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/Administrator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/AlertController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/AlertController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/ChangePasswordController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/ChangePasswordController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/CreateUserAccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/CreateUserAccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/DeleteUserProfileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/DeleteUserProfileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/Group.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/IFinanceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/IFinanceApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/IFinanceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/IFinanceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/MasterAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/MasterAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/ModifyUserProfileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/ModifyUserProfileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/NonAdminUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/NonAdminUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/Transaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/Transaction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/TransactionLine.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/TransactionLine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/UserAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/UserAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/iFINANCEUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se2203b/assignments/ifinance/iFINANCEUser.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +58,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -41,11 +83,13 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/pratikgupta/GitHub-Repository/SE2203_Software_Design/Assignmnet 4/iFINANCE&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.43793103&quot;,
@@ -124,6 +168,8 @@
       <workItem from="1679933868402" duration="2922000" />
       <workItem from="1680011698148" duration="2339000" />
       <workItem from="1680017505588" duration="332000" />
+      <workItem from="1682605090449" duration="877000" />
+      <workItem from="1688499441625" duration="15000" />
     </task>
     <servers />
   </component>

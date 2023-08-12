@@ -9,8 +9,5 @@
         <module name="iFINANCE" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="iFINANCE" target="19" />
-    </bytecodeTargetLevel>
   </component>
 </project>

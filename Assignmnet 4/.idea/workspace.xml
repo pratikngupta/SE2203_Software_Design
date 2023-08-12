@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="da3dcaa0-54d9-4524-a0dd-ef8492945770" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/dataSources/1db2a79e-ed23-4934-a2d9-3cca17b26466/storage_v2/_src_/schema/SYS.rUIBAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/dataSources/1db2a79e-ed23-4934-a2d9-3cca17b26466/storage_v2/_src_/schema/SYSCS_UTIL.JC_i2A.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/dataSources/1db2a79e-ed23-4934-a2d9-3cca17b26466/storage_v2/_src_/schema/SYSIBM.hzyvkg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/jupyter-settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/.idea/jupyter-settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_openjfx_javafx_base_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_openjfx_javafx_base_mac_aarch64_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_openjfx_javafx_controls_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_openjfx_javafx_controls_mac_aarch64_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_openjfx_javafx_fxml_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_openjfx_javafx_fxml_mac_aarch64_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_openjfx_javafx_graphics_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_openjfx_javafx_graphics_mac_aarch64_19_ea_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFINANCE.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/README_DO_NOT_TOUCH_FILES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/db.lck" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/dbex.lck" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/log/README_DO_NOT_TOUCH_FILES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/log/log.ctrl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/log/log1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/log/logmirror.ctrl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/README_DO_NOT_TOUCH_FILES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c10.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c101.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c111.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c121.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c130.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c141.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c150.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c161.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c171.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c180.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c191.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c1a1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c1b1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c1c0.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c1d1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c1e0.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c1f1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c20.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c200.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c211.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c221.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c230.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c241.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c251.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c260.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c271.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c281.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c290.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c2a1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c2b1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c2c1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c2d0.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c2e1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c2f0.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c300.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c31.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c311.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c321.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c331.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c340.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c351.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c361.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c371.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c380.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c391.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c3a1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c3b1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c3c0.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c3d1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c3e1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c3f1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c400.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c41.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c411.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c421.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c430.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c441.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c451.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c461.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c470.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c481.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c490.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c4a1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c4b0.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c4c1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c4d1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c51.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c510.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c521.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c531.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c5b0.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c5c1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c60.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c71.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c7a0.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c7b1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c7c1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c7d1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c81.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/c90.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/ca1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/cb1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/cc0.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/cd1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/ce1.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/cf0.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/d7e0.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/d7f0.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/d800.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/seg0/d810.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/iFinanceDB/service.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/src/main/java/se2203b/assignments/ifinance/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/src/main/java/se2203b/assignments/ifinance/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/AccountCategory.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/AccountCategory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/AccountGroups.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/AccountGroups.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/AccountGroupsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/AccountGroupsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/Administrator.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/Administrator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/AlertController.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/AlertController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/ChangePasswordController.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/ChangePasswordController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/CreateUserAccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/CreateUserAccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/DeleteUserProfileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/DeleteUserProfileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/Group.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/IFinance-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/IFinance-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/IFinanceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/IFinanceApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/IFinanceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/IFinanceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/MasterAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/MasterAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/ModifyUserProfileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/ModifyUserProfileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/NonAdminUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/NonAdminUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/Transaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/Transaction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/TransactionLine.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/TransactionLine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/UserAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/UserAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/iFINANCEUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/iFINANCE/target/classes/se2203b/assignments/ifinance/iFINANCEUser.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2P0rU0fDgZdWOjX28m4E8stFAk8" />
+  <component name="ProjectViewState">
+    <option name="compactDirectories" value="true" />
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/pratikgupta/GitHub-Repository/SE2203_Software_Design/Assignmnet 4",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.43793103",
+    "settings.editor.selected.configurable": "project.propDebugger",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="IFinanceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="se2203b.assignments.ifinance.IFinanceApplication" />
+      <module name="iFINANCE" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="se2203b.assignments.ifinance.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.IFinanceApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="da3dcaa0-54d9-4524-a0dd-ef8492945770" name="Changes" comment="" />
+      <created>1682604851347</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1682604851347</updated>
+      <workItem from="1682604852430" duration="125000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
